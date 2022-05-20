@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/listComingSoonMovies"
+        android:icon="@drawable/ic_baseline_attach_money_24"
+        android:title="@string/moedas"/>
+
+    <item
+        android:id="@+id/listPopularMovies"
+        android:icon="@drawable/ic_baseline_star_24"
+        android:title="@string/meus_favoritos"/>
+</menu>
