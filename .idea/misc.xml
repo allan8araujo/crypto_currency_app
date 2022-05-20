@@ -3,7 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/hjesusmo/AndroidStudioProjects/crypto_currency_app/app/src/main/res/drawable/bottom_navigation_selector.xml" value="0.1335" />
         <entry key="..\:/Users/hjesusmo/AndroidStudioProjects/crypto_currency_app/app/src/main/res/layout/activity_main.xml" value="0.14130434782608695" />
+        <entry key="..\:/Users/hjesusmo/AndroidStudioProjects/crypto_currency_app/app/src/main/res/menu/bottom_navigation.xml" value="0.1796875" />
       </map>
     </option>
   </component>
