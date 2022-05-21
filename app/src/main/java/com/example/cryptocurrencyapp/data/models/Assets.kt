@@ -79,6 +79,15 @@ val listMockedAssetsItems = mutableListOf(
         id_icon = "688fcf1c-92bb-4c84-ac95-0971e9bfed2f",
         data_start = "2011-04-06",
         data_end = "2022-05-20"
+    ),
+    AssetsItem(
+        asset_id = "USD",
+        name = "US Dollar",
+        type_is_crypto = 0,
+        data_symbols_count = 110646,
+        volume_1hrs_usd = 609939509196.15,
+        volume_1day_usd = 14528654658029.37,
+        volume_1mth_usd = 555174170860704.13,
     )
 )
 val MockedAssets = Assets(listMockedAssetsItems)
