@@ -2,4 +2,5 @@
     <string name="app_name">Crypto Currency App</string>
     <string name="meus_favoritos">Meus favoritos</string>
     <string name="moedas">Moedas</string>
+    <string name="moeda_digital">Moeda Digital</string>
 </resources>
