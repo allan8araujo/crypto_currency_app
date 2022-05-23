@@ -10,5 +10,6 @@
     <color name="app_black_background">#181619</color>
     <color name="app_yellow_background">#8c975b</color>
     <color name="app_grey_background">#464443</color>
+    <color name="icon_coin_base_grey">#8F8F8F</color>
 
 </resources>
