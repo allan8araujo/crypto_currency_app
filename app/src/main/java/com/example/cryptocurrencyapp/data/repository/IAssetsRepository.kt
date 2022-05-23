@@ -1,5 +1,7 @@
 package com.example.cryptocurrencyapp.data.repository
 
+import com.example.cryptocurrencyapp.data.models.Assets
+
 interface IAssetsRepository {
-    //IMPLEMENTAR POSTERIORMENTE
+    suspend fun getAssets():Assets
 }

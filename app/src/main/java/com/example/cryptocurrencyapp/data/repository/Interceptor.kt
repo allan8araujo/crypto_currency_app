@@ -12,7 +12,7 @@ class Interceptor() : Interceptor {
             .request()
             .url
             .newBuilder()
-            .addQueryParameter("api_key", Constants.API_KEY)
+            .addQueryParameter("apikey", Constants.API_KEY)
             .build()
 
         val request: Request = chain
@@ -23,6 +23,4 @@ class Interceptor() : Interceptor {
 
         return chain.proceed(request)
     }
-
-
 }
