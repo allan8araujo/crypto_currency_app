@@ -3,4 +3,16 @@
     <string name="meus_favoritos">Meus favoritos</string>
     <string name="moedas">Moedas</string>
     <string name="moeda_digital">Moeda Digital</string>
+    <string name="btc">BTC</string>
+    <string name="todo">TODO</string>
+    <string name="_31_010_20">$31.010.20</string>
+    <string name="adicionar">ADICIONAR</string>
+    <string name="voltar">voltar</string>
+    <string name="ultima_hora">ultima hora</string>
+    <string name="ultimo_m_s">ultimo mês</string>
+    <string name="ultimo_ano">ultimo ano</string>
+    <string name="_123_456_78">$ 123.456.78</string>
+    <string name="_123_456_78">$ 123.456.78</string>
+    <string name="_123_456_78">$ 123.456.78</string>
+    <string name="volumes_negociados">volumes negociados</string>
 </resources>
