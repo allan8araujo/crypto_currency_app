@@ -2,7 +2,7 @@ package com.example.cryptocurrencyapp.data.models
 
 class Assets: ArrayList<AssetsItem>()
 
-val listMockedAssetsItems = mutableListOf(
+val listMockedAssetsItems = arrayListOf(
     AssetsItem(
         asset_id = "BTC",
         name = "Bitcoin",
@@ -88,5 +88,5 @@ val listMockedAssetsItems = mutableListOf(
         volume_1mth_usd = 555174170860704.13,
     )
 )
-//
-//fun funMockLives() = Assets(listMockedAssetsItems)
+
+fun funMockLives() = listMockedAssetsItems
