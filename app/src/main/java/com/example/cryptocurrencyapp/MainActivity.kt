@@ -22,12 +22,6 @@ class MainActivity : AppCompatActivity() {
         ActivityMainBinding.inflate(layoutInflater)
     }
 
-    /**    assetsListViewModel.getAllAssets()
-     searchAssetViewModel.searchedAsset()
-     Log.d("tag", assetsListViewModel.assets.value .toString())
-     Log.d("tag", searchAssetViewModel.asset.value .toString())
-     **/
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)

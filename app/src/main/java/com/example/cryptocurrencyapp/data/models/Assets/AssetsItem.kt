@@ -1,4 +1,4 @@
-package com.example.cryptocurrencyapp.data.models
+package com.example.cryptocurrencyapp.data.models.Assets
 
 data class AssetsItem(
     val asset_id: String,
