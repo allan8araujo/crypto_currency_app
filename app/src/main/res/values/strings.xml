@@ -12,10 +12,7 @@
     <string name="ultimo_m_s">ultimo mês</string>
     <string name="ultimo_ano">ultimo ano</string>
     <string name="_123_456_78">$ 123.456.78</string>
-    <string name="_123_456_78">$ 123.456.78</string>
-    <string name="_123_456_78">$ 123.456.78</string>
     <string name="volumes_negociados">volumes negociados</string>
-    <string name="btc">BTC</string>
     <string name="bitcoin">Bitcoin</string>
     <string name="escrita_da_moeda_bitcoin_do_item_favorite_screen">escrita da moeda bitcoin do item favorite screen</string>
     <string name="imagem_de_fundo_do_item_favorite_screen">imagem de fundo do item favorite screen</string>
@@ -23,4 +20,6 @@
     <string name="valor_do_item_favorite_screen">valor do item favorite screen</string>
     <string name="icone_da_moeda_do_item_favorite">icone da moeda do item favorite</string>
     <string name="titulo_da_splash_screen">titulo da splash screen</string>
+    <string name="_23_mai_2022">23 Mai 2022</string>
+    <string name="search">Search</string>
 </resources>
