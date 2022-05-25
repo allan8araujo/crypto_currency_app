@@ -5,6 +5,9 @@ import com.example.cryptocurrencyapp.data.models.Assets
 import retrofit2.http.GET
 
 interface RetrofitService {
-    @GET(Constants.PATH_END_POINT)
-     suspend fun getAssets():Assets
+    @GET(Constants.LIST_PATH_END_POINT)
+    suspend fun getAssets(): Assets
+
+    @GET(Constants.SEARCH_PATH_END_POINT)
+    suspend fun searchAssets(): Assets
 }

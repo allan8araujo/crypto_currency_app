@@ -10,18 +10,19 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class AssetsListViewModel(
-    private val assetsRespository: IAssetsRepository,
+class SearchedAssetsViewModel(
+    private val assetsRespository: IAssetsRepository
 ) : ViewModel() {
-    private val liveList = MutableLiveData<Assets>()
-    val assets: LiveData<Assets> = liveList
-    fun getAllAssets() {
+
+    private val searchedAsset = MutableLiveData<Assets>()
+    val asset: LiveData<Assets> = searchedAsset
+
+    fun searchedAsset() {
         viewModelScope.launch {
-            val assetsFromApi = withContext(Dispatchers.IO) {
-                assetsRespository.getAssets()
+            val assetSearched = withContext(Dispatchers.IO) {
+                assetsRespository.searchAsset()
             }
-            liveList.value = assetsFromApi
+            searchedAsset.value = assetSearched
         }
     }
-
 }
