@@ -3,62 +3,61 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-
-    >
+    android:layout_height="wrap_content"
+    android:background="@color/app_black_background">
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/digital_coin_cardView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        >
+        android:layout_height="wrap_content">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/app_black_background"
-            android:padding="8dp"
-            >
+            android:padding="8dp">
 
             <ImageView
                 android:id="@+id/coin_icon_imageView"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
-                tools:src="@drawable/ic_coin_base"
+                android:layout_marginStart="8dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@drawable/ic_coin_base" />
 
             <TextView
                 android:id="@+id/coin_name_textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:ems="5"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="8dp"
-                tools:text="Moeda Digital"
                 android:textColor="@color/white"
                 android:textSize="18sp"
                 app:layout_constraintStart_toEndOf="@+id/coin_icon_imageView"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Moeda Digital" />
 
             <TextView
                 android:id="@+id/coin_asset_id_textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:text="MD"
                 android:textAllCaps="true"
                 android:textColor="@color/white"
                 android:textSize="14sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/coin_name_textView"
                 app:layout_constraintTop_toBottomOf="@+id/coin_name_textView"
-                app:layout_constraintVertical_bias="0.110000014" />
+                app:layout_constraintVertical_bias="0.110000014"
+                tools:text="MD" />
 
             <ImageView
                 android:id="@+id/favorite_imageView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_baseline_star_coin_24"
-                android:layout_marginStart="8dp"
                 app:layout_constraintBottom_toBottomOf="@+id/coin_name_textView"
                 app:layout_constraintStart_toEndOf="@+id/coin_name_textView"
                 app:layout_constraintTop_toTopOf="@+id/coin_name_textView" />
@@ -76,13 +75,15 @@
                 android:id="@+id/price_usd_textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:text="31.010.20"
-                android:layout_marginEnd="14dp"
-                android:textSize="20sp"
+                android:layout_marginEnd="8dp"
+                android:ems="4"
+                android:maxLines="1"
                 android:textColor="@color/white"
+                android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="31.010.20" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
