@@ -7,7 +7,7 @@
 
     <TextView
         android:id="@+id/title_coin_digital_textView"
-        android:contentDescription="@string/titulo_da_splash_screen"
+        android:contentDescription="@string/titulo_principal_da_splash_screen"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/roboto"

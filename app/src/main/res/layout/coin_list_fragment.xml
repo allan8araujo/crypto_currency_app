@@ -71,6 +71,7 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/coin_list_recyclerView"
+            android:contentDescription="@string/btc"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:background="@color/app_black_background"

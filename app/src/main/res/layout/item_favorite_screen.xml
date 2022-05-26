@@ -14,12 +14,12 @@
         android:paddingHorizontal="32dp">
 
         <ImageView
-            android:id="@+id/img_bottom_imageView"
+            android:id="@+id/item_criado_bottom_imageView"
             android:layout_width="160dp"
             android:layout_height="121dp"
             android:layout_marginTop="12dp"
             android:background="@drawable/ic_favorite_item"
-            android:contentDescription="@string/imagem_de_fundo_do_item_favorite_screen"
+            android:contentDescription="@string/item_para_uso_de_fundo_do_item_favorite_screen"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.428"
             app:layout_constraintStart_toStartOf="parent"
@@ -47,7 +47,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:background="@color/app_yellow_background"
-            android:contentDescription="@string/sigla_do_bitcoin_do_item_favorite_screen"
+            android:contentDescription="@string/abrevi_o_o_do_nome_da_moeda_da_tela_item_coin"
             android:fontFamily="@font/roboto"
             android:text="@string/btc"
             android:textColor="@color/white"
@@ -62,7 +62,7 @@
             android:layout_width="33dp"
             android:layout_height="34dp"
             android:layout_marginEnd="0dp"
-            android:contentDescription="@string/icone_da_moeda_do_item_favorite"
+            android:contentDescription="@string/icon_da_moeda_do_item_favorite"
             android:src="@drawable/ic_coin_base"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

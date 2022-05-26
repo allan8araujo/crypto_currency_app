@@ -19,6 +19,7 @@
 
             <ImageView
                 android:id="@+id/coin_icon_imageView"
+                android:contentDescription="@string/icon_da_moeda_da_tela_item_coin"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_marginStart="8dp"
@@ -29,6 +30,7 @@
 
             <TextView
                 android:id="@+id/coin_name_textView"
+                android:contentDescription="@string/nome_completo_da_moeda_da_tela_item_coin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ems="5"
@@ -42,6 +44,7 @@
 
             <TextView
                 android:id="@+id/coin_asset_id_textView"
+                android:contentDescription="@string/abrevi_o_o_do_nome_da_moeda_da_tela_item_coin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAllCaps="true"
@@ -55,6 +58,7 @@
 
             <ImageView
                 android:id="@+id/favorite_imageView"
+                android:contentDescription="@string/estrela_dos_favoritos_da_tela_item_coin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_baseline_star_coin_24"
@@ -64,6 +68,7 @@
 
             <ImageView
                 android:id="@+id/dolar_icon_imageView"
+                android:contentDescription="@string/cifr_o_da_moeda_da_tela_item_coin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_baseline_attach_coin_24"
@@ -73,6 +78,7 @@
 
             <TextView
                 android:id="@+id/price_usd_textView"
+                android:contentDescription="@string/valor_do_item_da_tela_item_coin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
