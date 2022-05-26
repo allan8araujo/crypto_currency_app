@@ -9,7 +9,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="193dp"
         android:layout_height="match_parent"
-        android:background="@color/black"
+        android:background="@color/app_black_background"
         android:padding="8dp"
         android:paddingHorizontal="32dp">
 
