@@ -5,19 +5,36 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.cryptocurrencyapp.R
 import com.example.cryptocurrencyapp.data.models.Assets.AssetsItem
 import com.example.cryptocurrencyapp.databinding.ItemCoinBinding
+import com.example.cryptocurrencyapp.viewmodel.AssetsListViewModel
 
-class CoinListAdapter(var onClick: (asset: AssetsItem) -> Unit = {}) :
+class CoinListAdapter(
+    var iconViewModel: AssetsListViewModel,
+    var onClick: (asset: AssetsItem) -> Unit = {},
+) :
     ListAdapter<AssetsItem, CoinListAdapter.ViewHolder>(DiffCallback()) {
 
     inner class ViewHolder(val binding: ItemCoinBinding) : RecyclerView.ViewHolder(binding.root) {
 
+        fun loadUrlFromGlide(assetItem: AssetsItem): String? {
+            val assetUrlLink = iconViewModel.icon.value?.find {
+                it.asset_id == assetItem.asset_id
+            }
+            return assetUrlLink?.url
+        }
+
         fun bind(assetItem: AssetsItem) {
 
+            Glide.with(binding.root)
+                .load(loadUrlFromGlide(assetItem))
+                .placeholder(R.drawable.ic_coin_base)
+                .into(binding.coinIconImageView)
+
             with(binding) {
-                coinIconImageView.setBackgroundResource(R.drawable.ic_coin_base)
+//                coinIconImageView.setBackgroundResource(R.drawable.ic_coin_base)
                 coinAssetIdTextView.text = assetItem.asset_id
                 coinNameTextView.text = assetItem.name
                 priceUsdTextView.text = if (assetItem.price_usd != null) {

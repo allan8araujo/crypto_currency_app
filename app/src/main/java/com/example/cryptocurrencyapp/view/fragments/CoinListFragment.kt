@@ -22,7 +22,6 @@ class CoinListFragment : Fragment() {
     private val coinViewModel: AssetsListViewModel by viewModels {
         RetrofitRequestHelper.getListAssets()
     }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -39,7 +38,10 @@ class CoinListFragment : Fragment() {
     }
 
     private fun setupRecycler() {
-        listAdapter = CoinListAdapter() { asset -> goToCoinDetails() }
+
+        coinViewModel.getAllAssets()
+
+        listAdapter = CoinListAdapter(coinViewModel) { asset -> goToCoinDetails() }
         linearLayoutManager = LinearLayoutManager(
             activity,
             LinearLayoutManager.VERTICAL,
@@ -50,7 +52,6 @@ class CoinListFragment : Fragment() {
     }
 
     private fun collectAssetsObserver() {
-        coinViewModel.getAllAssets()
         coinViewModel.assets.observe(viewLifecycleOwner) { assetsResults ->
             setListAdapter(assetsResults)
         }

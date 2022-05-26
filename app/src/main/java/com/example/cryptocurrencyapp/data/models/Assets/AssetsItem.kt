@@ -1,5 +1,7 @@
 package com.example.cryptocurrencyapp.data.models.Assets
 
+import android.widget.ImageView
+
 data class AssetsItem(
     val asset_id: String,
     val data_end: String? = null,
