@@ -1,14 +1,11 @@
 package com.example.cryptocurrencyapp.view
 
 import android.os.Bundle
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.cryptocurrencyapp.R
-import com.example.cryptocurrencyapp.data.api.RetrofitInstance
 import com.example.cryptocurrencyapp.databinding.ActivityMainBinding
-import com.example.cryptocurrencyapp.viewmodel.AssetsListViewModel
 
 class MainActivity : AppCompatActivity() {
 

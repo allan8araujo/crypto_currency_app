@@ -9,4 +9,3 @@ class InterceptorHelper {
         return RetrofitInstance().retrofitInstance(interceptor)
     }
 }
-

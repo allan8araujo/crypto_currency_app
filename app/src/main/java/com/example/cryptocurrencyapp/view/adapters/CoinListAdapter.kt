@@ -6,19 +6,15 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cryptocurrencyapp.R
-import com.example.cryptocurrencyapp.data.models.AssetsItem
+import com.example.cryptocurrencyapp.data.models.Assets.AssetsItem
 import com.example.cryptocurrencyapp.databinding.ItemCoinBinding
-
 
 class CoinListAdapter(var onClick: (asset: AssetsItem) -> Unit = {}) :
     ListAdapter<AssetsItem, CoinListAdapter.ViewHolder>(DiffCallback()) {
 
-
-
     inner class ViewHolder(val binding: ItemCoinBinding) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(assetItem: AssetsItem) {
-
 
             with(binding) {
                 coinIconImageView.setBackgroundResource(R.drawable.ic_coin_base)
@@ -33,9 +29,7 @@ class CoinListAdapter(var onClick: (asset: AssetsItem) -> Unit = {}) :
                 }
                 digitalCoinCardView.setOnClickListener { onClick.invoke(assetItem) }
             }
-
         }
-
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -47,6 +41,4 @@ class CoinListAdapter(var onClick: (asset: AssetsItem) -> Unit = {}) :
             ItemCoinBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         )
     }
-
-
 }
