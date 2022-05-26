@@ -11,7 +11,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class IconAssetsViewModel(
-    private val assetsRespository: IAssetsRepository
+    private val assetsRespository: IAssetsRepository,
 ) : ViewModel() {
 
     private val iconAsset = MutableLiveData<AssetsImage>()

@@ -11,7 +11,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class SearchedAssetsViewModel(
-    private val assetsRespository: IAssetsRepository
+    private val assetsRespository: IAssetsRepository,
 ) : ViewModel() {
 
     private val searchedAsset = MutableLiveData<Assets>()

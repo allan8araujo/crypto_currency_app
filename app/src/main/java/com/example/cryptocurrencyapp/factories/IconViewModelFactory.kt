@@ -3,10 +3,10 @@ package com.example.cryptocurrencyapp.factories
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.cryptocurrencyapp.data.repository.AssetsRepository
-import com.example.cryptocurrencyapp.viewmodel.SearchedAssetsViewModel
+import com.example.cryptocurrencyapp.viewmodel.IconAssetsViewModel
 
-class AssetsSearchedVMFactory(private val repository: AssetsRepository) : ViewModelProvider.Factory {
+class IconViewModelFactory(private val repository: AssetsRepository) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        return SearchedAssetsViewModel(repository) as T
+        return IconAssetsViewModel(repository) as T
     }
 }

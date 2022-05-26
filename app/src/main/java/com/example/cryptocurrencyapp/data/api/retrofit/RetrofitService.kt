@@ -1,4 +1,4 @@
-package com.example.cryptocurrencyapp.data.api
+package com.example.cryptocurrencyapp.data.api.retrofit
 
 import com.example.cryptocurrencyapp.data.const.Constants
 import com.example.cryptocurrencyapp.data.models.Assets.Assets

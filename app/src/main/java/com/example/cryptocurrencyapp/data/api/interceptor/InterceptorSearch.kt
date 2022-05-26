@@ -5,7 +5,7 @@ import okhttp3.Interceptor
 import okhttp3.Request
 import okhttp3.Response
 
-class InterceptorSearch(val searchId: String) : Interceptor {
+class InterceptorSearch(private val searchId: String) : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
 
         val url = chain

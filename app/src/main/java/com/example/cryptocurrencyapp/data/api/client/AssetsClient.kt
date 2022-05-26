@@ -3,7 +3,7 @@ package com.example.cryptocurrencyapp.data.api.client
 import com.example.cryptocurrencyapp.data.api.interceptor.InterceptorList
 import okhttp3.OkHttpClient
 
-object ListAssetsClient {
+class AssetsClient {
     val clientInterceptor by lazy {
         OkHttpClient
             .Builder()

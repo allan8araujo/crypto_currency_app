@@ -13,8 +13,10 @@ import kotlinx.coroutines.withContext
 class AssetsListViewModel(
     private val assetsRespository: IAssetsRepository,
 ) : ViewModel() {
+
     private val liveList = MutableLiveData<List<AssetsItem>>()
     val assets: LiveData<List<AssetsItem>> = liveList
+
     fun getAllAssets() {
         viewModelScope.launch {
             val assetsFromApi = withContext(Dispatchers.IO) {
