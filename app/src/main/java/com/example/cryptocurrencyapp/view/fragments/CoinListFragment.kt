@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupMenu
+import android.widget.SearchView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -47,14 +48,25 @@ class CoinListFragment : Fragment() {
         binding.imgMenu.setOnClickListener { onClick ->
             settingUpMenu(onClick)
         }
+        binding.searchEditText.setOnQueryTextListener(
+            object : SearchView.OnQueryTextListener {
+                override fun onQueryTextSubmit(name: String?): Boolean {
+                    searchFilter(name)
+                    return false
+                }
+
+                override fun onQueryTextChange(name: String?): Boolean {
+                    searchFilter(name)
+                    return false
+                }
+            }
+        )
     }
 
     private fun settingUpMenu(it: View?) {
         val popupmenu = PopupMenu(context, it)
         popupmenu.setOnMenuItemClickListener { item ->
-
             when (item.itemId) {
-
                 R.id.list_crypto_menu -> {
                     filterType(1)
                     true
@@ -78,9 +90,19 @@ class CoinListFragment : Fragment() {
 
     private fun filterType(cryptoType: Any?) {
         val newlist = coinViewModel.assets.value?.filter {
+
             it.type_is_crypto == cryptoType
         }
-        setListAdapter(newlist!!)
+        setListAdapter(newlist)
+    }
+
+    private fun searchFilter(searchValue: String?) {
+        val searchValueUpperCase = searchValue?.uppercase()
+        val newlist = coinViewModel.assets.value?.filter {
+            (it.asset_id.uppercase() in searchValueUpperCase!!) ||
+                (it.name.uppercase() in searchValueUpperCase!!)
+        }
+        setListAdapter(newlist)
     }
 
     private fun settingRecyclerViewProperties() {
