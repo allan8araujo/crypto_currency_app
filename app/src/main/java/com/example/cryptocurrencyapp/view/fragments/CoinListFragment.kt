@@ -19,6 +19,8 @@ import com.example.cryptocurrencyapp.data.models.Assets.funMockLives
 import com.example.cryptocurrencyapp.databinding.CoinListFragmentBinding
 import com.example.cryptocurrencyapp.view.adapters.CoinListAdapter
 import com.example.cryptocurrencyapp.viewmodel.AssetsListViewModel
+import java.text.SimpleDateFormat
+import java.util.*
 
 class CoinListFragment : Fragment() {
 
@@ -120,12 +122,14 @@ class CoinListFragment : Fragment() {
             LinearLayoutManager.VERTICAL,
             false
         )
+
+        binding.currentDateTextView.text = SimpleDateFormat("dd MMM yyyy").format(Date())
         binding.coinListRecyclerView.layoutManager = linearLayoutManager
         binding.coinListRecyclerView.adapter = listAdapter
     }
 
     private fun collectAssetsObserver() {
-        coinViewModel.getAllAssets()
+//        coinViewModel.getAllAssets()
         coinViewModel.assets.observe(viewLifecycleOwner) { assetsResults ->
             setListAdapter(assetsResults)
         }

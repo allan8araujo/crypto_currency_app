@@ -17,6 +17,7 @@ class MainActivity : AppCompatActivity() {
         findNavController(R.id.activity_main_navHost)
     }
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
