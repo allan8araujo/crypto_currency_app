@@ -7,5 +7,8 @@ class Constants {
         const val SEARCH_PATH = "v1/assets/"
         const val ICONS_PATH = "v1/assets/icons/128"
         const val API_KEY = "C4D1540B-3B30-410C-9D30-1D06A82F678C"
+        //        const val API_KEY = "E1483ECB-B918-4AC5-AE2D-628604676A17"
+//        const val API_KEY = "C4227E0F-DE5F-4E80-8B53-FA0D24542C28"
+//        const val API_KEY = "0FACCEE3-25E3-4347-B99D-E49D9C11FF8D"
     }
 }
