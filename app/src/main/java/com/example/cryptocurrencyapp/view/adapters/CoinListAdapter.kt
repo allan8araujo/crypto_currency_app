@@ -1,6 +1,7 @@
 package com.example.cryptocurrencyapp.view.adapters
 
 import android.opengl.Visibility
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,7 +13,7 @@ import com.example.cryptocurrencyapp.data.models.Assets.AssetsItem
 import com.example.cryptocurrencyapp.databinding.ItemCoinBinding
 import com.example.cryptocurrencyapp.viewmodel.AssetsListViewModel
 
-class CoinListAdapter(
+class CoinListAdapter(val context: Context,
     var iconViewModel: AssetsListViewModel,
     var onClick: (asset: AssetsItem) -> Unit = {},
 ) :
@@ -27,6 +28,7 @@ class CoinListAdapter(
         }
 
         fun bind(assetItem: AssetsItem) {
+            val dataBase = TinyDB(context)
             val progressBar = binding.pbLoading
             progressBar.visibility = View.VISIBLE
             Glide.with(binding.root)
@@ -37,7 +39,12 @@ class CoinListAdapter(
                 .into(binding.coinIconImageView)
 
             with(binding) {
-//                coinIconImageView.setBackgroundResource(R.drawable.ic_coin_base)
+
+                if (dataBase.hasItem(assetItem.asset_id)) {
+                    favoriteImageView.visibility = View.VISIBLE
+                }
+
+                coinIconImageView.setBackgroundResource(R.drawable.ic_coin_base)
                 coinAssetIdTextView.text = assetItem.asset_id
                 coinNameTextView.text = assetItem.name
                 priceUsdTextView.text = if (assetItem.price_usd != null) {
