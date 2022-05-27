@@ -7,12 +7,15 @@ import android.view.ViewGroup
 import android.widget.PopupMenu
 import android.widget.SearchView
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.cryptocurrencyapp.R
 import com.example.cryptocurrencyapp.data.api.retrofit.RetrofitRequestHelper
 import com.example.cryptocurrencyapp.data.models.Assets.AssetsItem
+import com.example.cryptocurrencyapp.data.models.Assets.funMockLives
 import com.example.cryptocurrencyapp.databinding.CoinListFragmentBinding
 import com.example.cryptocurrencyapp.view.adapters.CoinListAdapter
 import com.example.cryptocurrencyapp.viewmodel.AssetsListViewModel
@@ -43,7 +46,7 @@ class CoinListFragment : Fragment() {
 
     private fun setupRecycler() {
         coinViewModel.getAllAssets()
-        listAdapter = CoinListAdapter(coinViewModel) { asset -> goToCoinDetails() }
+        listAdapter = CoinListAdapter(requireContext(),coinViewModel) { asset -> goToCoinDetails(asset) }
         settingRecyclerViewProperties()
         binding.imgMenu.setOnClickListener { onClick ->
             settingUpMenu(onClick)
@@ -122,16 +125,19 @@ class CoinListFragment : Fragment() {
     }
 
     private fun collectAssetsObserver() {
+        coinViewModel.getAllAssets()
         coinViewModel.assets.observe(viewLifecycleOwner) { assetsResults ->
             setListAdapter(assetsResults)
         }
+//        setListAdapter(funMockLives())
     }
 
     private fun setListAdapter(list: List<AssetsItem>?) {
         listAdapter.submitList(list)
     }
 
-    private fun goToCoinDetails() {
-        Toast.makeText(context, "to details", Toast.LENGTH_LONG).show()
+    private fun goToCoinDetails(asset: AssetsItem) {
+        val bundle = bundleOf("asset" to asset)
+        findNavController().navigate(R.id.action_to_detailIcon, bundle)
     }
 }

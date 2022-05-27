@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/digital_coin"
+        android:id="@+id/coinList"
         android:icon="@drawable/ic_baseline_attach_money_24"
         android:title="@string/moedas"/>
     <item
-        android:id="@+id/favorite_coin"
+        android:id="@+id/coinFavorite"
         android:icon="@drawable/ic_baseline_star_coin_24"
         android:title="@string/meus_favoritos"/>
 </menu>

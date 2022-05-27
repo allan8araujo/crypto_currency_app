@@ -73,6 +73,7 @@
                 android:contentDescription="@string/estrela_dos_favoritos_da_tela_item_coin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:visibility="gone"
                 android:src="@drawable/ic_baseline_star_coin_24"
                 app:layout_constraintBottom_toBottomOf="@+id/coin_name_textView"
                 app:layout_constraintStart_toEndOf="@+id/coin_name_textView"
