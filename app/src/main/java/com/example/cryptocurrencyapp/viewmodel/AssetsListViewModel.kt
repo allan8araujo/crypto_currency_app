@@ -1,5 +1,6 @@
 package com.example.cryptocurrencyapp.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -37,6 +38,13 @@ class AssetsListViewModel(
         val assetsFromApi = withContext(Dispatchers.IO) {
             assetsRespository.getAssets()
         }
+
+//        Log.i("", assetsFromApi[1].toString())
+//        assetsFromApi.sortBy {
+//            it.asset_id
+//        }
+//        Log.i("", assetsFromApi[1].toString())
+
         liveList.value = assetsFromApi
     }
 }
