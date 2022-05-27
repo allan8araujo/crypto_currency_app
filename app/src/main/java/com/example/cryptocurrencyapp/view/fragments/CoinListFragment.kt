@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.cryptocurrencyapp.R
 import com.example.cryptocurrencyapp.data.api.retrofit.RetrofitRequestHelper
 import com.example.cryptocurrencyapp.data.models.Assets.AssetsItem
+import com.example.cryptocurrencyapp.data.models.Assets.funMockLives
 import com.example.cryptocurrencyapp.databinding.CoinListFragmentBinding
 import com.example.cryptocurrencyapp.view.adapters.CoinListAdapter
 import com.example.cryptocurrencyapp.viewmodel.AssetsListViewModel
@@ -42,7 +43,7 @@ class CoinListFragment : Fragment() {
     }
 
     private fun setupRecycler() {
-        listAdapter = CoinListAdapter() { asset -> goToCoinDetails(asset) }
+        listAdapter = CoinListAdapter(requireContext()) { asset -> goToCoinDetails(asset) }
         linearLayoutManager = LinearLayoutManager(
             activity,
             LinearLayoutManager.VERTICAL,
@@ -57,6 +58,7 @@ class CoinListFragment : Fragment() {
         coinViewModel.assets.observe(viewLifecycleOwner) { assetsResults ->
             setListAdapter(assetsResults)
         }
+//        setListAdapter(funMockLives())
     }
 
     private fun setListAdapter(list: List<AssetsItem>) {

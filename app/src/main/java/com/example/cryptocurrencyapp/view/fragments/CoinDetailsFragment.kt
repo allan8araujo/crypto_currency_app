@@ -5,8 +5,9 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
@@ -36,7 +37,7 @@ class CoinDetailsFragment : Fragment() {
 
     private fun bindingView(args: CoinDetailsFragmentArgs) {
         val asset: AssetsItem = args.asset
-        val clickEvent: Boolean
+        val dataBase: TinyDB = TinyDB(requireContext())
 
         context?.let {
             Glide.with(it)
@@ -46,28 +47,45 @@ class CoinDetailsFragment : Fragment() {
         }
 
         with(binding) {
-            if ( TinyDB(requireContext()).ler().contains(asset.asset_id)) {
-                starIconImageView.visibility = View.VISIBLE
-            }
+
             iconAssetIdTextView.text = asset.asset_id
-            priceUsdTextView.text = asset.price_usd.toString()
+            Log.d("TAG",asset.asset_id)
+            Log.d("TAG",dataBase.hasItem(asset.asset_id).toString())
+            when (dataBase.hasItem(asset.asset_id)) {
+                true -> {
+                    addButton.setText("Remover")
+                    starIconImageView.visibility = View.VISIBLE
+                    addButton.setOnClickListener {
+                        dataBase.removeItem(asset.asset_id)
+                        goToCoinList()
+                    }
+                }
+                false -> {
+                    addButton.setText("Adicionar")
+                    starIconImageView.visibility = View.GONE
+                    addButton.setOnClickListener {
+                        dataBase.addItem(asset.asset_id)
+                        goToCoinList()
+                    }
+                }
+            }
+            if (asset.price_usd != null) {
+                priceUsdTextView.text = asset.price_usd.toString()
+            } else {
+                priceUsdTextView.text = "0.00 "
+                priceUsdTextView.setEms(3)
+            }
             lastHourTextView.text = asset.volume_1hrs_usd.toString()
             lastMonthTextView.text = asset.volume_1day_usd.toString()
             lastYearTextView.text = asset.volume_1mth_usd.toString()
-            addButton.setOnClickListener {
-                starIconImageView.visibility = View.VISIBLE
-                addButton.text = "Remover"
-                TinyDB(requireContext()).escrever(asset.asset_id)
-            }
+            backPressButton.setOnClickListener { goToCoinList() }
 
         }
-
     }
 
-    private fun buttonClick(click: Boolean) {
-
+    fun goToCoinList() {
+        fragmentManager?.popBackStack()
     }
-
 }
 
 

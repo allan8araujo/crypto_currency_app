@@ -20,5 +20,6 @@
             app:argType="com.example.cryptocurrencyapp.data.models.Assets.AssetsItem"/>
     </fragment>
     <action android:id="@+id/action_to_detailIcon" app:destination="@+id/coinDetails"/>
+    <action android:id="@+id/action_to_coinList" app:destination="@+id/coinList"/>
 
 </navigation>

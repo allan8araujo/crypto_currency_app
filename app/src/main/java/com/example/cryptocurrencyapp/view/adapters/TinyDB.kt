@@ -1,8 +1,11 @@
 package com.example.cryptocurrencyapp.view.adapters
 
 import android.content.Context
+import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import java.io.*
+import java.lang.Exception
 
 
 //
@@ -46,7 +49,7 @@ import java.io.*
 //    }
 //}
 
-class TinyDB(c: Context) :
+class TinyDB(val context: Context) :
     AppCompatActivity(), Serializable {
     var nomeDaCategoria: File
     private val arquivos = HashMap<String, String>()
@@ -64,7 +67,7 @@ class TinyDB(c: Context) :
         return flag
     }
 
-    private fun categoria(context: Context): File {
+    private fun categoria(): File {
         return File(context.filesDir, FAVORITOS)
     }
 
@@ -75,60 +78,7 @@ class TinyDB(c: Context) :
         arquivos["disciplina"] = DISCIPLINA
     }
 
-    fun populador(context: Context) {
-        val arrStr = HashMap<String, String>()
-        arrStr["favoritos"]
-        arrStr["animal"] = """
-               abelha
-               andorinha
-               macaco
-               baleia
-               cachorro
-               hipopotamo
-               ema
-               elefante
-               texugo
-               gato
-               
-               """.trimIndent()
-        arrStr["pais"] = """
-               egito
-               alemanha
-               argentina
-               australia
-               holanda
-               brasil
-               china
-               canada
-               inglaterra
-               chile
-               
-               """.trimIndent()
-        arrStr["disciplina"] = """
-               matematica
-               sociologia
-               ingles
-               quimica
-               espanhol
-               biologia
-               geografia
-               filosofia
-               ciencias
-               historia
-               
-               """.trimIndent()
-        for (nomeDoBanco in arrStr.keys) {
-            try {
-                val bw = BufferedWriter(FileWriter(categoria(context), true))
-                bw.write(arrStr[nomeDoBanco])
-                bw.close()
-            } catch (e: IOException) {
-                e.printStackTrace()
-            }
-        }
-    }
-
-    fun ler(): ArrayList<String> {
+    fun getAll(): ArrayList<String> {
         val leitura = ArrayList<String>()
         try {
             val br = BufferedReader(FileReader(nomeDaCategoria))
@@ -142,7 +92,7 @@ class TinyDB(c: Context) :
         return leitura
     }
 
-    fun escrever(palavra: String?) {
+    fun addItem(palavra: String?) {
         try {
             val bw = BufferedWriter(FileWriter(nomeDaCategoria, true))
             bw.write(palavra)
@@ -151,6 +101,29 @@ class TinyDB(c: Context) :
         } catch (e: IOException) {
             e.printStackTrace()
         }
+    }
+
+    fun hasItem(id: String): Boolean {
+        return getAll().contains(id)
+    }
+
+    fun getItem(id: String): String? {
+        return getAll().find { s -> s.equals(id) }
+    }
+
+    fun removeItem(palavra: String) {
+        val list: ArrayList<String> = getAll()
+        try {
+            File(context.filesDir, FAVORITOS).delete()
+            nomeDaCategoria = categoria()
+        } catch (e: Exception) {
+            TODO()
+        }
+        list.forEach { id ->
+            if (id != palavra)
+                addItem(id)
+        }
+
     }
 
     companion object {
@@ -162,6 +135,6 @@ class TinyDB(c: Context) :
 
     init {
         populaHash()
-        nomeDaCategoria = categoria(c)
+        nomeDaCategoria = categoria()
     }
 }
