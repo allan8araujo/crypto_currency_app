@@ -97,12 +97,18 @@ class CoinListFragment : Fragment() {
     }
 
     private fun searchFilter(searchValue: String?) {
-        val searchValueUpperCase = searchValue?.uppercase()
-        val newlist = coinViewModel.assets.value?.filter {
-            (it.asset_id.uppercase() in searchValueUpperCase!!) ||
-                (it.name.uppercase() in searchValueUpperCase!!)
+        val listResults: List<AssetsItem>?
+        if (searchValue != "") {
+            val searchValueUpperCase = searchValue?.uppercase()
+            val listResults = coinViewModel.assets.value?.filter {
+                (it.asset_id.uppercase() in searchValueUpperCase!!) ||
+                    (it.name.uppercase() in searchValueUpperCase!!)
+            }
+            setListAdapter(listResults)
+        } else {
+            listResults = coinViewModel.assets.value
+            setListAdapter(listResults)
         }
-        setListAdapter(newlist)
     }
 
     private fun settingRecyclerViewProperties() {

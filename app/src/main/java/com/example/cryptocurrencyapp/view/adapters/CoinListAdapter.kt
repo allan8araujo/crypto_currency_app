@@ -1,5 +1,6 @@
 package com.example.cryptocurrencyapp.view.adapters
 
+import android.opengl.Visibility
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,7 +19,6 @@ class CoinListAdapter(
     ListAdapter<AssetsItem, CoinListAdapter.ViewHolder>(DiffCallback()) {
 
     inner class ViewHolder(val binding: ItemCoinBinding) : RecyclerView.ViewHolder(binding.root) {
-
         fun loadUrlFromGlide(assetItem: AssetsItem): String? {
             val assetUrlLink = iconViewModel.icon.value?.find {
                 it.asset_id == assetItem.asset_id
@@ -27,10 +27,13 @@ class CoinListAdapter(
         }
 
         fun bind(assetItem: AssetsItem) {
-
+            val progressBar = binding.pbLoading
+            progressBar.visibility = View.VISIBLE
             Glide.with(binding.root)
                 .load(loadUrlFromGlide(assetItem))
                 .placeholder(R.drawable.ic_coin_base)
+                .listener(ProgressBarListener(progressBar))
+                .centerCrop()
                 .into(binding.coinIconImageView)
 
             with(binding) {
