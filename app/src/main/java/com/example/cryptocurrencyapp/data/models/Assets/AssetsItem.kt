@@ -1,5 +1,6 @@
 package com.example.cryptocurrencyapp.data.models.Assets
 
+
 data class AssetsItem(
     val asset_id: String,
     val data_end: String? = null,

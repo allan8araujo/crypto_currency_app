@@ -28,6 +28,18 @@
                 app:layout_constraintTop_toTopOf="parent"
                 tools:src="@drawable/ic_coin_base" />
 
+            <ProgressBar
+                android:id="@+id/pbLoading"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:fromDegrees="0"
+                android:toDegrees="1080"
+                app:layout_constraintBottom_toBottomOf="@+id/coin_icon_imageView"
+                app:layout_constraintEnd_toEndOf="@+id/coin_icon_imageView"
+                app:layout_constraintStart_toStartOf="@+id/coin_icon_imageView"
+                app:layout_constraintTop_toTopOf="@+id/coin_icon_imageView" />
+
             <TextView
                 android:id="@+id/coin_name_textView"
                 android:contentDescription="@string/nome_completo_da_moeda_da_tela_item_coin"

@@ -4,7 +4,7 @@
     <item>
         <shape>
             <corners android:radius="360dp"/>
-            <solid android:color="#FF9800" />
+            <solid android:color="@color/app_grey_background" />
         </shape>
     </item>
     <item android:drawable="@drawable/ic_baseline_attach_coin_24" />
