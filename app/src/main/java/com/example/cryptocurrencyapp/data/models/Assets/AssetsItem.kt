@@ -1,6 +1,9 @@
 package com.example.cryptocurrencyapp.data.models.Assets
 
-data class AssetsItem(
+import com.google.gson.annotations.SerializedName
+import java.io.Serializable
+
+data class AssetsItem (
     val asset_id: String,
     val data_end: String? = null,
     val data_orderbook_end: String? = null,
@@ -18,4 +21,4 @@ data class AssetsItem(
     val volume_1day_usd: Double,
     val volume_1hrs_usd: Double,
     val volume_1mth_usd: Double,
-)
+): Serializable

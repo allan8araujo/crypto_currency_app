@@ -24,8 +24,7 @@ class CoinListAdapter(var onClick: (asset: AssetsItem) -> Unit = {}) :
                     assetItem.price_usd.toString()
                 } else {
                     priceUsdTextView.setEms(5)
-                    dolarIconImageView.visibility = View.GONE
-                    "Indisponivel"
+                    ""
                 }
                 digitalCoinCardView.setOnClickListener { onClick.invoke(assetItem) }
             }

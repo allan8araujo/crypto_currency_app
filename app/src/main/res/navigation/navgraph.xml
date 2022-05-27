@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/coinList">
+
+    <fragment
+        android:id="@+id/coinList"
+        android:name="com.example.cryptocurrencyapp.view.fragments.CoinListFragment"
+        android:label="CoinList"
+        tools:layout="@layout/coin_list_fragment" />
+    <fragment
+        android:id="@+id/coinDetails"
+        android:name="com.example.cryptocurrencyapp.view.fragments.CoinDetailsFragment"
+        android:label="CoinDetails"
+        tools:layout="@layout/details_fragment">
+        <argument
+            android:name="asset"
+            app:argType="com.example.cryptocurrencyapp.data.models.Assets.AssetsItem"/>
+    </fragment>
+    <action android:id="@+id/action_to_detailIcon" app:destination="@+id/coinDetails"/>
+
+</navigation>

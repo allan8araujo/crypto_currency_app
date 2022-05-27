@@ -5,9 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.cryptocurrencyapp.R
 import com.example.cryptocurrencyapp.data.api.retrofit.RetrofitRequestHelper
 import com.example.cryptocurrencyapp.data.models.Assets.AssetsItem
 import com.example.cryptocurrencyapp.databinding.CoinListFragmentBinding
@@ -39,7 +42,7 @@ class CoinListFragment : Fragment() {
     }
 
     private fun setupRecycler() {
-        listAdapter = CoinListAdapter() { asset -> goToCoinDetails() }
+        listAdapter = CoinListAdapter() { asset -> goToCoinDetails(asset) }
         linearLayoutManager = LinearLayoutManager(
             activity,
             LinearLayoutManager.VERTICAL,
@@ -60,7 +63,8 @@ class CoinListFragment : Fragment() {
         listAdapter.submitList(list)
     }
 
-    private fun goToCoinDetails() {
-        Toast.makeText(context, "to details", Toast.LENGTH_LONG).show()
+    private fun goToCoinDetails(asset: AssetsItem) {
+        val bundle = bundleOf("asset" to asset)
+        findNavController().navigate(R.id.action_to_detailIcon, bundle)
     }
 }
