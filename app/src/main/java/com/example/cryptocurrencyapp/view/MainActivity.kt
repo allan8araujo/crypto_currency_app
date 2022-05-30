@@ -34,8 +34,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupBottomNav() {
-        controller.addOnDestinationChangedListener {_,destination,_ ->
-            when(destination.id){
+        controller.addOnDestinationChangedListener { _, destination, _ ->
+            when (destination.id) {
                 coinList, coinFavorites, coinDetails -> {
                     visibilityButtonNavigation()
                 }
@@ -44,12 +44,22 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+
+    override fun onBackPressed() {
+        when (controller.currentDestination!!.id) {
+            coinDetails -> super.onBackPressed()
+        }
+    }
+
     private fun visibilityButtonNavigation() {
         binding.mainBottomNavigation.visibility = View.VISIBLE
     }
-    private fun hideButtonNavigation(){
+
+    private fun hideButtonNavigation() {
         binding.mainBottomNavigation.visibility = View.GONE
     }
+
+
 }
 
 

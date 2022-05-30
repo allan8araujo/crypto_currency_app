@@ -43,6 +43,8 @@ class CoinDetailsFragment : Fragment() {
         bindingView(args)
     }
 
+
+
     private fun bindingView(args: CoinDetailsFragmentArgs) {
         val asset: AssetsItem = args.asset
         val dataBase: TinyDB = TinyDB(requireContext())
