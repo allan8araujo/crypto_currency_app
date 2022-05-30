@@ -6,22 +6,18 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupMenu
 import android.widget.SearchView
-import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.cryptocurrencyapp.R
 import com.example.cryptocurrencyapp.data.api.retrofit.RetrofitRequestHelper
 import com.example.cryptocurrencyapp.data.models.Assets.AssetsItem
-import com.example.cryptocurrencyapp.data.models.Assets.funMockLives
 import com.example.cryptocurrencyapp.databinding.CoinListFragmentBinding
 import com.example.cryptocurrencyapp.view.adapters.CoinListAdapter
 import com.example.cryptocurrencyapp.viewmodel.AssetsListViewModel
-import java.text.SimpleDateFormat
-import java.util.*
+import com.example.cryptocurrencyapp.viewmodel.DataResult
 
 class CoinListFragment : Fragment() {
 
@@ -38,47 +34,40 @@ class CoinListFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View {
         binding = CoinListFragmentBinding.inflate(inflater, container, false)
+        binding.mainScreenProgressBar.visibility = View.GONE
+        setupRecycler()
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setupRecycler()
         collectAssetsObserver()
     }
 
     private fun setupRecycler() {
-//
-//        val favoriteList = arrayListOf<AssetsItem?>()
-//        TinyDB(requireContext()).getAll().forEach { dataBaseItem ->
-//            val favoriteItem = coinViewModel.assets.value?.find { assetItem ->
-//                assetItem.asset_id == dataBaseItem
-//            }
-//            favoriteList += favoriteItem
-//        }
-//
-//        Log.d("",newList.toString())
+        listAdapter =
+            CoinListAdapter(requireContext(), coinViewModel) { asset -> goToCoinDetails(asset) }
 
-
-        coinViewModel.getAllAssets()
-        listAdapter = CoinListAdapter(requireContext(),coinViewModel) { asset -> goToCoinDetails(asset) }
         settingRecyclerViewProperties()
+
         binding.imgMenu.setOnClickListener { onClick ->
             settingUpMenu(onClick)
         }
         binding.searchEditText.setOnQueryTextListener(
-            object : SearchView.OnQueryTextListener {
-                override fun onQueryTextSubmit(name: String?): Boolean {
-                    searchFilter(name)
-                    return false
-                }
-
-                override fun onQueryTextChange(name: String?): Boolean {
-                    searchFilter(name)
-                    return false
-                }
-            }
+            onQueryTextListener()
         )
+    }
+
+    private fun onQueryTextListener() = object : SearchView.OnQueryTextListener {
+        override fun onQueryTextSubmit(name: String?): Boolean {
+            searchFilter(name)
+            return false
+        }
+
+        override fun onQueryTextChange(name: String?): Boolean {
+            searchFilter(name)
+            return false
+        }
     }
 
     private fun settingUpMenu(it: View?) {
@@ -89,14 +78,12 @@ class CoinListFragment : Fragment() {
                     filterType(1)
                     true
                 }
-
                 R.id.list_currency_menu -> {
                     filterType(0)
                     true
                 }
-
                 R.id.list_all_menu -> {
-                    setListAdapter(coinViewModel.assets.value)
+                    observeAndSetList()
                     true
                 }
                 else -> false
@@ -107,25 +94,47 @@ class CoinListFragment : Fragment() {
     }
 
     private fun filterType(cryptoType: Any?) {
-        val newlist = coinViewModel.assets.value?.filter {
-
-            it.type_is_crypto == cryptoType
+        coinViewModel.assets.observe(viewLifecycleOwner) { dataResults ->
+            var newlist = listOf<AssetsItem>()
+            when (dataResults) {
+                is DataResult.Loading -> {
+                }
+                is DataResult.Sucess -> {
+                    newlist = dataResults.data.filter { assetItem ->
+                        assetItem.type_is_crypto == cryptoType
+                    }
+                }
+                is DataResult.Error -> {
+                    newlist = dataResults.emptyDataResults
+                }
+            }
+            setListAdapter(newlist)
         }
-        setListAdapter(newlist)
     }
 
     private fun searchFilter(searchValue: String?) {
-        val listResults: List<AssetsItem>?
-        if (searchValue != "") {
-            val searchValueUpperCase = searchValue?.uppercase()
-            val listResults = coinViewModel.assets.value?.filter {
-                (it.asset_id.uppercase() in searchValueUpperCase!!) ||
-                    (it.name.uppercase() in searchValueUpperCase!!)
+        var listResults = listOf<AssetsItem>()
+        coinViewModel.assets.observe(viewLifecycleOwner) { dataResults ->
+
+            if (searchValue != "") {
+                val searchValueUpperCase = searchValue?.uppercase()
+                when (dataResults) {
+                    is DataResult.Loading -> {
+                    }
+                    is DataResult.Sucess -> {
+                        listResults = dataResults.data.filter { assetItem ->
+                            (assetItem.asset_id.uppercase() in searchValueUpperCase!!) ||
+                                (assetItem.name.uppercase() in searchValueUpperCase!!)
+                        }
+                    }
+                    is DataResult.Error -> {
+                        listResults = dataResults.emptyDataResults
+                    }
+                }
+                setListAdapter(listResults)
+            } else {
+                observeAndSetList()
             }
-            setListAdapter(listResults)
-        } else {
-            listResults = coinViewModel.assets.value
-            setListAdapter(listResults)
         }
     }
 
@@ -140,10 +149,24 @@ class CoinListFragment : Fragment() {
     }
 
     private fun collectAssetsObserver() {
-        coinViewModel.assets.observe(viewLifecycleOwner) { assetsResults ->
-            setListAdapter(assetsResults)
+        observeAndSetList()
+    }
+
+    private fun observeAndSetList() {
+        coinViewModel.assets.observe(viewLifecycleOwner) { dataResults ->
+            when (dataResults) {
+                is DataResult.Loading -> {
+                    binding.mainScreenProgressBar.visibility = View.VISIBLE
+                }
+                is DataResult.Sucess -> {
+                    binding.mainScreenProgressBar.visibility = View.GONE
+                    setListAdapter(dataResults.data)
+                }
+                is DataResult.Error -> {
+                    setListAdapter(dataResults.emptyDataResults)
+                }
+            }
         }
-//        setListAdapter(funMockLives())
     }
 
     private fun setListAdapter(list: List<AssetsItem>?) {
