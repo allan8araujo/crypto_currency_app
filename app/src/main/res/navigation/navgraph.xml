@@ -3,7 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/coinList">
+    app:startDestination="@id/splashScreen">
+
+    <fragment
+        android:id="@+id/splashScreen"
+        android:name="com.example.cryptocurrencyapp.view.fragments.SplashScreenFragment"
+        android:label="SplashScreen"
+        tools:layout="@layout/splash_screen_fragment"/>
 
     <fragment
         android:id="@+id/coinList"
