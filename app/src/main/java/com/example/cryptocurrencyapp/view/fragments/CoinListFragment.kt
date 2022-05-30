@@ -48,6 +48,18 @@ class CoinListFragment : Fragment() {
     }
 
     private fun setupRecycler() {
+//
+//        val favoriteList = arrayListOf<AssetsItem?>()
+//        TinyDB(requireContext()).getAll().forEach { dataBaseItem ->
+//            val favoriteItem = coinViewModel.assets.value?.find { assetItem ->
+//                assetItem.asset_id == dataBaseItem
+//            }
+//            favoriteList += favoriteItem
+//        }
+//
+//        Log.d("",newList.toString())
+
+
         coinViewModel.getAllAssets()
         listAdapter = CoinListAdapter(requireContext(),coinViewModel) { asset -> goToCoinDetails(asset) }
         settingRecyclerViewProperties()
@@ -123,14 +135,11 @@ class CoinListFragment : Fragment() {
             LinearLayoutManager.VERTICAL,
             false
         )
-
-        binding.currentDateTextView.text = SimpleDateFormat("dd MMM yyyy").format(Date())
         binding.coinListRecyclerView.layoutManager = linearLayoutManager
         binding.coinListRecyclerView.adapter = listAdapter
     }
 
     private fun collectAssetsObserver() {
-//        coinViewModel.getAllAssets()
         coinViewModel.assets.observe(viewLifecycleOwner) { assetsResults ->
             setListAdapter(assetsResults)
         }

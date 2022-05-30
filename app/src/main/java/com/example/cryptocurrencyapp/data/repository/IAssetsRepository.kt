@@ -5,6 +5,5 @@ import com.example.cryptocurrencyapp.data.models.AssetsImage.AssetsImage
 
 interface IAssetsRepository {
     suspend fun getAssets(): Assets
-    suspend fun searchAsset(): Assets
     suspend fun getIcons(): AssetsImage
 }

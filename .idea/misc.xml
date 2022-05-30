@@ -3,6 +3,16 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/allan/AndroidStudioProjects/crypto_currency_app/app/src/main/res/drawable/bottom_navigation_selector.xml" value="0.141" />
+        <entry key="..\:/Users/allan/AndroidStudioProjects/crypto_currency_app/app/src/main/res/drawable/outlined_button.xml" value="0.193" />
+        <entry key="..\:/Users/allan/AndroidStudioProjects/crypto_currency_app/app/src/main/res/layout/activity_main.xml" value="0.22" />
+        <entry key="..\:/Users/allan/AndroidStudioProjects/crypto_currency_app/app/src/main/res/layout/coin_list_fragment.xml" value="0.1" />
+        <entry key="..\:/Users/allan/AndroidStudioProjects/crypto_currency_app/app/src/main/res/layout/details_fragment.xml" value="0.33" />
+        <entry key="..\:/Users/allan/AndroidStudioProjects/crypto_currency_app/app/src/main/res/layout/favorite_fragment.xml" value="0.2" />
+        <entry key="..\:/Users/allan/AndroidStudioProjects/crypto_currency_app/app/src/main/res/layout/fragment_splash_screen.xml" value="0.2" />
+        <entry key="..\:/Users/allan/AndroidStudioProjects/crypto_currency_app/app/src/main/res/layout/item_coin.xml" value="0.1" />
+        <entry key="..\:/Users/allan/AndroidStudioProjects/crypto_currency_app/app/src/main/res/layout/item_favorite.xml" value="0.2" />
+        <entry key="..\:/Users/allan/AndroidStudioProjects/crypto_currency_app/app/src/main/res/menu/bottom_navigation.xml" value="0.2" />
         <entry key="..\:/Users/hjesusmo/AndroidStudioProjects/crypto_currency_app/app/src/main/res/drawable/bottom_navigation_selector.xml" value="0.1335" />
         <entry key="..\:/Users/hjesusmo/AndroidStudioProjects/crypto_currency_app/app/src/main/res/drawable/ic_coin_base.xml" value="0.1275" />
         <entry key="..\:/Users/hjesusmo/AndroidStudioProjects/crypto_currency_app/app/src/main/res/drawable/outlined_button.xml" value="0.1015" />
@@ -15,7 +25,6 @@
         <entry key="..\:/Users/hjesusmo/AndroidStudioProjects/crypto_currency_app/app/src/main/res/layout/fragment_details.xml" value="0.1" />
         <entry key="..\:/Users/hjesusmo/AndroidStudioProjects/crypto_currency_app/app/src/main/res/layout/fragment_splash_screen.xml" value="0.1" />
         <entry key="..\:/Users/hjesusmo/AndroidStudioProjects/crypto_currency_app/app/src/main/res/layout/item_coin.xml" value="0.16666666666666666" />
-        <entry key="..\:/Users/hjesusmo/AndroidStudioProjects/crypto_currency_app/app/src/main/res/layout/item_favorite.xml" value="0.3333333333333333" />
         <entry key="..\:/Users/hjesusmo/AndroidStudioProjects/crypto_currency_app/app/src/main/res/layout/item_favorite_screen.xml" value="0.1716485507246377" />
         <entry key="..\:/Users/hjesusmo/AndroidStudioProjects/crypto_currency_app/app/src/main/res/layout/toolbar.xml" value="0.1" />
         <entry key="..\:/Users/hjesusmo/AndroidStudioProjects/crypto_currency_app/app/src/main/res/menu/bottom_navigation.xml" value="0.1796875" />

@@ -8,10 +8,6 @@ import retrofit2.http.GET
 interface RetrofitService {
     @GET(Constants.LIST_PATH)
     suspend fun getAssets(): Assets
-
-    @GET(Constants.SEARCH_PATH)
-    suspend fun searchAssets(): Assets
-
     @GET(Constants.ICONS_PATH)
     suspend fun getIcons(): AssetsImage
 }

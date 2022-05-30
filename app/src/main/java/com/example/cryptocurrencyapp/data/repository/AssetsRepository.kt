@@ -9,10 +9,6 @@ class AssetsRepository(private val assetsClient: RetrofitService) : IAssetsRepos
         return assetsClient.getAssets()
     }
 
-    override suspend fun searchAsset(): Assets {
-        return assetsClient.searchAssets()
-    }
-
     override suspend fun getIcons(): AssetsImage {
         return assetsClient.getIcons()
     }
