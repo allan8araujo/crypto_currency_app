@@ -1,11 +1,15 @@
 package com.example.cryptocurrencyapp.view
 
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.cryptocurrencyapp.R
+import com.example.cryptocurrencyapp.data.api.retrofit.RetrofitRequestHelper
 import com.example.cryptocurrencyapp.databinding.ActivityMainBinding
+import com.example.cryptocurrencyapp.viewmodel.AssetsListViewModel
 
 class MainActivity : AppCompatActivity() {
 
@@ -17,6 +21,9 @@ class MainActivity : AppCompatActivity() {
         findNavController(R.id.activity_main_navHost)
     }
 
+    private val coinViewModel: AssetsListViewModel by viewModels {
+        RetrofitRequestHelper.getListAssets()
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

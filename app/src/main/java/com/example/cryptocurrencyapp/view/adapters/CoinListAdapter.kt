@@ -1,6 +1,5 @@
 package com.example.cryptocurrencyapp.view.adapters
 
-import android.opengl.Visibility
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -13,7 +12,8 @@ import com.example.cryptocurrencyapp.data.models.Assets.AssetsItem
 import com.example.cryptocurrencyapp.databinding.ItemCoinBinding
 import com.example.cryptocurrencyapp.viewmodel.AssetsListViewModel
 
-class CoinListAdapter(val context: Context,
+class CoinListAdapter(
+    val context: Context,
     var iconViewModel: AssetsListViewModel,
     var onClick: (asset: AssetsItem) -> Unit = {},
 ) :

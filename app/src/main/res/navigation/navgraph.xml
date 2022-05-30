@@ -11,6 +11,11 @@
         android:label="CoinList"
         tools:layout="@layout/coin_list_fragment" />
     <fragment
+        android:id="@id/coinFavorites"
+        android:name="com.example.cryptocurrencyapp.view.fragments.CoinFavoriteFragment"
+        android:label="CoinFavorite"
+        tools:layout="@layout/favorite_fragment"/>
+    <fragment
         android:id="@+id/coinDetails"
         android:name="com.example.cryptocurrencyapp.view.fragments.CoinDetailsFragment"
         android:label="CoinDetails"
@@ -21,5 +26,6 @@
     </fragment>
     <action android:id="@+id/action_to_detailIcon" app:destination="@+id/coinDetails"/>
     <action android:id="@+id/action_to_coinList" app:destination="@+id/coinList"/>
+    <action android:id="@+id/action_to_favorite" app:destination="@+id/coinFavorites"/>
 
 </navigation>

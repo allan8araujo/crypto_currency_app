@@ -5,21 +5,29 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.net.toUri
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.example.cryptocurrencyapp.R
+import com.example.cryptocurrencyapp.data.api.retrofit.RetrofitRequestHelper
 import com.example.cryptocurrencyapp.data.models.Assets.AssetsItem
 import com.example.cryptocurrencyapp.databinding.DetailsFragmentBinding
+import com.example.cryptocurrencyapp.view.adapters.ProgressBarListener
 import com.example.cryptocurrencyapp.view.adapters.TinyDB
+import com.example.cryptocurrencyapp.viewmodel.AssetsListViewModel
 
 class CoinDetailsFragment : Fragment() {
 
     private lateinit var binding: DetailsFragmentBinding
     private val args: CoinDetailsFragmentArgs by navArgs()
+    private val coinViewModel: AssetsListViewModel by activityViewModels {
+        RetrofitRequestHelper.getListAssets()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -39,18 +47,32 @@ class CoinDetailsFragment : Fragment() {
         val asset: AssetsItem = args.asset
         val dataBase: TinyDB = TinyDB(requireContext())
 
+        fun loadUrlFromGlide(assetItem: AssetsItem): String? {
+            val assetUrlLink = coinViewModel.icon.value?.find {
+                it.asset_id == assetItem.asset_id
+            }
+            return assetUrlLink?.url
+        }
+
         context?.let {
             Glide.with(it)
                 .load(R.drawable.ic_coin_base)
                 .transform(CenterCrop())
                 .into(binding.coinIconImageView)
         }
-
+        val progressBar = binding.detailsProgressBar
+        progressBar.visibility = View.VISIBLE
+        Glide.with(binding.root)
+            .load(loadUrlFromGlide(asset))
+            .placeholder(R.drawable.ic_coin_base)
+            .listener(ProgressBarListener(progressBar))
+            .centerCrop()
+            .into(binding.coinIconImageView)
         with(binding) {
 
             iconAssetIdTextView.text = asset.asset_id
-            Log.d("TAG",asset.asset_id)
-            Log.d("TAG",dataBase.hasItem(asset.asset_id).toString())
+            Log.d("TAG", asset.asset_id)
+            Log.d("TAG", dataBase.hasItem(asset.asset_id).toString())
             when (dataBase.hasItem(asset.asset_id)) {
                 true -> {
                     addButton.setText("Remover")

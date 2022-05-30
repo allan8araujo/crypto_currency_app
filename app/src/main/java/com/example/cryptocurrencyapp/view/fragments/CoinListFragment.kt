@@ -9,6 +9,7 @@ import android.widget.SearchView
 import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -27,7 +28,7 @@ class CoinListFragment : Fragment() {
     private lateinit var listAdapter: CoinListAdapter
     private lateinit var binding: CoinListFragmentBinding
     private lateinit var linearLayoutManager: LinearLayoutManager
-    private val coinViewModel: AssetsListViewModel by viewModels {
+    private val coinViewModel: AssetsListViewModel by activityViewModels {
         RetrofitRequestHelper.getListAssets()
     }
 
