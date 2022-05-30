@@ -1,6 +1,7 @@
 package com.example.cryptocurrencyapp.view.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,6 +17,7 @@ import com.example.cryptocurrencyapp.databinding.FavoriteFragmentBinding
 import com.example.cryptocurrencyapp.view.adapters.CoinFavoriteAdapter
 import com.example.cryptocurrencyapp.view.adapters.TinyDB
 import com.example.cryptocurrencyapp.viewmodel.AssetsListViewModel
+import com.example.cryptocurrencyapp.viewmodel.DataResult
 
 class CoinFavoriteFragment : Fragment() {
     private lateinit var listAdapter: CoinFavoriteAdapter
@@ -43,45 +45,54 @@ class CoinFavoriteFragment : Fragment() {
     private fun setupRecycler() {
         listAdapter =
             CoinFavoriteAdapter(requireContext(), coinViewModel) { asset -> goToCoinDetails(asset) }
-        staggeredGridLayoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+        staggeredGridLayoutManager =
+            StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
         binding.favoritRecyclerView.layoutManager = staggeredGridLayoutManager
         binding.favoritRecyclerView.adapter = listAdapter
-
-
     }
-
 
     private fun collectAssetsObserver() {
-        val dataBase = TinyDB(requireContext())
-
-
+        val dataBase = TinyDB(requireContext()).getAll()
         val favoritList = arrayListOf<AssetsItem?>()
 
-        dataBase.getAll().forEach { databaseItem ->
-            val favoriteItem = coinViewModel.assets.value?.find { assetsItem ->
-                assetsItem.asset_id == databaseItem
+        filterFavoriteAssets(dataBase, favoritList)
+        listAdapter.submitList(favoritList)
+    }
+
+    private fun filterFavoriteAssets(
+        dataBase: ArrayList<String>,
+        favoritList: ArrayList<AssetsItem?>,
+    ) {
+        coinViewModel.assets.observe(viewLifecycleOwner) { assetsItem ->
+            when (assetsItem) {
+                is DataResult.Loading -> {
+                    Log.d("", "Loading")
+                }
+                is DataResult.Sucess -> {
+                    dataBase.forEach { databaseItem ->
+                        val favoriteItem = assetsItem.data.find { assetsItem ->
+                            assetsItem.asset_id == databaseItem
+                        }
+                        favoritList += favoriteItem
+                    }
+                }
+                is DataResult.Error -> {
+                    Log.d("", "erro")
+                }
             }
-            favoritList += favoriteItem
         }
-
-        setListAdapter(favoritList)
     }
-
-    private fun searchFilter(searchValue: String?): AssetsItem? {
-        val listResults: AssetsItem? = null
-        if (searchValue != "") {
-            val searchValueUpperCase = searchValue?.uppercase()
-            val listResults = coinViewModel.assets.value?.filter {
-                (it.asset_id.uppercase() in searchValueUpperCase!!)
-            }
-        }
-        return listResults
-    }
-
-    private fun setListAdapter(list: ArrayList<AssetsItem?>) {
-        listAdapter.submitList(list)
-
-    }
+//
+//    private fun searchFilter(searchValue: String?): AssetsItem? {
+//        val listResults: AssetsItem? = null
+//        if (searchValue != "") {
+//            val searchValueUpperCase = searchValue?.uppercase()
+//            val listResults = coinViewModel.assets.value?.filter {
+//                (it.asset_id.uppercase() in searchValueUpperCase!!)
+//            }
+//        }
+//        return listResults
+//    }
 
     private fun goToCoinDetails(asset: AssetsItem) {
         val bundle = bundleOf("asset" to asset)

@@ -1,6 +1,7 @@
 package com.example.cryptocurrencyapp.view
 
 import android.os.Bundle
+import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.viewModels
@@ -28,6 +29,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+        coinViewModel.getAllAssets()
         binding.mainBottomNavigation.setupWithNavController(controller)
     }
 }

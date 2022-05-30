@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
@@ -14,7 +15,7 @@
         android:id="@id/coinFavorites"
         android:name="com.example.cryptocurrencyapp.view.fragments.CoinFavoriteFragment"
         android:label="CoinFavorite"
-        tools:layout="@layout/favorite_fragment"/>
+        tools:layout="@layout/favorite_fragment" />
     <fragment
         android:id="@+id/coinDetails"
         android:name="com.example.cryptocurrencyapp.view.fragments.CoinDetailsFragment"
@@ -22,10 +23,16 @@
         tools:layout="@layout/details_fragment">
         <argument
             android:name="asset"
-            app:argType="com.example.cryptocurrencyapp.data.models.Assets.AssetsItem"/>
+            app:argType="com.example.cryptocurrencyapp.data.models.Assets.AssetsItem" />
     </fragment>
-    <action android:id="@+id/action_to_detailIcon" app:destination="@+id/coinDetails"/>
-    <action android:id="@+id/action_to_coinList" app:destination="@+id/coinList"/>
-    <action android:id="@+id/action_to_favorite" app:destination="@+id/coinFavorites"/>
+    <action
+        android:id="@+id/action_to_detailIcon"
+        app:destination="@+id/coinDetails" />
+    <action
+        android:id="@+id/action_to_coinList"
+        app:destination="@+id/coinList" />
+    <action
+        android:id="@+id/action_to_favorite"
+        app:destination="@+id/coinFavorites" />
 
 </navigation>
