@@ -44,7 +44,6 @@ class CoinListAdapter(
                     favoriteImageView.visibility = View.VISIBLE
                 }
 
-                coinIconImageView.setBackgroundResource(R.drawable.ic_coin_base)
                 coinAssetIdTextView.text = assetItem.asset_id
                 coinNameTextView.text = assetItem.name
                 priceUsdTextView.text = if (assetItem.price_usd != null) {

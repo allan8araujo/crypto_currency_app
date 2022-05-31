@@ -124,7 +124,7 @@
         android:contentDescription="@string/constraint_de_baixo_da_tela_fragment_details"
         android:layout_width="match_parent"
         android:layout_height="366dp"
-        android:background="@color/black">
+        android:background="@color/app_black_background">
 
         <TextView
             android:id="@+id/traded_volumes_textView"
