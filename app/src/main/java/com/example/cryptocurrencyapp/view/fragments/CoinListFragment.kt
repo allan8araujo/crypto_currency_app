@@ -12,8 +12,8 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.cryptocurrencyapp.R
-import com.example.cryptocurrencyapp.data.api.retrofit.RetrofitRequestHelper
-import com.example.cryptocurrencyapp.data.models.Assets.AssetsItem
+import com.example.cryptocurrencyapp.models.repository.api.retrofit.RetrofitRequestHelper
+import com.example.cryptocurrencyapp.models.assets.Assets.AssetsItem
 import com.example.cryptocurrencyapp.databinding.CoinListFragmentBinding
 import com.example.cryptocurrencyapp.view.adapters.CoinListAdapter
 import com.example.cryptocurrencyapp.viewmodel.AssetsListViewModel

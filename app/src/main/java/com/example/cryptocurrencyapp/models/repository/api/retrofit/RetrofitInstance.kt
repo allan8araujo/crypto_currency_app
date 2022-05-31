@@ -1,7 +1,7 @@
-package com.example.cryptocurrencyapp.data.api.retrofit
+package com.example.cryptocurrencyapp.models.repository.api.retrofit
 
-import com.example.cryptocurrencyapp.data.const.Constants
-import com.example.cryptocurrencyapp.data.repository.AssetsRepository
+import com.example.cryptocurrencyapp.models.const.Constants
+import com.example.cryptocurrencyapp.models.repository.AssetsRepository
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

@@ -1,4 +1,4 @@
-package com.example.cryptocurrencyapp.data.models.Assets
+package com.example.cryptocurrencyapp.models.assets.Assets
 
 class Assets : ArrayList<AssetsItem>()
 

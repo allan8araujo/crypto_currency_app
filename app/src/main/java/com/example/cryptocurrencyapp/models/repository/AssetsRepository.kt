@@ -1,8 +1,8 @@
-package com.example.cryptocurrencyapp.data.repository
+package com.example.cryptocurrencyapp.models.repository
 
-import com.example.cryptocurrencyapp.data.api.retrofit.RetrofitService
-import com.example.cryptocurrencyapp.data.models.Assets.Assets
-import com.example.cryptocurrencyapp.data.models.AssetsImage.AssetsImage
+import com.example.cryptocurrencyapp.models.repository.api.retrofit.RetrofitService
+import com.example.cryptocurrencyapp.models.assets.Assets.Assets
+import com.example.cryptocurrencyapp.models.assets.AssetsImage.AssetsImage
 
 class AssetsRepository(private val assetsClient: RetrofitService) : IAssetsRepository {
     override suspend fun getAssets(): Assets {

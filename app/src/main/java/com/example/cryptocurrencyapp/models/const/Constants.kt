@@ -1,4 +1,4 @@
-package com.example.cryptocurrencyapp.data.const
+package com.example.cryptocurrencyapp.models.const
 
 class Constants {
     companion object {

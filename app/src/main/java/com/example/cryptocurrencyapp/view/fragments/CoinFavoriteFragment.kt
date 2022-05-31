@@ -11,8 +11,8 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.cryptocurrencyapp.R
-import com.example.cryptocurrencyapp.data.api.retrofit.RetrofitRequestHelper
-import com.example.cryptocurrencyapp.data.models.Assets.AssetsItem
+import com.example.cryptocurrencyapp.models.repository.api.retrofit.RetrofitRequestHelper
+import com.example.cryptocurrencyapp.models.assets.Assets.AssetsItem
 import com.example.cryptocurrencyapp.databinding.FavoriteFragmentBinding
 import com.example.cryptocurrencyapp.view.adapters.CoinFavoriteAdapter
 import com.example.cryptocurrencyapp.view.adapters.TinyDB

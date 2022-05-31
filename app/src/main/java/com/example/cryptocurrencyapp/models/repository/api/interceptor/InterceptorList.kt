@@ -1,6 +1,6 @@
-package com.example.cryptocurrencyapp.data.api.interceptor
+package com.example.cryptocurrencyapp.models.repository.api.interceptor
 
-import com.example.cryptocurrencyapp.data.const.Constants
+import com.example.cryptocurrencyapp.models.const.Constants
 import okhttp3.Interceptor
 import okhttp3.Request
 import okhttp3.Response

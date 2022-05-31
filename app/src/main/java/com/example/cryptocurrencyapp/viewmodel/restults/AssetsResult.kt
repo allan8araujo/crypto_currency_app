@@ -1,6 +1,6 @@
 package com.example.cryptocurrencyapp.viewmodel
 
-import com.example.cryptocurrencyapp.data.models.Assets.AssetsItem
+import com.example.cryptocurrencyapp.models.assets.Assets.AssetsItem
 
 sealed class DataResult<T> {
     class Loading<T> : DataResult<T>()

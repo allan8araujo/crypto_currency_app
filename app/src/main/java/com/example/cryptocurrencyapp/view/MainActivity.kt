@@ -4,12 +4,11 @@ import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.cryptocurrencyapp.R
 import com.example.cryptocurrencyapp.R.id.*
-import com.example.cryptocurrencyapp.data.api.retrofit.RetrofitRequestHelper
+import com.example.cryptocurrencyapp.models.repository.api.retrofit.RetrofitRequestHelper
 import com.example.cryptocurrencyapp.databinding.ActivityMainBinding
 import com.example.cryptocurrencyapp.viewmodel.AssetsListViewModel
 

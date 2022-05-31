@@ -1,8 +1,8 @@
-package com.example.cryptocurrencyapp.factories
+package com.example.cryptocurrencyapp.viewmodel.factories
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.cryptocurrencyapp.data.repository.AssetsRepository
+import com.example.cryptocurrencyapp.models.repository.AssetsRepository
 import com.example.cryptocurrencyapp.viewmodel.AssetsListViewModel
 
 class ListViewModelFactory(private val repository: AssetsRepository) : ViewModelProvider.Factory {
