@@ -5,33 +5,57 @@
     android:id="@+id/nav_graph"
     app:startDestination="@id/splashScreen">
 
+
     <fragment
         android:id="@+id/splashScreen"
         android:name="com.example.cryptocurrencyapp.view.fragments.SplashScreenFragment"
         android:label="SplashScreen"
-        tools:layout="@layout/splash_screen_fragment"/>
+        tools:layout="@layout/splash_screen_fragment">
+        <action
+            android:id="@+id/action_to_coinList"
+            app:destination="@+id/coinList"
+            app:launchSingleTop="true" />
+    </fragment>
 
     <fragment
         android:id="@+id/coinList"
         android:name="com.example.cryptocurrencyapp.view.fragments.CoinListFragment"
         android:label="CoinList"
-        tools:layout="@layout/coin_list_fragment" />
+        tools:layout="@layout/coin_list_fragment">
+        <action
+            android:id="@+id/action_to_favorite"
+            app:destination="@+id/coinFavorites" />
+        <action
+            android:id="@+id/action_to_detailIcon"
+            app:destination="@+id/coinDetails" />
+    </fragment>
     <fragment
         android:id="@id/coinFavorites"
         android:name="com.example.cryptocurrencyapp.view.fragments.CoinFavoriteFragment"
         android:label="CoinFavorite"
-        tools:layout="@layout/favorite_fragment"/>
+        tools:layout="@layout/favorite_fragment">
+        <action
+            android:id="@+id/action_to_coinList"
+            app:destination="@+id/coinList" />
+        <action
+            android:id="@+id/action_to_detailIcon"
+            app:destination="@+id/coinDetails" />
+    </fragment>
     <fragment
         android:id="@+id/coinDetails"
         android:name="com.example.cryptocurrencyapp.view.fragments.CoinDetailsFragment"
         android:label="CoinDetails"
         tools:layout="@layout/details_fragment">
+        <action
+            android:id="@+id/action_to_coinList"
+            app:destination="@+id/coinList" />
+        <action
+            android:id="@+id/action_to_favorite"
+            app:destination="@+id/coinFavorites" />
         <argument
             android:name="asset"
-            app:argType="com.example.cryptocurrencyapp.models.assets.Assets.AssetsItem"/>
+            app:argType="com.example.cryptocurrencyapp.models.assets.Assets.AssetsItem" />
     </fragment>
-    <action android:id="@+id/action_to_detailIcon" app:destination="@+id/coinDetails"/>
-    <action android:id="@+id/action_to_coinList" app:destination="@+id/coinList" />
-    <action android:id="@+id/action_to_favorite" app:destination="@+id/coinFavorites"/>
+
 
 </navigation>

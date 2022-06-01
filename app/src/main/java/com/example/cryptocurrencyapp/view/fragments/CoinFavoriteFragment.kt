@@ -82,17 +82,6 @@ class CoinFavoriteFragment : Fragment() {
             }
         }
     }
-//
-//    private fun searchFilter(searchValue: String?): AssetsItem? {
-//        val listResults: AssetsItem? = null
-//        if (searchValue != "") {
-//            val searchValueUpperCase = searchValue?.uppercase()
-//            val listResults = coinViewModel.assets.value?.filter {
-//                (it.asset_id.uppercase() in searchValueUpperCase!!)
-//            }
-//        }
-//        return listResults
-//    }
 
     private fun goToCoinDetails(asset: AssetsItem) {
         val bundle = bundleOf("asset" to asset)

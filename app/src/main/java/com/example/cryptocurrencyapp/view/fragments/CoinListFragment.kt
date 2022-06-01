@@ -18,6 +18,8 @@ import com.example.cryptocurrencyapp.databinding.CoinListFragmentBinding
 import com.example.cryptocurrencyapp.view.adapters.CoinListAdapter
 import com.example.cryptocurrencyapp.viewmodel.AssetsListViewModel
 import com.example.cryptocurrencyapp.viewmodel.DataResult
+import java.text.SimpleDateFormat
+import java.util.*
 
 class CoinListFragment : Fragment() {
 
@@ -49,7 +51,7 @@ class CoinListFragment : Fragment() {
             CoinListAdapter(requireContext(), coinViewModel) { asset -> goToCoinDetails(asset) }
 
         settingRecyclerViewProperties()
-
+        binding.currentDateTextView.text = SimpleDateFormat("dd MMM yyyy").format(Date())
         binding.imgMenu.setOnClickListener { onClick ->
             settingUpMenu(onClick)
         }

@@ -20,20 +20,17 @@ class SplashScreenFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = SplashScreenFragmentBinding.inflate(inflater, container, false)
+        setupSplashScreen()
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setupSplashScreen()
     }
 
     private fun setupSplashScreen(){
         Handler().postDelayed({
             findNavController().navigate(R.id.action_to_coinList)
-        }, 3000)
-
-
+        }, 2500)
     }
-
 }

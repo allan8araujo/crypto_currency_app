@@ -16,12 +16,14 @@
     </style>
 
     <style name="SearchViewStyle" parent="Widget.AppCompat.SearchView">
+        <item name="backgroundColor">@color/app_grey_background</item>
         <item name="searchIcon"> @color/white </item>
         <item name="searchHintIcon"> @color/white </item>
         <item name="searchViewStyle"> @color/white </item>
         <item name="android:textColor">@color/white</item>
         <item name="android:editTextColor">@color/white</item>
-        <item name="android:textColorHint">@color/app_grey_background</item>
+        <item name="android:searchIcon">@drawable/ic_baseline_search_24</item>
+        <item name="android:textColorHint">@color/white</item>
     </style>
 
 </resources>

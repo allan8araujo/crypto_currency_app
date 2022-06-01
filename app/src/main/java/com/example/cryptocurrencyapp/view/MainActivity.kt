@@ -5,6 +5,7 @@ import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
+import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
 import com.example.cryptocurrencyapp.R
 import com.example.cryptocurrencyapp.R.id.*
@@ -31,13 +32,15 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         coinViewModel.getAllAssets()
         setupBottomNav()
-        binding.mainBottomNavigation.setupWithNavController(controller)
+        NavigationUI.setupWithNavController(binding.mainBottomNavigation, controller)
+//        binding.mainBottomNavigation.setupWithNavController(controller)
     }
 
     private fun setupBottomNav() {
         controller.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
                 coinList, coinFavorites, coinDetails -> {
+
                     visibilityButtonNavigation()
                 }
                 else -> hideButtonNavigation()

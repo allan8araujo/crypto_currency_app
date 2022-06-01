@@ -59,18 +59,22 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
+
                 <SearchView
                     android:id="@+id/search_editText"
+                    style="@android:style/Widget.Material.SearchView"
                     android:layout_width="363dp"
                     android:layout_height="42dp"
                     android:layout_marginHorizontal="20dp"
                     android:layout_marginBottom="12dp"
                     android:background="@drawable/round_search_view"
                     android:iconifiedByDefault="false"
-                    android:drawableStart="@drawable/ic_baseline_search_24"
                     android:padding="5dp"
                     android:queryBackground="@android:color/transparent"
                     android:queryHint="Search"
+                    android:searchIcon="@drawable/ic_baseline_search_24"
+                    android:submitBackground="@color/white"
+                    android:textColorHint="@color/design_default_color_background"
                     android:theme="@style/SearchViewStyle"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
