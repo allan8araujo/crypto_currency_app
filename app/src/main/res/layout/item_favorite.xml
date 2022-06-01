@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
@@ -14,51 +13,74 @@
         android:padding="8dp"
         android:paddingHorizontal="32dp">
 
-        <ImageView
+
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/card_imageView"
             android:layout_width="160dp"
-            android:layout_height="121dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
             android:background="@drawable/ic_favorite_item"
             android:contentDescription="@string/item_para_uso_de_fundo_do_item_favorite_screen"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.428"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/name_bitcoin_textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:background="@color/app_yellow_background"
-            android:contentDescription="@string/escrita_da_moeda_bitcoin_do_item_favorite_screen"
-            android:fontFamily="@font/roboto"
-            android:text="@string/bitcoin"
-            android:textColor="@color/white"
-            android:textSize="24sp"
-            android:textAlignment="center"
-            android:maxLines="1"
-            android:ems="5"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            <TextView
+                android:id="@+id/name_bitcoin_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:background="@color/app_yellow_background"
+                android:contentDescription="@string/escrita_da_moeda_bitcoin_do_item_favorite_screen"
+                android:ems="4"
+                android:fontFamily="@font/roboto"
+                android:text="@string/bitcoin"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="24sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/btc_textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:background="@color/app_yellow_background"
-            android:contentDescription="@string/abrevi_o_o_do_nome_da_moeda_da_tela_item_coin"
-            android:fontFamily="@font/roboto"
-            android:text="@string/btc"
-            android:textColor="@color/white"
-            android:textSize="14sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.506"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/name_bitcoin_textView" />
+            <TextView
+                android:id="@+id/btc_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:background="@color/app_yellow_background"
+                android:contentDescription="@string/abrevi_o_o_do_nome_da_moeda_da_tela_item_coin"
+                android:fontFamily="@font/roboto"
+                android:text="@string/btc"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/name_bitcoin_textView" />
+
+
+            <TextView
+                android:id="@+id/price_bit_coin_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="12dp"
+                android:background="@color/app_yellow_background"
+                android:contentDescription="@string/valor_do_item_favorite_screen"
+                android:drawableStart="@drawable/ic_baseline_attach_coin_24"
+                android:ems="4"
+                android:fontFamily="@font/roboto"
+                android:maxLines="1"
+                android:text="@string/_31_010_20"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="24sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btc_textView" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
 
         <ImageView
             android:id="@+id/img_coin_imageView"
@@ -72,26 +94,6 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.0" />
 
-        <TextView
-            android:id="@+id/price_bit_coin_textView"
-            android:contentDescription="@string/valor_do_item_favorite_screen"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:background="@color/app_yellow_background"
-            android:fontFamily="@font/roboto"
-            android:text="@string/_31_010_20"
-            android:ems="4"
-            android:maxLines="1"
-            android:textAlignment="center"
-            android:drawableStart="@drawable/ic_baseline_attach_coin_24"
-            android:textColor="@color/white"
-            android:textSize="24sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.493"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btc_textView" />
-
         <ProgressBar
             android:id="@+id/favorite_progressBar"
             style="?android:attr/progressBarStyle"
@@ -99,12 +101,11 @@
             android:layout_height="34dp"
             android:fromDegrees="0"
             android:toDegrees="1080"
-            app:layout_constraintEnd_toEndOf="@+id/img_coin_imageView"
-            app:layout_constraintTop_toTopOf="@+id/img_coin_imageView"
             app:layout_constraintBottom_toBottomOf="@+id/img_coin_imageView"
+            app:layout_constraintEnd_toEndOf="@+id/img_coin_imageView"
             app:layout_constraintStart_toStartOf="@+id/img_coin_imageView"
+            app:layout_constraintTop_toTopOf="@+id/img_coin_imageView"
             tools:layout_editor_absoluteY="8dp" />
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
