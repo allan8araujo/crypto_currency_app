@@ -89,5 +89,6 @@ dependencies {
     //Http
     implementation "com.squareup.okhttp3:logging-interceptor:4.5.0"
 
-
+//test
+    implementation project(path: ':apiLibrary')
 }

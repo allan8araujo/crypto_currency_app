@@ -6,11 +6,10 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
-import androidx.navigation.ui.setupWithNavController
 import com.example.cryptocurrencyapp.R
 import com.example.cryptocurrencyapp.R.id.*
-import com.example.cryptocurrencyapp.models.repository.api.retrofit.RetrofitRequestHelper
 import com.example.cryptocurrencyapp.databinding.ActivityMainBinding
+import com.example.cryptocurrencyapp.models.RetrofitRequestHelper
 import com.example.cryptocurrencyapp.viewmodel.AssetsListViewModel
 
 class MainActivity : AppCompatActivity() {
@@ -33,7 +32,6 @@ class MainActivity : AppCompatActivity() {
         coinViewModel.getAllAssets()
         setupBottomNav()
         NavigationUI.setupWithNavController(binding.mainBottomNavigation, controller)
-//        binding.mainBottomNavigation.setupWithNavController(controller)
     }
 
     private fun setupBottomNav() {
@@ -48,7 +46,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-
     override fun onBackPressed() {
         when (controller.currentDestination!!.id) {
             coinDetails -> super.onBackPressed()
@@ -62,8 +59,4 @@ class MainActivity : AppCompatActivity() {
     private fun hideButtonNavigation() {
         binding.mainBottomNavigation.visibility = View.GONE
     }
-
-
 }
-
-

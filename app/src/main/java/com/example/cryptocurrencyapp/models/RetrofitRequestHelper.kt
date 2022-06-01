@@ -1,7 +1,8 @@
-package com.example.cryptocurrencyapp.models.repository.api.retrofit
+package com.example.cryptocurrencyapp.models
 
-import com.example.cryptocurrencyapp.models.repository.api.client.AssetsClient
-import com.example.cryptocurrencyapp.models.repository.api.interceptor.InterceptorHelper
+import com.example.apilibrary.repository.api.AssetsRepository
+import com.example.apilibrary.repository.api.client.AssetsClient
+import com.example.apilibrary.repository.api.interceptor.InterceptorHelper
 import com.example.cryptocurrencyapp.viewmodel.factories.ListViewModelFactory
 
 class RetrofitRequestHelper {
@@ -9,7 +10,7 @@ class RetrofitRequestHelper {
         fun getListAssets(): ListViewModelFactory {
             val listRepository =
                 InterceptorHelper().interceptorHelper(AssetsClient().clientInterceptor)
-            return ListViewModelFactory(listRepository)
+            return ListViewModelFactory(listRepository as AssetsRepository)
         }
     }
 }

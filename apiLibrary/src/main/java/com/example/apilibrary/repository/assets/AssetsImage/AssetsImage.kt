@@ -1,6 +1,4 @@
-package com.example.cryptocurrencyapp.models.assets.AssetsImage
-
-import com.example.apilibrary.repository.assets.AssetsImage.AssetsImageItem
+package com.example.apilibrary.repository.assets.AssetsImage
 
 class AssetsImage : ArrayList<AssetsImageItem>()
 

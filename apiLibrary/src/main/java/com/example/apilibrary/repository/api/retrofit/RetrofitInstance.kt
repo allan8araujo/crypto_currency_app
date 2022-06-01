@@ -1,13 +1,14 @@
-package com.example.cryptocurrencyapp.models.repository.api.retrofit
+package com.example.apilibrary.repository.api.retrofit
 
-import com.example.cryptocurrencyapp.models.const.Constants
-import com.example.cryptocurrencyapp.models.repository.AssetsRepository
+import com.example.apilibrary.repository.api.AssetsRepository
+import com.example.apilibrary.repository.api.IAssetsRepository
+import com.example.apilibrary.repository.const.Constants
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class RetrofitInstance() {
-    fun retrofitInstance(interpertor: OkHttpClient): AssetsRepository {
+class RetrofitInstance {
+    fun retrofitInstance(interpertor: OkHttpClient):IAssetsRepository{
         val retrofitInstance by lazy {
             Retrofit
                 .Builder()

@@ -1,6 +1,6 @@
-package com.example.cryptocurrencyapp.models.repository.api.client
+package com.example.apilibrary.repository.api.client
 
-import com.example.cryptocurrencyapp.models.repository.api.interceptor.InterceptorList
+import com.example.apilibrary.repository.api.interceptor.InterceptorList
 import okhttp3.OkHttpClient
 
 class AssetsClient {

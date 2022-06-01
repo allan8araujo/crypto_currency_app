@@ -4,10 +4,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.cryptocurrencyapp.models.assets.Assets.AssetsItem
-import com.example.cryptocurrencyapp.models.assets.Assets.funEmptyAssets
-import com.example.cryptocurrencyapp.models.assets.AssetsImage.AssetsImage
-import com.example.cryptocurrencyapp.models.repository.IAssetsRepository
+import com.example.apilibrary.repository.api.IAssetsRepository
+import com.example.apilibrary.repository.assets.Assets.AssetsItem
+import com.example.apilibrary.repository.assets.Assets.funEmptyAssets
+import com.example.apilibrary.repository.assets.AssetsImage.AssetsImage
+import com.example.cryptocurrencyapp.viewmodel.restults.DataResult
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext

@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.cryptocurrencyapp.R
-import com.example.cryptocurrencyapp.models.assets.Assets.AssetsItem
+import com.example.apilibrary.repository.assets.Assets.AssetsItem
 import com.example.cryptocurrencyapp.databinding.ItemCoinBinding
 import com.example.cryptocurrencyapp.viewmodel.AssetsListViewModel
 

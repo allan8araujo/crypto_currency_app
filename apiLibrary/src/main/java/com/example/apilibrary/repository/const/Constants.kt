@@ -1,4 +1,4 @@
-package com.example.cryptocurrencyapp.models.const
+package com.example.apilibrary.repository.const
 
 class Constants {
     companion object {

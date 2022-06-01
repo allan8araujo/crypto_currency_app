@@ -10,9 +10,9 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.example.cryptocurrencyapp.R
-import com.example.cryptocurrencyapp.models.repository.api.retrofit.RetrofitRequestHelper
+import com.example.cryptocurrencyapp.models.RetrofitRequestHelper
 import com.example.cryptocurrencyapp.databinding.DetailsFragmentBinding
-import com.example.cryptocurrencyapp.models.assets.Assets.AssetsItem
+import com.example.apilibrary.repository.assets.Assets.AssetsItem
 import com.example.cryptocurrencyapp.view.adapters.ProgressBarListener
 import com.example.cryptocurrencyapp.view.adapters.TinyDB
 import com.example.cryptocurrencyapp.viewmodel.AssetsListViewModel

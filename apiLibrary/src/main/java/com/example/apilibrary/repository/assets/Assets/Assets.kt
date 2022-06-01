@@ -1,6 +1,5 @@
-package com.example.cryptocurrencyapp.models.assets.Assets
+package com.example.apilibrary.repository.assets.Assets
 
-import com.example.apilibrary.repository.assets.Assets.AssetsItem
 
 class Assets : ArrayList<AssetsItem>()
 
