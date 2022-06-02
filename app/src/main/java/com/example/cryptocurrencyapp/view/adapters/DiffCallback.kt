@@ -1,7 +1,7 @@
 package com.example.cryptocurrencyapp.view.adapters
 
 import androidx.recyclerview.widget.DiffUtil
-import com.example.apilibrary.repository.assets.Assets.AssetsItem
+import com.example.cryptocurrencyapp.models.assets.Assets.AssetsItem
 
 class DiffCallback : DiffUtil.ItemCallback<AssetsItem>() {
     override fun areItemsTheSame(oldItem: AssetsItem, newItem: AssetsItem): Boolean {

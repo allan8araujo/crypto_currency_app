@@ -75,20 +75,5 @@ dependencies {
     //Glide
     implementation 'com.github.bumptech.glide:glide:4.13.0'
 
-    implementation 'com.squareup.picasso:picasso:2.71828'
-
-    //Retrofit & Gson
-    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
-    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
-    implementation "com.squareup.retrofit2:adapter-rxjava2:2.9.0"
-    implementation 'com.google.code.gson:gson:2.8.9'
-
-    // Corountine
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.1")
-
-    //Http
-    implementation "com.squareup.okhttp3:logging-interceptor:4.5.0"
-
-//test
-    implementation project(path: ':apiLibrary')
+    implementation project(':apiLibrary')
 }

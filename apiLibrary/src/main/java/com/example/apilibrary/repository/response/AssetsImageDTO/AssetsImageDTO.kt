@@ -1,25 +1,25 @@
-package com.example.apilibrary.repository.assets.AssetsImage
+package com.example.apilibrary.repository.response.AssetsImageDTO
 
-class AssetsImage : ArrayList<AssetsImageItem>()
+class AssetsImageResponse : ArrayList<AssetsImageItemDTO>()
 
 val emptyImageList = arrayListOf(
-    AssetsImageItem(
+    AssetsImageItemDTO(
         asset_id = "",
         url = ""
     ),
-    AssetsImageItem(
+    AssetsImageItemDTO(
         asset_id = "",
         url = ""
     ),
-    AssetsImageItem(
+    AssetsImageItemDTO(
         asset_id = "",
         url = ""
     ),
-    AssetsImageItem(
+    AssetsImageItemDTO(
         asset_id = "",
         url = ""
     ),
-    AssetsImageItem(
+    AssetsImageItemDTO(
         asset_id = "",
         url = ""
     )

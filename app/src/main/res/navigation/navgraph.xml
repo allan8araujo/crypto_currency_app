@@ -54,7 +54,7 @@
             app:destination="@+id/coinFavorites" />
         <argument
             android:name="asset"
-            app:argType="com.example.apilibrary.repository.assets.Assets.AssetsItem" />
+            app:argType="com.example.cryptocurrencyapp.models.assets.Assets.AssetsItem" />
     </fragment>
 
 

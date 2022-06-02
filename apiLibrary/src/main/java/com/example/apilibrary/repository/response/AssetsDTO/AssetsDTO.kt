@@ -1,10 +1,10 @@
-package com.example.apilibrary.repository.assets.Assets
+package com.example.apilibrary.repository.response.AssetsDTO
 
 
-class Assets : ArrayList<AssetsItem>()
+class AssetsResponse : ArrayList<AssetsItemDTO>()
 
 val listMockedAssetsItems = arrayListOf(
-    AssetsItem(
+    AssetsItemDTO(
         asset_id = "BTC",
         name = "Bitcoin",
         type_is_crypto = 1,
@@ -23,7 +23,7 @@ val listMockedAssetsItems = arrayListOf(
         data_start = "2010-07-17",
         data_end = "2022-05-20"
     ),
-    AssetsItem(
+    AssetsItemDTO(
         asset_id = "USD",
         name = "US Dollar",
         type_is_crypto = 0,
@@ -41,7 +41,7 @@ val listMockedAssetsItems = arrayListOf(
         data_start = "2010-07-17",
         data_end = "2022-05-20"
     ),
-    AssetsItem(
+    AssetsItemDTO(
         asset_id = "PLN",
         name = "Zloty",
         type_is_crypto = 0,
@@ -60,7 +60,7 @@ val listMockedAssetsItems = arrayListOf(
         data_start = "2011-04-05",
         data_end = "2022-05-20"
     ),
-    AssetsItem(
+    AssetsItemDTO(
         asset_id = "EUR",
         name = "Euro",
         type_is_crypto = 0,
@@ -79,7 +79,7 @@ val listMockedAssetsItems = arrayListOf(
         data_start = "2011-04-06",
         data_end = "2022-05-20"
     ),
-    AssetsItem(
+    AssetsItemDTO(
         asset_id = "USD",
         name = "US Dollar",
         type_is_crypto = 0,
@@ -92,8 +92,8 @@ val listMockedAssetsItems = arrayListOf(
 
 fun funMockLives() = listMockedAssetsItems
 
-fun funEmptyAssets() = arrayListOf<AssetsItem>(
-    AssetsItem(
+fun funEmptyAssets() = arrayListOf<AssetsItemDTO>(
+    AssetsItemDTO(
         asset_id = "",
         name = "",
         type_is_crypto = 0,
@@ -112,7 +112,7 @@ fun funEmptyAssets() = arrayListOf<AssetsItem>(
         data_start = "",
         data_end = ""
     ),
-    AssetsItem(
+    AssetsItemDTO(
         asset_id = "",
         name = "",
         type_is_crypto = 0,
@@ -131,7 +131,7 @@ fun funEmptyAssets() = arrayListOf<AssetsItem>(
         data_start = "",
         data_end = ""
     ),
-    AssetsItem(
+    AssetsItemDTO(
         asset_id = "",
         name = "",
         type_is_crypto = 0,

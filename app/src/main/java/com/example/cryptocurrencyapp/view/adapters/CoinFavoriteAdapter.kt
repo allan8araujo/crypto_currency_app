@@ -8,8 +8,8 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.cryptocurrencyapp.R
-import com.example.apilibrary.repository.assets.Assets.AssetsItem
 import com.example.cryptocurrencyapp.databinding.ItemFavoriteBinding
+import com.example.cryptocurrencyapp.models.assets.Assets.AssetsItem
 import com.example.cryptocurrencyapp.viewmodel.AssetsListViewModel
 
 class CoinFavoriteAdapter(
@@ -19,22 +19,15 @@ class CoinFavoriteAdapter(
 ) :
     ListAdapter<AssetsItem, CoinFavoriteAdapter.ViewHolder>(DiffCallback()) {
 
-
     inner class ViewHolder(val binding: ItemFavoriteBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun loadUrlFromGlide(assetItem: AssetsItem): String? {
-            val assetUrlLink = iconViewModel.icon.value?.find {
-                it.asset_id == assetItem.asset_id
-            }
-            return assetUrlLink?.url
-        }
 
         fun bind(assetItem: AssetsItem) {
 
             val progressBar = binding.favoriteProgressBar
             progressBar.visibility = View.VISIBLE
             Glide.with(binding.root)
-                .load(loadUrlFromGlide(assetItem))
+                .load(iconViewModel.loadUrlFromGlide(assetItem))
                 .placeholder(R.drawable.ic_coin_base)
                 .listener(ProgressBarListener(progressBar))
                 .centerCrop()
@@ -51,11 +44,8 @@ class CoinFavoriteAdapter(
                 }
 
                 cardImageView.setOnClickListener { onClick.invoke(assetItem) }
-
             }
-
         }
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

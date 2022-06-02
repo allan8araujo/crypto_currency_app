@@ -12,12 +12,13 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.cryptocurrencyapp.R
-import com.example.cryptocurrencyapp.models.RetrofitRequestHelper
-import com.example.apilibrary.repository.assets.Assets.AssetsItem
 import com.example.cryptocurrencyapp.databinding.CoinListFragmentBinding
+import com.example.apilibrary.repository.api.RetrofitRequestHelper
+import com.example.cryptocurrencyapp.models.assets.Assets.AssetsItem
 import com.example.cryptocurrencyapp.view.adapters.CoinListAdapter
 import com.example.cryptocurrencyapp.viewmodel.AssetsListViewModel
-import com.example.cryptocurrencyapp.viewmodel.restults.DataResult
+import com.example.cryptocurrencyapp.viewmodel.factories.ListViewModelFactory
+import com.example.cryptocurrencyapp.viewmodel.results.DataResult
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -27,7 +28,7 @@ class CoinListFragment : Fragment() {
     private lateinit var binding: CoinListFragmentBinding
     private lateinit var linearLayoutManager: LinearLayoutManager
     private val coinViewModel: AssetsListViewModel by activityViewModels {
-        RetrofitRequestHelper.getListAssets()
+        ListViewModelFactory(RetrofitRequestHelper.getListAssets())
     }
 
     override fun onCreateView(
