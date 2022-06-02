@@ -17,7 +17,7 @@ class SplashScreenFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         binding = SplashScreenFragmentBinding.inflate(inflater, container, false)
         setupSplashScreen()
@@ -28,7 +28,7 @@ class SplashScreenFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
     }
 
-    private fun setupSplashScreen(){
+    private fun setupSplashScreen() {
         Handler().postDelayed({
             findNavController().navigate(R.id.action_to_coinList)
         }, 2500)

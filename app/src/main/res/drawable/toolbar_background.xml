@@ -9,7 +9,7 @@
             <solid android:color="@color/app_black_background" />
             <stroke
                 android:width="0.7dp"
-                android:color="@color/icon_coin_base_grey"/>
+                android:color="@color/icon_coin_base_grey" />
             <padding
                 android:bottom="5dp"
                 android:left="5dp"

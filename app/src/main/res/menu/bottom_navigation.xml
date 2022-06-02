@@ -3,9 +3,9 @@
     <item
         android:id="@+id/coinList"
         android:icon="@drawable/ic_baseline_attach_money_24"
-        android:title="@string/moedas"/>
+        android:title="@string/moedas" />
     <item
         android:id="@+id/coinFavorites"
         android:icon="@drawable/ic_baseline_star_coin_24"
-        android:title="@string/meus_favoritos"/>
+        android:title="@string/meus_favoritos" />
 </menu>

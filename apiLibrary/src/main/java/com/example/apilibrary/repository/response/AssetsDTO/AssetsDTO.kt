@@ -1,6 +1,5 @@
 package com.example.apilibrary.repository.response.AssetsDTO
 
-
 class AssetsResponse : ArrayList<AssetsItemDTO>()
 
 val listMockedAssetsItems = arrayListOf(

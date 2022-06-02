@@ -24,4 +24,5 @@ val emptyImageList = arrayListOf(
         url = ""
     )
 )
+
 fun funEmptyImageList() = emptyImageList

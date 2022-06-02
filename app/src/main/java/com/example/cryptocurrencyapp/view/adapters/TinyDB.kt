@@ -1,15 +1,11 @@
 package com.example.cryptocurrencyapp.view.adapters
 
 import android.content.Context
-import android.util.Log
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import java.io.*
-import java.lang.Exception
-
 
 //
-//class tinyDB(val view: Context) {
+// class tinyDB(val view: Context) {
 //
 //    val sharedPref: SharedPreferences? = view.getSharedPreferences(
 //        "ASSETS", 0
@@ -47,7 +43,7 @@ import java.lang.Exception
 //        val item = list?.contains(id)
 //        return  item == true
 //    }
-//}
+// }
 
 class TinyDB(val context: Context) :
     AppCompatActivity(), Serializable {
@@ -123,7 +119,6 @@ class TinyDB(val context: Context) :
             if (id != palavra)
                 addItem(id)
         }
-
     }
 
     companion object {

@@ -4,4 +4,3 @@ data class AssetsImageItemDTO(
     val asset_id: String,
     val url: String,
 )
-

@@ -8,17 +8,17 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraint_top_fragment_details_constraintLayout"
-        android:contentDescription="@string/constraint_de_cima_da_tela_fragment_details"
         android:layout_width="match_parent"
         android:layout_height="366dp"
-        android:background="@color/app_yellow_background">
+        android:background="@color/app_yellow_background"
+        android:contentDescription="@string/constraint_de_cima_da_tela_fragment_details">
 
         <TextView
             android:id="@+id/icon_asset_id_textView"
-            android:contentDescription="@string/abrevi_o_o_do_nome_da_moeda_da_tela_item_coin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
+            android:contentDescription="@string/abrevi_o_o_do_nome_da_moeda_da_tela_item_coin"
             android:fontFamily="@font/roboto"
             android:textColor="@color/white"
             android:textSize="20sp"
@@ -47,22 +47,21 @@
             android:layout_width="34dp"
             android:layout_height="34dp"
             app:layout_constraintBottom_toBottomOf="@id/coin_icon_imageView"
-            app:layout_constraintTop_toTopOf="@id/coin_icon_imageView"
-            app:layout_constraintStart_toStartOf="@id/coin_icon_imageView"
             app:layout_constraintEnd_toEndOf="@id/coin_icon_imageView"
-             />
+            app:layout_constraintStart_toStartOf="@id/coin_icon_imageView"
+            app:layout_constraintTop_toTopOf="@id/coin_icon_imageView" />
 
         <TextView
             android:id="@+id/price_usd_textView"
-            android:contentDescription="@string/valor_real_da_tela_fragment_details"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:paddingHorizontal="4dp"
+            android:contentDescription="@string/valor_real_da_tela_fragment_details"
             android:drawableStart="@drawable/ic_baseline_attach_coin_24"
+            android:ems="5"
             android:gravity="center"
             android:maxLines="1"
-            android:ems="5"
+            android:paddingHorizontal="4dp"
             android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="28sp"
@@ -73,11 +72,11 @@
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/add_button"
-            android:contentDescription="@string/button_adicionar_da_tela_fragment_details"
             android:layout_width="300dp"
             android:layout_height="59dp"
             android:layout_marginTop="48dp"
             android:background="@drawable/outlined_button"
+            android:contentDescription="@string/button_adicionar_da_tela_fragment_details"
             android:fontFamily="@font/roboto"
             android:text="@string/adicionar"
             android:textColor="@color/white"
@@ -89,10 +88,10 @@
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/back_press_button"
-            android:contentDescription="@string/button_voltar_da_tela_fragment_details"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@android:color/transparent"
+            android:contentDescription="@string/button_voltar_da_tela_fragment_details"
             android:drawableStart="@drawable/ic_baseline_chevron_left_24"
             android:fontFamily="@font/roboto"
             android:paddingEnd="8dp"
@@ -106,9 +105,9 @@
 
         <ImageView
             android:id="@+id/star_icon_imageView"
-            android:contentDescription="@string/estrela_favoritos_da_tela_fragment_details"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:contentDescription="@string/estrela_favoritos_da_tela_fragment_details"
             android:src="@drawable/ic_baseline_star_coin_24"
             android:visibility="gone"
             app:layout_constraintBottom_toTopOf="@+id/coin_icon_imageView"
@@ -121,18 +120,18 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraint_bottom_fragment_details_constraintLayout"
-        android:contentDescription="@string/constraint_de_baixo_da_tela_fragment_details"
         android:layout_width="match_parent"
         android:layout_height="366dp"
-        android:background="@color/app_black_background">
+        android:background="@color/app_black_background"
+        android:contentDescription="@string/constraint_de_baixo_da_tela_fragment_details">
 
         <TextView
             android:id="@+id/traded_volumes_textView"
-            android:contentDescription="@string/titulo_volume_negociados_da_tela_fragment_details"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
+            android:contentDescription="@string/titulo_volume_negociados_da_tela_fragment_details"
             android:fontFamily="@font/roboto"
             android:text="@string/volumes_negociados"
             android:textColor="@color/white"
@@ -143,10 +142,10 @@
 
         <TextView
             android:id="@+id/last_hour_textView"
-            android:contentDescription="@string/sub_titulo_ultima_hora_da_tela_fragment_details"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
+            android:contentDescription="@string/sub_titulo_ultima_hora_da_tela_fragment_details"
             android:fontFamily="@font/roboto"
             android:text="@string/ultima_hora"
             android:textColor="@color/white"
@@ -157,10 +156,10 @@
 
         <TextView
             android:id="@+id/last_month_textView"
-            android:contentDescription="@string/sub_titulo_ultimo_m_s_da_tela_fragment_details"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
+            android:contentDescription="@string/sub_titulo_ultimo_m_s_da_tela_fragment_details"
             android:text="@string/ultimo_dia"
             android:textColor="@color/white"
             android:textSize="20sp"
@@ -169,10 +168,10 @@
 
         <TextView
             android:id="@+id/last_year_textView"
-            android:contentDescription="@string/sub_titulo_ultimo_ano_da_tela_fragment_details"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="30sp"
+            android:contentDescription="@string/sub_titulo_ultimo_ano_da_tela_fragment_details"
             android:text="@string/ultimo_mes"
             android:textColor="@color/white"
             android:textSize="20sp"
@@ -181,11 +180,11 @@
 
         <TextView
             android:id="@+id/last_hour_value_textView"
-            android:contentDescription="@string/valor_da_ultima_hora_da_tela_fragment_details"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:layout_marginEnd="32dp"
+            android:contentDescription="@string/valor_da_ultima_hora_da_tela_fragment_details"
             android:drawableStart="@drawable/ic_baseline_attach_coin_24"
             android:ems="4"
             android:maxLines="1"
@@ -198,11 +197,11 @@
 
         <TextView
             android:id="@+id/last_week_value_textView"
-            android:contentDescription="@string/valor_da_ultimo_m_s_da_tela_fragment_details"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:layout_marginEnd="32dp"
+            android:contentDescription="@string/valor_da_ultimo_m_s_da_tela_fragment_details"
             android:drawableStart="@drawable/ic_baseline_attach_coin_24"
             android:ems="4"
             android:maxLines="1"
@@ -215,11 +214,11 @@
 
         <TextView
             android:id="@+id/last_mounth_value_textView"
-            android:contentDescription="@string/valor_da_ultimo_ano_da_tela_fragment_details"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:layout_marginEnd="32dp"
+            android:contentDescription="@string/valor_da_ultimo_ano_da_tela_fragment_details"
             android:drawableStart="@drawable/ic_baseline_attach_coin_24"
             android:ems="4"
             android:maxLines="1"
