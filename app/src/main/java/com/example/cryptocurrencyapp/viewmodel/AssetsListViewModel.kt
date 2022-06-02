@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.apilibrary.repository.api.IAssetsRepository
 import com.example.apilibrary.repository.const.Constants.Companion.AMAZON_ICON
-import com.example.apilibrary.repository.response.AssetsDTO.AssetsResponse
+import com.example.apilibrary.repository.response.AssetsDTO.AssetsDTO
 import com.example.cryptocurrencyapp.models.assets.Assets.AssetsItem
 import com.example.cryptocurrencyapp.models.assets.Assets.funEmptyAssets
 import com.example.cryptocurrencyapp.models.assets.AssetsImage.AssetsImage
@@ -16,6 +16,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class AssetsListViewModel(
+
     private val assetsRespository: IAssetsRepository,
 ) : ViewModel() {
     private val liveList = MutableLiveData<DataResult<List<AssetsItem>>>()
@@ -33,18 +34,18 @@ class AssetsListViewModel(
     private suspend fun getAssetsData() {
         liveList.value = DataResult.Loading()
         try {
-            val assetsFromApi = withContext(Dispatchers.IO) {
+            val assetsResponseFromApi = withContext(Dispatchers.IO) {
                 assetsRespository.getAssets()
             }
-            val teste = assetsFromApi.toAssets()
-            liveList.value = DataResult.Sucess(teste)
+            val assetsFromApi = assetsResponseFromApi.toAssets()
+            liveList.value = DataResult.Sucess(assetsFromApi)
         } catch (e: Throwable) {
             val assetsFromApi = DataResult.Error<List<AssetsItem>>(e, funEmptyAssets())
             liveList.value = assetsFromApi
         }
     }
 
-    private fun AssetsResponse.toAssets(): List<AssetsItem> {
+    private fun AssetsDTO.toAssets(): List<AssetsItem> {
         return map {
             AssetsItem(
                 asset_id = it.asset_id,

@@ -6,6 +6,7 @@ import okhttp3.OkHttpClient
 
 class InterceptorHelper {
     fun interceptorHelper(interceptor: OkHttpClient): IAssetsRepository {
-        return RetrofitInstance().retrofitInstance(interceptor)
+        return RetrofitInstance()
+            .retrofitInstance(interceptor)
     }
 }

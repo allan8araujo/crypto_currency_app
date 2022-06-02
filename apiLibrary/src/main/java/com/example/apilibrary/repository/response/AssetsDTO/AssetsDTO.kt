@@ -1,6 +1,6 @@
 package com.example.apilibrary.repository.response.AssetsDTO
 
-class AssetsResponse : ArrayList<AssetsItemDTO>()
+class AssetsDTO() : ArrayList<AssetsItemDTO>()
 
 val listMockedAssetsItems = arrayListOf(
     AssetsItemDTO(
@@ -89,8 +89,6 @@ val listMockedAssetsItems = arrayListOf(
     )
 )
 
-fun funMockLives() = listMockedAssetsItems
-
 fun funEmptyAssets() = arrayListOf<AssetsItemDTO>(
     AssetsItemDTO(
         asset_id = "",
@@ -150,3 +148,5 @@ fun funEmptyAssets() = arrayListOf<AssetsItemDTO>(
         data_end = ""
     ),
 )
+
+fun funMockAssets(): ArrayList<AssetsItemDTO> = listMockedAssetsItems
