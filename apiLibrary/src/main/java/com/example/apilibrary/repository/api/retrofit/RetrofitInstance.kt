@@ -8,7 +8,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 class RetrofitInstance {
-    fun retrofitInstance(interpertor: OkHttpClient):IAssetsRepository{
+    fun retrofitInstance(interpertor: OkHttpClient): IAssetsRepository {
         val retrofitInstance by lazy {
             Retrofit
                 .Builder()

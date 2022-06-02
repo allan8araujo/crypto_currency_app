@@ -9,20 +9,22 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
+import com.example.apilibrary.repository.api.RetrofitRequestHelper
 import com.example.cryptocurrencyapp.R
-import com.example.cryptocurrencyapp.models.RetrofitRequestHelper
 import com.example.cryptocurrencyapp.databinding.DetailsFragmentBinding
-import com.example.apilibrary.repository.assets.Assets.AssetsItem
+import com.example.cryptocurrencyapp.models.assets.Assets.AssetsItem
 import com.example.cryptocurrencyapp.view.adapters.ProgressBarListener
 import com.example.cryptocurrencyapp.view.adapters.TinyDB
 import com.example.cryptocurrencyapp.viewmodel.AssetsListViewModel
+import com.example.cryptocurrencyapp.viewmodel.factories.ListViewModelFactory
 
 class CoinDetailsFragment : Fragment() {
 
     private lateinit var binding: DetailsFragmentBinding
     private val args: CoinDetailsFragmentArgs by navArgs()
+
     private val coinViewModel: AssetsListViewModel by activityViewModels {
-        RetrofitRequestHelper.getListAssets()
+        ListViewModelFactory(RetrofitRequestHelper.getListAssets())
     }
 
     override fun onCreateView(
@@ -38,8 +40,6 @@ class CoinDetailsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         bindingView(args)
     }
-
-
 
     private fun bindingView(args: CoinDetailsFragmentArgs) {
         val asset: AssetsItem = args.asset
@@ -105,21 +105,15 @@ class CoinDetailsFragment : Fragment() {
     ) {
         val progressBar = binding.detailsProgressBar
         progressBar.visibility = View.VISIBLE
-
-        val assetUrlLink = coinViewModel.icon.value?.find {
-            it.asset_id == asset.asset_id
-        }
-
         Glide.with(binding.root)
-            .load(assetUrlLink?.url)
+            .load(coinViewModel.loadUrlFromGlide(asset))
             .placeholder(R.drawable.ic_coin_base)
             .listener(ProgressBarListener(progressBar))
             .centerCrop()
             .into(binding.coinIconImageView)
     }
 
-    fun goToCoinList() {
-//        parentFragmentManager.popBackStack()
+    private fun goToCoinList() {
         findNavController().popBackStack()
     }
 }

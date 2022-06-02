@@ -1,9 +1,9 @@
 package com.example.apilibrary.repository.api
 
-import com.example.apilibrary.repository.assets.Assets.Assets
-import com.example.apilibrary.repository.assets.AssetsImage.AssetsImage
+import com.example.apilibrary.repository.response.AssetsImageDTO.AssetsImageResponse
+import com.example.apilibrary.repository.response.AssetsDTO.AssetsResponse
 
 interface IAssetsRepository {
-    suspend fun getAssets(): Assets
-    suspend fun getIcons(): AssetsImage
+    suspend fun getAssets(): AssetsResponse
+    suspend fun getIcons(): AssetsImageResponse
 }

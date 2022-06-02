@@ -8,8 +8,8 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.cryptocurrencyapp.R
-import com.example.apilibrary.repository.assets.Assets.AssetsItem
 import com.example.cryptocurrencyapp.databinding.ItemCoinBinding
+import com.example.cryptocurrencyapp.models.assets.Assets.AssetsItem
 import com.example.cryptocurrencyapp.viewmodel.AssetsListViewModel
 
 class CoinListAdapter(
@@ -20,19 +20,13 @@ class CoinListAdapter(
     ListAdapter<AssetsItem, CoinListAdapter.ViewHolder>(DiffCallback()) {
 
     inner class ViewHolder(val binding: ItemCoinBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun loadUrlFromGlide(assetItem: AssetsItem): String? {
-            val assetUrlLink = iconViewModel.icon.value?.find {
-                it.asset_id == assetItem.asset_id
-            }
-            return assetUrlLink?.url
-        }
 
         fun bind(assetItem: AssetsItem) {
             val dataBase = TinyDB(context)
             val progressBar = binding.pbLoading
             progressBar.visibility = View.VISIBLE
             Glide.with(binding.root)
-                .load(loadUrlFromGlide(assetItem))
+                .load(iconViewModel.loadUrlFromGlide(assetItem))
                 .placeholder(R.drawable.ic_coin_base)
                 .listener(ProgressBarListener(progressBar))
                 .centerCrop()
