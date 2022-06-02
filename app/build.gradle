@@ -74,5 +74,10 @@ dependencies {
     //Glide
     implementation 'com.github.bumptech.glide:glide:4.13.0'
 
+    //LottieFilesAnimation
+    def lottieVersion = "3.4.0"
+    implementation "com.airbnb.android:lottie:$lottieVersion"
+
+    //módulo de apiLibrary
     implementation project(':apiLibrary')
 }
