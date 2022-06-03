@@ -1,6 +1,7 @@
 package com.example.cryptocurrencyapp.view.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,9 +13,9 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.cryptocurrencyapp.R
-import com.example.cryptocurrencyapp.models.repository.api.retrofit.RetrofitRequestHelper
-import com.example.cryptocurrencyapp.models.assets.Assets.AssetsItem
 import com.example.cryptocurrencyapp.databinding.CoinListFragmentBinding
+import com.example.cryptocurrencyapp.models.assets.Assets.AssetsItem
+import com.example.cryptocurrencyapp.models.repository.api.retrofit.RetrofitRequestHelper
 import com.example.cryptocurrencyapp.view.adapters.CoinListAdapter
 import com.example.cryptocurrencyapp.viewmodel.AssetsListViewModel
 import com.example.cryptocurrencyapp.viewmodel.DataResult
@@ -27,7 +28,7 @@ class CoinListFragment : Fragment() {
     private lateinit var binding: CoinListFragmentBinding
     private lateinit var linearLayoutManager: LinearLayoutManager
     private val coinViewModel: AssetsListViewModel by activityViewModels {
-        RetrofitRequestHelper.getListAssets()
+        RetrofitRequestHelper().getListAssets()
     }
 
     override fun onCreateView(
@@ -165,7 +166,10 @@ class CoinListFragment : Fragment() {
                     setListAdapter(dataResults.data)
                 }
                 is DataResult.Error -> {
+                    Log.d("dasdasdError: ", dataResults.throwable.toString())
+                    binding.mainScreenProgressBar.visibility = View.GONE
                     setListAdapter(dataResults.emptyDataResults)
+                    findNavController().navigate(R.id.action_coinList_to_errorScreen)
                 }
             }
         }

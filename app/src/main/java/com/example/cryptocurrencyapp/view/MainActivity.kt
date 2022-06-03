@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private val coinViewModel: AssetsListViewModel by viewModels {
-        RetrofitRequestHelper.getListAssets()
+        RetrofitRequestHelper().getListAssets()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,8 +39,7 @@ class MainActivity : AppCompatActivity() {
     private fun setupBottomNav() {
         controller.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
-                coinList, coinFavorites, coinDetails -> {
-
+                coinList, coinFavorites, coinDetails, errorScreen -> {
                     visibilityButtonNavigation()
                 }
                 else -> hideButtonNavigation()

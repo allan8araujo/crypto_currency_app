@@ -41,4 +41,5 @@
     <string name="valor_da_ultima_hora_da_tela_fragment_details">valor da ultima hora da tela fragment details</string>
     <string name="valor_da_ultimo_m_s_da_tela_fragment_details">valor da ultimo mês da tela fragment details</string>
     <string name="valor_da_ultimo_ano_da_tela_fragment_details">valor da ultimo ano da tela fragment details</string>
+    <string name="algo_inesperado_aconteceu_tentar_novamente">Algo inesperado aconteceu! Tentar novamente?</string>
 </resources>
