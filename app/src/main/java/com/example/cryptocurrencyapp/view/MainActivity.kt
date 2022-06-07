@@ -6,6 +6,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
+import androidx.navigation.ui.setupWithNavController
 import com.example.apilibrary.repository.api.RetrofitRequestHelper
 import com.example.cryptocurrencyapp.R
 import com.example.cryptocurrencyapp.R.id.* // ktlint-disable no-wildcard-imports
@@ -32,8 +33,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         coinViewModel.getAllAssets()
         setupBottomNav()
-        NavigationUI.setupWithNavController(binding.mainBottomNavigation, controller)
-//        binding.mainBottomNavigation.setupWithNavController(controller)
+        binding.mainBottomNavigation.setupWithNavController(controller)
     }
 
     private fun setupBottomNav() {
