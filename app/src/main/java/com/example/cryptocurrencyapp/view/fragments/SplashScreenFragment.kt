@@ -30,7 +30,7 @@ class SplashScreenFragment : Fragment() {
 
     private fun setupSplashScreen() {
         Handler().postDelayed({
-            findNavController().navigate(R.id.action_to_coinList)
+            findNavController().navigate(R.id.action_splash_to_coinList)
         }, 2500)
     }
 }

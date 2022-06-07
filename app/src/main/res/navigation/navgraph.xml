@@ -12,7 +12,7 @@
         android:label="SplashScreen"
         tools:layout="@layout/splash_screen_fragment">
         <action
-            android:id="@+id/action_to_coinList"
+            android:id="@+id/action_splash_to_coinList"
             app:destination="@+id/coinList"
             app:launchSingleTop="true" />
     </fragment>
@@ -28,6 +28,9 @@
         <action
             android:id="@+id/action_to_detailIcon"
             app:destination="@+id/coinDetails" />
+        <action
+            android:id="@+id/action_coinList_to_errorScreen"
+            app:destination="@id/errorScreen" />
     </fragment>
     <fragment
         android:id="@id/coinFavorites"
@@ -55,6 +58,14 @@
         <argument
             android:name="asset"
             app:argType="com.example.cryptocurrencyapp.models.assets.Assets.AssetsItem" />
+    </fragment>
+    <fragment
+        android:id="@+id/errorScreen"
+        android:name="com.example.cryptocurrencyapp.view.fragments.ErrorScreen"
+        android:label="ErrorScreen" >
+        <action
+            android:id="@+id/action_errorScreen_to_coinList"
+            app:destination="@id/coinList" />
     </fragment>
 
 

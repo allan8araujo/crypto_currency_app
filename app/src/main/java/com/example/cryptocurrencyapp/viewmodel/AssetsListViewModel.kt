@@ -14,6 +14,7 @@ import com.example.cryptocurrencyapp.viewmodel.results.DataResult
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import retrofit2.HttpException
 
 class AssetsListViewModel(
 
@@ -34,14 +35,15 @@ class AssetsListViewModel(
     private suspend fun getAssetsData() {
         liveList.value = DataResult.Loading()
         try {
-            val assetsResponseFromApi = withContext(Dispatchers.IO) {
+            val assetsResponseFromApi = withContext(Dispatchers.Main) {
                 assetsRespository.getAssets()
             }
             val assetsFromApi = assetsResponseFromApi.toAssets()
             liveList.value = DataResult.Sucess(assetsFromApi)
-        } catch (e: Throwable) {
-            val assetsFromApi = DataResult.Error<List<AssetsItem>>(e, funEmptyAssets())
+        } catch (httpException: HttpException) {
+            val assetsFromApi = DataResult.Error<List<AssetsItem>>(httpException, funEmptyAssets())
             liveList.value = assetsFromApi
+        } catch (throwable: Throwable) {
         }
     }
 

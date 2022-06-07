@@ -9,7 +9,7 @@ internal class AssetsRepositoryTest {
     fun testApi() {
         runTest {
             Assert.assertNotEquals(
-                0, RetrofitRequestHelper.getListAssets().getAssets().size
+                0, RetrofitRequestHelper().getListAssets().getAssets().size
             )
         }
     }

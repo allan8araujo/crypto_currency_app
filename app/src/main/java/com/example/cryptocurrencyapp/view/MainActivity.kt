@@ -8,7 +8,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
 import com.example.apilibrary.repository.api.RetrofitRequestHelper
 import com.example.cryptocurrencyapp.R
-import com.example.cryptocurrencyapp.R.id.*
+import com.example.cryptocurrencyapp.R.id.* // ktlint-disable no-wildcard-imports
 import com.example.cryptocurrencyapp.databinding.ActivityMainBinding
 import com.example.cryptocurrencyapp.viewmodel.AssetsListViewModel
 import com.example.cryptocurrencyapp.viewmodel.factories.ListViewModelFactory
@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private val coinViewModel: AssetsListViewModel by viewModels {
-        ListViewModelFactory(RetrofitRequestHelper.getListAssets())
+        ListViewModelFactory(RetrofitRequestHelper().getListAssets())
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,13 +33,13 @@ class MainActivity : AppCompatActivity() {
         coinViewModel.getAllAssets()
         setupBottomNav()
         NavigationUI.setupWithNavController(binding.mainBottomNavigation, controller)
+//        binding.mainBottomNavigation.setupWithNavController(controller)
     }
 
     private fun setupBottomNav() {
         controller.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
-                coinList, coinFavorites, coinDetails -> {
-
+                coinList, coinFavorites, coinDetails, errorScreen -> {
                     visibilityButtonNavigation()
                 }
                 else -> hideButtonNavigation()

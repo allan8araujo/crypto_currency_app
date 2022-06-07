@@ -10,24 +10,19 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
-import com.example.apilibrary.repository.api.RetrofitRequestHelper
 import com.example.cryptocurrencyapp.R
 import com.example.cryptocurrencyapp.databinding.FavoriteFragmentBinding
 import com.example.cryptocurrencyapp.models.assets.Assets.AssetsItem
 import com.example.cryptocurrencyapp.view.adapters.CoinFavoriteAdapter
 import com.example.cryptocurrencyapp.view.adapters.TinyDB
 import com.example.cryptocurrencyapp.viewmodel.AssetsListViewModel
-import com.example.cryptocurrencyapp.viewmodel.factories.ListViewModelFactory
 import com.example.cryptocurrencyapp.viewmodel.results.DataResult
 
 class CoinFavoriteFragment : Fragment() {
     private lateinit var listAdapter: CoinFavoriteAdapter
     private lateinit var binding: FavoriteFragmentBinding
     private lateinit var staggeredGridLayoutManager: StaggeredGridLayoutManager
-    private val coinViewModel: AssetsListViewModel by activityViewModels {
-        ListViewModelFactory(RetrofitRequestHelper.getListAssets())
-    }
-
+    private val coinViewModel: AssetsListViewModel by activityViewModels()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
