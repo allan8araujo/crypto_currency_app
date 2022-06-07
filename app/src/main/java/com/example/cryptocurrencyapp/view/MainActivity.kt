@@ -6,7 +6,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
-import com.example.apilibrary.repository.api.RetrofitRequestHelper
+import com.example.apilibrary.repository.api.retrofit.RetrofitRequestHelper
 import com.example.cryptocurrencyapp.R
 import com.example.cryptocurrencyapp.R.id.*
 import com.example.cryptocurrencyapp.databinding.ActivityMainBinding
@@ -23,7 +23,7 @@ class MainActivity : AppCompatActivity() {
         findNavController(R.id.activity_main_navHost)
     }
 
-    private val coinViewModel: AssetsListViewModel by viewModels {
+    val coinViewModel: AssetsListViewModel by viewModels {
         ListViewModelFactory(RetrofitRequestHelper.getListAssets())
     }
 

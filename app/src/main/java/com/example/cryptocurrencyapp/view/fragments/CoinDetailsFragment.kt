@@ -9,7 +9,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
-import com.example.apilibrary.repository.api.RetrofitRequestHelper
+import com.example.apilibrary.repository.Repository
 import com.example.cryptocurrencyapp.R
 import com.example.cryptocurrencyapp.databinding.DetailsFragmentBinding
 import com.example.cryptocurrencyapp.models.assets.Assets.AssetsItem
@@ -24,7 +24,8 @@ class CoinDetailsFragment : Fragment() {
     private val args: CoinDetailsFragmentArgs by navArgs()
 
     private val coinViewModel: AssetsListViewModel by activityViewModels {
-        ListViewModelFactory(RetrofitRequestHelper.getListAssets())
+//        ListViewModelFactory(RetrofitRequestHelper.getListAssets())
+        ListViewModelFactory(Repository().getApiAssets())
     }
 
     override fun onCreateView(
@@ -43,13 +44,14 @@ class CoinDetailsFragment : Fragment() {
 
     private fun bindingView(args: CoinDetailsFragmentArgs) {
         val asset: AssetsItem = args.asset
-        val dataBase: TinyDB = TinyDB(requireContext())
+//        val dataBase: TinyDB = TinyDB(requireContext())
+        val dataBase = coinViewModel
         settingImageIcon(asset)
         with(binding) {
             iconAssetIdTextView.text = asset.asset_id
-            when (dataBase.hasItem(asset.asset_id)) {
+            when (dataBase.getAllDatabaseAssets(requireContext()).contains(asset)) {
                 true -> {
-                    setRemove(dataBase, asset)
+//                    setRemove(dataBase, asset)
                 }
                 false -> {
                     setAdd(dataBase, asset)
@@ -77,13 +79,13 @@ class CoinDetailsFragment : Fragment() {
     }
 
     private fun DetailsFragmentBinding.setAdd(
-        dataBase: TinyDB,
+        dataBase: AssetsListViewModel,
         asset: AssetsItem,
     ) {
         addButton.setText("Adicionar")
         starIconImageView.visibility = View.GONE
         addButton.setOnClickListener {
-            dataBase.addItem(asset.asset_id)
+            dataBase.addFavoriteAsset(requireContext(),asset)
             goToCoinList()
         }
     }

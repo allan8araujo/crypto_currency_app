@@ -10,7 +10,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
-import com.example.apilibrary.repository.api.RetrofitRequestHelper
+import com.example.apilibrary.repository.Repository
+import com.example.apilibrary.repository.api.retrofit.RetrofitRequestHelper
 import com.example.cryptocurrencyapp.R
 import com.example.cryptocurrencyapp.databinding.FavoriteFragmentBinding
 import com.example.cryptocurrencyapp.models.assets.Assets.AssetsItem
@@ -25,8 +26,10 @@ class CoinFavoriteFragment : Fragment() {
     private lateinit var binding: FavoriteFragmentBinding
     private lateinit var staggeredGridLayoutManager: StaggeredGridLayoutManager
     private val coinViewModel: AssetsListViewModel by activityViewModels {
-        ListViewModelFactory(RetrofitRequestHelper.getListAssets())
+//        ListViewModelFactory(RetrofitRequestHelper.getListAssets())
+        ListViewModelFactory(Repository().getApiAssets())
     }
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -53,11 +56,12 @@ class CoinFavoriteFragment : Fragment() {
     }
 
     private fun collectAssetsObserver() {
-        val dataBase = TinyDB(requireContext()).getAll()
+//        val dataBase = TinyDB(requireContext()).getAll()
+        val dataBase = coinViewModel
         val favoritList = arrayListOf<AssetsItem?>()
 
-        filterFavoriteAssets(dataBase, favoritList)
-        listAdapter.submitList(favoritList)
+//        filterFavoriteAssets(dataBase, favoritList)
+        listAdapter.submitList(dataBase.getAllDatabaseAssets(requireContext()))
     }
 
     private fun filterFavoriteAssets(

@@ -11,7 +11,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.apilibrary.repository.api.RetrofitRequestHelper
+import com.example.apilibrary.repository.Repository
+import com.example.apilibrary.repository.api.retrofit.RetrofitRequestHelper
 import com.example.cryptocurrencyapp.R
 import com.example.cryptocurrencyapp.databinding.CoinListFragmentBinding
 import com.example.cryptocurrencyapp.models.assets.Assets.AssetsItem
@@ -27,8 +28,10 @@ class CoinListFragment : Fragment() {
     private lateinit var listAdapter: CoinListAdapter
     private lateinit var binding: CoinListFragmentBinding
     private lateinit var linearLayoutManager: LinearLayoutManager
-    private val coinViewModel: AssetsListViewModel by activityViewModels {
-        ListViewModelFactory(RetrofitRequestHelper.getListAssets())
+    val coinViewModel: AssetsListViewModel by activityViewModels {
+//        ListViewModelFactory(RetrofitRequestHelper.getListAssets())
+        ListViewModelFactory(Repository().getApiAssets())
+
     }
 
     override fun onCreateView(
@@ -127,7 +130,7 @@ class CoinListFragment : Fragment() {
                     is DataResult.Sucess -> {
                         listResults = dataResults.data.filter { assetItem ->
                             (assetItem.asset_id.uppercase() in searchValueUpperCase!!) ||
-                                (assetItem.name.uppercase() in searchValueUpperCase!!)
+                                    (assetItem.name.uppercase() in searchValueUpperCase!!)
                         }
                     }
                     is DataResult.Error -> {

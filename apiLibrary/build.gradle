@@ -58,4 +58,11 @@ dependencies {
 
     //mockk
     testImplementation("io.mockk:mockk:1.10.6")
+
+    // Room components
+    def roomVersion = '2.2.5'
+
+    apply plugin: 'kotlin-kapt'
+    implementation "androidx.room:room-ktx:$roomVersion"
+    kapt "androidx.room:room-compiler:$roomVersion"
 }

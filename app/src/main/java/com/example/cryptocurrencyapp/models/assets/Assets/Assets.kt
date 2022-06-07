@@ -1,6 +1,6 @@
 package com.example.cryptocurrencyapp.models.assets.Assets
 
-class Assets : ArrayList<AssetsItem>()
+class Assets() : ArrayList<AssetsItem>()
 
 val listMockedAssetsItems = arrayListOf(
     AssetsItem(
