@@ -19,11 +19,8 @@ class AssetsListViewModel(
 
     private val assetsRespository: IAssetsRepository,
 ) : ViewModel() {
-    private val liveList = MutableLiveData<DataResult<List<AssetsItem>>>()
+    val liveList = MutableLiveData<DataResult<List<AssetsItem>>>()
     val assets: LiveData<DataResult<List<AssetsItem>>> = liveList
-
-    private val iconAsset = MutableLiveData<AssetsImage>()
-    val icon: LiveData<AssetsImage> = iconAsset
 
     fun getAllAssets() {
         viewModelScope.launch {
@@ -69,7 +66,7 @@ class AssetsListViewModel(
         }
     }
 
-    private fun toAssetsImage(idIcon: String?): String? {
+     fun toAssetsImage(idIcon: String?): String? {
         idIcon?.let {
             return stringToUrl(idIcon)
         }
