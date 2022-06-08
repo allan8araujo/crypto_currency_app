@@ -1,4 +1,4 @@
-package com.example.cryptocurrencyapp.view.adapters
+package com.example.cryptocurrencyapp.utils
 
 import androidx.recyclerview.widget.DiffUtil
 import com.example.cryptocurrencyapp.models.assets.Assets.AssetsItem

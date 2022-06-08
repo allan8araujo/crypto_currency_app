@@ -1,4 +1,4 @@
-package com.example.cryptocurrencyapp.view.adapters
+package com.example.cryptocurrencyapp.utils
 
 import android.graphics.drawable.Drawable
 import android.view.View

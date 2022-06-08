@@ -81,15 +81,6 @@
                 app:layout_constraintStart_toEndOf="@+id/coin_name_textView"
                 app:layout_constraintTop_toTopOf="@+id/coin_name_textView" />
 
-            <ImageView
-                android:id="@+id/dolar_icon_imageView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:contentDescription="@string/cifr_o_da_moeda_da_tela_item_coin"
-                android:src="@drawable/ic_baseline_attach_coin_24"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/price_usd_textView"
-                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/price_usd_textView"
@@ -97,8 +88,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
                 android:contentDescription="@string/valor_do_item_da_tela_item_coin"
-                android:ems="4"
+                android:ems="5"
                 android:maxLines="1"
+                android:drawableStart="@drawable/ic_baseline_attach_coin_24"
                 android:textColor="@color/white"
                 android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="parent"
