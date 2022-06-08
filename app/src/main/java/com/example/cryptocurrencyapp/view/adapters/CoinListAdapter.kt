@@ -10,11 +10,13 @@ import com.bumptech.glide.Glide
 import com.example.cryptocurrencyapp.R
 import com.example.cryptocurrencyapp.databinding.ItemCoinBinding
 import com.example.cryptocurrencyapp.models.assets.Assets.AssetsItem
+import com.example.cryptocurrencyapp.utils.DiffCallback
+import com.example.cryptocurrencyapp.utils.ProgressBarListener
 import com.example.cryptocurrencyapp.viewmodel.AssetsListViewModel
 
 class CoinListAdapter(
     val context: Context,
-    var iconViewModel: AssetsListViewModel,
+    var coinViewModel: AssetsListViewModel,
     var onClick: (asset: AssetsItem) -> Unit = {},
 ) :
     ListAdapter<AssetsItem, CoinListAdapter.ViewHolder>(DiffCallback()) {
@@ -22,11 +24,11 @@ class CoinListAdapter(
     inner class ViewHolder(val binding: ItemCoinBinding) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(assetItem: AssetsItem) {
-            val dataBase = TinyDB(context)
+            val dataBase = coinViewModel.database
             val progressBar = binding.pbLoading
             progressBar.visibility = View.VISIBLE
             Glide.with(binding.root)
-                .load(iconViewModel.loadUrlFromGlide(assetItem))
+                .load(coinViewModel.loadUrlFromGlide(assetItem))
                 .placeholder(R.drawable.ic_coin_base)
                 .listener(ProgressBarListener(progressBar))
                 .centerCrop()
@@ -44,7 +46,7 @@ class CoinListAdapter(
                     assetItem.price_usd.toString()
                 } else {
                     priceUsdTextView.setEms(5)
-                    dolarIconImageView.visibility = View.GONE
+                    priceUsdTextView.setCompoundDrawablesRelative(null, null, null, null)
                     "Indisponivel"
                 }
                 digitalCoinCardView.setOnClickListener { onClick.invoke(assetItem) }

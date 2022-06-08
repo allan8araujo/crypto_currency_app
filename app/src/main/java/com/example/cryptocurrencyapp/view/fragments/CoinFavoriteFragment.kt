@@ -10,11 +10,12 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import com.example.apilibrary.repository.Repository
+import com.example.apilibrary.repository.const.Constants.Companion.DATE_NOW
 import com.example.cryptocurrencyapp.R
 import com.example.cryptocurrencyapp.databinding.FavoriteFragmentBinding
 import com.example.cryptocurrencyapp.models.assets.Assets.AssetsItem
 import com.example.cryptocurrencyapp.view.adapters.CoinFavoriteAdapter
-import com.example.cryptocurrencyapp.view.adapters.TinyDB
 import com.example.cryptocurrencyapp.viewmodel.AssetsListViewModel
 import com.example.cryptocurrencyapp.viewmodel.results.DataResult
 
@@ -43,37 +44,24 @@ class CoinFavoriteFragment : Fragment() {
             CoinFavoriteAdapter(requireContext(), coinViewModel) { asset -> goToCoinDetails(asset) }
         staggeredGridLayoutManager =
             StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+        binding.currentDateTextView.text = DATE_NOW
         binding.favoritRecyclerView.layoutManager = staggeredGridLayoutManager
         binding.favoritRecyclerView.adapter = listAdapter
     }
 
     private fun collectAssetsObserver() {
-        val dataBase = TinyDB(requireContext()).getAll()
-        val favoritList = arrayListOf<AssetsItem?>()
-
-        filterFavoriteAssets(dataBase, favoritList)
-        listAdapter.submitList(favoritList)
-    }
-
-    private fun filterFavoriteAssets(
-        dataBase: ArrayList<String>,
-        favoritList: ArrayList<AssetsItem?>,
-    ) {
-        coinViewModel.assets.observe(viewLifecycleOwner) { assetsItem ->
+        coinViewModel.getFavoriteAssets()
+        coinViewModel.favoriteAssets.observe(viewLifecycleOwner) { assetsItem ->
             when (assetsItem) {
                 is DataResult.Loading -> {
-                    Log.d("", "Loading")
+                    binding.favoriteScreenProgressBar.visibility = View.VISIBLE
                 }
                 is DataResult.Sucess -> {
-                    dataBase.forEach { databaseItem ->
-                        val favoriteItem = assetsItem.data.find { assetsItem ->
-                            assetsItem.asset_id == databaseItem
-                        }
-                        favoritList += favoriteItem
-                    }
+                    binding.favoriteScreenProgressBar.visibility = View.GONE
+                    listAdapter.submitList(assetsItem.data)
                 }
                 is DataResult.Error -> {
-                    Log.d("", "erro")
+                    binding.favoriteScreenProgressBar.visibility = View.GONE
                 }
             }
         }

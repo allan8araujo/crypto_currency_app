@@ -67,7 +67,7 @@
                 android:background="@color/app_yellow_background"
                 android:contentDescription="@string/valor_do_item_favorite_screen"
                 android:drawableStart="@drawable/ic_baseline_attach_coin_24"
-                android:ems="4"
+                android:ems="5"
                 android:fontFamily="@font/roboto"
                 android:maxLines="1"
                 android:text="@string/_31_010_20"

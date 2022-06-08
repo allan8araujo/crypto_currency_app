@@ -9,12 +9,14 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
+import com.example.apilibrary.repository.Repository
 import com.example.cryptocurrencyapp.R
 import com.example.cryptocurrencyapp.databinding.DetailsFragmentBinding
 import com.example.cryptocurrencyapp.models.assets.Assets.AssetsItem
-import com.example.cryptocurrencyapp.view.adapters.ProgressBarListener
-import com.example.cryptocurrencyapp.view.adapters.TinyDB
+import com.example.cryptocurrencyapp.utils.ProgressBarListener
+import com.example.apilibrary.repository.database.TinyDB
 import com.example.cryptocurrencyapp.viewmodel.AssetsListViewModel
+import com.example.cryptocurrencyapp.viewmodel.factories.ListViewModelFactory
 
 class CoinDetailsFragment : Fragment() {
 
@@ -39,7 +41,7 @@ class CoinDetailsFragment : Fragment() {
 
     private fun bindingView(args: CoinDetailsFragmentArgs) {
         val asset: AssetsItem = args.asset
-        val dataBase: TinyDB = TinyDB(requireContext())
+        val dataBase = coinViewModel.database
         settingImageIcon(asset)
         with(binding) {
             iconAssetIdTextView.text = asset.asset_id
@@ -63,8 +65,9 @@ class CoinDetailsFragment : Fragment() {
         if (asset.price_usd != null) {
             priceUsdTextView.text = price_usd.toString()
         } else {
-            priceUsdTextView.text = "0.00 "
-            priceUsdTextView.setEms(3)
+            priceUsdTextView.setEms(5)
+            priceUsdTextView.setCompoundDrawablesRelative(null, null, null, null)
+            priceUsdTextView.text = "Indisponivel"
         }
         lastHourValueTextView.text = asset.volume_1hrs_usd.toString()
         lastWeekValueTextView.text = asset.volume_1day_usd.toString()

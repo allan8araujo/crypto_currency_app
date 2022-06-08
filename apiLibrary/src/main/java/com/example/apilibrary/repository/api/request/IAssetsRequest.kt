@@ -1,7 +1,7 @@
-package com.example.apilibrary.repository.api
+package com.example.apilibrary.repository.api.request
 
 import com.example.apilibrary.repository.response.AssetsDTO.AssetsDTO
 
-interface IAssetsRepository {
+interface IAssetsRequest {
     suspend fun getAssets(): AssetsDTO
 }

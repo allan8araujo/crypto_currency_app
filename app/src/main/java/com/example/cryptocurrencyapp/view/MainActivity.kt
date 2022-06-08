@@ -25,8 +25,8 @@ class MainActivity : AppCompatActivity() {
         findNavController(activity_main_navHost)
     }
 
-    private val coinViewModel: AssetsListViewModel by viewModels {
-        ListViewModelFactory(RetrofitRequestHelper().getListAssets())
+    val coinViewModel: AssetsListViewModel by viewModels {
+        ListViewModelFactory(Repository(applicationContext))
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
