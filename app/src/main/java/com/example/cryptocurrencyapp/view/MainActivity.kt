@@ -1,15 +1,16 @@
 package com.example.cryptocurrencyapp.view
 
+import android.content.pm.ApplicationInfo
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
-import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
 import com.example.apilibrary.repository.api.RetrofitRequestHelper
-import com.example.cryptocurrencyapp.R
-import com.example.cryptocurrencyapp.R.id.* // ktlint-disable no-wildcard-imports
+import com.example.apilibrary.repository.const.Constants
+import com.example.cryptocurrencyapp.R.id.*
 import com.example.cryptocurrencyapp.databinding.ActivityMainBinding
 import com.example.cryptocurrencyapp.viewmodel.AssetsListViewModel
 import com.example.cryptocurrencyapp.viewmodel.factories.ListViewModelFactory
@@ -21,7 +22,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private val controller by lazy {
-        findNavController(R.id.activity_main_navHost)
+        findNavController(activity_main_navHost)
     }
 
     private val coinViewModel: AssetsListViewModel by viewModels {
@@ -31,9 +32,20 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+        setupApplication()
+    }
+
+    private fun setupApplication() {
+        getSecretKey()
         coinViewModel.getAllAssets()
         setupBottomNav()
-        binding.mainBottomNavigation.setupWithNavController(controller)
+    }
+
+    private fun getSecretKey() {
+        val applicationInfo: ApplicationInfo = applicationContext.packageManager
+            .getApplicationInfo(applicationContext.packageName, PackageManager.GET_META_DATA)
+        val value = applicationInfo.metaData["apiKey"]
+        Constants.API_KEY = value.toString()
     }
 
     private fun setupBottomNav() {
@@ -45,6 +57,7 @@ class MainActivity : AppCompatActivity() {
                 else -> hideButtonNavigation()
             }
         }
+        binding.mainBottomNavigation.setupWithNavController(controller)
     }
 
     override fun onBackPressed() {
