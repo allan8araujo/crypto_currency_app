@@ -13,6 +13,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.apilibrary.repository.Repository
 import com.example.apilibrary.repository.api.retrofit.RetrofitRequestHelper
+import com.example.apilibrary.repository.const.Constants.Companion.DATE_NOW
 import com.example.cryptocurrencyapp.R
 import com.example.cryptocurrencyapp.databinding.CoinListFragmentBinding
 import com.example.cryptocurrencyapp.models.assets.Assets.AssetsItem
@@ -28,11 +29,7 @@ class CoinListFragment : Fragment() {
     private lateinit var listAdapter: CoinListAdapter
     private lateinit var binding: CoinListFragmentBinding
     private lateinit var linearLayoutManager: LinearLayoutManager
-    val coinViewModel: AssetsListViewModel by activityViewModels {
-//        ListViewModelFactory(RetrofitRequestHelper.getListAssets())
-        ListViewModelFactory(Repository().getApiAssets())
-
-    }
+    val coinViewModel: AssetsListViewModel by activityViewModels ()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -55,7 +52,7 @@ class CoinListFragment : Fragment() {
             CoinListAdapter(requireContext(), coinViewModel) { asset -> goToCoinDetails(asset) }
 
         settingRecyclerViewProperties()
-        binding.currentDateTextView.text = SimpleDateFormat("dd MMM yyyy").format(Date())
+        binding.currentDateTextView.text = DATE_NOW
         binding.imgMenu.setOnClickListener { onClick ->
             settingUpMenu(onClick)
         }

@@ -6,6 +6,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
+import com.example.apilibrary.repository.Repository
 import com.example.apilibrary.repository.api.retrofit.RetrofitRequestHelper
 import com.example.cryptocurrencyapp.R
 import com.example.cryptocurrencyapp.R.id.*
@@ -24,7 +25,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     val coinViewModel: AssetsListViewModel by viewModels {
-        ListViewModelFactory(RetrofitRequestHelper.getListAssets())
+        ListViewModelFactory(Repository(applicationContext))
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

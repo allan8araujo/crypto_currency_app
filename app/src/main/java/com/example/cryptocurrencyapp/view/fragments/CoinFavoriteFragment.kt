@@ -11,12 +11,11 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.apilibrary.repository.Repository
-import com.example.apilibrary.repository.api.retrofit.RetrofitRequestHelper
+import com.example.apilibrary.repository.const.Constants.Companion.DATE_NOW
 import com.example.cryptocurrencyapp.R
 import com.example.cryptocurrencyapp.databinding.FavoriteFragmentBinding
 import com.example.cryptocurrencyapp.models.assets.Assets.AssetsItem
 import com.example.cryptocurrencyapp.view.adapters.CoinFavoriteAdapter
-import com.example.cryptocurrencyapp.view.adapters.TinyDB
 import com.example.cryptocurrencyapp.viewmodel.AssetsListViewModel
 import com.example.cryptocurrencyapp.viewmodel.factories.ListViewModelFactory
 import com.example.cryptocurrencyapp.viewmodel.results.DataResult
@@ -25,10 +24,7 @@ class CoinFavoriteFragment : Fragment() {
     private lateinit var listAdapter: CoinFavoriteAdapter
     private lateinit var binding: FavoriteFragmentBinding
     private lateinit var staggeredGridLayoutManager: StaggeredGridLayoutManager
-    private val coinViewModel: AssetsListViewModel by activityViewModels {
-//        ListViewModelFactory(RetrofitRequestHelper.getListAssets())
-        ListViewModelFactory(Repository().getApiAssets())
-    }
+    val coinViewModel: AssetsListViewModel by activityViewModels ()
 
 
     override fun onCreateView(
@@ -51,41 +47,29 @@ class CoinFavoriteFragment : Fragment() {
             CoinFavoriteAdapter(requireContext(), coinViewModel) { asset -> goToCoinDetails(asset) }
         staggeredGridLayoutManager =
             StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+        binding.currentDateTextView.text = DATE_NOW
         binding.favoritRecyclerView.layoutManager = staggeredGridLayoutManager
         binding.favoritRecyclerView.adapter = listAdapter
     }
 
     private fun collectAssetsObserver() {
-//        val dataBase = TinyDB(requireContext()).getAll()
-        val dataBase = coinViewModel
-        val favoritList = arrayListOf<AssetsItem?>()
-
-//        filterFavoriteAssets(dataBase, favoritList)
-        listAdapter.submitList(dataBase.getAllDatabaseAssets(requireContext()))
-    }
-
-    private fun filterFavoriteAssets(
-        dataBase: ArrayList<String>,
-        favoritList: ArrayList<AssetsItem?>,
-    ) {
-        coinViewModel.assets.observe(viewLifecycleOwner) { assetsItem ->
+        coinViewModel.getFavoriteAssets()
+        coinViewModel.favoriteAssets.observe(viewLifecycleOwner) { assetsItem ->
             when (assetsItem) {
                 is DataResult.Loading -> {
-                    Log.d("", "Loading")
+                    binding.favoriteScreenProgressBar.visibility = View.VISIBLE
                 }
                 is DataResult.Sucess -> {
-                    dataBase.forEach { databaseItem ->
-                        val favoriteItem = assetsItem.data.find { assetsItem ->
-                            assetsItem.asset_id == databaseItem
-                        }
-                        favoritList += favoriteItem
-                    }
+                    binding.favoriteScreenProgressBar.visibility = View.GONE
+                    listAdapter.submitList(assetsItem.data)
                 }
                 is DataResult.Error -> {
+                    binding.favoriteScreenProgressBar.visibility = View.GONE
                     Log.d("", "erro")
                 }
             }
         }
+
     }
 
     private fun goToCoinDetails(asset: AssetsItem) {

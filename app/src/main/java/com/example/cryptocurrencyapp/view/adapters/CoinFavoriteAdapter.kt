@@ -10,6 +10,8 @@ import com.bumptech.glide.Glide
 import com.example.cryptocurrencyapp.R
 import com.example.cryptocurrencyapp.databinding.ItemFavoriteBinding
 import com.example.cryptocurrencyapp.models.assets.Assets.AssetsItem
+import com.example.cryptocurrencyapp.utils.DiffCallback
+import com.example.cryptocurrencyapp.utils.ProgressBarListener
 import com.example.cryptocurrencyapp.viewmodel.AssetsListViewModel
 
 class CoinFavoriteAdapter(
@@ -40,7 +42,9 @@ class CoinFavoriteAdapter(
                 if (assetItem.price_usd != null) {
                     priceBitCoinTextView.text = assetItem.price_usd.toString()
                 } else {
-                    priceBitCoinTextView.text = "0.00"
+                    priceBitCoinTextView.setEms(5)
+                    priceBitCoinTextView.setCompoundDrawablesRelative(null, null, null, null)
+                    priceBitCoinTextView.text = "Indisponivel"
                 }
 
                 cardImageView.setOnClickListener { onClick.invoke(assetItem) }

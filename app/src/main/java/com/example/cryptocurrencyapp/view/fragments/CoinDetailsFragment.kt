@@ -13,8 +13,8 @@ import com.example.apilibrary.repository.Repository
 import com.example.cryptocurrencyapp.R
 import com.example.cryptocurrencyapp.databinding.DetailsFragmentBinding
 import com.example.cryptocurrencyapp.models.assets.Assets.AssetsItem
-import com.example.cryptocurrencyapp.view.adapters.ProgressBarListener
-import com.example.cryptocurrencyapp.view.adapters.TinyDB
+import com.example.cryptocurrencyapp.utils.ProgressBarListener
+import com.example.apilibrary.repository.database.TinyDB
 import com.example.cryptocurrencyapp.viewmodel.AssetsListViewModel
 import com.example.cryptocurrencyapp.viewmodel.factories.ListViewModelFactory
 
@@ -23,10 +23,7 @@ class CoinDetailsFragment : Fragment() {
     private lateinit var binding: DetailsFragmentBinding
     private val args: CoinDetailsFragmentArgs by navArgs()
 
-    private val coinViewModel: AssetsListViewModel by activityViewModels {
-//        ListViewModelFactory(RetrofitRequestHelper.getListAssets())
-        ListViewModelFactory(Repository().getApiAssets())
-    }
+    val coinViewModel: AssetsListViewModel by activityViewModels ()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -44,14 +41,13 @@ class CoinDetailsFragment : Fragment() {
 
     private fun bindingView(args: CoinDetailsFragmentArgs) {
         val asset: AssetsItem = args.asset
-//        val dataBase: TinyDB = TinyDB(requireContext())
-        val dataBase = coinViewModel
+        val dataBase = coinViewModel.database
         settingImageIcon(asset)
         with(binding) {
             iconAssetIdTextView.text = asset.asset_id
-            when (dataBase.getAllDatabaseAssets(requireContext()).contains(asset)) {
+            when (dataBase.hasItem(asset.asset_id)) {
                 true -> {
-//                    setRemove(dataBase, asset)
+                    setRemove(dataBase, asset)
                 }
                 false -> {
                     setAdd(dataBase, asset)
@@ -69,8 +65,9 @@ class CoinDetailsFragment : Fragment() {
         if (asset.price_usd != null) {
             priceUsdTextView.text = price_usd.toString()
         } else {
-            priceUsdTextView.text = "0.00 "
-            priceUsdTextView.setEms(3)
+            priceUsdTextView.setEms(5)
+            priceUsdTextView.setCompoundDrawablesRelative(null, null, null, null)
+            priceUsdTextView.text = "Indisponivel"
         }
         lastHourValueTextView.text = asset.volume_1hrs_usd.toString()
         lastWeekValueTextView.text = asset.volume_1day_usd.toString()
@@ -79,13 +76,13 @@ class CoinDetailsFragment : Fragment() {
     }
 
     private fun DetailsFragmentBinding.setAdd(
-        dataBase: AssetsListViewModel,
+        dataBase: TinyDB,
         asset: AssetsItem,
     ) {
         addButton.setText("Adicionar")
         starIconImageView.visibility = View.GONE
         addButton.setOnClickListener {
-            dataBase.addFavoriteAsset(requireContext(),asset)
+            dataBase.addItem(asset.asset_id)
             goToCoinList()
         }
     }
