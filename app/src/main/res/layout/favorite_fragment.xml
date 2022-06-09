@@ -19,11 +19,13 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:contentDescription="@string/tool_bar"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
                 <TextView
                     android:id="@+id/title_textView"
+                    android:contentDescription="@string/title_coin_digital"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -38,6 +40,7 @@
 
                 <TextView
                     android:id="@+id/current_date_textView"
+                    android:contentDescription="@string/date_tool_bar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"

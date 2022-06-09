@@ -1,4 +1,5 @@
 package com.example.cryptocurrencyapp.viewmodel
+/*
 
 import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.LiveData
@@ -40,4 +41,4 @@ class LiveDataTestUtil {
         @Suppress("UNCHECKED_CAST")
         return data as T
     }
-}
+}*/
