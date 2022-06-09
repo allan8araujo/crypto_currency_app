@@ -1,7 +1,6 @@
 package com.example.cryptocurrencyapp.view.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,7 +9,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
-import com.example.apilibrary.repository.Repository
 import com.example.apilibrary.repository.const.Constants.Companion.DATE_NOW
 import com.example.cryptocurrencyapp.R
 import com.example.cryptocurrencyapp.databinding.FavoriteFragmentBinding
@@ -56,7 +54,7 @@ class CoinFavoriteFragment : Fragment() {
                 is DataResult.Loading -> {
                     binding.favoriteScreenProgressBar.visibility = View.VISIBLE
                 }
-                is DataResult.Sucess -> {
+                is DataResult.Success -> {
                     binding.favoriteScreenProgressBar.visibility = View.GONE
                     listAdapter.submitList(assetsItem.data)
                 }

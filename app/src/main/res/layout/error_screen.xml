@@ -22,7 +22,7 @@
         android:id="@+id/error_textView"
         android:layout_width="192dp"
         android:layout_height="187dp"
-        android:text="@string/algo_inesperado_aconteceu_tentar_novamente"
+        android:text="@string/tente_novamente"
         android:textColor="@color/white"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/try_again_progressBar"

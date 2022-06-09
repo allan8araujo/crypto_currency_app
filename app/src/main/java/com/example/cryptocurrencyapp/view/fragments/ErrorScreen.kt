@@ -40,7 +40,7 @@ class ErrorScreen() : Fragment() {
                 is DataResult.Loading -> {
                     binding.tryAgainProgressBar.visibility = VISIBLE
                 }
-                is DataResult.Sucess -> {
+                is DataResult.Success -> {
                     binding.tryAgainProgressBar.visibility = INVISIBLE
                     findNavController().navigate(R.id.action_errorScreen_to_coinList)
                 }

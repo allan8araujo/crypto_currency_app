@@ -45,4 +45,5 @@
     <string name="tool_bar">barra de ferramentas</string>
     <string name="date_tool_bar">data da barra de ferramentas</string>
     <string name="title_coin_digital">Titulo moeda digital</string>
+    <string name="tente_novamente">algo inesperado aconteceu tentar novamente</string>
 </resources>
