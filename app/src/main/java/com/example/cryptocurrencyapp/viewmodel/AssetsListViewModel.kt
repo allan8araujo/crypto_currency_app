@@ -11,6 +11,7 @@ import com.example.apilibrary.repository.const.Constants.Companion.AMAZON_ICON
 import com.example.apilibrary.repository.response.AssetsDTO.AssetsDTO
 import com.example.cryptocurrencyapp.models.assets.Assets.AssetsItem
 import com.example.cryptocurrencyapp.models.assets.Assets.funEmptyAssets
+import com.example.cryptocurrencyapp.models.assets.AssetsImage.AssetsImage
 import com.example.cryptocurrencyapp.viewmodel.results.DataResult
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
