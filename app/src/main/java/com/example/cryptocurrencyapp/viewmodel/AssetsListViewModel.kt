@@ -72,7 +72,7 @@ class AssetsListViewModel(
         }
         return list
     }
-    private fun AssetsDTO.toAssets(): List<AssetsItem> {
+    fun AssetsDTO.toAssets(): List<AssetsItem> {
         return map {
             AssetsItem(
                 asset_id = it.asset_id,
@@ -96,16 +96,16 @@ class AssetsListViewModel(
         }
     }
 
-    private fun toAssetsImage(idIcon: String?): String? {
-        idIcon?.let {
-            return stringToUrl(idIcon)
-        }
-        return null
+fun toAssetsImage(idIcon: String?): String? {
+    idIcon?.let {
+        return stringToUrl(idIcon)
     }
+    return null
+}
 
-    private fun stringToUrl(idIcon: String): String {
-        return AMAZON_ICON + idIcon.replace("-", "") + ".png"
-    }
+fun stringToUrl(idIcon: String): String {
+    return AMAZON_ICON + idIcon.replace("-", "") + ".png"
+}
 
     fun loadUrlFromGlide(assetItem: AssetsItem): String? {
         return assetItem.id_icon
