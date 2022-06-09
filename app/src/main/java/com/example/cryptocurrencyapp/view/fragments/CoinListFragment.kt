@@ -11,8 +11,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.apilibrary.repository.Repository
-import com.example.apilibrary.repository.api.retrofit.RetrofitRequestHelper
 import com.example.apilibrary.repository.const.Constants.Companion.DATE_NOW
 import com.example.cryptocurrencyapp.R
 import com.example.cryptocurrencyapp.databinding.CoinListFragmentBinding
@@ -20,8 +18,6 @@ import com.example.cryptocurrencyapp.models.assets.Assets.AssetsItem
 import com.example.cryptocurrencyapp.view.adapters.CoinListAdapter
 import com.example.cryptocurrencyapp.viewmodel.AssetsListViewModel
 import com.example.cryptocurrencyapp.viewmodel.results.DataResult
-import java.text.SimpleDateFormat
-import java.util.*
 
 class CoinListFragment : Fragment() {
 
@@ -101,7 +97,7 @@ class CoinListFragment : Fragment() {
             when (dataResults) {
                 is DataResult.Loading -> {
                 }
-                is DataResult.Sucess -> {
+                is DataResult.Success -> {
                     newlist = dataResults.data.filter { assetItem ->
                         assetItem.type_is_crypto == cryptoType
                     }
@@ -123,7 +119,7 @@ class CoinListFragment : Fragment() {
                 when (dataResults) {
                     is DataResult.Loading -> {
                     }
-                    is DataResult.Sucess -> {
+                    is DataResult.Success -> {
                         listResults = dataResults.data.filter { assetItem ->
                             (assetItem.asset_id.uppercase() in searchValueUpperCase!!) ||
                                 (assetItem.name.uppercase() in searchValueUpperCase!!)
@@ -160,7 +156,7 @@ class CoinListFragment : Fragment() {
                 is DataResult.Loading -> {
                     binding.mainScreenProgressBar.visibility = View.VISIBLE
                 }
-                is DataResult.Sucess -> {
+                is DataResult.Success -> {
                     binding.mainScreenProgressBar.visibility = View.GONE
                     setListAdapter(dataResults.data)
                 }
