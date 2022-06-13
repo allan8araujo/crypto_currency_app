@@ -10,7 +10,7 @@ import org.junit.Test
 internal class AssetsRequestTest {
     @OptIn(ExperimentalCoroutinesApi::class)
     @Test
-    fun testApi() {
+    fun `quando a api e chamada o tamanho do retorno de objetos tem que ser maior que zero`() {
         runTest {
             Constants.API_KEY = "0FACCEE3-25E3-4347-B99D-E49D9C11FF8D"
             Assert.assertNotEquals(
