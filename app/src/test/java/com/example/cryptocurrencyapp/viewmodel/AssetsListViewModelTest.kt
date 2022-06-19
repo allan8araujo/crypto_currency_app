@@ -7,7 +7,7 @@ import org.junit.Test
 
 internal class AssetsListViewModelTest {
 
-//    @Test
+    //    @Test
 //    fun givenServerResponseError_whenFetch_shouldReturnError() {
 //        testCoroutineRule.runBlockingTest {
 //            val someGeekyError = "Something is not right"

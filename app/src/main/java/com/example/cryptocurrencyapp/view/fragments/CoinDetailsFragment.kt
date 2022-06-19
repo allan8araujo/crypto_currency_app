@@ -9,14 +9,12 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
-import com.example.apilibrary.repository.Repository
+import com.example.apilibrary.repository.database.TinyDB
 import com.example.cryptocurrencyapp.R
 import com.example.cryptocurrencyapp.databinding.DetailsFragmentBinding
 import com.example.cryptocurrencyapp.models.assets.Assets.AssetsItem
 import com.example.cryptocurrencyapp.utils.ProgressBarListener
-import com.example.apilibrary.repository.database.TinyDB
 import com.example.cryptocurrencyapp.viewmodel.AssetsListViewModel
-import com.example.cryptocurrencyapp.viewmodel.factories.ListViewModelFactory
 
 class CoinDetailsFragment : Fragment() {
 

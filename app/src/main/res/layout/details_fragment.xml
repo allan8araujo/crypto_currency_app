@@ -44,9 +44,9 @@
         <ProgressBar
             android:id="@+id/details_progressBar"
             style="?android:attr/progressBarStyle"
-            android:contentDescription="@string/icon_da_moeda_da_tela_fragment_details"
             android:layout_width="34dp"
             android:layout_height="34dp"
+            android:contentDescription="@string/icon_da_moeda_da_tela_fragment_details"
             app:layout_constraintBottom_toBottomOf="@id/coin_icon_imageView"
             app:layout_constraintEnd_toEndOf="@id/coin_icon_imageView"
             app:layout_constraintStart_toStartOf="@id/coin_icon_imageView"

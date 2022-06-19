@@ -12,10 +12,10 @@
         android:layout_height="wrap_content">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:contentDescription="@string/item_moeda_da_tela_Item_coin"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/app_black_background"
+            android:contentDescription="@string/item_moeda_da_tela_Item_coin"
             android:padding="8dp">
 
             <ImageView
@@ -89,9 +89,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
                 android:contentDescription="@string/valor_do_item_da_tela_item_coin"
+                android:drawableStart="@drawable/ic_baseline_attach_coin_24"
                 android:ems="5"
                 android:maxLines="1"
-                android:drawableStart="@drawable/ic_baseline_attach_coin_24"
                 android:textColor="@color/white"
                 android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="parent"
