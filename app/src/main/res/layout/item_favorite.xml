@@ -96,10 +96,10 @@
 
         <ProgressBar
             android:id="@+id/favorite_progressBar"
-            android:contentDescription="@string/item_para_uso_de_fundo_do_item_favorite_screen"
             style="?android:attr/progressBarStyle"
             android:layout_width="34dp"
             android:layout_height="34dp"
+            android:contentDescription="@string/item_para_uso_de_fundo_do_item_favorite_screen"
             android:fromDegrees="0"
             android:toDegrees="1080"
             app:layout_constraintBottom_toBottomOf="@+id/img_coin_imageView"

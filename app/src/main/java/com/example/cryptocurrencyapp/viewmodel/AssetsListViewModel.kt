@@ -17,7 +17,7 @@ import kotlinx.coroutines.withContext
 import retrofit2.HttpException
 
 class AssetsListViewModel(
-    private val repository: Repository
+    private val repository: Repository,
 ) : ViewModel() {
     private val liveList = MutableLiveData<DataResult<List<AssetsItem>>>()
     val assets: LiveData<DataResult<List<AssetsItem>>> = liveList
@@ -28,9 +28,7 @@ class AssetsListViewModel(
     private val favoriteLiveList = MutableLiveData<DataResult<List<AssetsItem>>>()
     val favoriteAssets: LiveData<DataResult<List<AssetsItem>>> = favoriteLiveList
 
-
     private val assetsRespository: IAssetsRequest = repository.getApiAssets()
-
 
     fun getAllAssets() {
         viewModelScope.launch {
@@ -50,7 +48,6 @@ class AssetsListViewModel(
             }
         }
     }
-
 
     fun getFavoriteAssets() {
         viewModelScope.launch {
