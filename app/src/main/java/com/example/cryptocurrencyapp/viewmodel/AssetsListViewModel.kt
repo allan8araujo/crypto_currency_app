@@ -33,6 +33,7 @@ class AssetsListViewModel(
 
 
     fun getAllAssets() {
+
         viewModelScope.launch {
             liveList.value = DataResult.Loading()
             try {
