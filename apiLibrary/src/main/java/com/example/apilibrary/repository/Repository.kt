@@ -5,7 +5,7 @@ import com.example.apilibrary.repository.api.request.IAssetsRequest
 import com.example.apilibrary.repository.api.retrofit.RetrofitRequestHelper
 import com.example.apilibrary.repository.database.TinyDB
 
-class Repository(private val context: Context): IRepository {
+class Repository(private val context: Context) : IRepository {
     override fun getApiAssets(): IAssetsRequest {
         return RetrofitRequestHelper.getListAssets()
     }
@@ -13,5 +13,4 @@ class Repository(private val context: Context): IRepository {
     override fun getDatabaseAssets(): TinyDB {
         return TinyDB(context)
     }
-
 }
