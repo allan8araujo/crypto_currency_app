@@ -1,8 +1,9 @@
-package com.example.apilibrary.repository.response.AssetsDTO
+package com.example.abstraction
 
 import java.io.Serializable
 
-data class AssetsItemDTO(
+
+data class AssetsItem(
     val asset_id: String,
     val data_end: String? = null,
     val data_orderbook_end: String? = null,

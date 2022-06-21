@@ -9,14 +9,11 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
-import com.example.apilibrary.repository.Repository
+import com.example.apilibrary.repository.database.TinyDB
 import com.example.cryptocurrencyapp.R
 import com.example.cryptocurrencyapp.databinding.DetailsFragmentBinding
-import com.example.cryptocurrencyapp.models.assets.Assets.AssetsItem
 import com.example.cryptocurrencyapp.utils.ProgressBarListener
-import com.example.apilibrary.repository.database.TinyDB
 import com.example.cryptocurrencyapp.viewmodel.AssetsListViewModel
-import com.example.cryptocurrencyapp.viewmodel.factories.ListViewModelFactory
 
 class CoinDetailsFragment : Fragment() {
 
@@ -40,7 +37,7 @@ class CoinDetailsFragment : Fragment() {
     }
 
     private fun bindingView(args: CoinDetailsFragmentArgs) {
-        val asset: AssetsItem = args.asset
+        val asset: com.example.abstraction.AssetsItem = args.asset
         val dataBase = coinViewModel.database
         settingImageIcon(asset)
         with(binding) {
@@ -59,7 +56,7 @@ class CoinDetailsFragment : Fragment() {
     }
 
     private fun DetailsFragmentBinding.settingPricesAndVolum(
-        asset: AssetsItem,
+        asset: com.example.abstraction.AssetsItem,
         price_usd: Double?,
     ) {
         if (asset.price_usd != null) {
@@ -77,7 +74,7 @@ class CoinDetailsFragment : Fragment() {
 
     private fun DetailsFragmentBinding.setAdd(
         dataBase: TinyDB,
-        asset: AssetsItem,
+        asset: com.example.abstraction.AssetsItem,
     ) {
         addButton.setText("Adicionar")
         starIconImageView.visibility = View.GONE
@@ -89,7 +86,7 @@ class CoinDetailsFragment : Fragment() {
 
     private fun DetailsFragmentBinding.setRemove(
         dataBase: TinyDB,
-        asset: AssetsItem,
+        asset: com.example.abstraction.AssetsItem,
     ) {
         addButton.setText("Remover")
         starIconImageView.visibility = View.VISIBLE
@@ -100,7 +97,7 @@ class CoinDetailsFragment : Fragment() {
     }
 
     private fun settingImageIcon(
-        asset: AssetsItem,
+        asset: com.example.abstraction.AssetsItem,
     ) {
         val progressBar = binding.detailsProgressBar
         progressBar.visibility = View.VISIBLE

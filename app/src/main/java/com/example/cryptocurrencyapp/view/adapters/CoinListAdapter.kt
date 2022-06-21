@@ -7,9 +7,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.abstraction.AssetsItem
 import com.example.cryptocurrencyapp.R
 import com.example.cryptocurrencyapp.databinding.ItemCoinBinding
-import com.example.cryptocurrencyapp.models.assets.Assets.AssetsItem
 import com.example.cryptocurrencyapp.utils.DiffCallback
 import com.example.cryptocurrencyapp.utils.ProgressBarListener
 import com.example.cryptocurrencyapp.viewmodel.AssetsListViewModel
@@ -17,13 +17,13 @@ import com.example.cryptocurrencyapp.viewmodel.AssetsListViewModel
 class CoinListAdapter(
     val context: Context,
     var coinViewModel: AssetsListViewModel,
-    var onClick: (asset: AssetsItem) -> Unit = {},
+    var onClick: (asset: com.example.abstraction.AssetsItem) -> Unit = {},
 ) :
-    ListAdapter<AssetsItem, CoinListAdapter.ViewHolder>(DiffCallback()) {
+    ListAdapter<com.example.abstraction.AssetsItem, CoinListAdapter.ViewHolder>(DiffCallback()) {
 
     inner class ViewHolder(val binding: ItemCoinBinding) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(assetItem: AssetsItem) {
+        fun bind(assetItem: com.example.abstraction.AssetsItem) {
             val dataBase = coinViewModel.database
             val progressBar = binding.pbLoading
             progressBar.visibility = View.VISIBLE

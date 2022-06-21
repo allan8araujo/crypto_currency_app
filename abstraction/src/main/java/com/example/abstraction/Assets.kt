@@ -1,4 +1,4 @@
-package com.example.cryptocurrencyapp.models.assets.Assets
+package com.example.abstraction
 
 class Assets() : ArrayList<AssetsItem>()
 
@@ -89,7 +89,7 @@ val listMockedAssetsItems = arrayListOf(
     )
 )
 
-fun funMockLives() = listMockedAssetsItems
+fun funMockAssets(): ArrayList<AssetsItem> = listMockedAssetsItems
 
 fun funEmptyAssets() = arrayListOf<AssetsItem>(
     AssetsItem(

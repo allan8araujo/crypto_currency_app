@@ -4,33 +4,31 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.abstraction.Assets
+import com.example.abstraction.AssetsItem
 import com.example.apilibrary.repository.Repository
 import com.example.apilibrary.repository.api.request.IAssetsRequest
 import com.example.apilibrary.repository.const.Constants.Companion.AMAZON_ICON
-import com.example.apilibrary.repository.response.AssetsDTO.AssetsDTO
-import com.example.cryptocurrencyapp.models.assets.Assets.AssetsItem
-import com.example.cryptocurrencyapp.models.assets.Assets.funEmptyAssets
 import com.example.cryptocurrencyapp.viewmodel.results.DataResult
+import com.example.abstraction.funEmptyAssets
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import retrofit2.HttpException
 
 class AssetsListViewModel(
-    private val repository: Repository
+    private val repository: Repository,
 ) : ViewModel() {
-    private val liveList = MutableLiveData<DataResult<List<AssetsItem>>>()
-    val assets: LiveData<DataResult<List<AssetsItem>>> = liveList
+    private val liveList = MutableLiveData<DataResult<List<com.example.abstraction.AssetsItem>>>()
+    val assets: LiveData<DataResult<List<com.example.abstraction.AssetsItem>>> = liveList
 
     val database = repository.getDatabaseAssets()
-    private lateinit var recycledApiList: List<AssetsItem>
+    private lateinit var recycledApiList: List<com.example.abstraction.AssetsItem>
 
-    private val favoriteLiveList = MutableLiveData<DataResult<List<AssetsItem>>>()
-    val favoriteAssets: LiveData<DataResult<List<AssetsItem>>> = favoriteLiveList
-
+    private val favoriteLiveList = MutableLiveData<DataResult<List<com.example.abstraction.AssetsItem>>>()
+    val favoriteAssets: LiveData<DataResult<List<com.example.abstraction.AssetsItem>>> = favoriteLiveList
 
     private val assetsRespository: IAssetsRequest = repository.getApiAssets()
-
 
     fun getAllAssets() {
         viewModelScope.launch {
@@ -43,14 +41,14 @@ class AssetsListViewModel(
                 liveList.value = DataResult.Success(recycledApiList)
             } catch (httpException: HttpException) {
                 val assetsFromApi =
-                    DataResult.Error<List<AssetsItem>>(httpException, funEmptyAssets())
+                    DataResult.Error<List<com.example.abstraction.AssetsItem>>(httpException,
+                        com.example.abstraction.funEmptyAssets())
                 liveList.value = assetsFromApi
             } catch (throwable: Throwable) {
                 liveList.value = DataResult.Loading()
             }
         }
     }
-
 
     fun getFavoriteAssets() {
         viewModelScope.launch {
@@ -63,8 +61,8 @@ class AssetsListViewModel(
         }
     }
 
-    private fun filterFavorites(assetsFromApi: List<AssetsItem>): ArrayList<AssetsItem> {
-        val list: ArrayList<AssetsItem> = arrayListOf()
+    private fun filterFavorites(assetsFromApi: List<com.example.abstraction.AssetsItem>): ArrayList<com.example.abstraction.AssetsItem> {
+        val list: ArrayList<com.example.abstraction.AssetsItem> = arrayListOf()
         database.getAll().forEach { dataId ->
             assetsFromApi.find { assetsItem -> assetsItem.asset_id == dataId }
                 ?.let { list.add(it) }
@@ -72,9 +70,9 @@ class AssetsListViewModel(
         return list
     }
 
-    fun AssetsDTO.toAssets(): List<AssetsItem> {
+    fun com.example.abstraction.Assets.toAssets(): List<com.example.abstraction.AssetsItem> {
         return map {
-            AssetsItem(
+            com.example.abstraction.AssetsItem(
                 asset_id = it.asset_id,
                 name = it.name,
                 type_is_crypto = it.type_is_crypto,
@@ -107,7 +105,7 @@ class AssetsListViewModel(
         return AMAZON_ICON + idIcon.replace("-", "") + ".png"
     }
 
-    fun loadUrlFromGlide(assetItem: AssetsItem): String? {
+    fun loadUrlFromGlide(assetItem: com.example.abstraction.AssetsItem): String? {
         return assetItem.id_icon
     }
 }

@@ -1,4 +1,4 @@
-package com.example.cryptocurrencyapp.models.assets.AssetsImage
+package com.example.abstraction
 
 data class AssetsImageItem(
     val asset_id: String,
