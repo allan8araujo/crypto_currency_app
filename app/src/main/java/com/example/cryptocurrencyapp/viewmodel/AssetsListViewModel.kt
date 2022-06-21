@@ -1,16 +1,12 @@
 package com.example.cryptocurrencyapp.viewmodel
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.example.abstraction.Assets
 import com.example.abstraction.AssetsItem
 import com.example.apilibrary.repository.Repository
 import com.example.apilibrary.repository.api.request.IAssetsRequest
 import com.example.apilibrary.repository.const.Constants.Companion.AMAZON_ICON
 import com.example.cryptocurrencyapp.viewmodel.results.DataResult
-import com.example.abstraction.funEmptyAssets
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -19,16 +15,23 @@ import retrofit2.HttpException
 class AssetsListViewModel(
     private val repository: Repository,
 ) : ViewModel() {
-    private val liveList = MutableLiveData<DataResult<List<com.example.abstraction.AssetsItem>>>()
-    val assets: LiveData<DataResult<List<com.example.abstraction.AssetsItem>>> = liveList
+    private val liveList = MutableLiveData<DataResult<List<AssetsItem>>>()
+    val assets: LiveData<DataResult<List<AssetsItem>>> = liveList
 
-    val database = repository.getDatabaseAssets()
-    private lateinit var recycledApiList: List<com.example.abstraction.AssetsItem>
+    private lateinit var recycledApiList: List<AssetsItem>
 
-    private val favoriteLiveList = MutableLiveData<DataResult<List<com.example.abstraction.AssetsItem>>>()
-    val favoriteAssets: LiveData<DataResult<List<com.example.abstraction.AssetsItem>>> = favoriteLiveList
+    private val favoriteLiveList = MutableLiveData<List<AssetsItem>>()
+    val favoriteAssets = repository.getAssets().asLiveData()
 
     private val assetsRespository: IAssetsRequest = repository.getApiAssets()
+
+    fun insertAsset(assetItem: AssetsItem) = viewModelScope.launch {
+        repository.insertAsset(assetItem)
+    }
+
+    fun deleteAsset(assetItem: AssetsItem) = viewModelScope.launch {
+        repository.deleteAsset(assetItem)
+    }
 
     fun getAllAssets() {
         viewModelScope.launch {
@@ -41,8 +44,10 @@ class AssetsListViewModel(
                 liveList.value = DataResult.Success(recycledApiList)
             } catch (httpException: HttpException) {
                 val assetsFromApi =
-                    DataResult.Error<List<com.example.abstraction.AssetsItem>>(httpException,
-                        com.example.abstraction.funEmptyAssets())
+                    DataResult.Error<List<AssetsItem>>(
+                        httpException,
+                        com.example.abstraction.funEmptyAssets()
+                    )
                 liveList.value = assetsFromApi
             } catch (throwable: Throwable) {
                 liveList.value = DataResult.Loading()
@@ -52,27 +57,28 @@ class AssetsListViewModel(
 
     fun getFavoriteAssets() {
         viewModelScope.launch {
-            favoriteLiveList.value = DataResult.Loading()
             try {
-                favoriteLiveList.value = DataResult.Success(filterFavorites(recycledApiList))
+                favoriteLiveList.value = filterFavorites(recycledApiList)
             } catch (e: Throwable) {
                 TODO()
             }
         }
     }
 
-    private fun filterFavorites(assetsFromApi: List<com.example.abstraction.AssetsItem>): ArrayList<com.example.abstraction.AssetsItem> {
-        val list: ArrayList<com.example.abstraction.AssetsItem> = arrayListOf()
-        database.getAll().forEach { dataId ->
-            assetsFromApi.find { assetsItem -> assetsItem.asset_id == dataId }
+    private fun filterFavorites(assetsFromApi: List<AssetsItem>): ArrayList<AssetsItem> {
+        val list: ArrayList<AssetsItem> = arrayListOf()
+        favoriteAssets.value?.forEach { dataId ->
+            assetsFromApi.find { assetsItem ->
+                assetsItem.asset_id == dataId.asset_id
+            }
                 ?.let { list.add(it) }
         }
         return list
     }
 
-    fun com.example.abstraction.Assets.toAssets(): List<com.example.abstraction.AssetsItem> {
+    fun Assets.toAssets(): List<AssetsItem> {
         return map {
-            com.example.abstraction.AssetsItem(
+            AssetsItem(
                 asset_id = it.asset_id,
                 name = it.name,
                 type_is_crypto = it.type_is_crypto,
@@ -105,7 +111,7 @@ class AssetsListViewModel(
         return AMAZON_ICON + idIcon.replace("-", "") + ".png"
     }
 
-    fun loadUrlFromGlide(assetItem: com.example.abstraction.AssetsItem): String? {
+    fun loadUrlFromGlide(assetItem: AssetsItem): String? {
         return assetItem.id_icon
     }
 }

@@ -17,14 +17,14 @@ import com.example.cryptocurrencyapp.viewmodel.AssetsListViewModel
 class CoinListAdapter(
     val context: Context,
     var coinViewModel: AssetsListViewModel,
-    var onClick: (asset: com.example.abstraction.AssetsItem) -> Unit = {},
+    var onClick: (asset: AssetsItem) -> Unit = {},
 ) :
-    ListAdapter<com.example.abstraction.AssetsItem, CoinListAdapter.ViewHolder>(DiffCallback()) {
+    ListAdapter<AssetsItem, CoinListAdapter.ViewHolder>(DiffCallback()) {
 
     inner class ViewHolder(val binding: ItemCoinBinding) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(assetItem: com.example.abstraction.AssetsItem) {
-            val dataBase = coinViewModel.database
+        fun bind(assetItem: AssetsItem) {
+            val dataBase = coinViewModel.favoriteAssets.value
             val progressBar = binding.pbLoading
             progressBar.visibility = View.VISIBLE
             Glide.with(binding.root)
@@ -35,8 +35,7 @@ class CoinListAdapter(
                 .into(binding.coinIconImageView)
 
             with(binding) {
-
-                if (dataBase.hasItem(assetItem.asset_id)) {
+                if (dataBase?.any { it.asset_id == assetItem.asset_id } == true) {
                     favoriteImageView.visibility = View.VISIBLE
                 }
 

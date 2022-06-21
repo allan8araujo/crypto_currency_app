@@ -9,7 +9,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
-import com.example.apilibrary.repository.database.TinyDB
+import com.example.abstraction.AssetsItem
 import com.example.cryptocurrencyapp.R
 import com.example.cryptocurrencyapp.databinding.DetailsFragmentBinding
 import com.example.cryptocurrencyapp.utils.ProgressBarListener
@@ -38,11 +38,12 @@ class CoinDetailsFragment : Fragment() {
 
     private fun bindingView(args: CoinDetailsFragmentArgs) {
         val asset: com.example.abstraction.AssetsItem = args.asset
-        val dataBase = coinViewModel.database
+        val dataBase = coinViewModel.favoriteAssets.value
         settingImageIcon(asset)
         with(binding) {
             iconAssetIdTextView.text = asset.asset_id
-            when (dataBase.hasItem(asset.asset_id)) {
+
+            when (dataBase?.any { it.asset_id == asset.asset_id } == true) {
                 true -> {
                     setRemove(dataBase, asset)
                 }
@@ -73,25 +74,25 @@ class CoinDetailsFragment : Fragment() {
     }
 
     private fun DetailsFragmentBinding.setAdd(
-        dataBase: TinyDB,
-        asset: com.example.abstraction.AssetsItem,
+        dataBase: List<AssetsItem>?,
+        asset: AssetsItem,
     ) {
         addButton.setText("Adicionar")
         starIconImageView.visibility = View.GONE
         addButton.setOnClickListener {
-            dataBase.addItem(asset.asset_id)
+            coinViewModel.insertAsset(asset)
             goToCoinList()
         }
     }
 
     private fun DetailsFragmentBinding.setRemove(
-        dataBase: TinyDB,
-        asset: com.example.abstraction.AssetsItem,
+        dataBase: List<AssetsItem>?,
+        asset: AssetsItem,
     ) {
         addButton.setText("Remover")
         starIconImageView.visibility = View.VISIBLE
         addButton.setOnClickListener {
-            dataBase.removeItem(asset.asset_id)
+            coinViewModel.deleteAsset(asset)
             goToCoinList()
         }
     }

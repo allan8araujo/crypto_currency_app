@@ -1,10 +1,14 @@
 package com.example.abstraction
 
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import java.io.Serializable
 
-
+@Entity(tableName = "favorite_assets")
 data class AssetsItem(
-    val asset_id: String,
+    @ColumnInfo(name = "is_favorite") val isFavorite: Boolean? = null,
+    @PrimaryKey @ColumnInfo(name = "asset_id") val asset_id: String,
     val data_end: String? = null,
     val data_orderbook_end: String? = null,
     val data_orderbook_start: String? = null,

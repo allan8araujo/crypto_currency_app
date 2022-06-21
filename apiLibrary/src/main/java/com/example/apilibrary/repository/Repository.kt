@@ -1,17 +1,28 @@
 package com.example.apilibrary.repository
 
-import android.content.Context
+import androidx.annotation.WorkerThread
+import com.example.abstraction.AssetsItem
 import com.example.apilibrary.repository.api.request.IAssetsRequest
 import com.example.apilibrary.repository.api.retrofit.RetrofitRequestHelper
-import com.example.apilibrary.repository.database.TinyDB
+import com.example.apilibrary.repository.database.AssetsDao
+import kotlinx.coroutines.flow.Flow
 
-class Repository(private val context: Context): IRepository {
+class Repository(private val assetsDao: AssetsDao) : IRepository {
     override fun getApiAssets(): IAssetsRequest {
         return RetrofitRequestHelper.getListAssets()
     }
 
-    override fun getDatabaseAssets(): TinyDB {
-        return TinyDB(context)
+    override fun getAssets(): Flow<List<AssetsItem>> {
+        return assetsDao.getFavoriteAssets()
     }
 
+    @WorkerThread
+    override suspend fun insertAsset(asset: AssetsItem) {
+        assetsDao.insertFavorite(asset)
+    }
+
+    @WorkerThread
+    override suspend fun deleteAsset(asset: AssetsItem) {
+        assetsDao.deleteFavorite(asset)
+    }
 }
