@@ -36,7 +36,8 @@ class CoinListAdapter(
 
             with(binding) {
                 coinViewModel.allFavoriteAssets.observe(context) { it ->
-                    val findByAssetID = it?.any {assetItem_ -> assetItem_.asset_id == assetItem.asset_id}
+                    val findByAssetID =
+                        it?.any { assetItem_ -> assetItem_.asset_id == assetItem.asset_id }
                     if (findByAssetID == true) {
                         favoriteImageView.visibility = View.VISIBLE
                     }

@@ -6,7 +6,7 @@ import com.example.apilibrary.repository.api.request.IAssetsRequest
 
 class RetrofitRequestHelper {
     companion object {
-        fun getListAssets(): IAssetsRequest{
+        fun getListAssets(): IAssetsRequest {
             return (
                 InterceptorHelper()
                     .interceptorHelper(

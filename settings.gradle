@@ -14,5 +14,5 @@ dependencyResolutionManagement {
 }
 rootProject.name = "Crypto Currency App"
 include ':app'
-include ':apiLibrary'
+include ':repository'
 include ':abstraction'

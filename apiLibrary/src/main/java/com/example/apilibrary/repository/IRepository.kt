@@ -2,7 +2,6 @@ package com.example.apilibrary.repository
 
 import com.example.abstraction.AssetsItem
 import com.example.apilibrary.repository.api.request.IAssetsRequest
-import kotlinx.coroutines.flow.Flow
 
 interface IRepository {
     fun getApiAssets(): IAssetsRequest

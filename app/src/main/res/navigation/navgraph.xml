@@ -72,7 +72,7 @@
     <fragment
         android:id="@+id/errorScreen"
         android:name="com.example.cryptocurrencyapp.view.fragments.ErrorScreen"
-        android:label="ErrorScreen" >
+        android:label="ErrorScreen">
         <action
             android:id="@+id/action_errorScreen_to_coinList"
             app:destination="@id/coinList" />

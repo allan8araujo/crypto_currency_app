@@ -13,6 +13,7 @@ class Repository(private val assetsDao: AssetsDao) : IRepository {
     }
 
     val getAllAssets: Flow<List<AssetsItem>> = assetsDao.getFavoriteAssets()
+
     @WorkerThread
     override suspend fun insertAsset(asset: AssetsItem) {
         assetsDao.insertFavorite(asset)

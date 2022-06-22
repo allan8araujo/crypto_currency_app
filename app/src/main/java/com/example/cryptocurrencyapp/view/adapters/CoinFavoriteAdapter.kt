@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.abstraction.AssetsItem
 import com.example.cryptocurrencyapp.R
 import com.example.cryptocurrencyapp.databinding.ItemFavoriteBinding
 import com.example.cryptocurrencyapp.utils.DiffCallback
