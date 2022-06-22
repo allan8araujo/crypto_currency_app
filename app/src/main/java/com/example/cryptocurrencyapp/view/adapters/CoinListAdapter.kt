@@ -1,5 +1,6 @@
 package com.example.cryptocurrencyapp.view.adapters
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -35,11 +36,16 @@ class CoinListAdapter(
                 .into(binding.coinIconImageView)
 
             with(binding) {
-                coinViewModel.allFavoriteAssets.observe(context) { it ->
+                coinViewModel.allFavoriteAssets.observe(context) { assetsItensList ->
                     val findByAssetID =
-                        it?.any { assetItem_ -> assetItem_.asset_id == assetItem.asset_id }
+                        assetsItensList?.any { assetItem_ ->
+                            assetItem_.asset_id == assetItem.asset_id
+                        }
                     if (findByAssetID == true) {
                         favoriteImageView.visibility = View.VISIBLE
+                        Log.i(assetItem.asset_id, "rr@@@@@@@@@@@@@@@@@@@@@")
+                    } else {
+                        favoriteImageView.visibility = View.GONE
                     }
                 }
                 coinAssetIdTextView.text = assetItem.asset_id

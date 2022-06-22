@@ -47,7 +47,6 @@ class CoinFavoriteFragment : Fragment() {
     }
 
     private fun collectAssetsObserver() {
-        coinViewModel.allFavoriteAssets.value
         coinViewModel.allFavoriteAssets.observe(viewLifecycleOwner) { assetsItem ->
             binding.favoriteScreenProgressBar.visibility = View.GONE
             listAdapter.submitList(assetsItem)
