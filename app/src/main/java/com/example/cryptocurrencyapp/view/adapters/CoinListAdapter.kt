@@ -1,9 +1,9 @@
 package com.example.cryptocurrencyapp.view.adapters
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -15,7 +15,7 @@ import com.example.cryptocurrencyapp.utils.ProgressBarListener
 import com.example.cryptocurrencyapp.viewmodel.AssetsListViewModel
 
 class CoinListAdapter(
-    val context: Context,
+    val context: LifecycleOwner,
     var coinViewModel: AssetsListViewModel,
     var onClick: (asset: AssetsItem) -> Unit = {},
 ) :
@@ -24,7 +24,7 @@ class CoinListAdapter(
     inner class ViewHolder(val binding: ItemCoinBinding) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(assetItem: AssetsItem) {
-            val dataBase = coinViewModel.favoriteAssets.value
+
             val progressBar = binding.pbLoading
             progressBar.visibility = View.VISIBLE
             Glide.with(binding.root)
@@ -35,10 +35,12 @@ class CoinListAdapter(
                 .into(binding.coinIconImageView)
 
             with(binding) {
-                if (dataBase?.any { it.asset_id == assetItem.asset_id } == true) {
-                    favoriteImageView.visibility = View.VISIBLE
+                coinViewModel.allFavoriteAssets.observe(context) { it ->
+                    val findByAssetID = it?.any {assetItem_ -> assetItem_.asset_id == assetItem.asset_id}
+                    if (findByAssetID == true) {
+                        favoriteImageView.visibility = View.VISIBLE
+                    }
                 }
-
                 coinAssetIdTextView.text = assetItem.asset_id
                 coinNameTextView.text = assetItem.name
                 priceUsdTextView.text = if (assetItem.price_usd != null) {

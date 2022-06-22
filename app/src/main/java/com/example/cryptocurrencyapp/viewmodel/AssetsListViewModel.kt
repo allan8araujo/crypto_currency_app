@@ -8,6 +8,7 @@ import com.example.apilibrary.repository.api.request.IAssetsRequest
 import com.example.apilibrary.repository.const.Constants.Companion.AMAZON_ICON
 import com.example.cryptocurrencyapp.viewmodel.results.DataResult
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import retrofit2.HttpException
@@ -17,13 +18,13 @@ class AssetsListViewModel(
 ) : ViewModel() {
     private val liveList = MutableLiveData<DataResult<List<AssetsItem>>>()
     val assets: LiveData<DataResult<List<AssetsItem>>> = liveList
+    private val assetsRespository: IAssetsRequest = repository.getApiAssets()
 
     private lateinit var recycledApiList: List<AssetsItem>
 
-    private val favoriteLiveList = MutableLiveData<List<AssetsItem>>()
-    val favoriteAssets = repository.getAssets().asLiveData()
-
-    private val assetsRespository: IAssetsRequest = repository.getApiAssets()
+    //    private val favoriteLiveList = MutableLiveData<List<AssetsItem>>()
+//    val favoriteAssets: LiveData<List<AssetsItem>> = favoriteLiveList
+    val allFavoriteAssets: LiveData<List<AssetsItem>> = repository.getAllAssets.asLiveData()
 
     fun insertAsset(assetItem: AssetsItem) = viewModelScope.launch {
         repository.insertAsset(assetItem)
@@ -55,27 +56,27 @@ class AssetsListViewModel(
         }
     }
 
-    fun getFavoriteAssets() {
-        viewModelScope.launch {
-            try {
-                favoriteLiveList.value = filterFavorites(recycledApiList)
-            } catch (e: Throwable) {
-                TODO()
-            }
-        }
-    }
-
-    private fun filterFavorites(assetsFromApi: List<AssetsItem>): ArrayList<AssetsItem> {
-        val list: ArrayList<AssetsItem> = arrayListOf()
-        favoriteAssets.value?.forEach { dataId ->
-            assetsFromApi.find { assetsItem ->
-                assetsItem.asset_id == dataId.asset_id
-            }
-                ?.let { list.add(it) }
-        }
-        return list
-    }
-
+    //    fun getFavoriteAssets() {
+//        viewModelScope.launch {
+//            try {
+//                favoriteLiveList.value = filterFavorites(recycledApiList)
+//            } catch (e: Throwable) {
+//                TODO()
+//            }
+//        }
+//    }
+//
+//    private fun filterFavorites(assetsFromApi: List<AssetsItem>): ArrayList<AssetsItem> {
+//        val list: ArrayList<AssetsItem> = arrayListOf()
+//        favoriteAssetsRepository.asLiveData().value?.forEach { dataId ->
+//            assetsFromApi.find { assetsItem ->
+//                assetsItem.asset_id == dataId.asset_id
+//            }
+//                ?.let { list.add(it) }
+//        }
+//        return list
+//    }
+//
     fun Assets.toAssets(): List<AssetsItem> {
         return map {
             AssetsItem(

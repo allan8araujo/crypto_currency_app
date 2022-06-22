@@ -1,11 +1,14 @@
 package com.example.cryptocurrencyapp.view.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.asLiveData
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
@@ -37,27 +40,26 @@ class CoinDetailsFragment : Fragment() {
     }
 
     private fun bindingView(args: CoinDetailsFragmentArgs) {
-        val asset: com.example.abstraction.AssetsItem = args.asset
-        val dataBase = coinViewModel.favoriteAssets.value
-        settingImageIcon(asset)
-        with(binding) {
-            iconAssetIdTextView.text = asset.asset_id
-
-            when (dataBase?.any { it.asset_id == asset.asset_id } == true) {
-                true -> {
-                    setRemove(dataBase, asset)
+        val asset: AssetsItem = args.asset
+        coinViewModel.allFavoriteAssets.observe(viewLifecycleOwner){ listAssetsItems ->
+            settingImageIcon(asset)
+            with(binding) {
+                iconAssetIdTextView.text = asset.asset_id
+                val findItemOnList = listAssetsItems?.any{
+                    it.asset_id == asset.asset_id
                 }
-                false -> {
-                    setAdd(dataBase, asset)
+                if (findItemOnList == true) {
+                    setRemove(listAssetsItems, asset)
+                } else {
+                    setAdd(listAssetsItems, asset)
                 }
+                settingPricesAndVolum(asset, asset.price_usd)
             }
-
-            settingPricesAndVolum(asset, asset.price_usd)
         }
     }
 
     private fun DetailsFragmentBinding.settingPricesAndVolum(
-        asset: com.example.abstraction.AssetsItem,
+        asset: AssetsItem,
         price_usd: Double?,
     ) {
         if (asset.price_usd != null) {

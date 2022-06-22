@@ -1,12 +1,14 @@
 package com.example.cryptocurrencyapp.view.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.asLiveData
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.abstraction.AssetsItem
@@ -15,7 +17,6 @@ import com.example.cryptocurrencyapp.R
 import com.example.cryptocurrencyapp.databinding.FavoriteFragmentBinding
 import com.example.cryptocurrencyapp.view.adapters.CoinFavoriteAdapter
 import com.example.cryptocurrencyapp.viewmodel.AssetsListViewModel
-import com.example.cryptocurrencyapp.viewmodel.results.DataResult
 
 class CoinFavoriteFragment : Fragment() {
     private lateinit var listAdapter: CoinFavoriteAdapter
@@ -48,8 +49,8 @@ class CoinFavoriteFragment : Fragment() {
     }
 
     private fun collectAssetsObserver() {
-        coinViewModel.getFavoriteAssets()
-        coinViewModel.favoriteAssets.observe(viewLifecycleOwner) { assetsItem ->
+        coinViewModel.allFavoriteAssets.value
+        coinViewModel.allFavoriteAssets.observe(viewLifecycleOwner) { assetsItem ->
             binding.favoriteScreenProgressBar.visibility = View.GONE
             listAdapter.submitList(assetsItem)
         }

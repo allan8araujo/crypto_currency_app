@@ -44,7 +44,7 @@ class CoinListFragment : Fragment() {
 
     private fun setupRecycler() {
         listAdapter =
-            CoinListAdapter(requireContext(), coinViewModel) { asset -> goToCoinDetails(asset) }
+            CoinListAdapter(viewLifecycleOwner, coinViewModel) { asset -> goToCoinDetails(asset) }
 
         settingRecyclerViewProperties()
         binding.currentDateTextView.text = DATE_NOW

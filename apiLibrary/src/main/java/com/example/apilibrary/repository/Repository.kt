@@ -12,10 +12,7 @@ class Repository(private val assetsDao: AssetsDao) : IRepository {
         return RetrofitRequestHelper.getListAssets()
     }
 
-    override fun getAssets(): Flow<List<AssetsItem>> {
-        return assetsDao.getFavoriteAssets()
-    }
-
+    val getAllAssets: Flow<List<AssetsItem>> = assetsDao.getFavoriteAssets()
     @WorkerThread
     override suspend fun insertAsset(asset: AssetsItem) {
         assetsDao.insertFavorite(asset)
