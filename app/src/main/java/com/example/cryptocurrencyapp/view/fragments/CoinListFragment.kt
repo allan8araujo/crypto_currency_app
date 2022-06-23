@@ -169,7 +169,9 @@ class CoinListFragment : Fragment() {
     }
 
     private fun setListAdapter(list: List<AssetsItem>?) {
-        listAdapter.submitList(list)
+        listAdapter.submitList(list) {
+            binding.coinListRecyclerView.smoothScrollToPosition(0)
+        }
     }
 
     private fun goToCoinDetails(asset: AssetsItem) {
