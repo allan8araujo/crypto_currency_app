@@ -1,6 +1,6 @@
 package com.example.cryptocurrencyapp.viewmodel.results
 
-import com.example.cryptocurrencyapp.models.assets.Assets.AssetsItem
+import com.example.abstraction.AssetsItem
 import retrofit2.HttpException
 
 sealed class DataResult<T> {

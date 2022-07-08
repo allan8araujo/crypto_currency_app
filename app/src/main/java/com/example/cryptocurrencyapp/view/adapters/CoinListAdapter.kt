@@ -1,21 +1,22 @@
 package com.example.cryptocurrencyapp.view.adapters
 
-import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.abstraction.AssetsItem
 import com.example.cryptocurrencyapp.R
 import com.example.cryptocurrencyapp.databinding.ItemCoinBinding
-import com.example.cryptocurrencyapp.models.assets.Assets.AssetsItem
 import com.example.cryptocurrencyapp.utils.DiffCallback
 import com.example.cryptocurrencyapp.utils.ProgressBarListener
 import com.example.cryptocurrencyapp.viewmodel.AssetsListViewModel
 
 class CoinListAdapter(
-    val context: Context,
+    val context: LifecycleOwner,
     var coinViewModel: AssetsListViewModel,
     var onClick: (asset: AssetsItem) -> Unit = {},
 ) :
@@ -24,7 +25,7 @@ class CoinListAdapter(
     inner class ViewHolder(val binding: ItemCoinBinding) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(assetItem: AssetsItem) {
-            val dataBase = coinViewModel.database
+
             val progressBar = binding.pbLoading
             progressBar.visibility = View.VISIBLE
             Glide.with(binding.root)
@@ -35,11 +36,17 @@ class CoinListAdapter(
                 .into(binding.coinIconImageView)
 
             with(binding) {
-
-                if (dataBase.hasItem(assetItem.asset_id)) {
-                    favoriteImageView.visibility = View.VISIBLE
+                coinViewModel.allFavoriteAssets.observe(context) { assetsItensList ->
+                    val findByAssetID =
+                        assetsItensList?.any { assetItem_ ->
+                            assetItem_.asset_id == assetItem.asset_id
+                        }
+                    if (findByAssetID == true) {
+                        favoriteImageView.visibility = View.VISIBLE
+                    } else {
+                        favoriteImageView.visibility = View.GONE
+                    }
                 }
-
                 coinAssetIdTextView.text = assetItem.asset_id
                 coinNameTextView.text = assetItem.name
                 priceUsdTextView.text = if (assetItem.price_usd != null) {

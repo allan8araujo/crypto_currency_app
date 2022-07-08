@@ -9,13 +9,12 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import com.example.abstraction.AssetsItem
 import com.example.apilibrary.repository.const.Constants.Companion.DATE_NOW
 import com.example.cryptocurrencyapp.R
 import com.example.cryptocurrencyapp.databinding.FavoriteFragmentBinding
-import com.example.cryptocurrencyapp.models.assets.Assets.AssetsItem
 import com.example.cryptocurrencyapp.view.adapters.CoinFavoriteAdapter
 import com.example.cryptocurrencyapp.viewmodel.AssetsListViewModel
-import com.example.cryptocurrencyapp.viewmodel.results.DataResult
 
 class CoinFavoriteFragment : Fragment() {
     private lateinit var listAdapter: CoinFavoriteAdapter
@@ -48,20 +47,9 @@ class CoinFavoriteFragment : Fragment() {
     }
 
     private fun collectAssetsObserver() {
-        coinViewModel.getFavoriteAssets()
-        coinViewModel.favoriteAssets.observe(viewLifecycleOwner) { assetsItem ->
-            when (assetsItem) {
-                is DataResult.Loading -> {
-                    binding.favoriteScreenProgressBar.visibility = View.VISIBLE
-                }
-                is DataResult.Success -> {
-                    binding.favoriteScreenProgressBar.visibility = View.GONE
-                    listAdapter.submitList(assetsItem.data)
-                }
-                is DataResult.Error -> {
-                    binding.favoriteScreenProgressBar.visibility = View.GONE
-                }
-            }
+        coinViewModel.allFavoriteAssets.observe(viewLifecycleOwner) { assetsItem ->
+            binding.favoriteScreenProgressBar.visibility = View.GONE
+            listAdapter.submitList(assetsItem)
         }
     }
 

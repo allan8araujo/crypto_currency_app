@@ -9,14 +9,11 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
-import com.example.apilibrary.repository.Repository
+import com.example.abstraction.AssetsItem
 import com.example.cryptocurrencyapp.R
 import com.example.cryptocurrencyapp.databinding.DetailsFragmentBinding
-import com.example.cryptocurrencyapp.models.assets.Assets.AssetsItem
 import com.example.cryptocurrencyapp.utils.ProgressBarListener
-import com.example.apilibrary.repository.database.TinyDB
 import com.example.cryptocurrencyapp.viewmodel.AssetsListViewModel
-import com.example.cryptocurrencyapp.viewmodel.factories.ListViewModelFactory
 
 class CoinDetailsFragment : Fragment() {
 
@@ -41,20 +38,20 @@ class CoinDetailsFragment : Fragment() {
 
     private fun bindingView(args: CoinDetailsFragmentArgs) {
         val asset: AssetsItem = args.asset
-        val dataBase = coinViewModel.database
-        settingImageIcon(asset)
-        with(binding) {
-            iconAssetIdTextView.text = asset.asset_id
-            when (dataBase.hasItem(asset.asset_id)) {
-                true -> {
-                    setRemove(dataBase, asset)
+        coinViewModel.allFavoriteAssets.observe(viewLifecycleOwner) { listAssetsItems ->
+            settingImageIcon(asset)
+            with(binding) {
+                iconAssetIdTextView.text = asset.asset_id
+                val findItemOnList = listAssetsItems?.any {
+                    it.asset_id == asset.asset_id
                 }
-                false -> {
-                    setAdd(dataBase, asset)
+                if (findItemOnList == true) {
+                    setRemove(listAssetsItems, asset)
+                } else {
+                    setAdd(listAssetsItems, asset)
                 }
+                settingPricesAndVolum(asset, asset.price_usd)
             }
-
-            settingPricesAndVolum(asset, asset.price_usd)
         }
     }
 
@@ -76,31 +73,31 @@ class CoinDetailsFragment : Fragment() {
     }
 
     private fun DetailsFragmentBinding.setAdd(
-        dataBase: TinyDB,
+        dataBase: List<AssetsItem>?,
         asset: AssetsItem,
     ) {
         addButton.setText("Adicionar")
         starIconImageView.visibility = View.GONE
         addButton.setOnClickListener {
-            dataBase.addItem(asset.asset_id)
+            coinViewModel.insertAsset(asset)
             goToCoinList()
         }
     }
 
     private fun DetailsFragmentBinding.setRemove(
-        dataBase: TinyDB,
+        dataBase: List<AssetsItem>?,
         asset: AssetsItem,
     ) {
         addButton.setText("Remover")
         starIconImageView.visibility = View.VISIBLE
         addButton.setOnClickListener {
-            dataBase.removeItem(asset.asset_id)
+            coinViewModel.deleteAsset(asset)
             goToCoinList()
         }
     }
 
     private fun settingImageIcon(
-        asset: AssetsItem,
+        asset: com.example.abstraction.AssetsItem,
     ) {
         val progressBar = binding.detailsProgressBar
         progressBar.visibility = View.VISIBLE

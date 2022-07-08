@@ -1,15 +1,11 @@
 package com.example.cryptocurrencyapp.viewmodel
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
+import com.example.abstraction.Assets
+import com.example.abstraction.AssetsItem
 import com.example.apilibrary.repository.Repository
 import com.example.apilibrary.repository.api.request.IAssetsRequest
 import com.example.apilibrary.repository.const.Constants.Companion.AMAZON_ICON
-import com.example.apilibrary.repository.response.AssetsDTO.AssetsDTO
-import com.example.cryptocurrencyapp.models.assets.Assets.AssetsItem
-import com.example.cryptocurrencyapp.models.assets.Assets.funEmptyAssets
 import com.example.cryptocurrencyapp.viewmodel.results.DataResult
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -17,20 +13,25 @@ import kotlinx.coroutines.withContext
 import retrofit2.HttpException
 
 class AssetsListViewModel(
-    private val repository: Repository
+    private val repository: Repository,
 ) : ViewModel() {
     private val liveList = MutableLiveData<DataResult<List<AssetsItem>>>()
     val assets: LiveData<DataResult<List<AssetsItem>>> = liveList
-
-    val database = repository.getDatabaseAssets()
-    private lateinit var recycledApiList: List<AssetsItem>
-
-    private val favoriteLiveList = MutableLiveData<DataResult<List<AssetsItem>>>()
-    val favoriteAssets: LiveData<DataResult<List<AssetsItem>>> = favoriteLiveList
-
-
     private val assetsRespository: IAssetsRequest = repository.getApiAssets()
 
+    private lateinit var recycledApiList: List<AssetsItem>
+
+    //    private val favoriteLiveList = MutableLiveData<List<AssetsItem>>()
+//    val favoriteAssets: LiveData<List<AssetsItem>> = favoriteLiveList
+    val allFavoriteAssets: LiveData<List<AssetsItem>> = repository.getAllAssets.asLiveData()
+
+    fun insertAsset(assetItem: AssetsItem) = viewModelScope.launch {
+        repository.insertAsset(assetItem)
+    }
+
+    fun deleteAsset(assetItem: AssetsItem) = viewModelScope.launch {
+        repository.deleteAsset(assetItem)
+    }
 
     fun getAllAssets() {
         viewModelScope.launch {
@@ -43,7 +44,10 @@ class AssetsListViewModel(
                 liveList.value = DataResult.Success(recycledApiList)
             } catch (httpException: HttpException) {
                 val assetsFromApi =
-                    DataResult.Error<List<AssetsItem>>(httpException, funEmptyAssets())
+                    DataResult.Error<List<AssetsItem>>(
+                        httpException,
+                        com.example.abstraction.funEmptyAssets()
+                    )
                 liveList.value = assetsFromApi
             } catch (throwable: Throwable) {
                 liveList.value = DataResult.Loading()
@@ -51,28 +55,28 @@ class AssetsListViewModel(
         }
     }
 
-
-    fun getFavoriteAssets() {
-        viewModelScope.launch {
-            favoriteLiveList.value = DataResult.Loading()
-            try {
-                favoriteLiveList.value = DataResult.Success(filterFavorites(recycledApiList))
-            } catch (e: Throwable) {
-                TODO()
-            }
-        }
-    }
-
-    private fun filterFavorites(assetsFromApi: List<AssetsItem>): ArrayList<AssetsItem> {
-        val list: ArrayList<AssetsItem> = arrayListOf()
-        database.getAll().forEach { dataId ->
-            assetsFromApi.find { assetsItem -> assetsItem.asset_id == dataId }
-                ?.let { list.add(it) }
-        }
-        return list
-    }
-
-    fun AssetsDTO.toAssets(): List<AssetsItem> {
+    //    fun getFavoriteAssets() {
+//        viewModelScope.launch {
+//            try {
+//                favoriteLiveList.value = filterFavorites(recycledApiList)
+//            } catch (e: Throwable) {
+//                TODO()
+//            }
+//        }
+//    }
+//
+//    private fun filterFavorites(assetsFromApi: List<AssetsItem>): ArrayList<AssetsItem> {
+//        val list: ArrayList<AssetsItem> = arrayListOf()
+//        favoriteAssetsRepository.asLiveData().value?.forEach { dataId ->
+//            assetsFromApi.find { assetsItem ->
+//                assetsItem.asset_id == dataId.asset_id
+//            }
+//                ?.let { list.add(it) }
+//        }
+//        return list
+//    }
+//
+    fun Assets.toAssets(): List<AssetsItem> {
         return map {
             AssetsItem(
                 asset_id = it.asset_id,

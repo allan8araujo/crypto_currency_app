@@ -1,13 +1,13 @@
 package com.example.cryptocurrencyapp.viewmodel
 
-import com.example.apilibrary.repository.response.AssetsDTO.AssetsDTO
-import com.example.apilibrary.repository.response.AssetsDTO.funMockAssets
+import com.example.models.AssetsDTO
+import com.example.models.funMockAssets
 import org.junit.Assert
 import org.junit.Test
 
 internal class AssetsListViewModelTest {
 
-//    @Test
+    //    @Test
 //    fun givenServerResponseError_whenFetch_shouldReturnError() {
 //        testCoroutineRule.runBlockingTest {
 //            val someGeekyError = "Something is not right"
@@ -28,9 +28,9 @@ internal class AssetsListViewModelTest {
 //    }
     @Test
     fun `ao chamar a funcao toAssets com dados nao vazios, o resultado precisa ser diferente de nulo ou vazio`() {
-        val assetDTO = AssetsDTO()
+        val assetDTO = com.example.models.AssetsDTO()
         assetDTO.addAll(
-            funMockAssets()
+            com.example.models.funMockAssets()
         )
         val asset = assetDTO.toAssets()
         Assert.assertFalse(asset.isNullOrEmpty())

@@ -67,12 +67,12 @@
             app:destination="@+id/coinFavorites" />
         <argument
             android:name="asset"
-            app:argType="com.example.cryptocurrencyapp.models.assets.Assets.AssetsItem" />
+            app:argType="com.example.abstraction.AssetsItem" />
     </fragment>
     <fragment
         android:id="@+id/errorScreen"
         android:name="com.example.cryptocurrencyapp.view.fragments.ErrorScreen"
-        android:label="ErrorScreen" >
+        android:label="ErrorScreen">
         <action
             android:id="@+id/action_errorScreen_to_coinList"
             app:destination="@id/coinList" />

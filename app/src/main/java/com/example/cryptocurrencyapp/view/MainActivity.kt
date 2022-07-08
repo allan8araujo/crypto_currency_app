@@ -10,6 +10,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.apilibrary.repository.Repository
 import com.example.apilibrary.repository.const.Constants
+import com.example.apilibrary.repository.database.AssetsDatabase
 import com.example.cryptocurrencyapp.R.id.*
 import com.example.cryptocurrencyapp.databinding.ActivityMainBinding
 import com.example.cryptocurrencyapp.viewmodel.AssetsListViewModel
@@ -25,8 +26,10 @@ class MainActivity : AppCompatActivity() {
         findNavController(activity_main_navHost)
     }
 
+    val database by lazy { AssetsDatabase.getDatabase(this) }
+
     val coinViewModel: AssetsListViewModel by viewModels {
-        ListViewModelFactory(Repository(applicationContext))
+        ListViewModelFactory(Repository(database.assetsDao()))
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -9,9 +9,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import com.example.abstraction.AssetsItem
 import com.example.cryptocurrencyapp.R
 import com.example.cryptocurrencyapp.databinding.ErrorScreenBinding
-import com.example.cryptocurrencyapp.models.assets.Assets.AssetsItem
 import com.example.cryptocurrencyapp.viewmodel.AssetsListViewModel
 import com.example.cryptocurrencyapp.viewmodel.results.DataResult
 

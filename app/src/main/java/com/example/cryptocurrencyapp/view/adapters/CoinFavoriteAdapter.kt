@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.cryptocurrencyapp.R
 import com.example.cryptocurrencyapp.databinding.ItemFavoriteBinding
-import com.example.cryptocurrencyapp.models.assets.Assets.AssetsItem
 import com.example.cryptocurrencyapp.utils.DiffCallback
 import com.example.cryptocurrencyapp.utils.ProgressBarListener
 import com.example.cryptocurrencyapp.viewmodel.AssetsListViewModel
@@ -17,14 +16,14 @@ import com.example.cryptocurrencyapp.viewmodel.AssetsListViewModel
 class CoinFavoriteAdapter(
     var context: Context,
     var iconViewModel: AssetsListViewModel,
-    var onClick: (asset: AssetsItem) -> Unit = {},
+    var onClick: (asset: com.example.abstraction.AssetsItem) -> Unit = {},
 ) :
-    ListAdapter<AssetsItem, CoinFavoriteAdapter.ViewHolder>(DiffCallback()) {
+    ListAdapter<com.example.abstraction.AssetsItem, CoinFavoriteAdapter.ViewHolder>(DiffCallback()) {
 
     inner class ViewHolder(val binding: ItemFavoriteBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(assetItem: AssetsItem) {
+        fun bind(assetItem: com.example.abstraction.AssetsItem) {
 
             val progressBar = binding.favoriteProgressBar
             progressBar.visibility = View.VISIBLE
