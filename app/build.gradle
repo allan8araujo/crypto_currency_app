@@ -46,18 +46,20 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'androidx.mediarouter:mediarouter:1.3.0'
     implementation 'androidx.paging:paging-runtime-ktx:3.1.1'
-    implementation 'androidx.navigation:navigation-fragment-ktx:2.5.0'
-    implementation 'androidx.navigation:navigation-ui-ktx:2.5.0'
-    implementation 'androidx.navigation:navigation-fragment:2.5.0'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.4.2'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.4.2'
+    implementation 'androidx.navigation:navigation-fragment:2.4.2'
 
     implementation 'androidx.paging:paging-common-ktx:3.1.1'
 
     //Fragments
-    def fragment_version = "1.5.0"
+    def fragment_version = "1.3.6"
+
     implementation "androidx.fragment:fragment-ktx:$fragment_version"
 
     // Navigation
-    def nav_version = "2.5.0"
+    def nav_version = "2.3.5"
+
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
 
@@ -68,7 +70,7 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
 
     //Glide
-    implementation 'com.github.bumptech.glide:glide:4.13.2'
+    implementation 'com.github.bumptech.glide:glide:4.13.0'
 
     //LottieFilesAnimation
     def lottieVersion = "3.4.0"
@@ -78,7 +80,7 @@ dependencies {
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
     implementation "com.squareup.retrofit2:adapter-rxjava2:2.9.0"
-    implementation 'com.google.code.gson:gson:2.9.0'
+    implementation 'com.google.code.gson:gson:2.8.9'
 
 
     // AndroidX Test - JVM testing
