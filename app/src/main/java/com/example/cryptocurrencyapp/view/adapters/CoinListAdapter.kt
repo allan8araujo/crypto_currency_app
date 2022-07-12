@@ -43,6 +43,7 @@ class CoinListAdapter(
                         }
                     if (findByAssetID == true) {
                         favoriteImageView.visibility = View.VISIBLE
+                        Log.i(assetItem.asset_id, "rr@@@@@@@@@@@@@@@@@@@@@")
                     } else {
                         favoriteImageView.visibility = View.GONE
                     }
