@@ -97,6 +97,9 @@ dependencies {
     kapt "androidx.room:room-compiler:$roomVersion"
     implementation project(path: ':repository')
 
+    //paging
+    def paging_version = "3.1.1"
+    implementation "androidx.paging:paging-runtime-ktx:$paging_version"
 
     //módulos
     implementation project(path: ':abstraction')
