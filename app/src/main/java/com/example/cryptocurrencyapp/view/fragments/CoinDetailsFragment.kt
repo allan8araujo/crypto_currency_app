@@ -8,19 +8,18 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.bumptech.glide.Glide
 import com.example.abstraction.AssetsItem
-import com.example.cryptocurrencyapp.R
 import com.example.cryptocurrencyapp.databinding.DetailsFragmentBinding
-import com.example.cryptocurrencyapp.utils.ProgressBarListener
-import com.example.cryptocurrencyapp.viewmodel.AssetsListViewModel
+import com.example.cryptocurrencyapp.viewmodel.CoinListViewModel
+import com.example.cryptocurrencyapp.viewmodel.CoinDetailsViewModel
 
 class CoinDetailsFragment : Fragment() {
 
     private lateinit var binding: DetailsFragmentBinding
     private val args: CoinDetailsFragmentArgs by navArgs()
 
-    private val coinViewModel: AssetsListViewModel by activityViewModels()
+    private val coinViewModel: CoinListViewModel by activityViewModels()
+    private val coinFavoriteViewModel: CoinDetailsViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -28,6 +27,9 @@ class CoinDetailsFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View {
         binding = DetailsFragmentBinding.inflate(inflater, container, false)
+        binding.backPressButton.setOnClickListener {
+            findNavController().popBackStack()
+        }
         return binding.root
     }
 
@@ -39,77 +41,48 @@ class CoinDetailsFragment : Fragment() {
     private fun bindingView(args: CoinDetailsFragmentArgs) {
         val asset: AssetsItem = args.asset
         coinViewModel.allFavoriteAssets.observe(viewLifecycleOwner) { listAssetsItems ->
-            settingImageIcon(asset)
-            with(binding) {
-                iconAssetIdTextView.text = asset.asset_id
-                val findItemOnList = listAssetsItems?.any {
-                    it.asset_id == asset.asset_id
-                }
-                if (findItemOnList == true) {
-                    setRemove(listAssetsItems, asset)
-                } else {
-                    setAdd(listAssetsItems, asset)
-                }
-                settingPricesAndVolum(asset, asset.price_usd)
-            }
+            setButtonAction(asset, listAssetsItems, binding)
         }
     }
 
-    private fun DetailsFragmentBinding.settingPricesAndVolum(
+    fun setButtonAction(
         asset: AssetsItem,
-        price_usd: Double?,
+        listAssetsItems: List<AssetsItem>,
+        binding: DetailsFragmentBinding,
     ) {
-        if (asset.price_usd != null) {
-            priceUsdTextView.text = price_usd.toString()
-        } else {
-            priceUsdTextView.setEms(5)
-            priceUsdTextView.setCompoundDrawablesRelative(null, null, null, null)
-            priceUsdTextView.text = "Indisponivel"
+        var findItemOnList: Boolean?
+        coinFavoriteViewModel.settingImageIcon(asset, binding)
+        with(binding) {
+            iconAssetIdTextView.text = asset.asset_id
+            findItemOnList = listAssetsItems.any {
+                it.asset_id == asset.asset_id
+            }
+            if (findItemOnList == true) {
+                setRemove(asset)
+            } else {
+                setAdd(asset)
+            }
+            coinFavoriteViewModel.settingPricesAndVolum(binding, asset, asset.price_usd)
         }
-        lastHourValueTextView.text = asset.volume_1hrs_usd.toString()
-        lastWeekValueTextView.text = asset.volume_1day_usd.toString()
-        lastMounthValueTextView.text = asset.volume_1mth_usd.toString()
-        backPressButton.setOnClickListener { goToCoinList() }
     }
 
     private fun DetailsFragmentBinding.setAdd(
-        dataBase: List<AssetsItem>?,
         asset: AssetsItem,
     ) {
-        addButton.setText("Adicionar")
+        addButton.text = "Adicionar"
         starIconImageView.visibility = View.GONE
         addButton.setOnClickListener {
             coinViewModel.insertAsset(asset)
-            goToCoinList()
         }
     }
 
     private fun DetailsFragmentBinding.setRemove(
-        dataBase: List<AssetsItem>?,
         asset: AssetsItem,
     ) {
-        addButton.setText("Remover")
+        addButton.text = "Remover"
         starIconImageView.visibility = View.VISIBLE
         addButton.setOnClickListener {
             coinViewModel.deleteAsset(asset)
-            goToCoinList()
         }
-    }
-
-    private fun settingImageIcon(
-        asset: com.example.abstraction.AssetsItem,
-    ) {
-        val progressBar = binding.detailsProgressBar
-        progressBar.visibility = View.VISIBLE
-        Glide.with(binding.root)
-            .load(coinViewModel.loadUrlFromGlide(asset))
-            .placeholder(R.drawable.ic_coin_base)
-            .listener(ProgressBarListener(progressBar))
-            .centerCrop()
-            .into(binding.coinIconImageView)
-    }
-
-    private fun goToCoinList() {
-        findNavController().popBackStack()
     }
 }

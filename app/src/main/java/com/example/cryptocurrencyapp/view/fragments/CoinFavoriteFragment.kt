@@ -10,40 +10,32 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.abstraction.AssetsItem
-import com.example.apilibrary.repository.const.Constants.Companion.DATE_NOW
 import com.example.cryptocurrencyapp.R
 import com.example.cryptocurrencyapp.databinding.FavoriteFragmentBinding
 import com.example.cryptocurrencyapp.view.adapters.CoinFavoriteAdapter
-import com.example.cryptocurrencyapp.viewmodel.AssetsListViewModel
+import com.example.cryptocurrencyapp.viewmodel.CoinListViewModel
+import com.example.cryptocurrencyapp.viewmodel.CoinFavoriteViewModel
 
 class CoinFavoriteFragment : Fragment() {
     private lateinit var listAdapter: CoinFavoriteAdapter
     private lateinit var binding: FavoriteFragmentBinding
     private lateinit var staggeredGridLayoutManager: StaggeredGridLayoutManager
-    private val coinViewModel: AssetsListViewModel by activityViewModels()
+    private val coinViewModel: CoinListViewModel by activityViewModels()
+    private val coinFavoriteViewModel: CoinFavoriteViewModel by activityViewModels()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
         binding = FavoriteFragmentBinding.inflate(inflater, container, false)
+        listAdapter = CoinFavoriteAdapter { asset -> goToCoinDetails(asset) }
+        coinFavoriteViewModel.setupRecycler(listAdapter, binding)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setupRecycler()
         collectAssetsObserver()
-    }
-
-    private fun setupRecycler() {
-        listAdapter =
-            CoinFavoriteAdapter(requireContext(), coinViewModel) { asset -> goToCoinDetails(asset) }
-        staggeredGridLayoutManager =
-            StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
-        binding.currentDateTextView.text = DATE_NOW
-        binding.favoritRecyclerView.layoutManager = staggeredGridLayoutManager
-        binding.favoritRecyclerView.adapter = listAdapter
     }
 
     private fun collectAssetsObserver() {

@@ -5,7 +5,7 @@ import com.example.models.funMockAssets
 import org.junit.Assert
 import org.junit.Test
 
-internal class AssetsListViewModelTest {
+internal class CoinListViewModelTest {
 
     //    @Test
 //    fun givenServerResponseError_whenFetch_shouldReturnError() {

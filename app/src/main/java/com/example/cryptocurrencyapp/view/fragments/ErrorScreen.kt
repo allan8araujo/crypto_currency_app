@@ -12,13 +12,13 @@ import androidx.navigation.fragment.findNavController
 import com.example.abstraction.AssetsItem
 import com.example.cryptocurrencyapp.R
 import com.example.cryptocurrencyapp.databinding.ErrorScreenBinding
-import com.example.cryptocurrencyapp.viewmodel.AssetsListViewModel
-import com.example.cryptocurrencyapp.viewmodel.results.DataResult
+import com.example.cryptocurrencyapp.viewmodel.CoinListViewModel
+import com.example.cryptocurrencyapp.viewmodel.states.DataResult
 
 class ErrorScreen() : Fragment() {
 
     private lateinit var binding: ErrorScreenBinding
-    private val coinViewModel: AssetsListViewModel by activityViewModels()
+    private val coinViewModel: CoinListViewModel by activityViewModels()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -35,7 +35,7 @@ class ErrorScreen() : Fragment() {
     }
 
     private fun observeResults() {
-        coinViewModel.assets.observe(viewLifecycleOwner) { dataResults ->
+        coinViewModel.assetsFromResultApi.observe(viewLifecycleOwner) { dataResults ->
             when (dataResults) {
                 is DataResult.Loading -> {
                     binding.tryAgainProgressBar.visibility = VISIBLE
