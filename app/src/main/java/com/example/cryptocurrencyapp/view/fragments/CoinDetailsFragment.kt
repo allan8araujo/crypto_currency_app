@@ -11,6 +11,7 @@ import androidx.navigation.fragment.navArgs
 import com.example.abstraction.AssetsItem
 import com.example.cryptocurrencyapp.databinding.DetailsFragmentBinding
 import com.example.cryptocurrencyapp.viewmodel.AssetsListViewModel
+import com.example.cryptocurrencyapp.viewmodel.CoinDetailsViewModel
 
 class CoinDetailsFragment : Fragment() {
 
@@ -18,6 +19,7 @@ class CoinDetailsFragment : Fragment() {
     private val args: CoinDetailsFragmentArgs by navArgs()
 
     private val coinViewModel: AssetsListViewModel by activityViewModels()
+    private val coinFavoriteViewModel: CoinDetailsViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -39,7 +41,48 @@ class CoinDetailsFragment : Fragment() {
     private fun bindingView(args: CoinDetailsFragmentArgs) {
         val asset: AssetsItem = args.asset
         coinViewModel.allFavoriteAssets.observe(viewLifecycleOwner) { listAssetsItems ->
-            coinViewModel.setButtonAction(asset, listAssetsItems, binding)
+            setButtonAction(asset, listAssetsItems, binding)
+        }
+    }
+
+    fun setButtonAction(
+        asset: AssetsItem,
+        listAssetsItems: List<AssetsItem>,
+        binding: DetailsFragmentBinding,
+    ) {
+        var findItemOnList: Boolean?
+        coinFavoriteViewModel.settingImageIcon(asset, binding)
+        with(binding) {
+            iconAssetIdTextView.text = asset.asset_id
+            findItemOnList = listAssetsItems.any {
+                it.asset_id == asset.asset_id
+            }
+            if (findItemOnList == true) {
+                setRemove(asset)
+            } else {
+                setAdd(asset)
+            }
+            coinFavoriteViewModel.settingPricesAndVolum(binding, asset, asset.price_usd)
+        }
+    }
+
+    private fun DetailsFragmentBinding.setAdd(
+        asset: AssetsItem,
+    ) {
+        addButton.text = "Adicionar"
+        starIconImageView.visibility = View.GONE
+        addButton.setOnClickListener {
+            coinViewModel.insertAsset(asset)
+        }
+    }
+
+    private fun DetailsFragmentBinding.setRemove(
+        asset: AssetsItem,
+    ) {
+        addButton.text = "Remover"
+        starIconImageView.visibility = View.VISIBLE
+        addButton.setOnClickListener {
+            coinViewModel.deleteAsset(asset)
         }
     }
 }

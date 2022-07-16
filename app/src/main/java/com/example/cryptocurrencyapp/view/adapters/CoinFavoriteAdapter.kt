@@ -1,6 +1,5 @@
 package com.example.cryptocurrencyapp.view.adapters
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,13 +8,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.cryptocurrencyapp.R
 import com.example.cryptocurrencyapp.databinding.ItemFavoriteBinding
+import com.example.cryptocurrencyapp.helper.UrlHelper
 import com.example.cryptocurrencyapp.utils.DiffCallback
 import com.example.cryptocurrencyapp.utils.ProgressBarListener
-import com.example.cryptocurrencyapp.viewmodel.AssetsListViewModel
 
 class CoinFavoriteAdapter(
-    var context: Context,
-    var iconViewModel: AssetsListViewModel,
     var onClick: (asset: com.example.abstraction.AssetsItem) -> Unit = {},
 ) :
     ListAdapter<com.example.abstraction.AssetsItem, CoinFavoriteAdapter.ViewHolder>(DiffCallback()) {
@@ -28,7 +25,7 @@ class CoinFavoriteAdapter(
             val progressBar = binding.favoriteProgressBar
             progressBar.visibility = View.VISIBLE
             Glide.with(binding.root)
-                .load(iconViewModel.loadUrlFromGlide(assetItem))
+                .load(UrlHelper().loadUrlFromGlide(assetItem))
                 .placeholder(R.drawable.ic_coin_base)
                 .listener(ProgressBarListener(progressBar))
                 .centerCrop()

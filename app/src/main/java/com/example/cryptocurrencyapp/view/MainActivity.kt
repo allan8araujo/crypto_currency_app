@@ -26,9 +26,9 @@ class MainActivity : AppCompatActivity() {
         findNavController(activity_main_navHost)
     }
 
-    val database by lazy { AssetsDatabase.getDatabase(this) }
+    private val database by lazy { AssetsDatabase.getDatabase(this) }
 
-    val coinViewModel: AssetsListViewModel by viewModels {
+    private val coinViewModel: AssetsListViewModel by viewModels {
         ListViewModelFactory(Repository(database.assetsDao()))
     }
 
