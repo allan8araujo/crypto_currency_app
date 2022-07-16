@@ -13,7 +13,7 @@ import com.example.apilibrary.repository.const.Constants
 import com.example.apilibrary.repository.database.AssetsDatabase
 import com.example.cryptocurrencyapp.R.id.*
 import com.example.cryptocurrencyapp.databinding.ActivityMainBinding
-import com.example.cryptocurrencyapp.viewmodel.AssetsListViewModel
+import com.example.cryptocurrencyapp.viewmodel.CoinListViewModel
 import com.example.cryptocurrencyapp.viewmodel.factories.ListViewModelFactory
 
 class MainActivity : AppCompatActivity() {
@@ -28,7 +28,7 @@ class MainActivity : AppCompatActivity() {
 
     private val database by lazy { AssetsDatabase.getDatabase(this) }
 
-    private val coinViewModel: AssetsListViewModel by viewModels {
+    private val coinViewModel: CoinListViewModel by viewModels {
         ListViewModelFactory(Repository(database.assetsDao()))
     }
 

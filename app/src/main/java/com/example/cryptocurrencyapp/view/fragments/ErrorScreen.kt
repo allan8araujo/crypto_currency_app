@@ -12,13 +12,13 @@ import androidx.navigation.fragment.findNavController
 import com.example.abstraction.AssetsItem
 import com.example.cryptocurrencyapp.R
 import com.example.cryptocurrencyapp.databinding.ErrorScreenBinding
-import com.example.cryptocurrencyapp.viewmodel.AssetsListViewModel
+import com.example.cryptocurrencyapp.viewmodel.CoinListViewModel
 import com.example.cryptocurrencyapp.viewmodel.states.DataResult
 
 class ErrorScreen() : Fragment() {
 
     private lateinit var binding: ErrorScreenBinding
-    private val coinViewModel: AssetsListViewModel by activityViewModels()
+    private val coinViewModel: CoinListViewModel by activityViewModels()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

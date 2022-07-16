@@ -10,7 +10,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.abstraction.AssetsItem
 import com.example.cryptocurrencyapp.databinding.DetailsFragmentBinding
-import com.example.cryptocurrencyapp.viewmodel.AssetsListViewModel
+import com.example.cryptocurrencyapp.viewmodel.CoinListViewModel
 import com.example.cryptocurrencyapp.viewmodel.CoinDetailsViewModel
 
 class CoinDetailsFragment : Fragment() {
@@ -18,7 +18,7 @@ class CoinDetailsFragment : Fragment() {
     private lateinit var binding: DetailsFragmentBinding
     private val args: CoinDetailsFragmentArgs by navArgs()
 
-    private val coinViewModel: AssetsListViewModel by activityViewModels()
+    private val coinViewModel: CoinListViewModel by activityViewModels()
     private val coinFavoriteViewModel: CoinDetailsViewModel by activityViewModels()
 
     override fun onCreateView(

@@ -13,11 +13,11 @@ import com.example.cryptocurrencyapp.databinding.ItemCoinBinding
 import com.example.cryptocurrencyapp.helper.UrlHelper
 import com.example.cryptocurrencyapp.utils.DiffCallback
 import com.example.cryptocurrencyapp.utils.ProgressBarListener
-import com.example.cryptocurrencyapp.viewmodel.AssetsListViewModel
+import com.example.cryptocurrencyapp.viewmodel.CoinListViewModel
 
 class CoinListAdapter(
     val context: LifecycleOwner,
-    var coinViewModel: AssetsListViewModel,
+    var coinViewModel: CoinListViewModel,
     var onClick: (asset: AssetsItem) -> Unit = {},
 ) :
     ListAdapter<AssetsItem, CoinListAdapter.ViewHolder>(DiffCallback()) {

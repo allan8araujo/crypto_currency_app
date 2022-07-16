@@ -16,7 +16,7 @@ import com.example.apilibrary.repository.const.Constants.Companion.DATE_NOW
 import com.example.cryptocurrencyapp.R
 import com.example.cryptocurrencyapp.databinding.CoinListFragmentBinding
 import com.example.cryptocurrencyapp.view.adapters.CoinListAdapter
-import com.example.cryptocurrencyapp.viewmodel.AssetsListViewModel
+import com.example.cryptocurrencyapp.viewmodel.CoinListViewModel
 import com.example.cryptocurrencyapp.viewmodel.states.DataResult
 
 class CoinListFragment : Fragment() {
@@ -24,7 +24,7 @@ class CoinListFragment : Fragment() {
     private lateinit var listAdapter: CoinListAdapter
     private lateinit var binding: CoinListFragmentBinding
     private lateinit var linearLayoutManager: LinearLayoutManager
-    private val coinViewModel: AssetsListViewModel by activityViewModels()
+    private val coinViewModel: CoinListViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -93,43 +93,15 @@ class CoinListFragment : Fragment() {
 
     private fun filterType(cryptoType: Any?) {
         coinViewModel.assetsFromResultApi.observe(viewLifecycleOwner) { dataResults ->
-            var newlist = listOf<AssetsItem>()
-            when (dataResults) {
-                is DataResult.Loading -> {
-                }
-                is DataResult.Success -> {
-                    newlist = dataResults.data.filter { assetItem ->
-                        assetItem.type_is_crypto == cryptoType
-                    }
-                }
-                is DataResult.Error -> {
-                    newlist = dataResults.emptyDataResults
-                }
-            }
+            val newlist = coinViewModel.filterType_(dataResults, cryptoType)
             setListAdapter(newlist)
         }
     }
 
     private fun searchFilter(searchValue: String?) {
-        var listResults = listOf<AssetsItem>()
         coinViewModel.assetsFromResultApi.observe(viewLifecycleOwner) { dataResults ->
-
             if (searchValue != "") {
-                val searchValueUpperCase = searchValue?.uppercase()
-                when (dataResults) {
-                    is DataResult.Loading -> {
-                    }
-                    is DataResult.Success -> {
-                        listResults = dataResults.data.filter { assetItem ->
-                            (assetItem.asset_id.uppercase() in searchValueUpperCase!!) ||
-                                (assetItem.name.uppercase() in searchValueUpperCase!!)
-                        }
-                    }
-                    is DataResult.Error -> {
-                        listResults = dataResults.emptyDataResults
-                    }
-                }
-                setListAdapter(listResults)
+                coinViewModel.searchInList(searchValue, dataResults, listAdapter)
             } else {
                 observeAndSetList()
             }

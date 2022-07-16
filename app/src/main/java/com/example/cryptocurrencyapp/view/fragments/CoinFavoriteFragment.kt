@@ -13,14 +13,14 @@ import com.example.abstraction.AssetsItem
 import com.example.cryptocurrencyapp.R
 import com.example.cryptocurrencyapp.databinding.FavoriteFragmentBinding
 import com.example.cryptocurrencyapp.view.adapters.CoinFavoriteAdapter
-import com.example.cryptocurrencyapp.viewmodel.AssetsListViewModel
+import com.example.cryptocurrencyapp.viewmodel.CoinListViewModel
 import com.example.cryptocurrencyapp.viewmodel.CoinFavoriteViewModel
 
 class CoinFavoriteFragment : Fragment() {
     private lateinit var listAdapter: CoinFavoriteAdapter
     private lateinit var binding: FavoriteFragmentBinding
     private lateinit var staggeredGridLayoutManager: StaggeredGridLayoutManager
-    private val coinViewModel: AssetsListViewModel by activityViewModels()
+    private val coinViewModel: CoinListViewModel by activityViewModels()
     private val coinFavoriteViewModel: CoinFavoriteViewModel by activityViewModels()
     override fun onCreateView(
         inflater: LayoutInflater,

@@ -6,13 +6,14 @@ import com.example.abstraction.AssetsItem
 import com.example.apilibrary.repository.Repository
 import com.example.apilibrary.repository.api.request.IAssetsRequest
 import com.example.cryptocurrencyapp.helper.UrlHelper
+import com.example.cryptocurrencyapp.view.adapters.CoinListAdapter
 import com.example.cryptocurrencyapp.viewmodel.states.DataResult
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import retrofit2.HttpException
 
-class AssetsListViewModel(
+class CoinListViewModel(
     private val repository: Repository,
 ) : ViewModel() {
     private val assetsLiveData = MutableLiveData<DataResult<List<AssetsItem>>>() //
@@ -81,5 +82,51 @@ class AssetsListViewModel(
 
     fun deleteAsset(assetItem: AssetsItem) = viewModelScope.launch {
         repository.deleteAsset(assetItem)
+    }
+
+    fun searchInList(
+        searchValue: String?,
+        dataResults: DataResult<List<AssetsItem>>?,
+        listAdapter: CoinListAdapter,
+    ) {
+        var listResults = listOf<AssetsItem>()
+        val searchValueUpperCase = searchValue?.uppercase()
+        when (dataResults) {
+            is DataResult.Loading -> {
+            }
+            is DataResult.Success -> {
+                listResults = dataResults.data.filter { assetItem ->
+                    (assetItem.asset_id.uppercase() in searchValueUpperCase!!) ||
+                        (assetItem.name.uppercase() in searchValueUpperCase!!)
+                }
+            }
+            is DataResult.Error -> {
+                listResults = dataResults.emptyDataResults
+            }
+            else -> {}
+        }
+        listAdapter.submitList(listResults)
+    }
+
+    fun filterType_(
+        dataResults: DataResult<List<AssetsItem>>?,
+        cryptoType: Any?,
+    ): List<AssetsItem> {
+        var newlist = listOf<AssetsItem>()
+        when (dataResults) {
+            is DataResult.Loading -> {
+            }
+            is DataResult.Success -> {
+                newlist = dataResults.data.filter { assetItem ->
+                    assetItem.type_is_crypto == cryptoType
+                }
+            }
+            is DataResult.Error -> {
+                newlist = dataResults.emptyDataResults
+            }
+            else -> {
+            }
+        }
+        return newlist
     }
 }
