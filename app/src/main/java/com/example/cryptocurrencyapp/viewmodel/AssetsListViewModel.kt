@@ -1,11 +1,16 @@
 package com.example.cryptocurrencyapp.viewmodel
 
+import android.view.View
 import androidx.lifecycle.*
+import com.bumptech.glide.Glide
 import com.example.abstraction.Assets
 import com.example.abstraction.AssetsItem
 import com.example.apilibrary.repository.Repository
 import com.example.apilibrary.repository.api.request.IAssetsRequest
 import com.example.apilibrary.repository.const.Constants.Companion.AMAZON_ICON
+import com.example.cryptocurrencyapp.R
+import com.example.cryptocurrencyapp.databinding.DetailsFragmentBinding
+import com.example.cryptocurrencyapp.utils.ProgressBarListener
 import com.example.cryptocurrencyapp.viewmodel.states.DataResult
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -90,4 +95,77 @@ class AssetsListViewModel(
     fun loadUrlFromGlide(assetItem: AssetsItem): String? {
         return assetItem.id_icon
     }
+
+    fun setButtonAction(
+        asset: AssetsItem,
+        listAssetsItems: List<AssetsItem>,
+        binding: DetailsFragmentBinding,
+    ) {
+        var findItemOnList: Boolean?
+        settingImageIcon(asset, binding)
+        with(binding) {
+            iconAssetIdTextView.text = asset.asset_id
+            findItemOnList = listAssetsItems.any {
+                it.asset_id == asset.asset_id
+            }
+            if (findItemOnList == true) {
+                setRemove(asset)
+            } else {
+                setAdd(asset)
+            }
+            settingPricesAndVolum(asset, asset.price_usd)
+        }
+    }
+
+    private fun DetailsFragmentBinding.settingPricesAndVolum(
+        asset: AssetsItem,
+        price_usd: Double?,
+    ) {
+        if (asset.price_usd != null) {
+            priceUsdTextView.text = price_usd.toString()
+        } else {
+            priceUsdTextView.setEms(5)
+            priceUsdTextView.setCompoundDrawablesRelative(null, null, null, null)
+            priceUsdTextView.text = "Indisponivel"
+        }
+        lastHourValueTextView.text = asset.volume_1hrs_usd.toString()
+        lastWeekValueTextView.text = asset.volume_1day_usd.toString()
+        lastMounthValueTextView.text = asset.volume_1mth_usd.toString()
+    }
+
+    private fun DetailsFragmentBinding.setAdd(
+        asset: AssetsItem,
+    ) {
+        addButton.text = "Adicionar"
+        starIconImageView.visibility = View.GONE
+        addButton.setOnClickListener {
+            insertAsset(asset)
+        }
+    }
+
+    private fun DetailsFragmentBinding.setRemove(
+        asset: AssetsItem,
+    ) {
+        addButton.text = "Remover"
+        starIconImageView.visibility = View.VISIBLE
+        addButton.setOnClickListener {
+            deleteAsset(asset)
+        }
+    }
+
+    private fun settingImageIcon(
+        asset: AssetsItem,
+        binding: DetailsFragmentBinding,
+    ) {
+        val progressBar = binding.detailsProgressBar
+        progressBar.visibility = View.VISIBLE
+        Glide.with(binding.root)
+            .load(loadUrlFromGlide(asset))
+            .placeholder(R.drawable.ic_coin_base)
+            .listener(ProgressBarListener(progressBar))
+            .centerCrop()
+            .into(binding.coinIconImageView)
+    }
+
+
 }
