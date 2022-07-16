@@ -1,4 +1,4 @@
-package com.example.cryptocurrencyapp.viewmodel.results
+package com.example.cryptocurrencyapp.viewmodel.states
 
 import com.example.abstraction.AssetsItem
 import retrofit2.HttpException

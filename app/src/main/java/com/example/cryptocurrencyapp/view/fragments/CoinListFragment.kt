@@ -17,7 +17,7 @@ import com.example.cryptocurrencyapp.R
 import com.example.cryptocurrencyapp.databinding.CoinListFragmentBinding
 import com.example.cryptocurrencyapp.view.adapters.CoinListAdapter
 import com.example.cryptocurrencyapp.viewmodel.AssetsListViewModel
-import com.example.cryptocurrencyapp.viewmodel.results.DataResult
+import com.example.cryptocurrencyapp.viewmodel.states.DataResult
 
 class CoinListFragment : Fragment() {
 
@@ -92,7 +92,7 @@ class CoinListFragment : Fragment() {
     }
 
     private fun filterType(cryptoType: Any?) {
-        coinViewModel.assets.observe(viewLifecycleOwner) { dataResults ->
+        coinViewModel.assetsFromResultApi.observe(viewLifecycleOwner) { dataResults ->
             var newlist = listOf<AssetsItem>()
             when (dataResults) {
                 is DataResult.Loading -> {
@@ -112,7 +112,7 @@ class CoinListFragment : Fragment() {
 
     private fun searchFilter(searchValue: String?) {
         var listResults = listOf<AssetsItem>()
-        coinViewModel.assets.observe(viewLifecycleOwner) { dataResults ->
+        coinViewModel.assetsFromResultApi.observe(viewLifecycleOwner) { dataResults ->
 
             if (searchValue != "") {
                 val searchValueUpperCase = searchValue?.uppercase()
@@ -151,7 +151,7 @@ class CoinListFragment : Fragment() {
     }
 
     private fun observeAndSetList() {
-        coinViewModel.assets.observe(viewLifecycleOwner) { dataResults ->
+        coinViewModel.assetsFromResultApi.observe(viewLifecycleOwner) { dataResults ->
             when (dataResults) {
                 is DataResult.Loading -> {
                     binding.mainScreenProgressBar.visibility = View.VISIBLE
