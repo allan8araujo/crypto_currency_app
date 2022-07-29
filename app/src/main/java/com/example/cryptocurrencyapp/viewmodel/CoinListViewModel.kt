@@ -77,11 +77,11 @@ class CoinListViewModel(
     }
 
     fun insertAsset(assetItem: AssetsItem) = viewModelScope.launch {
-        repository.insertAsset(assetItem)
+        repository.insertFavoriteAsset(assetItem)
     }
 
     fun deleteAsset(assetItem: AssetsItem) = viewModelScope.launch {
-        repository.deleteAsset(assetItem)
+        repository.deleteFavoriteAsset(assetItem)
     }
 
     fun searchInList(

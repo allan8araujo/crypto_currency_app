@@ -5,6 +5,6 @@ import com.example.apilibrary.repository.api.request.IAssetsRequest
 
 interface IRepository {
     fun getApiAssets(): IAssetsRequest
-    suspend fun insertAsset(asset: AssetsItem)
-    suspend fun deleteAsset(asset: AssetsItem)
+    suspend fun insertFavoriteAsset(asset: AssetsItem)
+    suspend fun deleteFavoriteAsset(asset: AssetsItem)
 }
