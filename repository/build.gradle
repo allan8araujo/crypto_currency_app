@@ -31,7 +31,7 @@ android {
 
 dependencies {
 
-    implementation 'androidx.core:core-ktx:1.7.0'
+    implementation 'androidx.core:core-ktx:1.8.0'
     implementation 'androidx.appcompat:appcompat:1.4.2'
     implementation 'com.google.android.material:material:1.6.1'
     testImplementation 'junit:junit:4.13.2'
@@ -39,20 +39,20 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 
     //Glide
-    implementation 'com.github.bumptech.glide:glide:4.13.0'
+    implementation 'com.github.bumptech.glide:glide:4.13.2'
 
     //Retrofit & Gson
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
     implementation "com.squareup.retrofit2:adapter-rxjava2:2.9.0"
-    implementation 'com.google.code.gson:gson:2.8.9'
+    implementation 'com.google.code.gson:gson:2.9.0'
 
     // Corountine
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.1")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.2")
     testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.2'
 
     //Http
-    implementation "com.squareup.okhttp3:logging-interceptor:4.5.0"
+    implementation "com.squareup.okhttp3:logging-interceptor:4.9.0"
 
     //mockk
     testImplementation("io.mockk:mockk:1.10.6")

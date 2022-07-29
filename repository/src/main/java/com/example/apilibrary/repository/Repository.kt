@@ -8,6 +8,7 @@ import com.example.apilibrary.repository.database.AssetsDao
 import kotlinx.coroutines.flow.Flow
 
 class Repository(private val assetsDao: AssetsDao) : IRepository {
+
     override fun getApiAssets(): IAssetsRequest {
         return RetrofitRequestHelper.getListAssets()
     }
@@ -15,12 +16,12 @@ class Repository(private val assetsDao: AssetsDao) : IRepository {
     val getAllAssets: Flow<List<AssetsItem>> = assetsDao.getFavoriteAssets()
 
     @WorkerThread
-    override suspend fun insertAsset(asset: AssetsItem) {
+    override suspend fun insertFavoriteAsset(asset: AssetsItem) {
         assetsDao.insertFavorite(asset)
     }
 
     @WorkerThread
-    override suspend fun deleteAsset(asset: AssetsItem) {
+    override suspend fun deleteFavoriteAsset(asset: AssetsItem) {
         assetsDao.deleteFavorite(asset)
     }
 }
