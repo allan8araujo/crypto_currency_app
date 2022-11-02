@@ -13,8 +13,8 @@ import com.example.abstraction.AssetsItem
 import com.example.cryptocurrencyapp.R
 import com.example.cryptocurrencyapp.databinding.FavoriteFragmentBinding
 import com.example.cryptocurrencyapp.view.adapters.CoinFavoriteAdapter
-import com.example.cryptocurrencyapp.viewmodel.CoinListViewModel
 import com.example.cryptocurrencyapp.viewmodel.CoinFavoriteViewModel
+import com.example.cryptocurrencyapp.viewmodel.CoinListViewModel
 
 class CoinFavoriteFragment : Fragment() {
     private lateinit var listAdapter: CoinFavoriteAdapter

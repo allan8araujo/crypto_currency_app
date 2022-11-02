@@ -3,8 +3,6 @@ package com.example.cryptocurrencyapp.view.fragments
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
-import android.view.View.INVISIBLE
-import android.view.View.VISIBLE
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
@@ -16,7 +14,7 @@ import com.example.cryptocurrencyapp.databinding.ErrorScreenBinding
 import com.example.cryptocurrencyapp.viewmodel.CoinListViewModel
 import com.example.cryptocurrencyapp.viewmodel.states.DataResult
 
-class ErrorScreen() : Fragment() {
+class ErrorScreen : Fragment() {
 
     private lateinit var binding: ErrorScreenBinding
     private val coinViewModel: CoinListViewModel by activityViewModels()

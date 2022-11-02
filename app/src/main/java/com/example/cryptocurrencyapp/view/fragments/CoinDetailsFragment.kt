@@ -11,8 +11,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.abstraction.AssetsItem
 import com.example.cryptocurrencyapp.databinding.DetailsFragmentBinding
-import com.example.cryptocurrencyapp.viewmodel.CoinListViewModel
 import com.example.cryptocurrencyapp.viewmodel.CoinDetailsViewModel
+import com.example.cryptocurrencyapp.viewmodel.CoinListViewModel
 
 class CoinDetailsFragment : Fragment() {
 

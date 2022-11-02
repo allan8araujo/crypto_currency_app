@@ -24,10 +24,6 @@ class SplashScreenFragment : Fragment() {
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-    }
-
     private fun setupSplashScreen() {
         Handler().postDelayed({
             findNavController().navigate(R.id.action_splash_to_coinList)

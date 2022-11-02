@@ -1,6 +1,6 @@
 package com.example.abstraction
 
-class Assets() : ArrayList<AssetsItem>()
+class Assets : ArrayList<AssetsItem>()
 
 val listMockedAssetsItems = arrayListOf(
     AssetsItem(

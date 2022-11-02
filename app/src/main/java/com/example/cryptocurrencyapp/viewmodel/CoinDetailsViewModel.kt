@@ -1,6 +1,5 @@
 package com.example.cryptocurrencyapp.viewmodel
 
-import android.view.View
 import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModel
 import com.bumptech.glide.Glide
@@ -10,7 +9,7 @@ import com.example.cryptocurrencyapp.databinding.DetailsFragmentBinding
 import com.example.cryptocurrencyapp.helper.UrlHelper
 import com.example.cryptocurrencyapp.utils.ProgressBarListener
 
-class CoinDetailsViewModel() : ViewModel() {
+class CoinDetailsViewModel : ViewModel() {
 
     fun settingPricesAndVolum(
         binding: DetailsFragmentBinding,

@@ -8,12 +8,12 @@ class RetrofitRequestHelper {
     companion object {
         fun getListAssets(): IAssetsRequest {
             return (
-                InterceptorHelper()
-                    .interceptorHelper(
-                        AssetsClient()
-                            .clientInterceptor
+                    InterceptorHelper()
+                        .interceptorHelper(
+                            AssetsClient()
+                                .clientInterceptor
+                        )
                     )
-                )
         }
     }
 }
