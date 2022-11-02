@@ -12,7 +12,7 @@
     <string name="ultimo_dia">ultimo dia</string>
     <string name="ultimo_mes">ultimo mês</string>
     <string name="_123_456_78">$ 123.456.78</string>
-    <string name="volumes_negociados">volumes negociados</string>
+    <string name="volumes_negociados">Volumes negociados</string>
     <string name="bitcoin">Bitcoin</string>
     <string name="escrita_da_moeda_bitcoin_do_item_favorite_screen">nome da moeda</string>
     <string name="valor_do_item_favorite_screen">valor da moeda com o cifrão</string>

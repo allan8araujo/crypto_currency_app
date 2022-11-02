@@ -9,19 +9,19 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraint_top_fragment_details_constraintLayout"
         android:layout_width="match_parent"
-        android:layout_height="366dp"
-        android:background="@color/app_yellow_background"
+        android:layout_height="wrap_content"
+        android:background="@color/green_base"
         android:contentDescription="@string/constraint_de_cima_da_tela_fragment_details">
 
         <TextView
             android:id="@+id/icon_asset_id_textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="32dp"
             android:contentDescription="@string/abrevi_o_o_do_nome_da_moeda_da_tela_item_coin"
             android:fontFamily="@font/roboto"
             android:textColor="@color/white"
-            android:textSize="20sp"
+            android:textSize="32sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
@@ -31,9 +31,9 @@
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/coin_icon_imageView"
-            android:layout_width="36dp"
-            android:layout_height="36dp"
-            android:layout_marginTop="44dp"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_marginTop="32dp"
             android:contentDescription="@string/icon_da_moeda_da_tela_fragment_details"
             android:src="@drawable/ic_coin_base"
             app:layout_constraintEnd_toEndOf="@+id/icon_asset_id_textView"
@@ -44,8 +44,8 @@
         <ProgressBar
             android:id="@+id/details_progressBar"
             style="?android:attr/progressBarStyle"
-            android:layout_width="34dp"
-            android:layout_height="34dp"
+            android:layout_width="62dp"
+            android:layout_height="62dp"
             android:contentDescription="@string/icon_da_moeda_da_tela_fragment_details"
             app:layout_constraintBottom_toBottomOf="@id/coin_icon_imageView"
             app:layout_constraintEnd_toEndOf="@id/coin_icon_imageView"
@@ -56,7 +56,7 @@
             android:id="@+id/price_usd_textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="16dp"
             android:contentDescription="@string/valor_real_da_tela_fragment_details"
             android:drawableStart="@drawable/ic_baseline_attach_coin_24"
             android:ems="5"
@@ -66,29 +66,34 @@
             android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="28sp"
-            app:layout_constraintEnd_toEndOf="@+id/icon_asset_id_textView"
-            app:layout_constraintStart_toStartOf="@+id/icon_asset_id_textView"
+            app:layout_constraintEnd_toEndOf="@+id/coin_icon_imageView"
+            app:layout_constraintStart_toStartOf="@+id/coin_icon_imageView"
             app:layout_constraintTop_toBottomOf="@+id/coin_icon_imageView"
             tools:text="@string/_31_010_20" />
 
-        <androidx.appcompat.widget.AppCompatButton
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/add_button"
             android:layout_width="300dp"
-            android:layout_height="59dp"
-            android:layout_marginTop="48dp"
-            android:background="@drawable/outlined_button"
+            android:layout_height="60dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginBottom="32dp"
+            android:backgroundTint="@color/green_base"
             android:contentDescription="@string/button_adicionar_da_tela_fragment_details"
             android:fontFamily="@font/roboto"
             android:text="@string/adicionar"
             android:textColor="@color/white"
             android:textSize="24sp"
             android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/price_usd_textView" />
+            app:layout_constraintTop_toBottomOf="@+id/price_usd_textView"
+            app:strokeColor="@color/white"
+            app:strokeWidth="2dp" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/back_press_button"
+            android:layout_margin="4dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@android:color/transparent"
@@ -122,7 +127,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraint_bottom_fragment_details_constraintLayout"
         android:layout_width="match_parent"
-        android:layout_height="366dp"
+        android:layout_height="match_parent"
         android:background="@color/app_black_background"
         android:contentDescription="@string/constraint_de_baixo_da_tela_fragment_details">
 
@@ -131,7 +136,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="16dp"
             android:contentDescription="@string/titulo_volume_negociados_da_tela_fragment_details"
             android:fontFamily="@font/roboto"
             android:text="@string/volumes_negociados"
@@ -186,12 +191,12 @@
             android:layout_marginTop="32dp"
             android:layout_marginEnd="32dp"
             android:contentDescription="@string/valor_da_ultima_hora_da_tela_fragment_details"
-            android:drawableStart="@drawable/ic_baseline_attach_coin_24"
             android:ems="4"
             android:maxLines="1"
             android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="20sp"
+            app:drawableStartCompat="@drawable/ic_baseline_attach_coin_24"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/traded_volumes_textView"
             tools:text="@string/_123_456_78" />
@@ -203,12 +208,12 @@
             android:layout_marginTop="32dp"
             android:layout_marginEnd="32dp"
             android:contentDescription="@string/valor_da_ultimo_m_s_da_tela_fragment_details"
-            android:drawableStart="@drawable/ic_baseline_attach_coin_24"
             android:ems="4"
             android:maxLines="1"
             android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="20sp"
+            app:drawableStartCompat="@drawable/ic_baseline_attach_coin_24"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/last_hour_value_textView"
             tools:text="@string/_123_456_78" />
@@ -220,12 +225,12 @@
             android:layout_marginTop="32dp"
             android:layout_marginEnd="32dp"
             android:contentDescription="@string/valor_da_ultimo_ano_da_tela_fragment_details"
-            android:drawableStart="@drawable/ic_baseline_attach_coin_24"
             android:ems="4"
             android:maxLines="1"
             android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="20sp"
+            app:drawableStartCompat="@drawable/ic_baseline_attach_coin_24"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/last_week_value_textView"
             tools:text="@string/_123_456_78" />
