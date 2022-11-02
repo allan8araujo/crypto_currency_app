@@ -18,7 +18,7 @@
             android:contentDescription="@string/item_moeda_da_tela_Item_coin"
             android:padding="8dp">
 
-            <ImageView
+            <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/coin_icon_imageView"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
@@ -78,7 +78,7 @@
 
             </LinearLayout>
 
-            <ImageView
+            <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/favorite_imageView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

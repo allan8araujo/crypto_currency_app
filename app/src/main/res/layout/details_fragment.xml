@@ -29,7 +29,7 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:text="@string/btc" />
 
-        <ImageView
+        <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/coin_icon_imageView"
             android:layout_width="36dp"
             android:layout_height="36dp"
@@ -104,7 +104,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
+        <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/star_icon_imageView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

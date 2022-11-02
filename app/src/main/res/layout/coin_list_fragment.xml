@@ -49,7 +49,7 @@
                     app:layout_constraintStart_toStartOf="@+id/title_textView"
                     app:layout_constraintTop_toBottomOf="@+id/title_textView" />
 
-                <ImageView
+                <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/img_menu"
                     android:layout_width="37dp"
                     android:layout_height="43dp"

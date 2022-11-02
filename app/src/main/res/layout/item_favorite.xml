@@ -81,8 +81,7 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-
-        <ImageView
+        <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/img_coin_imageView"
             android:layout_width="34dp"
             android:layout_height="34dp"
