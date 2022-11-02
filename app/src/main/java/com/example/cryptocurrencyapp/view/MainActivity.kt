@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.apilibrary.repository.Repository
@@ -70,10 +71,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun visibilityButtonNavigation() {
-        binding.mainBottomNavigation.visibility = View.VISIBLE
+        binding.mainBottomNavigation.isVisible = true
     }
 
     private fun hideButtonNavigation() {
-        binding.mainBottomNavigation.visibility = View.GONE
+        binding.mainBottomNavigation.isVisible = false
     }
 }

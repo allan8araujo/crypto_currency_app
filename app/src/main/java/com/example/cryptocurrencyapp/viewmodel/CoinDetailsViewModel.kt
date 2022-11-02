@@ -1,6 +1,7 @@
 package com.example.cryptocurrencyapp.viewmodel
 
 import android.view.View
+import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModel
 import com.bumptech.glide.Glide
 import com.example.abstraction.AssetsItem
@@ -35,7 +36,7 @@ class CoinDetailsViewModel() : ViewModel() {
         binding: DetailsFragmentBinding,
     ) {
         val progressBar = binding.detailsProgressBar
-        progressBar.visibility = View.VISIBLE
+        progressBar.isVisible = true
         Glide.with(binding.root)
             .load(UrlHelper().loadUrlFromGlide(asset))
             .placeholder(R.drawable.ic_coin_base)

@@ -96,8 +96,7 @@ class CoinListViewModel(
             }
             is DataResult.Success -> {
                 listResults = dataResults.data.filter { assetItem ->
-                    (assetItem.asset_id.uppercase() in searchValueUpperCase!!) ||
-                        (assetItem.name.uppercase() in searchValueUpperCase!!)
+                    (assetItem.asset_id.uppercase() in searchValueUpperCase!!) || (assetItem.name.uppercase() in searchValueUpperCase)
                 }
             }
             is DataResult.Error -> {

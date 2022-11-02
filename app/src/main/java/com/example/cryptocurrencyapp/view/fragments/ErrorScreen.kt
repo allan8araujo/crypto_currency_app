@@ -6,6 +6,7 @@ import android.view.View
 import android.view.View.INVISIBLE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -23,7 +24,7 @@ class ErrorScreen() : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?,
-    ): View? {
+    ): View {
         binding = ErrorScreenBinding.inflate(inflater, container, false)
         val view = binding.root
         observeResults()
@@ -38,17 +39,17 @@ class ErrorScreen() : Fragment() {
         coinViewModel.assetsFromResultApi.observe(viewLifecycleOwner) { dataResults ->
             when (dataResults) {
                 is DataResult.Loading -> {
-                    binding.tryAgainProgressBar.visibility = VISIBLE
+                    binding.tryAgainProgressBar.isVisible = true
                 }
                 is DataResult.Success -> {
-                    binding.tryAgainProgressBar.visibility = INVISIBLE
+                    binding.tryAgainProgressBar.isVisible = false
                     findNavController().navigate(R.id.action_errorScreen_to_coinList)
                 }
                 is DataResult.Error -> {
                     bindDataError(dataResults)
                 }
             }
-            binding.tryAgainProgressBar.visibility = INVISIBLE
+            binding.tryAgainProgressBar.isVisible = false
         }
     }
 

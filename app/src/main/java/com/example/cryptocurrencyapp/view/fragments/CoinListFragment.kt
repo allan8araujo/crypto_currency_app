@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.PopupMenu
 import android.widget.SearchView
 import androidx.core.os.bundleOf
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -126,7 +127,7 @@ class CoinListFragment : Fragment() {
         coinViewModel.assetsFromResultApi.observe(viewLifecycleOwner) { dataResults ->
             when (dataResults) {
                 is DataResult.Loading -> {
-                    binding.mainScreenProgressBar.visibility = View.VISIBLE
+                    binding.mainScreenProgressBar.isVisible = true
                 }
                 is DataResult.Success -> {
                     binding.mainScreenProgressBar.visibility = View.GONE

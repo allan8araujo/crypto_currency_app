@@ -4,6 +4,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -28,7 +29,7 @@ class CoinListAdapter(
         fun bind(assetItem: AssetsItem) {
 
             val progressBar = binding.pbLoading
-            progressBar.visibility = View.VISIBLE
+            progressBar.isVisible = true
             Glide.with(binding.root)
                 .load(UrlHelper().loadUrlFromGlide(assetItem))
                 .placeholder(R.drawable.ic_coin_base)
@@ -43,7 +44,7 @@ class CoinListAdapter(
                             assetItem_.asset_id == assetItem.asset_id
                         }
                     if (findByAssetID == true) {
-                        favoriteImageView.visibility = View.VISIBLE
+                        favoriteImageView.isVisible = true
                         Log.i(assetItem.asset_id, "rr@@@@@@@@@@@@@@@@@@@@@")
                     } else {
                         favoriteImageView.visibility = View.GONE

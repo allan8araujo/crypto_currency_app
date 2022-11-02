@@ -3,6 +3,7 @@ package com.example.cryptocurrencyapp.view.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -23,7 +24,7 @@ class CoinFavoriteAdapter(
         fun bind(assetItem: com.example.abstraction.AssetsItem) {
 
             val progressBar = binding.favoriteProgressBar
-            progressBar.visibility = View.VISIBLE
+            progressBar.isVisible = true
             Glide.with(binding.root)
                 .load(UrlHelper().loadUrlFromGlide(assetItem))
                 .placeholder(R.drawable.ic_coin_base)
