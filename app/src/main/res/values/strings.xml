@@ -8,9 +8,9 @@
     <string name="adicionar">ADICIONAR</string>
     <string name="remover">REMOVER</string>
     <string name="voltar">voltar</string>
-    <string name="ultima_hora">ultima hora</string>
-    <string name="ultimo_dia">ultimo dia</string>
-    <string name="ultimo_mes">ultimo mês</string>
+    <string name="ultima_hora">Ultima hora</string>
+    <string name="ultimo_dia">Ultima dia</string>
+    <string name="ultimo_mes">Ultima mês</string>
     <string name="_123_456_78">$ 123.456.78</string>
     <string name="volumes_negociados">Volumes negociados</string>
     <string name="bitcoin">Bitcoin</string>
