@@ -1,6 +1,5 @@
 package com.example.cryptocurrencyapp.view.adapters
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -45,7 +44,6 @@ class CoinListAdapter(
                         }
                     if (findByAssetID == true) {
                         favoriteImageView.isVisible = true
-                        Log.i(assetItem.asset_id, "rr@@@@@@@@@@@@@@@@@@@@@")
                     } else {
                         favoriteImageView.visibility = View.GONE
                     }
