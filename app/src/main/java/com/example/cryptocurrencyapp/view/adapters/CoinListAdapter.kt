@@ -44,8 +44,10 @@ class CoinListAdapter(
                         }
                     if (findByAssetID == true) {
                         favoriteImageView.isVisible = true
+                        emptyStarImageView.isVisible = false
                     } else {
-                        favoriteImageView.visibility = View.GONE
+                        favoriteImageView.isVisible = false
+                        emptyStarImageView.isVisible = true
                     }
                 }
                 coinAssetIdTextView.text = assetItem.asset_id

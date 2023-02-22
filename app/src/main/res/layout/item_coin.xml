@@ -4,9 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/digital_coin_card_view"
     android:layout_width="match_parent"
-
     android:layout_height="wrap_content"
-    android:layout_margin="4dp">
+    android:layout_margin="8dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -19,7 +18,7 @@
             android:id="@+id/coin_icon_imageView"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="4dp"
             android:contentDescription="@string/icon_da_moeda_da_tela_item_coin"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -81,9 +80,21 @@
             android:layout_height="wrap_content"
             android:contentDescription="@string/estrela_dos_favoritos_da_tela_item_coin"
             android:src="@drawable/ic_baseline_star_coin_24"
-            app:layout_constraintBottom_toBottomOf="@+id/price_usd_textView"
-            app:layout_constraintEnd_toStartOf="@+id/price_usd_textView"
-            app:layout_constraintTop_toTopOf="@+id/price_usd_textView" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/price_usd_textView"
+            app:layout_constraintTop_toBottomOf="@+id/price_usd_textView" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/empty_star_imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/estrela_dos_favoritos_da_tela_item_coin"
+            android:src="@drawable/baseline_star_outline_24"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/price_usd_textView"
+            app:layout_constraintTop_toBottomOf="@+id/price_usd_textView" />
 
         <TextView
             android:id="@+id/price_usd_textView"
@@ -96,7 +107,6 @@
             android:maxLines="1"
             android:textColor="@color/white"
             android:textSize="20sp"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="31.010.20" />
