@@ -3,6 +3,7 @@ package com.example.cryptocurrencyapp.view
 import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
 import android.os.Bundle
+import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
@@ -34,8 +35,12 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(binding.root)
-        setupApplication()
+//        setContentView(binding.root)
+//        setupApplication()
+
+        setContent() {
+            mainScreen()
+        }
     }
 
     private fun setupApplication() {
