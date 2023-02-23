@@ -3,53 +3,53 @@ package com.example.cryptocurrencyapp.view
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutVertically
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.example.cryptocurrencyapp.ui.NavigationBarScreens
+import com.example.cryptocurrencyapp.ui.NavigationMain
 import com.example.cryptocurrencyapp.ui.NavigationScreens
 
 @Composable
-fun Main(){
+fun Main() {
     val navController = rememberNavController()
-    val backStackEntry = navController.currentBackStackEntryAsState()
+
     val bottomBarState = rememberSaveable { mutableStateOf(true) }
 
-    when (backStackEntry){
+    val navBackStackEntry by navController.currentBackStackEntryAsState()
+    val currentDestination = navBackStackEntry?.destination
 
+    when (currentDestination?.route) {
+        NavigationScreens.FavoriteScreen.route -> bottomBarState.value = false
+        else -> bottomBarState.value = true
     }
 
     Scaffold(
-        topBar = { TopAppBar(title = { Text(text = "Coin app") })},
+        topBar = { TopAppBar(title = { Text(text = "Coin app") }) },
         bottomBar = {
-            AnimatedVisibility(
-                visible = bottomBarState.value,
+            AnimatedVisibility(visible = bottomBarState.value,
                 enter = slideInVertically(initialOffsetY = { it }),
                 exit = slideOutVertically(targetOffsetY = { it }),
                 content = {
                     BottomNavigation {
                         val items = listOf(
-                            NavigationScreens.MainScreen,
-                            NavigationScreens.FavoriteListScreen,
-                            NavigationScreens.ListScreen,
-                            NavigationScreens.FavoriteScreen,
+                            NavigationBarScreens.ListScreen,
+                            NavigationBarScreens.FavoriteListScreen,
                         )
 
                         items.forEach { screen ->
-                            BottomNavigationItem(
-                                icon = {
-                                    Icon(
-                                        painterResource(screen.Icon),
-                                        contentDescription = null
-                                    )
-                                },
+                            BottomNavigationItem(icon = {
+                                Icon(
+                                    painterResource(screen.Icon), contentDescription = null
+                                )
+                            },
                                 label = { Text(screen.resourceId) },
                                 selected = currentDestination?.hierarchy?.any { it.route == screen.route } == true,
                                 onClick = {
@@ -66,13 +66,11 @@ fun Main(){
                                         // Restore state when reselecting a previously selected item
                                         restoreState = true
                                     }
-                                }
-                            )
+                                })
                         }
                     }
                 })
-        }
-    ) {
-        Text(text = "text", modifier = Modifier.padding(it))
+        }) { paddingValues ->
+        NavigationMain(paddingValues, navController)
     }
 }
