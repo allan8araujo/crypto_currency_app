@@ -10,23 +10,22 @@ import androidx.navigation.compose.composable
 import com.example.cryptocurrencyapp.ui.coinList.CoinList
 import com.example.cryptocurrencyapp.ui.favoriteCoin.FavoriteCoin
 import com.example.cryptocurrencyapp.ui.favoriteCoinList.FavoriteCoinList
+import com.example.cryptocurrencyapp.viewmodel.CoinListViewModel
 
 @Composable
-fun NavigationMain(paddingValues: PaddingValues, navController: NavHostController) {
+fun NavigationMain(
+    paddingValues: PaddingValues,
+    navController: NavHostController,
+    coinViewModel: CoinListViewModel
+) {
 
     NavHost(
         modifier = Modifier.padding(paddingValues),
         navController = navController,
         startDestination = NavigationScreens.ListScreen.route
     ) {
-        composable(route = NavigationScreens.ListScreen.route) {
-            CoinList()
-        }
-        composable(route = NavigationScreens.FavoriteListScreen.route) {
-            FavoriteCoinList()
-        }
-        composable(route = NavigationScreens.FavoriteScreen.route) {
-            FavoriteCoin()
-        }
+        composable(route = NavigationScreens.ListScreen.route) { CoinList(coinViewModel) }
+        composable(route = NavigationScreens.FavoriteListScreen.route) { FavoriteCoinList() }
+        composable(route = NavigationScreens.FavoriteScreen.route) { FavoriteCoin() }
     }
 }

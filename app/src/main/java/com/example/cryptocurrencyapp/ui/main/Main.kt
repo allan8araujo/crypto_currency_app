@@ -16,9 +16,10 @@ import androidx.navigation.compose.rememberNavController
 import com.example.cryptocurrencyapp.ui.NavigationBarScreens
 import com.example.cryptocurrencyapp.ui.NavigationMain
 import com.example.cryptocurrencyapp.ui.NavigationScreens
+import com.example.cryptocurrencyapp.viewmodel.CoinListViewModel
 
 @Composable
-fun Main() {
+fun Main(coinViewModel: CoinListViewModel) {
     val navController = rememberNavController()
 
     val bottomBarState = rememberSaveable { mutableStateOf(true) }
@@ -71,6 +72,6 @@ fun Main() {
                     }
                 })
         }) { paddingValues ->
-        NavigationMain(paddingValues, navController)
+        NavigationMain(paddingValues, navController, coinViewModel)
     }
 }

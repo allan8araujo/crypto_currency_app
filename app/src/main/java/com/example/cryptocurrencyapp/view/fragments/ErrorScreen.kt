@@ -53,21 +53,14 @@ class ErrorScreen : Fragment() {
 
     private fun bindDataError(dataResults: DataResult.Error<List<AssetsItem>>) {
         when (dataResults.throwable.code()) {
-            400 ->
-                binding.errorTextView.text =
-                    "Problema ao carregar a lista de moedas."
-            401 ->
-                binding.errorTextView.text =
-                    "Erro ao carregar lista de moedas, tente novamente mais tarde."
-            403 ->
-                binding.errorTextView.text =
-                    "Erro ao carregar lista de moedas."
-            429 ->
-                binding.errorTextView.text =
-                    "Erro ao carregar lista de moedas, tente novamente mais tarde."
-            550 ->
-                binding.errorTextView.text =
-                    "Erro ao carregar lista de moedas. Você excedeu os limite de chamadas, tente novamente mais tarde."
+            400 -> binding.errorTextView.text = "Problema ao carregar a lista de moedas."
+            401 -> binding.errorTextView.text =
+                "Erro ao carregar lista de moedas, tente novamente mais tarde."
+            403 -> binding.errorTextView.text = "Erro ao carregar lista de moedas."
+            429 -> binding.errorTextView.text =
+                "Erro ao carregar lista de moedas, tente novamente mais tarde."
+            550 -> binding.errorTextView.text =
+                "Erro ao carregar lista de moedas. Você excedeu os limite de chamadas, tente novamente mais tarde."
         }
     }
 }

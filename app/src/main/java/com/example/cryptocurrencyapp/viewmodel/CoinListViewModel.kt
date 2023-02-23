@@ -9,6 +9,8 @@ import com.example.cryptocurrencyapp.helper.UrlHelper
 import com.example.cryptocurrencyapp.view.adapters.CoinListAdapter
 import com.example.cryptocurrencyapp.viewmodel.states.DataResult
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import retrofit2.HttpException
@@ -18,6 +20,7 @@ class CoinListViewModel(
 ) : ViewModel() {
     private val assetsLiveData = MutableLiveData<DataResult<List<AssetsItem>>>() //
     val assetsFromResultApi: LiveData<DataResult<List<AssetsItem>>> = assetsLiveData
+
     private val assetsResultApi: IAssetsRequest = repository.getApiAssets()
     private lateinit var assetsResponseFromApiWithIcon: List<AssetsItem>
 

@@ -111,9 +111,7 @@ class CoinListFragment : Fragment() {
 
     private fun settingRecyclerViewProperties() {
         linearLayoutManager = LinearLayoutManager(
-            activity,
-            LinearLayoutManager.VERTICAL,
-            false
+            activity, LinearLayoutManager.VERTICAL, false
         )
         binding.coinListRecyclerView.layoutManager = linearLayoutManager
         binding.coinListRecyclerView.adapter = listAdapter
