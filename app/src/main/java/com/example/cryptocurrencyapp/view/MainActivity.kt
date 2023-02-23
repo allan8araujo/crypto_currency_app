@@ -14,6 +14,7 @@ import com.example.apilibrary.repository.const.Constants
 import com.example.apilibrary.repository.database.AssetsDatabase
 import com.example.cryptocurrencyapp.R.id.*
 import com.example.cryptocurrencyapp.databinding.ActivityMainBinding
+import com.example.cryptocurrencyapp.ui.NavigationMain
 import com.example.cryptocurrencyapp.viewmodel.CoinListViewModel
 import com.example.cryptocurrencyapp.viewmodel.factories.ListViewModelFactory
 
@@ -39,7 +40,7 @@ class MainActivity : AppCompatActivity() {
 //        setupApplication()
 
         setContent() {
-            mainScreen()
+            NavigationMain()
         }
     }
 
