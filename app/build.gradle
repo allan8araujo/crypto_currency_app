@@ -39,16 +39,15 @@ android {
 }
 
 dependencies {
-
-    implementation 'androidx.core:core-ktx:1.8.0'
-    implementation 'androidx.appcompat:appcompat:1.4.2'
-    implementation 'com.google.android.material:material:1.6.1'
+    implementation 'androidx.core:core-ktx:1.9.0'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'com.google.android.material:material:1.8.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
-    implementation 'androidx.mediarouter:mediarouter:1.3.0'
+    implementation 'androidx.mediarouter:mediarouter:1.3.1'
     implementation 'androidx.paging:paging-runtime-ktx:3.1.1'
 
     //Navigation
-    def navigation_version= "2.4.2"
+    def navigation_version = "2.4.2"
     implementation "androidx.navigation:navigation-fragment-ktx:$navigation_version"
     implementation "androidx.navigation:navigation-ui-ktx:$navigation_version"
     implementation "androidx.navigation:navigation-fragment:$navigation_version"
@@ -104,4 +103,16 @@ dependencies {
 
     //módulos
     implementation project(path: ':abstraction')
+
+    //Compose
+    def compose_ui_version = '1.2.0'
+    implementation "androidx.compose.material:material:1.3.0-rc01"
+    implementation "androidx.compose.compiler:compiler:1.3.2"
+    implementation "androidx.compose.ui:ui-tooling-preview:1.3.0-rc01"
+    implementation 'androidx.activity:activity-compose:1.6.0'
+    implementation "androidx.navigation:navigation-compose:2.5.3"
+    implementation "androidx.compose.ui:ui:$compose_ui_version"
+    androidTestImplementation "androidx.compose.ui:ui-test-junit4:$compose_ui_version"
+    debugImplementation "androidx.compose.ui:ui-tooling:1.3.0-rc01"
+
 }
