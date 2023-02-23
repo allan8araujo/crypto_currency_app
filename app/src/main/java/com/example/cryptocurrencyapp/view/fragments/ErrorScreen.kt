@@ -8,11 +8,10 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
-import com.example.abstraction.AssetsItem
 import com.example.cryptocurrencyapp.R
 import com.example.cryptocurrencyapp.databinding.ErrorScreenBinding
 import com.example.cryptocurrencyapp.viewmodel.CoinListViewModel
-import com.example.cryptocurrencyapp.viewmodel.states.DataResult
+import com.example.apilibrary.repository.states.DataResult
 
 class ErrorScreen : Fragment() {
 
@@ -34,33 +33,33 @@ class ErrorScreen : Fragment() {
     }
 
     private fun observeResults() {
-        coinViewModel.assetsFromResultApi.observe(viewLifecycleOwner) { dataResults ->
-            when (dataResults) {
-                is DataResult.Loading -> {
-                    binding.tryAgainProgressBar.isVisible = true
-                }
-                is DataResult.Success -> {
-                    binding.tryAgainProgressBar.isVisible = false
-                    findNavController().navigate(R.id.action_errorScreen_to_coinList)
-                }
-                is DataResult.Error -> {
-                    bindDataError(dataResults)
-                }
-            }
-            binding.tryAgainProgressBar.isVisible = false
-        }
+//        coinViewModel.assetsLiveData.observe(viewLifecycleOwner) { dataResults ->
+////            when (dataResults) {
+////                is DataResult.Loading -> {
+////                    binding.tryAgainProgressBar.isVisible = true
+////                }
+////                is DataResult.Success -> {
+////                    binding.tryAgainProgressBar.isVisible = false
+////                    findNavController().navigate(R.id.action_errorScreen_to_coinList)
+////                }
+////                is DataResult.Error -> {
+//////                    bindDataError(dataResults)
+////                }
+////            }
+////            binding.tryAgainProgressBar.isVisible = false
+//        }
     }
 
-    private fun bindDataError(dataResults: DataResult.Error<List<AssetsItem>>) {
-        when (dataResults.throwable.code()) {
-            400 -> binding.errorTextView.text = "Problema ao carregar a lista de moedas."
-            401 -> binding.errorTextView.text =
-                "Erro ao carregar lista de moedas, tente novamente mais tarde."
-            403 -> binding.errorTextView.text = "Erro ao carregar lista de moedas."
-            429 -> binding.errorTextView.text =
-                "Erro ao carregar lista de moedas, tente novamente mais tarde."
-            550 -> binding.errorTextView.text =
-                "Erro ao carregar lista de moedas. Você excedeu os limite de chamadas, tente novamente mais tarde."
-        }
-    }
+//    private fun bindDataError(dataResults: DataResult.Error<List<AssetsItem>>) {
+//        when (dataResults.throwable.code()) {
+//            400 -> binding.errorTextView.text = "Problema ao carregar a lista de moedas."
+//            401 -> binding.errorTextView.text =
+//                "Erro ao carregar lista de moedas, tente novamente mais tarde."
+//            403 -> binding.errorTextView.text = "Erro ao carregar lista de moedas."
+//            429 -> binding.errorTextView.text =
+//                "Erro ao carregar lista de moedas, tente novamente mais tarde."
+//            550 -> binding.errorTextView.text =
+//                "Erro ao carregar lista de moedas. Você excedeu os limite de chamadas, tente novamente mais tarde."
+//        }
+//    }
 }

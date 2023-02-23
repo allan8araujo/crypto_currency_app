@@ -18,7 +18,7 @@ import com.example.cryptocurrencyapp.R
 import com.example.cryptocurrencyapp.databinding.CoinListFragmentBinding
 import com.example.cryptocurrencyapp.view.adapters.CoinListAdapter
 import com.example.cryptocurrencyapp.viewmodel.CoinListViewModel
-import com.example.cryptocurrencyapp.viewmodel.states.DataResult
+import com.example.apilibrary.repository.states.DataResult
 
 class CoinListFragment : Fragment() {
 
@@ -93,20 +93,20 @@ class CoinListFragment : Fragment() {
     }
 
     private fun filterType(cryptoType: Any?) {
-        coinViewModel.assetsFromResultApi.observe(viewLifecycleOwner) { dataResults ->
-            val newlist = coinViewModel.filterType_(dataResults, cryptoType)
-            setListAdapter(newlist)
-        }
+//        coinViewModel.assetsLiveData.observe(viewLifecycleOwner) { dataResults ->
+//            val newlist = coinViewModel.filterType_(dataResults, cryptoType)
+//            setListAdapter(newlist)
+//        }
     }
 
     private fun searchFilter(searchValue: String?) {
-        coinViewModel.assetsFromResultApi.observe(viewLifecycleOwner) { dataResults ->
-            if (searchValue != "") {
-                coinViewModel.searchInList(searchValue, dataResults, listAdapter)
-            } else {
-                observeAndSetList()
-            }
-        }
+//        coinViewModel.assetsLiveData.observe(viewLifecycleOwner) { dataResults ->
+//            if (searchValue != "") {
+//                coinViewModel.searchInList(searchValue, dataResults, listAdapter)
+//            } else {
+//                observeAndSetList()
+//            }
+//        }
     }
 
     private fun settingRecyclerViewProperties() {
@@ -122,21 +122,21 @@ class CoinListFragment : Fragment() {
     }
 
     private fun observeAndSetList() {
-        coinViewModel.assetsFromResultApi.observe(viewLifecycleOwner) { dataResults ->
-            when (dataResults) {
-                is DataResult.Loading -> {
-                    binding.mainScreenProgressBar.isVisible = true
-                }
-                is DataResult.Success -> {
-                    binding.mainScreenProgressBar.visibility = View.GONE
-                    setListAdapter(dataResults.data)
-                }
-                else -> {
-                    binding.mainScreenProgressBar.visibility = View.GONE
-                    findNavController().navigate(R.id.action_coinList_to_errorScreen)
-                }
-            }
-        }
+//        coinViewModel.assetsLiveData.observe(viewLifecycleOwner) { dataResults ->
+//            when (dataResults) {
+//                is DataResult.Loading -> {
+//                    binding.mainScreenProgressBar.isVisible = true
+//                }
+//                is DataResult.Success -> {
+//                    binding.mainScreenProgressBar.visibility = View.GONE
+//                    setListAdapter(dataResults.data)
+//                }
+//                else -> {
+//                    binding.mainScreenProgressBar.visibility = View.GONE
+//                    findNavController().navigate(R.id.action_coinList_to_errorScreen)
+//                }
+//            }
+//        }
     }
 
     private fun setListAdapter(list: List<AssetsItem>?) {

@@ -1,49 +1,35 @@
 package com.example.cryptocurrencyapp.viewmodel
 
-import androidx.lifecycle.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asLiveData
+import androidx.lifecycle.viewModelScope
 import com.example.abstraction.Assets
 import com.example.abstraction.AssetsItem
 import com.example.apilibrary.repository.Repository
-import com.example.apilibrary.repository.api.request.IAssetsRequest
+import com.example.apilibrary.repository.states.DataResult
 import com.example.cryptocurrencyapp.helper.UrlHelper
+import com.example.cryptocurrencyapp.ui.coinList.CoinListState
 import com.example.cryptocurrencyapp.view.adapters.CoinListAdapter
-import com.example.cryptocurrencyapp.viewmodel.states.DataResult
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.asFlow
+import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import retrofit2.HttpException
 
 class CoinListViewModel(
     private val repository: Repository,
 ) : ViewModel() {
-    private val assetsLiveData = MutableLiveData<DataResult<List<AssetsItem>>>() //
-    val assetsFromResultApi: LiveData<DataResult<List<AssetsItem>>> = assetsLiveData
-
-    private val assetsResultApi: IAssetsRequest = repository.getApiAssets()
-    private lateinit var assetsResponseFromApiWithIcon: List<AssetsItem>
+    private val _assetsLiveData = Channel<CoinListState>()
+    val assetsLiveData = _assetsLiveData.receiveAsFlow()
 
     val allFavoriteAssets: LiveData<List<AssetsItem>> = repository.getAllAssets.asLiveData()
 
-    fun getAllAssets() {
-        viewModelScope.launch {
-            assetsLiveData.value = DataResult.Loading()
-            try {
-                val assetsResponseFromApi = withContext(Dispatchers.IO) {
-                    assetsResultApi.getAssets()
-                }
-                assetsResponseFromApiWithIcon = assetsResponseFromApi.toAssets()
-                assetsLiveData.value = DataResult.Success(assetsResponseFromApiWithIcon)
-            } catch (httpException: HttpException) {
-                val assetsFromApi =
-                    DataResult.Error<List<AssetsItem>>(
-                        httpException,
-                        com.example.abstraction.funEmptyAssets()
-                    )
-                assetsLiveData.value = assetsFromApi
-            } catch (throwable: Throwable) {
-                assetsLiveData.value = DataResult.Loading()
+    fun getAllAssets() = viewModelScope.launch {
+        repository.getApiAssets().collect { result ->
+            when (result) {
+                is DataResult.Loading -> _assetsLiveData.send(CoinListState(isLoading = true))
+                is DataResult.Success -> _assetsLiveData.send(CoinListState(isSucess = result.data))
+                is DataResult.Error -> _assetsLiveData.send(CoinListState(isError = result.throwable.message))
+                else -> {}
             }
         }
     }
