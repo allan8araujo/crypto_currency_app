@@ -9,9 +9,13 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import coil.compose.AsyncImage
+import coil.compose.SubcomposeAsyncImage
 import com.example.apilibrary.repository.states.DataResult
+import com.example.cryptocurrencyapp.R
 import com.example.cryptocurrencyapp.viewmodel.CoinListViewModel
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
@@ -42,9 +46,7 @@ fun CoinList(coinViewModel: CoinListViewModel) {
         val currentDate = dateFormat.format(Date())
 
         Text(
-            modifier = Modifier.fillMaxWidth(),
-            text = currentDate,
-            textAlign = TextAlign.Center
+            modifier = Modifier.fillMaxWidth(), text = currentDate, textAlign = TextAlign.Center
         )
         LazyColumn(modifier = Modifier.fillMaxSize()) {
             val stateCoin_ = stateCoin.value
@@ -60,7 +62,21 @@ fun CoinList(coinViewModel: CoinListViewModel) {
                             modifier = Modifier.padding(8.dp),
                             verticalAlignment = Alignment.CenterVertically
                         ) {
-                            Column(modifier = Modifier.padding(8.dp)) {
+                            val iconUrl = coinViewModel.toAssetsImage(id_icon)
+                            if (!iconUrl.isNullOrEmpty()) SubcomposeAsyncImage(
+                                modifier = Modifier.weight(0.1f).aspectRatio(1f),
+                                model = iconUrl,
+                                contentDescription = "essa é a moeda $name",
+                                loading = {
+                                    CircularProgressIndicator()
+                                },
+                            )
+                            else AsyncImage(
+                                modifier = Modifier.weight(0.1f).aspectRatio(1f),
+                                model = R.drawable.ic_coin_base,
+                                contentDescription = "essa é a moeda $name",
+                            )
+                            Column(modifier = Modifier.padding(8.dp).weight(1f)) {
                                 Text(text = name)
                                 Text(text = asset_id)
                                 Text(text = price_usd.toString())

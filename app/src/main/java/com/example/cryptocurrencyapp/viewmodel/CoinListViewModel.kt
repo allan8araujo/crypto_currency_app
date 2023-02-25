@@ -53,7 +53,7 @@ class CoinListViewModel(
         }
     }
 
-    private fun toAssetsImage(idIcon: String?): String? {
+    fun toAssetsImage(idIcon: String?): String? {
         idIcon?.let {
             return UrlHelper().stringToUrl(idIcon)
         }
