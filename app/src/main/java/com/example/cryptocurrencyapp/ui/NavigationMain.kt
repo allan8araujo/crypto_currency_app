@@ -1,7 +1,6 @@
 package com.example.cryptocurrencyapp.ui
 
 import android.content.Context
-import androidx.activity.viewModels
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable

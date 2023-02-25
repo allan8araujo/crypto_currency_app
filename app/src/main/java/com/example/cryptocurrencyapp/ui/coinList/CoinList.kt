@@ -3,17 +3,19 @@ package com.example.cryptocurrencyapp.ui.coinList
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.Button
 import androidx.compose.material.Card
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.example.apilibrary.repository.states.DataResult
 import com.example.cryptocurrencyapp.viewmodel.CoinListViewModel
 import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
+import java.util.*
 
 @Composable
 fun CoinList(coinViewModel: CoinListViewModel) {
@@ -36,10 +38,17 @@ fun CoinList(coinViewModel: CoinListViewModel) {
     }
 
     Column(modifier = Modifier.fillMaxSize()) {
-        Text(text = "coinList")
-        Button(onClick = { scope.launch { coinViewModel.getAllAssets() } }) {}
+        val dateFormat = SimpleDateFormat("dd-MM-yyyy", Locale.US)
+        val currentDate = dateFormat.format(Date())
+
+        Text(
+            modifier = Modifier.fillMaxWidth(),
+            text = currentDate,
+            textAlign = TextAlign.Center
+        )
         LazyColumn(modifier = Modifier.fillMaxSize()) {
             val stateCoin_ = stateCoin.value
+
             if (stateCoin_?.isSucess != null) items(stateCoin_.isSucess!!) { asset ->
                 Card(
                     modifier = Modifier
