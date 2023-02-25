@@ -8,24 +8,24 @@ import androidx.compose.material.Card
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.cryptocurrencyapp.viewmodel.CoinListViewModel
 import kotlinx.coroutines.launch
 
 @Composable
-fun CoinList(coinViewModel: CoinListViewModel) {
+fun CoinList(coinViewModel: CoinListViewModel? = null) {
     val scope = rememberCoroutineScope()
-    val coinListState = coinViewModel.assetsLiveData.collectAsState(initial = null)
-    val state = coinListState.value
+    val coinListState = coinViewModel?.assetsLiveData?.collectAsState(initial = null)
+    val state = coinListState?.value
 
     Column(modifier = Modifier.fillMaxSize()) {
         Text(text = "coinList")
-        Button(onClick = { scope.launch { coinViewModel.getAllAssets() } }) {}
+        Button(onClick = { scope.launch { coinViewModel?.getAllAssets() } }) {}
         LazyColumn(modifier = Modifier.fillMaxSize()) {
             if (state?.isSucess != null) items(state.isSucess!!) { asset ->
                 Card(
@@ -52,3 +52,10 @@ fun CoinList(coinViewModel: CoinListViewModel) {
     if (state?.isLoading == true) CircularProgressIndicator()
 }
 
+
+
+@Preview
+@Composable
+fun CoinListPreview() {
+    CoinList()
+}

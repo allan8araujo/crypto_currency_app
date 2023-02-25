@@ -13,6 +13,7 @@ open class InterceptorList : Interceptor {
             .url
             .newBuilder()
             .addQueryParameter("apikey", Constants.API_KEY)
+            .addQueryParameter("limit", "5")
             .build()
 
         val request: Request = chain
