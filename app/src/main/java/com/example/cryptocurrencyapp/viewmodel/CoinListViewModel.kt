@@ -1,9 +1,6 @@
 package com.example.cryptocurrencyapp.viewmodel
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.asLiveData
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.example.abstraction.Assets
 import com.example.abstraction.AssetsItem
 import com.example.apilibrary.repository.Repository
@@ -11,29 +8,27 @@ import com.example.apilibrary.repository.states.DataResult
 import com.example.cryptocurrencyapp.helper.UrlHelper
 import com.example.cryptocurrencyapp.ui.coinList.CoinListState
 import com.example.cryptocurrencyapp.view.adapters.CoinListAdapter
-import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.flow.receiveAsFlow
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 
 class CoinListViewModel(
     private val repository: Repository,
 ) : ViewModel() {
-    private val _assetsLiveData = Channel<CoinListState>()
-    val assetsLiveData = _assetsLiveData.receiveAsFlow()
+    private val _assetsLiveData: LiveData<DataResult<Assets>> = getAllAssets()
+    val assetsLiveData = _assetsLiveData.asFlow()
 
     val allFavoriteAssets: LiveData<List<AssetsItem>> = repository.getAllAssets.asLiveData()
 
-    fun getAllAssets() = viewModelScope.launch {
-        repository.getApiAssets().collect { result ->
-            when (result) {
-                is DataResult.Loading -> _assetsLiveData.send(CoinListState(isLoading = true))
-                is DataResult.Success -> _assetsLiveData.send(CoinListState(isSucess = result.data))
-                is DataResult.Error -> _assetsLiveData.send(CoinListState(isError = result.throwable.message))
-                else -> {}
-            }
-        }
-    }
+    fun getAllAssets() = repository.getApiAssets().asLiveData()
 
+//    repository.getApiAssets().collect { result ->
+//        when (result) {
+//            is DataResult.Loading -> _assetsLiveData?.emit(CoinListState(isLoading = true))
+//            is DataResult.Success -> _assetsLiveData?.emit(CoinListState(isSucess = result.data))
+//            is DataResult.Error -> _assetsLiveData?.emit(CoinListState(isError = result.throwable.message))
+//            else -> {}
+//        }
+//    }
     private fun Assets.toAssets(): List<AssetsItem> {
         return map {
             AssetsItem(

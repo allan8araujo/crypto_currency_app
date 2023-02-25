@@ -1,5 +1,6 @@
-package com.example.cryptocurrencyapp.view
+package com.example.cryptocurrencyapp.ui.main
 
+import android.content.Context
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutVertically
@@ -16,10 +17,9 @@ import androidx.navigation.compose.rememberNavController
 import com.example.cryptocurrencyapp.ui.NavigationBarScreens
 import com.example.cryptocurrencyapp.ui.NavigationMain
 import com.example.cryptocurrencyapp.ui.NavigationScreens
-import com.example.cryptocurrencyapp.viewmodel.CoinListViewModel
 
 @Composable
-fun Main(coinViewModel: CoinListViewModel) {
+fun Main(context: Context) {
     val navController = rememberNavController()
 
     val bottomBarState = rememberSaveable { mutableStateOf(true) }
@@ -72,6 +72,6 @@ fun Main(coinViewModel: CoinListViewModel) {
                     }
                 })
         }) { paddingValues ->
-        NavigationMain(paddingValues, navController, coinViewModel)
+        NavigationMain(paddingValues, navController,context)
     }
 }
