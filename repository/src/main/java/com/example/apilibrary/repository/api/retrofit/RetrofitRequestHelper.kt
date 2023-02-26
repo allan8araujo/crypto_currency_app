@@ -7,13 +7,9 @@ import com.example.apilibrary.repository.api.request.IAssetsRequest
 class RetrofitRequestHelper {
     companion object {
         fun getListAssets(): IAssetsRequest {
-            return (
-                    InterceptorHelper()
-                        .interceptorHelper(
-                            AssetsClient()
-                                .clientInterceptor
-                        )
-                    )
+            return (InterceptorHelper().interceptorHelper(
+                AssetsClient().clientInterceptor
+            ))
         }
     }
 }

@@ -35,6 +35,7 @@ android {
     buildFeatures {
         dataBinding = true
         viewBinding = true
+        compose true
     }
 }
 
@@ -71,6 +72,9 @@ dependencies {
 
     //Glide
     implementation 'com.github.bumptech.glide:glide:4.13.0'
+
+    //Coil
+    implementation 'io.coil-kt:coil-compose:2.2.2'
 
     //LottieFilesAnimation
     def lottieVersion = "3.4.0"

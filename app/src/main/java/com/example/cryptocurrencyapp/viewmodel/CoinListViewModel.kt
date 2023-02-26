@@ -4,46 +4,22 @@ import androidx.lifecycle.*
 import com.example.abstraction.Assets
 import com.example.abstraction.AssetsItem
 import com.example.apilibrary.repository.Repository
-import com.example.apilibrary.repository.api.request.IAssetsRequest
+import com.example.apilibrary.repository.states.DataResult
 import com.example.cryptocurrencyapp.helper.UrlHelper
+import com.example.cryptocurrencyapp.ui.coinList.CoinListState
 import com.example.cryptocurrencyapp.view.adapters.CoinListAdapter
-import com.example.cryptocurrencyapp.viewmodel.states.DataResult
-import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import retrofit2.HttpException
 
 class CoinListViewModel(
     private val repository: Repository,
 ) : ViewModel() {
-    private val assetsLiveData = MutableLiveData<DataResult<List<AssetsItem>>>() //
-    val assetsFromResultApi: LiveData<DataResult<List<AssetsItem>>> = assetsLiveData
-    private val assetsResultApi: IAssetsRequest = repository.getApiAssets()
-    private lateinit var assetsResponseFromApiWithIcon: List<AssetsItem>
+    private val _assetsLiveData: LiveData<DataResult<Assets>> = getAllAssets()
+    val assetsLiveData = _assetsLiveData.asFlow()
 
     val allFavoriteAssets: LiveData<List<AssetsItem>> = repository.getAllAssets.asLiveData()
 
-    fun getAllAssets() {
-        viewModelScope.launch {
-            assetsLiveData.value = DataResult.Loading()
-            try {
-                val assetsResponseFromApi = withContext(Dispatchers.IO) {
-                    assetsResultApi.getAssets()
-                }
-                assetsResponseFromApiWithIcon = assetsResponseFromApi.toAssets()
-                assetsLiveData.value = DataResult.Success(assetsResponseFromApiWithIcon)
-            } catch (httpException: HttpException) {
-                val assetsFromApi =
-                    DataResult.Error<List<AssetsItem>>(
-                        httpException,
-                        com.example.abstraction.funEmptyAssets()
-                    )
-                assetsLiveData.value = assetsFromApi
-            } catch (throwable: Throwable) {
-                assetsLiveData.value = DataResult.Loading()
-            }
-        }
-    }
+    fun getAllAssets() = repository.getApiAssets().asLiveData()
 
     private fun Assets.toAssets(): List<AssetsItem> {
         return map {
@@ -69,7 +45,7 @@ class CoinListViewModel(
         }
     }
 
-    private fun toAssetsImage(idIcon: String?): String? {
+    fun toAssetsImage(idIcon: String?): String? {
         idIcon?.let {
             return UrlHelper().stringToUrl(idIcon)
         }
