@@ -19,6 +19,7 @@ import com.example.apilibrary.repository.states.DataResult
 import com.example.cryptocurrencyapp.R
 import com.example.cryptocurrencyapp.ui.NavigationScreens
 import com.example.cryptocurrencyapp.ui.coinDetail.CoinDetailSharedViewModel
+import com.example.cryptocurrencyapp.utils.toAssetsImage
 import com.example.cryptocurrencyapp.viewmodel.CoinListViewModel
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
@@ -65,21 +66,18 @@ fun CoinList(
             val stateCoin_ = stateCoin.value
 
             if (stateCoin_?.isSucess != null) items(stateCoin_.isSucess!!) { asset ->
-                Card(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(8.dp),
-                    onClick = {
-                        coinDetailSharedViewModel.addCoin(asset)
-                        navController.navigate(NavigationScreens.CoinDetailScreen.route)
-                    }
-                ) {
+                Card(modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(8.dp), onClick = {
+                    coinDetailSharedViewModel.addCoin(asset)
+                    navController.navigate(NavigationScreens.CoinDetailScreen.route)
+                }) {
                     asset.apply {
                         Row(
                             modifier = Modifier.padding(8.dp),
                             verticalAlignment = Alignment.CenterVertically
                         ) {
-                            val iconUrl = coinViewModel.toAssetsImage(id_icon)
+                            val iconUrl = toAssetsImage(id_icon)
                             if (!iconUrl.isNullOrEmpty()) SubcomposeAsyncImage(
                                 modifier = Modifier
                                     .weight(0.1f)

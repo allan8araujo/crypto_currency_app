@@ -5,10 +5,8 @@ import com.example.abstraction.Assets
 import com.example.abstraction.AssetsItem
 import com.example.apilibrary.repository.Repository
 import com.example.apilibrary.repository.states.DataResult
-import com.example.cryptocurrencyapp.helper.UrlHelper
-import com.example.cryptocurrencyapp.ui.coinList.CoinListState
+import com.example.cryptocurrencyapp.utils.toAssetsImage
 import com.example.cryptocurrencyapp.view.adapters.CoinListAdapter
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 
 class CoinListViewModel(
@@ -45,12 +43,6 @@ class CoinListViewModel(
         }
     }
 
-    fun toAssetsImage(idIcon: String?): String? {
-        idIcon?.let {
-            return UrlHelper().stringToUrl(idIcon)
-        }
-        return null
-    }
 
     fun insertAsset(assetItem: AssetsItem) = viewModelScope.launch {
         repository.insertFavoriteAsset(assetItem)
