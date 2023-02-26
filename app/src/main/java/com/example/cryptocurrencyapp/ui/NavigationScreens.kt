@@ -4,7 +4,7 @@ import androidx.annotation.DrawableRes
 import com.example.cryptocurrencyapp.R
 
 sealed class NavigationScreens(val route: String) {
-    object FavoriteScreen : NavigationScreens("favorite_screen")
+    object CoinDetailScreen : NavigationScreens("favorite_screen")
     object ListScreen : NavigationScreens("list_screen")
     object FavoriteListScreen : NavigationScreens("favorite_list_screen")
 }

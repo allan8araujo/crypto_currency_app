@@ -33,7 +33,7 @@ fun Main(context: Context) {
     val currentDestination = navBackStackEntry?.destination
 
     when (currentDestination?.route) {
-        NavigationScreens.FavoriteScreen.route -> bottomBarState.value = false
+        NavigationScreens.CoinDetailScreen.route -> bottomBarState.value = false
         else -> bottomBarState.value = true
     }
 

@@ -21,14 +21,6 @@ class CoinListViewModel(
 
     fun getAllAssets() = repository.getApiAssets().asLiveData()
 
-//    repository.getApiAssets().collect { result ->
-//        when (result) {
-//            is DataResult.Loading -> _assetsLiveData?.emit(CoinListState(isLoading = true))
-//            is DataResult.Success -> _assetsLiveData?.emit(CoinListState(isSucess = result.data))
-//            is DataResult.Error -> _assetsLiveData?.emit(CoinListState(isError = result.throwable.message))
-//            else -> {}
-//        }
-//    }
     private fun Assets.toAssets(): List<AssetsItem> {
         return map {
             AssetsItem(

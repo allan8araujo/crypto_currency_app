@@ -98,7 +98,7 @@
             android:layout_margin="4dp"
             android:background="@android:color/transparent"
             android:contentDescription="@string/button_voltar_da_tela_fragment_details"
-            android:drawableStart="@drawable/ic_baseline_chevron_left_24"
+            android:drawableStart="@drawable/ic_baseline_arrow_left_black_24"
             android:fontFamily="@font/roboto"
             android:paddingEnd="8dp"
             android:text="@string/voltar"
