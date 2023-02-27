@@ -24,7 +24,7 @@ import com.example.cryptocurrencyapp.ui.NavigationMain
 import com.example.cryptocurrencyapp.ui.NavigationScreens
 
 @Composable
-fun Main(context: Context) {
+fun Main() {
     val navController = rememberNavController()
 
     val bottomBarState = rememberSaveable { mutableStateOf(true) }
@@ -79,6 +79,6 @@ fun Main(context: Context) {
                 }
             })
     }) { paddingValues ->
-        NavigationMain(paddingValues, navController, context)
+        NavigationMain(paddingValues, navController)
     }
 }

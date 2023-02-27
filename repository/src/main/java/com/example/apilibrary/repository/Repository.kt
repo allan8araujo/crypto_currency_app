@@ -1,6 +1,7 @@
 package com.example.apilibrary.repository
 
 import androidx.annotation.WorkerThread
+import androidx.lifecycle.LiveData
 import com.example.abstraction.Assets
 import com.example.abstraction.AssetsItem
 import com.example.apilibrary.repository.api.retrofit.RetrofitRequestHelper
@@ -21,7 +22,7 @@ class Repository(private val assetsDao: AssetsDao) : IRepository {
         }
     }
 
-    val getAllAssets: Flow<List<AssetsItem>> = assetsDao.getFavoriteAssets()
+    val getAllAssets: LiveData<List<AssetsItem>> = assetsDao.getFavoriteAssets()
 
     @WorkerThread
     override suspend fun insertFavoriteAsset(asset: AssetsItem) {

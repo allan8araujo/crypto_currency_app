@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity() {
 //        setupApplication()
 
         setContent() {
-            Main(this.applicationContext)
+            Main()
         }
     }
 

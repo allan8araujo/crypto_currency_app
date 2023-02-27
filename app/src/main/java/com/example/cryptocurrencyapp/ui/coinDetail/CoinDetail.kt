@@ -1,7 +1,10 @@
 package com.example.cryptocurrencyapp.ui.coinDetail
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -15,14 +18,17 @@ import coil.compose.AsyncImage
 import com.example.cryptocurrencyapp.commons.composeBackButton
 import com.example.cryptocurrencyapp.ui.NavigationScreens
 import com.example.cryptocurrencyapp.utils.toAssetsImage
+import com.example.cryptocurrencyapp.viewmodel.CoinListViewModel
 
 
 @Composable
 fun CoinDetail(
-    coinDetailSharedViewModel: CoinDetailSharedViewModel, navController: NavHostController
+    coinViewModel: CoinListViewModel,
+    coinDetailSharedViewModel: CoinDetailSharedViewModel,
+    navController: NavHostController
 ) {
     val asset = coinDetailSharedViewModel.selectedCoin
-
+    coinViewModel.insertAsset(asset!!)
     val coinNameState = asset?.name
     val coinPriceState = asset?.price_usd
     val coinVolumeHoursState = asset?.volume_1hrs_usd
@@ -46,8 +52,7 @@ fun CoinDetail(
                 .fillMaxWidth()
         ) {
             composeBackButton(
-                navController = navController,
-                route = NavigationScreens.ListScreen.route
+                navController = navController, route = NavigationScreens.ListScreen.route
             )
             Text(
                 modifier = Modifier
@@ -77,7 +82,12 @@ fun CoinDetail(
 
         Button(modifier = Modifier
             .fillMaxWidth()
-            .padding(8.dp), onClick = { /*TODO*/ }) {
+            .padding(8.dp),
+            onClick = {
+                asset?.let {asset_ ->
+                    coinViewModel.insertAsset(asset_)
+                }
+            }) {
             Text(text = "Adicionar")
         }
     }
