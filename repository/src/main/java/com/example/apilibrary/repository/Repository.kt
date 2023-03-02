@@ -24,12 +24,10 @@ class Repository(private val assetsDao: AssetsDao) : IRepository {
 
     val getAllAssets: LiveData<List<AssetsItem>> = assetsDao.getFavoriteAssets()
 
-    @WorkerThread
     override suspend fun insertFavoriteAsset(asset: AssetsItem) {
         assetsDao.insertFavorite(asset)
     }
 
-    @WorkerThread
     override suspend fun deleteFavoriteAsset(asset: AssetsItem) {
         assetsDao.deleteFavorite(asset)
     }

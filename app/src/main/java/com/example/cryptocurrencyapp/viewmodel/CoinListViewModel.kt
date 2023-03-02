@@ -10,8 +10,10 @@ import com.example.apilibrary.repository.database.AssetsDatabase
 import com.example.apilibrary.repository.states.DataResult
 import com.example.cryptocurrencyapp.utils.toAssetsImage
 import com.example.cryptocurrencyapp.view.adapters.CoinListAdapter
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
+import okhttp3.Dispatcher
 
 class CoinListViewModel(application: Application) : AndroidViewModel(application) {
     private val repository: Repository
@@ -25,6 +27,7 @@ class CoinListViewModel(application: Application) : AndroidViewModel(application
         val assetDao = AssetsDatabase.getDatabase(application).assetsDao()
         repository = Repository(assetDao)
         allFavoriteAssets = repository.getAllAssets
+
         _assetsLiveData = getAllAssets()
         assetsLiveData = _assetsLiveData.asFlow()
     }
@@ -56,9 +59,9 @@ class CoinListViewModel(application: Application) : AndroidViewModel(application
     }
 
 
-    fun insertAsset(assetItem: AssetsItem) = viewModelScope.launch {
+    fun insertAsset(assetItem: AssetsItem) = viewModelScope.launch(Dispatchers.IO) {
         repository.insertFavoriteAsset(assetItem)
-        Log.i("favoriteAssets", "insertAsset: ${allFavoriteAssets.value?.size}")
+        Log.i("favoriteAssets", "insertAsset: ${repository.getAllAssets.value}")
     }
 
     fun deleteAsset(assetItem: AssetsItem) = viewModelScope.launch {

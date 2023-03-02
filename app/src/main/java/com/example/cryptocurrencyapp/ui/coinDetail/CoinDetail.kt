@@ -28,7 +28,6 @@ fun CoinDetail(
     navController: NavHostController
 ) {
     val asset = coinDetailSharedViewModel.selectedCoin
-    coinViewModel.insertAsset(asset!!)
     val coinNameState = asset?.name
     val coinPriceState = asset?.price_usd
     val coinVolumeHoursState = asset?.volume_1hrs_usd
