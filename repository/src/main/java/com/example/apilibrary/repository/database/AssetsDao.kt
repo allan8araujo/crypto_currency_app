@@ -8,9 +8,10 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface AssetsDao {
     @Query("SELECT * from favorite_assets")
-    fun getFavoriteAssets(): LiveData<List<AssetsItem>>
+    fun getFavoriteAssets(): Flow<List<AssetsItem>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Transaction
     suspend fun insertFavorite(item: AssetsItem)
 
     @Delete()

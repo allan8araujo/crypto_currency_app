@@ -1,5 +1,6 @@
 package com.example.apilibrary.repository
 
+import android.util.Log
 import androidx.annotation.WorkerThread
 import androidx.lifecycle.LiveData
 import com.example.abstraction.Assets
@@ -22,7 +23,10 @@ class Repository(private val assetsDao: AssetsDao) : IRepository {
         }
     }
 
-    val getAllAssets: LiveData<List<AssetsItem>> = assetsDao.getFavoriteAssets()
+    fun getAllAssets(): Flow<List<AssetsItem>> {
+        Log.i("TAG", "getAllAssets: ${assetsDao.getFavoriteAssets()}")
+        return assetsDao.getFavoriteAssets()
+    }
 
     override suspend fun insertFavoriteAsset(asset: AssetsItem) {
         assetsDao.insertFavorite(asset)

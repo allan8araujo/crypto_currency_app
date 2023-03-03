@@ -41,9 +41,9 @@ class CoinDetailsFragment : Fragment() {
 
     private fun bindingView(args: CoinDetailsFragmentArgs) {
         val asset: AssetsItem = args.asset
-        coinViewModel.allFavoriteAssets.observe(viewLifecycleOwner) { listAssetsItems ->
-            setButtonAction(asset, listAssetsItems, binding)
-        }
+//        coinViewModel.allFavoriteAssets.observe(viewLifecycleOwner) { listAssetsItems ->
+//            setButtonAction(asset, listAssetsItems, binding)
+//        }
     }
 
     fun setButtonAction(
@@ -73,7 +73,7 @@ class CoinDetailsFragment : Fragment() {
         addButton.text = "Adicionar"
         starIconImageView.visibility = View.GONE
         addButton.setOnClickListener {
-            coinViewModel.insertAsset(asset)
+//            coinViewModel.insertAsset(asset)
         }
     }
 

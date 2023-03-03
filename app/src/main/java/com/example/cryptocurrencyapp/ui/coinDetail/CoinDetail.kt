@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
@@ -19,6 +20,7 @@ import com.example.cryptocurrencyapp.commons.composeBackButton
 import com.example.cryptocurrencyapp.ui.NavigationScreens
 import com.example.cryptocurrencyapp.utils.toAssetsImage
 import com.example.cryptocurrencyapp.viewmodel.CoinListViewModel
+import kotlinx.coroutines.launch
 
 
 @Composable
@@ -29,6 +31,7 @@ fun CoinDetail(
 ) {
     val asset = coinDetailSharedViewModel.selectedCoin
     val coinNameState = asset?.name
+    val scope = rememberCoroutineScope()
     val coinPriceState = asset?.price_usd
     val coinVolumeHoursState = asset?.volume_1hrs_usd
     val coinVolumeDayState = asset?.volume_1day_usd

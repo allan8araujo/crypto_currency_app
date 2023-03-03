@@ -37,19 +37,19 @@ class CoinListAdapter(
                 .into(binding.coinIconImageView)
 
             with(binding) {
-                coinViewModel.allFavoriteAssets.observe(context) { assetsItensList ->
-                    val findByAssetID =
-                        assetsItensList?.any { assetItem_ ->
-                            assetItem_.asset_id == assetItem.asset_id
-                        }
-                    if (findByAssetID == true) {
-                        favoriteImageView.isVisible = true
-                        emptyStarImageView.isVisible = false
-                    } else {
-                        favoriteImageView.isVisible = false
-                        emptyStarImageView.isVisible = true
-                    }
-                }
+//                coinViewModel.allFavoriteAssets.observe(context) { assetsItensList ->
+//                    val findByAssetID =
+//                        assetsItensList?.any { assetItem_ ->
+//                            assetItem_.asset_id == assetItem.asset_id
+//                        }
+//                    if (findByAssetID == true) {
+//                        favoriteImageView.isVisible = true
+//                        emptyStarImageView.isVisible = false
+//                    } else {
+//                        favoriteImageView.isVisible = false
+//                        emptyStarImageView.isVisible = true
+//                    }
+//                }
                 coinAssetIdTextView.text = assetItem.asset_id
                 coinNameTextView.text = assetItem.name
                 priceUsdTextView.text = if (assetItem.price_usd != null) {

@@ -39,10 +39,10 @@ class CoinFavoriteFragment : Fragment() {
     }
 
     private fun collectAssetsObserver() {
-        coinViewModel.allFavoriteAssets.observe(viewLifecycleOwner) { assetsItem ->
-            binding.favoriteScreenProgressBar.visibility = View.GONE
-            listAdapter.submitList(assetsItem)
-        }
+//        coinViewModel.allFavoriteAssets.observe(viewLifecycleOwner) { assetsItem ->
+//            binding.favoriteScreenProgressBar.visibility = View.GONE
+//            listAdapter.submitList(assetsItem)
+//        }
     }
 
     private fun goToCoinDetails(asset: AssetsItem) {
