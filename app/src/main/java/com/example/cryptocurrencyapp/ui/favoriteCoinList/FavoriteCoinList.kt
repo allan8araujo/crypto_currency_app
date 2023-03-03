@@ -9,29 +9,33 @@ import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.mutableStateListOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
 import coil.compose.SubcomposeAsyncImage
 import com.example.cryptocurrencyapp.R
 import com.example.cryptocurrencyapp.ui.NavigationScreens
+import com.example.cryptocurrencyapp.ui.coinDetail.CoinDetailSharedViewModel
 import com.example.cryptocurrencyapp.utils.toAssetsImage
 import com.example.cryptocurrencyapp.viewmodel.CoinListViewModel
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun FavoriteCoinList(coinViewModel: CoinListViewModel) {
+fun FavoriteCoinList(
+    navController: NavHostController,
+    coinViewModel: CoinListViewModel,
+    coinDetailSharedViewModel: CoinDetailSharedViewModel
+) {
     val coinFavoriteList = coinViewModel.allFavoriteAssets.collectAsState(initial = null).value
     LazyColumn(modifier = Modifier.fillMaxSize()) {
         if (coinFavoriteList != null) items(coinFavoriteList) { asset ->
             Card(modifier = Modifier
                 .fillMaxWidth()
                 .padding(8.dp), onClick = {
-//                coinDetailSharedViewModel.addCoin(asset)
-//                navController.navigate(NavigationScreens.CoinDetailScreen.route)
+                coinDetailSharedViewModel.addCoin(asset)
+                navController.navigate(NavigationScreens.CoinDetailScreen.route)
             }) {
                 asset.apply {
                     Row(
@@ -57,7 +61,7 @@ fun FavoriteCoinList(coinViewModel: CoinListViewModel) {
                             contentDescription = "essa é a moeda $name",
                         )
                         Column(
-                            modifier = Modifier
+                            modifier = Modifierna
                                 .padding(8.dp)
                                 .weight(1f)
                         ) {

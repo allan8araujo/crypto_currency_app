@@ -35,21 +35,23 @@ fun NavigationMain(
     ) {
         composable(route = NavigationScreens.ListScreen.route) {
             CoinList(
-                coinViewModel,
-                coinDetailSharedViewModel,
-                navController
+                coinViewModel = coinViewModel,
+                coinDetailSharedViewModel = coinDetailSharedViewModel,
+                navController = navController
             )
         }
         composable(route = NavigationScreens.CoinDetailScreen.route) {
             CoinDetail(
-                coinViewModel,
-                coinDetailSharedViewModel,
-                navController
+                coinViewModel = coinViewModel,
+                coinDetailSharedViewModel = coinDetailSharedViewModel,
+                navController = navController
             )
         }
         composable(route = NavigationScreens.FavoriteListScreen.route) {
             FavoriteCoinList(
-                coinViewModel
+                navController = navController,
+                coinViewModel = coinViewModel,
+                coinDetailSharedViewModel = coinDetailSharedViewModel,
             )
         }
     }
