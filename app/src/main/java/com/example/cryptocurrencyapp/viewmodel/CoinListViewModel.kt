@@ -9,7 +9,6 @@ import com.example.apilibrary.repository.Repository
 import com.example.apilibrary.repository.database.AssetsDatabase
 import com.example.apilibrary.repository.states.DataResult
 import com.example.cryptocurrencyapp.utils.toAssetsImage
-import com.example.cryptocurrencyapp.view.adapters.CoinListAdapter
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
@@ -70,7 +69,7 @@ class CoinListViewModel(application: Application) : AndroidViewModel(application
     fun searchInList(
         searchValue: String?,
         dataResults: DataResult<List<AssetsItem>>?,
-        listAdapter: CoinListAdapter,
+//        listAdapter: CoinListAdapter,
     ) {
         var listResults = listOf<AssetsItem>()
         val searchValueUpperCase = searchValue?.uppercase()
@@ -87,7 +86,7 @@ class CoinListViewModel(application: Application) : AndroidViewModel(application
             }
             else -> {}
         }
-        listAdapter.submitList(listResults)
+//        listAdapter.submitList(listResults)
     }
 
     fun filterType_(
