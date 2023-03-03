@@ -61,7 +61,7 @@ fun FavoriteCoinList(
                             contentDescription = "essa é a moeda $name",
                         )
                         Column(
-                            modifier = Modifierna
+                            modifier = Modifier
                                 .padding(8.dp)
                                 .weight(1f)
                         ) {
