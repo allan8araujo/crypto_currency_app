@@ -1,23 +1,34 @@
 package com.example.cryptocurrencyapp.viewmodel
 
+import android.app.Application
+import android.util.Log
 import androidx.lifecycle.*
 import com.example.abstraction.Assets
 import com.example.abstraction.AssetsItem
 import com.example.apilibrary.repository.Repository
+import com.example.apilibrary.repository.database.AssetsDatabase
 import com.example.apilibrary.repository.states.DataResult
-import com.example.cryptocurrencyapp.helper.UrlHelper
-import com.example.cryptocurrencyapp.ui.coinList.CoinListState
-import com.example.cryptocurrencyapp.view.adapters.CoinListAdapter
+import com.example.cryptocurrencyapp.utils.toAssetsImage
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 
-class CoinListViewModel(
-    private val repository: Repository,
-) : ViewModel() {
-    private val _assetsLiveData: LiveData<DataResult<Assets>> = getAllAssets()
-    val assetsLiveData = _assetsLiveData.asFlow()
+class CoinListViewModel(application: Application) : AndroidViewModel(application) {
+    private val repository: Repository
 
-    val allFavoriteAssets: LiveData<List<AssetsItem>> = repository.getAllAssets.asLiveData()
+    private val _assetsLiveData: LiveData<DataResult<Assets>>
+    val assetsLiveData: Flow<DataResult<Assets>>
+
+    val allFavoriteAssets: Flow<List<AssetsItem>>
+
+    init {
+        val assetDao = AssetsDatabase.getDatabase(application).assetsDao()
+        repository = Repository(assetDao)
+        allFavoriteAssets = repository.getAllAssets()
+
+        _assetsLiveData = getAllAssets()
+        assetsLiveData = _assetsLiveData.asFlow()
+    }
 
     fun getAllAssets() = repository.getApiAssets().asLiveData()
 
@@ -45,15 +56,10 @@ class CoinListViewModel(
         }
     }
 
-    fun toAssetsImage(idIcon: String?): String? {
-        idIcon?.let {
-            return UrlHelper().stringToUrl(idIcon)
-        }
-        return null
-    }
 
-    fun insertAsset(assetItem: AssetsItem) = viewModelScope.launch {
+    fun insertAsset(assetItem: AssetsItem) = viewModelScope.launch(Dispatchers.IO) {
         repository.insertFavoriteAsset(assetItem)
+        Log.i("favoriteAssets", "insertAsset: ${repository.getAllAssets().asLiveData().value}")
     }
 
     fun deleteAsset(assetItem: AssetsItem) = viewModelScope.launch {
@@ -63,7 +69,7 @@ class CoinListViewModel(
     fun searchInList(
         searchValue: String?,
         dataResults: DataResult<List<AssetsItem>>?,
-        listAdapter: CoinListAdapter,
+//        listAdapter: CoinListAdapter,
     ) {
         var listResults = listOf<AssetsItem>()
         val searchValueUpperCase = searchValue?.uppercase()
@@ -80,7 +86,7 @@ class CoinListViewModel(
             }
             else -> {}
         }
-        listAdapter.submitList(listResults)
+//        listAdapter.submitList(listResults)
     }
 
     fun filterType_(

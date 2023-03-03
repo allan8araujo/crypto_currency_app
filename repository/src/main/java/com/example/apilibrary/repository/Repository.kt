@@ -1,6 +1,8 @@
 package com.example.apilibrary.repository
 
+import android.util.Log
 import androidx.annotation.WorkerThread
+import androidx.lifecycle.LiveData
 import com.example.abstraction.Assets
 import com.example.abstraction.AssetsItem
 import com.example.apilibrary.repository.api.retrofit.RetrofitRequestHelper
@@ -21,14 +23,15 @@ class Repository(private val assetsDao: AssetsDao) : IRepository {
         }
     }
 
-    val getAllAssets: Flow<List<AssetsItem>> = assetsDao.getFavoriteAssets()
+    fun getAllAssets(): Flow<List<AssetsItem>> {
+        Log.i("TAG", "getAllAssets: ${assetsDao.getFavoriteAssets()}")
+        return assetsDao.getFavoriteAssets()
+    }
 
-    @WorkerThread
     override suspend fun insertFavoriteAsset(asset: AssetsItem) {
         assetsDao.insertFavorite(asset)
     }
 
-    @WorkerThread
     override suspend fun deleteFavoriteAsset(asset: AssetsItem) {
         assetsDao.deleteFavorite(asset)
     }
