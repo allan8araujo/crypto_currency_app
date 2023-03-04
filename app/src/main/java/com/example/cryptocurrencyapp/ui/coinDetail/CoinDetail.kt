@@ -19,8 +19,8 @@ import coil.compose.AsyncImage
 import com.example.cryptocurrencyapp.commons.composeBackButton
 import com.example.cryptocurrencyapp.ui.NavigationScreens
 import com.example.cryptocurrencyapp.utils.toAssetsImage
+import com.example.cryptocurrencyapp.utils.toMoneyFormat
 import com.example.cryptocurrencyapp.viewmodel.CoinListViewModel
-import kotlinx.coroutines.launch
 
 
 @Composable
@@ -32,7 +32,7 @@ fun CoinDetail(
     val asset = coinDetailSharedViewModel.selectedCoin
     val coinNameState = asset?.name
     val scope = rememberCoroutineScope()
-    val coinPriceState = asset?.price_usd
+    val coinPriceState = asset?.price_usd?.toMoneyFormat()
     val coinVolumeHoursState = asset?.volume_1hrs_usd
     val coinVolumeDayState = asset?.volume_1day_usd
     val coinVolumeMonthState = asset?.volume_1mth_usd
@@ -66,7 +66,7 @@ fun CoinDetail(
                 modifier = Modifier
                     .weight(0.2f)
                     .align(Alignment.CenterHorizontally),
-                model = toAssetsImage(asset?.id_icon),
+                model = asset?.id_icon?.toAssetsImage(),
                 contentDescription = "imagem da moeda ${asset?.name.toString()}"
             )
         }
@@ -84,12 +84,11 @@ fun CoinDetail(
 
         Button(modifier = Modifier
             .fillMaxWidth()
-            .padding(8.dp),
-            onClick = {
-                asset?.let {asset_ ->
-                    coinViewModel.insertAsset(asset_)
-                }
-            }) {
+            .padding(8.dp), onClick = {
+            asset?.let { asset_ ->
+                coinViewModel.insertAsset(asset_)
+            }
+        }) {
             Text(text = "Adicionar")
         }
     }

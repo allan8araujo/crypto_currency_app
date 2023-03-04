@@ -1,8 +1,6 @@
 package com.example.apilibrary.repository
 
 import android.util.Log
-import androidx.annotation.WorkerThread
-import androidx.lifecycle.LiveData
 import com.example.abstraction.Assets
 import com.example.abstraction.AssetsItem
 import com.example.apilibrary.repository.api.retrofit.RetrofitRequestHelper
@@ -16,8 +14,8 @@ class Repository(private val assetsDao: AssetsDao) : IRepository {
     override fun getApiAssets(): Flow<DataResult<Assets>> {
         return flow {
             emit(DataResult.Loading)
-            val result = RetrofitRequestHelper.getListAssets()
-            emit(DataResult.Success(result.getAssets()))
+            val result = RetrofitRequestHelper.getListAssets().getAssets()
+            emit(DataResult.Success(result))
         }.catch {
             emit(DataResult.Error(it, emptyList()))
         }

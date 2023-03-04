@@ -21,6 +21,7 @@ import com.example.cryptocurrencyapp.R
 import com.example.cryptocurrencyapp.ui.NavigationScreens
 import com.example.cryptocurrencyapp.ui.coinDetail.CoinDetailSharedViewModel
 import com.example.cryptocurrencyapp.utils.toAssetsImage
+import com.example.cryptocurrencyapp.utils.toMoneyFormat
 import com.example.cryptocurrencyapp.viewmodel.CoinListViewModel
 
 @OptIn(
@@ -50,7 +51,7 @@ fun FavoriteCoinList(
                         modifier = Modifier.padding(8.dp),
                         verticalAlignment = Alignment.CenterVertically
                     ) {
-                        val iconUrl = toAssetsImage(asset.id_icon)
+                        val iconUrl = asset.id_icon?.toAssetsImage()
                         if (!iconUrl.isNullOrEmpty()) SubcomposeAsyncImage(
                             modifier = Modifier
                                 .weight(0.1f)
@@ -75,7 +76,7 @@ fun FavoriteCoinList(
                         ) {
                             Text(text = name)
                             Text(text = asset_id)
-                            Text(text = price_usd.toString())
+                            Text(text = price_usd?.toMoneyFormat().toString())
                         }
                     }
                 }
