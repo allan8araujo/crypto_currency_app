@@ -6,9 +6,9 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Button
+import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
@@ -18,6 +18,8 @@ import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
 import com.example.cryptocurrencyapp.commons.composeBackButton
 import com.example.cryptocurrencyapp.ui.NavigationScreens
+import com.example.cryptocurrencyapp.utils.greenColor
+import com.example.cryptocurrencyapp.utils.lightBlack
 import com.example.cryptocurrencyapp.utils.toAssetsImage
 import com.example.cryptocurrencyapp.utils.toMoneyFormat
 import com.example.cryptocurrencyapp.viewmodel.CoinListViewModel
@@ -31,7 +33,6 @@ fun CoinDetail(
 ) {
     val asset = coinDetailSharedViewModel.selectedCoin
     val coinNameState = asset?.name
-    val scope = rememberCoroutineScope()
     val coinPriceState = asset?.price_usd?.toMoneyFormat()
     val coinVolumeHoursState = asset?.volume_1hrs_usd
     val coinVolumeDayState = asset?.volume_1day_usd
@@ -39,12 +40,12 @@ fun CoinDetail(
 
 
     val backgroundCoinColor = Brush.verticalGradient(
-        0.75f to Color(0xFF8D9562), 0.5f to Color(0xFF424242)
+        0.75f to Color(greenColor), 0.5f to Color(lightBlack)
     )
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(color = Color(0xFF424242))
+            .background(color = Color(lightBlack))
     ) {
 
         Column(
@@ -84,11 +85,13 @@ fun CoinDetail(
 
         Button(modifier = Modifier
             .fillMaxWidth()
-            .padding(8.dp), onClick = {
-            asset?.let { asset_ ->
-                coinViewModel.insertAsset(asset_)
-            }
-        }) {
+            .padding(8.dp),
+            colors = ButtonDefaults.buttonColors(backgroundColor = Color(greenColor)),
+            onClick = {
+                asset?.let { asset_ ->
+                    coinViewModel.insertAsset(asset_)
+                }
+            }) {
             Text(text = "Adicionar")
         }
     }

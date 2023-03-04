@@ -10,6 +10,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
@@ -19,6 +20,7 @@ import com.example.apilibrary.repository.states.DataResult
 import com.example.cryptocurrencyapp.R
 import com.example.cryptocurrencyapp.ui.NavigationScreens
 import com.example.cryptocurrencyapp.ui.coinDetail.CoinDetailSharedViewModel
+import com.example.cryptocurrencyapp.utils.greenColor
 import com.example.cryptocurrencyapp.utils.toAssetsImage
 import com.example.cryptocurrencyapp.utils.toMoneyFormat
 import com.example.cryptocurrencyapp.viewmodel.CoinListViewModel
@@ -86,7 +88,9 @@ fun CoinList(
                                 model = iconUrl,
                                 contentDescription = "essa é a moeda $name",
                                 loading = {
-                                    CircularProgressIndicator()
+                                    CircularProgressIndicator(
+                                        color = Color(greenColor)
+                                    )
                                 },
                             )
                             else AsyncImage(
