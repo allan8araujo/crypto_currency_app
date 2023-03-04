@@ -1,8 +1,10 @@
 package com.example.cryptocurrencyapp.ui.favoriteCoinList
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
+import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
+import androidx.compose.foundation.lazy.staggeredgrid.items
 import androidx.compose.material.Card
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.ExperimentalMaterialApi
@@ -21,7 +23,10 @@ import com.example.cryptocurrencyapp.ui.coinDetail.CoinDetailSharedViewModel
 import com.example.cryptocurrencyapp.utils.toAssetsImage
 import com.example.cryptocurrencyapp.viewmodel.CoinListViewModel
 
-@OptIn(ExperimentalMaterialApi::class)
+@OptIn(
+    ExperimentalMaterialApi::class, ExperimentalFoundationApi::class,
+    ExperimentalFoundationApi::class
+)
 @Composable
 fun FavoriteCoinList(
     navController: NavHostController,
@@ -29,7 +34,10 @@ fun FavoriteCoinList(
     coinDetailSharedViewModel: CoinDetailSharedViewModel
 ) {
     val coinFavoriteList = coinViewModel.allFavoriteAssets.collectAsState(initial = null).value
-    LazyColumn(modifier = Modifier.fillMaxSize()) {
+    LazyVerticalStaggeredGrid(
+        columns = StaggeredGridCells.Fixed(2),
+        modifier = Modifier.fillMaxSize()
+    ) {
         if (coinFavoriteList != null) items(coinFavoriteList) { asset ->
             Card(modifier = Modifier
                 .fillMaxWidth()
