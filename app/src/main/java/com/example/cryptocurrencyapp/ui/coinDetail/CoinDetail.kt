@@ -1,12 +1,10 @@
 package com.example.cryptocurrencyapp.ui.coinDetail
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -18,12 +16,8 @@ import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
 import com.example.cryptocurrencyapp.commons.composeBackButton
 import com.example.cryptocurrencyapp.ui.NavigationScreens
-import com.example.cryptocurrencyapp.utils.greenColor
-import com.example.cryptocurrencyapp.utils.lightBlack
-import com.example.cryptocurrencyapp.utils.toAssetsImage
-import com.example.cryptocurrencyapp.utils.toMoneyFormat
+import com.example.cryptocurrencyapp.utils.*
 import com.example.cryptocurrencyapp.viewmodel.CoinListViewModel
-
 
 @Composable
 fun CoinDetail(
@@ -32,69 +26,118 @@ fun CoinDetail(
     navController: NavHostController
 ) {
     val asset = coinDetailSharedViewModel.selectedCoin
-    val coinNameState = asset?.name
-    val coinPriceState = asset?.price_usd?.toMoneyFormat()
-    val coinVolumeHoursState = asset?.volume_1hrs_usd
-    val coinVolumeDayState = asset?.volume_1day_usd
-    val coinVolumeMonthState = asset?.volume_1mth_usd
 
-
-    val backgroundCoinColor = Brush.verticalGradient(
-        0.75f to Color(greenColor), 0.5f to Color(lightBlack)
-    )
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(color = Color(lightBlack))
+            .background(color = Color(lightBlackColor))
     ) {
 
         Column(
             modifier = Modifier
-                .weight(0.5f)
-                .background(brush = backgroundCoinColor)
-                .fillMaxWidth()
+                .weight(0.4f)
+                .background(
+                    brush = Brush.verticalGradient(
+                        colors = listOf(
+                            Color(greenColor),
+                            Color(lightBlackColor)
+                        )
+                    )
+                )
         ) {
-            composeBackButton(
-                navController = navController, route = NavigationScreens.ListScreen.route
-            )
+            Row(
+                modifier = Modifier
+                    .padding(top = 16.dp, start = 16.dp, end = 16.dp)
+                    .fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                composeBackButton(
+                    navController = navController,
+                    route = NavigationScreens.ListScreen.route
+                )
+                AsyncImage(
+                    modifier = Modifier
+                        .size(32.dp)
+                        .align(Alignment.CenterVertically),
+                    model = asset?.id_icon?.toAssetsImage(),
+                    contentDescription = "imagem da moeda ${asset?.name.toString()}"
+                )
+            }
             Text(
                 modifier = Modifier
-                    .weight(0.1f)
-                    .align(Alignment.CenterHorizontally),
-                text = coinNameState.toString()
+                    .padding(start = 16.dp, end = 16.dp, bottom = 8.dp),
+                text = asset?.name.toString(),
+                style = MaterialTheme.typography.h4,
+                color = Color.White
             )
-            AsyncImage(
+
+            val textValue = asset?.formatNullText()
+
+            Text(
                 modifier = Modifier
-                    .weight(0.2f)
-                    .align(Alignment.CenterHorizontally),
-                model = asset?.id_icon?.toAssetsImage(),
-                contentDescription = "imagem da moeda ${asset?.name.toString()}"
+                    .padding(start = 16.dp, end = 16.dp, bottom = 16.dp),
+                text = textValue.toString(),
+                style = MaterialTheme.typography.h3,
+                color = Color.White
             )
         }
 
         Column(
             modifier = Modifier
-                .weight(1f)
-                .fillMaxWidth()
+                .weight(0.6f)
+                .padding(16.dp)
         ) {
-            Text(text = coinPriceState.toString())
-            Text(text = coinVolumeHoursState.toString())
-            Text(text = coinVolumeDayState.toString())
-            Text(text = coinVolumeMonthState.toString())
+            Column(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Text(
+                    modifier = Modifier.padding(bottom = 8.dp),
+                    text = "Volume (24h)",
+                    style = MaterialTheme.typography.h6,
+                    color = Color.Gray
+                )
+                Text(
+                    text = asset?.volume_1day_usd?.toMoneyFormat().toString(),
+                    style = MaterialTheme.typography.h5,
+                    color = Color.White
+                )
+            }
+            Spacer(modifier = Modifier.height(16.dp))
+            Column(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Text(
+                    modifier = Modifier.padding(bottom = 8.dp),
+                    text = "Volume (30d)",
+                    style = MaterialTheme.typography.h6,
+                    color = Color.Gray
+                )
+                Text(
+                    text = asset?.volume_1mth_usd?.toMoneyFormat().toString(),
+                    style = MaterialTheme.typography.h5,
+                    color = Color.White
+                )
+            }
         }
 
-        Button(modifier = Modifier
-            .fillMaxWidth()
-            .padding(8.dp),
-            colors = ButtonDefaults.buttonColors(backgroundColor = Color(greenColor)),
+        Button(
+            modifier = Modifier
+                .padding(16.dp)
+                .fillMaxWidth()
+                .height(48.dp),
+            colors = ButtonDefaults.buttonColors(
+                backgroundColor = Color(greenColor),
+                contentColor = Color.White
+            ),
             onClick = {
                 asset?.let { asset_ ->
                     coinViewModel.insertAsset(asset_)
                 }
-            }) {
-            Text(text = "Adicionar")
+            }
+        ) {
+            Text(text = "Adicionar ao portfólio")
         }
     }
 }
-
-

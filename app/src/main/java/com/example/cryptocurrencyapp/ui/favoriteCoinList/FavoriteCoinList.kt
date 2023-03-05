@@ -54,7 +54,7 @@ fun FavoriteCoinList(
                         val iconUrl = asset.id_icon?.toAssetsImage()
                         if (!iconUrl.isNullOrEmpty()) SubcomposeAsyncImage(
                             modifier = Modifier
-                                .weight(0.1f)
+                                .weight(0.4f)
                                 .aspectRatio(1f),
                             model = iconUrl,
                             contentDescription = "essa é a moeda $name",
@@ -64,7 +64,7 @@ fun FavoriteCoinList(
                         )
                         else AsyncImage(
                             modifier = Modifier
-                                .weight(0.1f)
+                                .weight(0.4f)
                                 .aspectRatio(1f),
                             model = R.drawable.ic_coin_base,
                             contentDescription = "essa é a moeda $name",
