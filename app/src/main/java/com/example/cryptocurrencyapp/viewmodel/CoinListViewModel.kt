@@ -32,36 +32,12 @@ class CoinListViewModel(application: Application) : AndroidViewModel(application
 
     fun getAllAssets() = repository.getApiAssets().asLiveData()
 
-    fun insertAsset(assetItem: AssetsItem) = viewModelScope.launch(Dispatchers.IO) {
+    fun insertAsset(assetItem: AssetsItem) = viewModelScope.launch {
         repository.insertFavoriteAsset(assetItem)
-        Log.i("favoriteAssets", "insertAsset: ${repository.getAllAssets().asLiveData().value}")
     }
 
     fun deleteAsset(assetItem: AssetsItem) = viewModelScope.launch {
         repository.deleteFavoriteAsset(assetItem)
-    }
-
-    fun searchInList(
-        searchValue: String?,
-        dataResults: DataResult<List<AssetsItem>>?,
-//        listAdapter: CoinListAdapter,
-    ) {
-        var listResults = listOf<AssetsItem>()
-        val searchValueUpperCase = searchValue?.uppercase()
-        when (dataResults) {
-            is DataResult.Loading -> {
-            }
-            is DataResult.Success -> {
-                listResults = dataResults.data.filter { assetItem ->
-                    (assetItem.asset_id.uppercase() in searchValueUpperCase!!) || (assetItem.name.uppercase() in searchValueUpperCase)
-                }
-            }
-            is DataResult.Error -> {
-                listResults = dataResults.emptyDataResults
-            }
-            else -> {}
-        }
-//        listAdapter.submitList(listResults)
     }
 
     fun filterType_(

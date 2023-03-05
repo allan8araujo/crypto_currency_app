@@ -1,6 +1,6 @@
 package com.example.cryptocurrencyapp.ui.coinDetail
 
-import android.util.Log
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Button
@@ -12,9 +12,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
+import com.example.cryptocurrencyapp.R
 import com.example.cryptocurrencyapp.commons.composeBackButton
 import com.example.cryptocurrencyapp.ui.NavigationScreens
 import com.example.cryptocurrencyapp.utils.*
@@ -27,9 +29,7 @@ fun CoinDetail(
     navController: NavHostController
 ) {
     val asset = coinDetailSharedViewModel.selectedCoin
-    if (coinDetailSharedViewModel.isFavoriteAsset){
-        Log.i("FavoriteCoinList", "FavoriteCoinList: is Favorite!")
-    }
+    val isFavoriteAsset = coinDetailSharedViewModel.isFavoriteAsset
 
     Column(
         modifier = Modifier
@@ -67,13 +67,32 @@ fun CoinDetail(
                     contentDescription = "imagem da moeda ${asset?.name.toString()}"
                 )
             }
-            Text(
-                modifier = Modifier
-                    .padding(start = 16.dp, end = 16.dp, bottom = 8.dp),
-                text = asset?.name.toString(),
-                style = MaterialTheme.typography.h4,
-                color = Color.White
-            )
+            Row(
+            ) {
+                if (isFavoriteAsset) {
+                    Image(
+                        modifier = Modifier
+                            .aspectRatio(1f)
+                            .weight(0.1f),
+                        painter = painterResource(id = R.drawable.ic_baseline_star_coin_24),
+                        contentDescription = "is favorite"
+                    )
+                } else {
+                    Image(
+                        modifier = Modifier
+                            .aspectRatio(1f)
+                            .weight(0.1f),
+                        painter = painterResource(id = R.drawable.baseline_star_outline_24),
+                        contentDescription = "is not favorite"
+                    )
+                }
+                Text(
+                    modifier= Modifier.weight(1f),
+                    text = asset?.name.toString(),
+                    style = MaterialTheme.typography.h4,
+                    color = Color.White
+                )
+            }
 
             val textValue = asset?.formatNullText()
 
@@ -113,16 +132,19 @@ fun CoinDetail(
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text(
-                    modifier = Modifier.padding(bottom = 8.dp),
+                    modifier = Modifier
+                        .padding(bottom = 8.dp),
                     text = "Volume (30d)",
                     style = MaterialTheme.typography.h6,
                     color = Color.Gray
                 )
                 Text(
+                    modifier = Modifier.weight(0.5f),
                     text = asset?.volume_1mth_usd?.toMoneyFormat().toString(),
                     style = MaterialTheme.typography.h5,
                     color = Color.White
                 )
+
             }
         }
 
@@ -137,11 +159,15 @@ fun CoinDetail(
             ),
             onClick = {
                 asset?.let { asset_ ->
-                    coinViewModel.insertAsset(asset_)
+                    coinDetailSharedViewModel.setIsFavorite(!isFavoriteAsset)
+                    if (isFavoriteAsset)
+                        coinViewModel.deleteAsset(asset_) else
+                        coinViewModel.insertAsset(asset_)
                 }
             }
         ) {
-            Text(text = "Adicionar ao portfólio")
+            val buttonTextState = if (!isFavoriteAsset) "Adicionar Moeda" else "Remover moeda"
+            Text(text = buttonTextState)
         }
     }
 }

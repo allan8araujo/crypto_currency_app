@@ -22,7 +22,6 @@ class Repository(private val assetsDao: AssetsDao) : IRepository {
     }
 
     fun getAllAssets(): Flow<List<AssetsItem>> {
-        Log.i("TAG", "getAllAssets: ${assetsDao.getFavoriteAssets()}")
         return assetsDao.getFavoriteAssets()
     }
 

@@ -11,7 +11,6 @@ interface AssetsDao {
     fun getFavoriteAssets(): Flow<List<AssetsItem>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    @Transaction
     suspend fun insertFavorite(item: AssetsItem)
 
     @Delete()
