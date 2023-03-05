@@ -10,6 +10,7 @@ import com.example.apilibrary.repository.database.AssetsDatabase
 import com.example.apilibrary.repository.states.DataResult
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 class CoinListViewModel(application: Application) : AndroidViewModel(application) {

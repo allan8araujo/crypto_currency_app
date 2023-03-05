@@ -1,7 +1,6 @@
 package com.example.cryptocurrencyapp.ui.coinList
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -12,14 +11,13 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
 import coil.compose.SubcomposeAsyncImage
-import com.example.abstraction.AssetsItem
 import com.example.apilibrary.repository.states.DataResult
 import com.example.cryptocurrencyapp.R
 import com.example.cryptocurrencyapp.ui.NavigationScreens
@@ -39,6 +37,7 @@ fun CoinList(
 ) {
     val scope = rememberCoroutineScope()
     val stateCoin = remember { mutableStateOf<CoinListState?>(null) }
+    val favoriteAssets = coinViewModel.allFavoriteAssets.collectAsState(initial = null)
 
     LaunchedEffect(key1 = Unit) {
         scope.launch {
@@ -71,9 +70,15 @@ fun CoinList(
             val stateCoin_ = stateCoin.value
 
             if (stateCoin_?.isSucess != null) items(stateCoin_.isSucess!!) { asset ->
+                val isFavorite =
+                    favoriteAssets.value?.any { it.name == asset.name } == true
+
                 Card(modifier = Modifier
                     .fillMaxWidth()
                     .padding(8.dp), onClick = {
+
+                    coinDetailSharedViewModel.setIsFavorite(isFavorite)
+
                     coinDetailSharedViewModel.addCoin(asset)
                     navController.navigate(NavigationScreens.CoinDetailScreen.route)
                 }) {
@@ -120,6 +125,24 @@ fun CoinList(
                                     .weight(1f),
                                 textAlign = TextAlign.End
                             )
+
+                            if (isFavorite) {
+                                Image(
+                                    modifier = Modifier
+                                        .weight(0.2f)
+                                        .aspectRatio(1f),
+                                    painter = painterResource(id = R.drawable.ic_baseline_star_coin_24),
+                                    contentDescription = "essa é a moeda $name",
+                                )
+                            } else {
+                                Image(
+                                    modifier = Modifier
+                                        .weight(0.2f)
+                                        .aspectRatio(1f),
+                                    painter = painterResource(id = R.drawable.baseline_star_outline_24),
+                                    contentDescription = "essa é a moeda $name",
+                                )
+                            }
                         }
                     }
                 }

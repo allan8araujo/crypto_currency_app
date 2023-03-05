@@ -1,5 +1,6 @@
 package com.example.cryptocurrencyapp.ui.coinDetail
 
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Button
@@ -26,6 +27,9 @@ fun CoinDetail(
     navController: NavHostController
 ) {
     val asset = coinDetailSharedViewModel.selectedCoin
+    if (coinDetailSharedViewModel.isFavoriteAsset){
+        Log.i("FavoriteCoinList", "FavoriteCoinList: is Favorite!")
+    }
 
     Column(
         modifier = Modifier
