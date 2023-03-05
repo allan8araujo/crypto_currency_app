@@ -1,9 +1,5 @@
 package com.example.cryptocurrencyapp.ui.main
 
-import android.content.Context
-import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.slideInVertically
-import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.*
@@ -38,46 +34,45 @@ fun Main() {
     }
 
     Scaffold(topBar = {
-        TopAppBar(title = {
-            Text(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(8.dp),
-                text = "Moeda Digital",
-                textAlign = TextAlign.Center,
-            )
-        })
-    }, bottomBar = {
-        AnimatedVisibility(visible = bottomBarState.value,
-            enter = slideInVertically(initialOffsetY = { it }),
-            exit = slideOutVertically(targetOffsetY = { it }),
-            content = {
-                BottomNavigation {
-                    val items = listOf(
-                        NavigationBarScreens.ListScreen,
-                        NavigationBarScreens.FavoriteListScreen,
-                    )
-
-                    items.forEach { screen ->
-                        BottomNavigationItem(icon = {
-                            Icon(
-                                painterResource(screen.Icon), contentDescription = null
-                            )
-                        },
-                            label = { Text(screen.resourceId) },
-                            selected = currentDestination?.hierarchy?.any { it.route == screen.route } == true,
-                            onClick = {
-                                navController.navigate(screen.route) {
-                                    popUpTo(navController.graph.findStartDestination().id) {
-                                        saveState = true
-                                    }
-                                    launchSingleTop = true
-                                    restoreState = true
-                                }
-                            })
-                    }
-                }
+        if (bottomBarState.value) {
+            TopAppBar(title = {
+                Text(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(8.dp),
+                    text = "Moeda Digital",
+                    textAlign = TextAlign.Center,
+                )
             })
+        }
+    }, bottomBar = {
+        if (bottomBarState.value) {
+            BottomNavigation {
+                val items = listOf(
+                    NavigationBarScreens.ListScreen,
+                    NavigationBarScreens.FavoriteListScreen,
+                )
+
+                items.forEach { screen ->
+                    BottomNavigationItem(icon = {
+                        Icon(
+                            painterResource(screen.Icon), contentDescription = null
+                        )
+                    },
+                        label = { Text(screen.resourceId) },
+                        selected = currentDestination?.hierarchy?.any { it.route == screen.route } == true,
+                        onClick = {
+                            navController.navigate(screen.route) {
+                                popUpTo(navController.graph.findStartDestination().id) {
+                                    saveState = true
+                                }
+                                launchSingleTop = true
+                                restoreState = true
+                            }
+                        })
+                }
+            }
+        }
     }) { paddingValues ->
         NavigationMain(paddingValues, navController)
     }

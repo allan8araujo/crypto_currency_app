@@ -1,8 +1,11 @@
 package com.example.cryptocurrencyapp.ui.favoriteCoinList
 
+import android.util.Log
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
+import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
+import androidx.compose.foundation.lazy.staggeredgrid.items
 import androidx.compose.material.Card
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.ExperimentalMaterialApi
@@ -19,9 +22,13 @@ import com.example.cryptocurrencyapp.R
 import com.example.cryptocurrencyapp.ui.NavigationScreens
 import com.example.cryptocurrencyapp.ui.coinDetail.CoinDetailSharedViewModel
 import com.example.cryptocurrencyapp.utils.toAssetsImage
+import com.example.cryptocurrencyapp.utils.toMoneyFormat
 import com.example.cryptocurrencyapp.viewmodel.CoinListViewModel
 
-@OptIn(ExperimentalMaterialApi::class)
+@OptIn(
+    ExperimentalMaterialApi::class, ExperimentalFoundationApi::class,
+    ExperimentalFoundationApi::class
+)
 @Composable
 fun FavoriteCoinList(
     navController: NavHostController,
@@ -29,7 +36,10 @@ fun FavoriteCoinList(
     coinDetailSharedViewModel: CoinDetailSharedViewModel
 ) {
     val coinFavoriteList = coinViewModel.allFavoriteAssets.collectAsState(initial = null).value
-    LazyColumn(modifier = Modifier.fillMaxSize()) {
+    LazyVerticalStaggeredGrid(
+        columns = StaggeredGridCells.Fixed(2),
+        modifier = Modifier.fillMaxSize()
+    ) {
         if (coinFavoriteList != null) items(coinFavoriteList) { asset ->
             Card(modifier = Modifier
                 .fillMaxWidth()
@@ -42,10 +52,10 @@ fun FavoriteCoinList(
                         modifier = Modifier.padding(8.dp),
                         verticalAlignment = Alignment.CenterVertically
                     ) {
-                        val iconUrl = toAssetsImage(asset.id_icon)
+                        val iconUrl = asset.id_icon?.toAssetsImage()
                         if (!iconUrl.isNullOrEmpty()) SubcomposeAsyncImage(
                             modifier = Modifier
-                                .weight(0.1f)
+                                .weight(0.4f)
                                 .aspectRatio(1f),
                             model = iconUrl,
                             contentDescription = "essa é a moeda $name",
@@ -55,19 +65,19 @@ fun FavoriteCoinList(
                         )
                         else AsyncImage(
                             modifier = Modifier
-                                .weight(0.1f)
+                                .weight(0.4f)
                                 .aspectRatio(1f),
                             model = R.drawable.ic_coin_base,
                             contentDescription = "essa é a moeda $name",
                         )
                         Column(
-                            modifier = Modifierna
+                            modifier = Modifier
                                 .padding(8.dp)
                                 .weight(1f)
                         ) {
                             Text(text = name)
                             Text(text = asset_id)
-                            Text(text = price_usd.toString())
+                            Text(text = price_usd?.toMoneyFormat().toString())
                         }
                     }
                 }
