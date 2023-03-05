@@ -1,15 +1,14 @@
 # Crypto currency app
 
+ The application is designed to display a comprehensive list of all cryptocurrencies available, allowing users to track the daily movements and prices of their favorite currencies. This is achieved by making API calls via the CoinAPI platform using Retrofit, and images are loaded using the Coil library.
 
-  was used concepts of viewBind, Adapter, holder and other tools to maintain interfaces.
-  Calls to api made via: https://docs.coinapi.io/#md-rest-api. Were made with retrofit and images loaded with Glide.
-  The construction and implementation of the design pattern was used in the model Moldel, View and view-Model(MVVM).
-  
-  Application made in order to list all cryptocurrencies and favorite as currencies to keep track in their prices and daily movements.
- 
+The app's architecture follows the Model-View-ViewModel (MVVM) design pattern, which allows for clean and efficient code separation, improving code maintainability and readability.
+
+By providing real-time data on preferred cryptocurrencies, the user-friendly and visually appealing interface aims to enhance the user experience. 
+
   ## Video about the app flow
-
-https://user-images.githubusercontent.com/77680596/173099400-40c62638-810d-42dd-a0d9-b6eb866e728c.mp4
+  
+Updating Video
 
 # Libraries
 
