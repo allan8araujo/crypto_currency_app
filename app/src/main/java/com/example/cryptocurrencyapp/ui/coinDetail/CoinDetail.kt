@@ -105,14 +105,11 @@ fun CoinDetail(
             val textValue = asset?.formatNullText()
 
             Text(
-                modifier = Modifier
-                    .padding(start = 16.dp, end = 16.dp, bottom = 16.dp),
                 text = textValue.toString(),
                 style = MaterialTheme.typography.h3,
                 color = Color.White
             )
             Text(
-                modifier = Modifier.padding(bottom = 8.dp),
                 text = "Volume (24h)",
                 style = MaterialTheme.typography.h6,
                 color = Color.Gray
@@ -125,39 +122,37 @@ fun CoinDetail(
             Spacer(modifier = Modifier.height(16.dp))
 
             Text(
-                modifier = Modifier
-                    .padding(bottom = 8.dp),
                 text = "Volume (30d)",
                 style = MaterialTheme.typography.h6,
                 color = Color.Gray
             )
             Text(
-                modifier = Modifier.weight(0.5f),
                 text = asset?.volume_1mth_usd?.toMoneyFormat().toString(),
                 style = MaterialTheme.typography.h5,
                 color = Color.White
             )
+        }
 
-            Button(
-                modifier = Modifier
-                    .padding(16.dp)
-                    .fillMaxWidth(),
-                colors = ButtonDefaults.buttonColors(
-                    backgroundColor = Color(greenColor),
-                    contentColor = Color.White
-                ),
-                onClick = {
-                    asset?.let { asset_ ->
-                        coinDetailSharedViewModel.setIsFavorite(!isFavoriteAsset)
-                        if (isFavoriteAsset)
-                            coinViewModel.deleteAsset(asset_) else
-                            coinViewModel.insertAsset(asset_)
-                    }
+        Button(
+            modifier = Modifier
+                .padding(8.dp)
+                .fillMaxWidth()
+                .weight(0.2f),
+            colors = ButtonDefaults.buttonColors(
+                backgroundColor = Color(greenColor),
+                contentColor = Color.White
+            ),
+            onClick = {
+                asset?.let { asset_ ->
+                    coinDetailSharedViewModel.setIsFavorite(!isFavoriteAsset)
+                    if (isFavoriteAsset)
+                        coinViewModel.deleteAsset(asset_) else
+                        coinViewModel.insertAsset(asset_)
                 }
-            ) {
-                val buttonTextState = if (!isFavoriteAsset) "ADD" else "REMOVE"
-                textButtonStyle(buttonTextState)
             }
+        ) {
+            val buttonTextState = if (!isFavoriteAsset) "ADD" else "REMOVE"
+            textButtonStyle(buttonTextState)
         }
     }
 }
