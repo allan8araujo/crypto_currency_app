@@ -127,4 +127,5 @@ dependencies {
     //ViewmodelCompose
     implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.4.1'
     implementation "androidx.lifecycle:lifecycle-viewmodel-compose:2.4.1"
+    implementation "com.github.skydoves:orbital:0.2.4"
 }
