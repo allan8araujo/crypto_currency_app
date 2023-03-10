@@ -6,6 +6,7 @@ import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
@@ -27,10 +28,15 @@ fun Main() {
 
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentDestination = navBackStackEntry?.destination
+    val titleTextState = remember { mutableStateOf("")}
 
     when (currentDestination?.route) {
         NavigationScreens.CoinDetailScreen.route -> bottomBarState.value = false
-        else -> bottomBarState.value = true
+        NavigationScreens.FavoriteListScreen.route -> titleTextState.value = "Favorites crypto currencies"
+        NavigationScreens.ListScreen.route -> titleTextState.value = "List of crypto currencies"
+        else -> {
+            bottomBarState.value = true
+        }
     }
 
     Scaffold(topBar = {
@@ -40,7 +46,7 @@ fun Main() {
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(8.dp),
-                    text = "Moeda Digital",
+                    text = titleTextState.value,
                     textAlign = TextAlign.Center,
                 )
             })

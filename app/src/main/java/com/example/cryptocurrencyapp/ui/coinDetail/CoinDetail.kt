@@ -60,7 +60,15 @@ fun CoinDetail(
                 )
             }
 
-            AsyncImage(
+            if (asset?.id_icon.isNullOrEmpty()) AsyncImage(
+                modifier = Modifier
+                    .aspectRatio(1f)
+                    .weight(0.3f)
+                    .align(Alignment.CenterHorizontally),
+                model = R.drawable.ic_coin_base,
+                contentDescription = "essa é a moeda ${asset?.name}",
+            )
+            else AsyncImage(
                 modifier = Modifier
                     .aspectRatio(1f)
                     .weight(0.3f)
