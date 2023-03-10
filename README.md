@@ -14,6 +14,9 @@ By providing real-time data on preferred cryptocurrencies, the user-friendly and
   <img src="https://user-images.githubusercontent.com/77680596/224366915-7eda01bd-c299-481e-a718-6eb96bae38c1.png" width="25%"/>
 </h2>
 
+# Download
+App is now available to download on [release](https://github.com/allan8araujo/crypto_currency_app/releases/tag/1.0.0)
+
 # Libraries
 
 • [Coil v2.2.2](https://github.com/coil-kt/coil)
