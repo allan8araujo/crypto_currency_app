@@ -37,73 +37,54 @@ android {
     }
 }
 
+ext {
+    groupVersions = [lifecycle_version  : '2.6.0-alpha01',
+                     core_version       : '1.9.0',
+                     appcompat_version  : '1.6.1',
+                     material_version   : '1.8.0',
+                     constraint_version : '2.1.4',
+                     mediarouter_version: '1.3.1',
+                     paging_version     : '3.1.1',
+                     coil_version       : '2.2.2',
+                     lottie_version     : '3.4.0',
+                     retrofit_version   : '2.9.0',
+                     gson_version       : '2.8.9',
+                     room_version       : '2.5.0',
+                     compose_ui_version : '1.2.0',]
+}
+
+
 dependencies {
-    implementation 'androidx.core:core-ktx:1.9.0'
-    implementation 'androidx.appcompat:appcompat:1.6.1'
-    implementation 'com.google.android.material:material:1.8.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
-    implementation 'androidx.mediarouter:mediarouter:1.3.1'
-    implementation 'androidx.paging:paging-runtime-ktx:3.1.1'
-
-    // ViewModel e LiveData
-    def lifecycle_version = "2.6.0-alpha01"
-
+    implementation "androidx.core:core-ktx:${groupVersions.core_version}"
+    implementation "androidx.appcompat:appcompat:${groupVersions.appcompat_version}"
+    implementation "com.google.android.material:material:${groupVersions.material_version}"
+    implementation "androidx.constraintlayout:constraintlayout:${groupVersions.constraint_version}"
+    implementation "androidx.mediarouter:mediarouter:${groupVersions.mediarouter_version}"
+    implementation "androidx.paging:paging-runtime-ktx:${groupVersions.paging_version}"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.0-rc01"
-    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
-
-    //Coil
-    implementation 'io.coil-kt:coil-compose:2.2.2'
-
-    //LottieFilesAnimation
-    def lottieVersion = "3.4.0"
-    implementation "com.airbnb.android:lottie:$lottieVersion"
-
-    //Retrofit & Gson
-    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
-    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
-    implementation "com.squareup.retrofit2:adapter-rxjava2:2.9.0"
-    implementation 'com.google.code.gson:gson:2.8.9'
-
-    // AndroidX Test - JVM testing
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:${groupVersions.lifecycle_version}"
+    implementation "io.coil-kt:coil-compose:${groupVersions.coil_version}"
+    implementation "com.airbnb.android:lottie:${groupVersions.lottie_version}"
+    implementation "com.squareup.retrofit2:retrofit:${groupVersions.retrofit_version}"
+    implementation "com.squareup.retrofit2:converter-gson:${groupVersions.retrofit_version}"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:${groupVersions.retrofit_version}"
+    implementation "com.google.code.gson:gson:${groupVersions.gson_version}"
     testImplementation 'junit:junit:4.13.2'
     testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.2'
-
-    //liveDate
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
-
-    // Room components
-    def roomVersion = '2.5.0'
-
-    implementation "androidx.room:room-runtime:$roomVersion"
-    kapt "androidx.room:room-compiler:$roomVersion"
-    implementation "androidx.room:room-ktx:$roomVersion"
-
-    implementation "androidx.compose.runtime:runtime-livedata:1.3.3"
-    implementation project(path: ':repository')
-
-    //paging
-    def paging_version = "3.1.1"
-    implementation "androidx.paging:paging-common-ktx:$paging_version"
-    implementation "androidx.paging:paging-runtime-ktx:$paging_version"
-
-    //módulos
-    implementation project(path: ':abstraction')
-
-    //Compose
-    def compose_ui_version = '1.2.0'
+    implementation "androidx.room:room-runtime:${groupVersions.room_version}"
+    kapt "androidx.room:room-compiler:${groupVersions.room_version}"
+    implementation "androidx.room:room-ktx:${groupVersions.room_version}"
     implementation "androidx.compose.material:material:1.3.0-rc01"
     implementation "androidx.compose.compiler:compiler:1.3.2"
     implementation "androidx.compose.ui:ui-tooling-preview:1.3.0-rc01"
     implementation 'androidx.activity:activity-compose:1.6.0'
     implementation "androidx.navigation:navigation-compose:2.5.3"
-    implementation "androidx.compose.ui:ui:$compose_ui_version"
+    implementation "androidx.compose.ui:ui:${groupVersions.compose_ui_version}"
     implementation 'androidx.compose.foundation:foundation:1.3.0'
-    androidTestImplementation "androidx.compose.ui:ui-test-junit4:$compose_ui_version"
+    androidTestImplementation "androidx.compose.ui:ui-test-junit4:${groupVersions.compose_ui_version}"
     debugImplementation "androidx.compose.ui:ui-tooling:1.3.0-rc01"
-
-    //ViewmodelCompose
-    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.4.1'
-    implementation "androidx.lifecycle:lifecycle-viewmodel-compose:2.4.1"
-    implementation "com.github.skydoves:orbital:0.2.4"
+    implementation project(path: ':repository')
+    implementation project(path: ':abstraction')
 }
