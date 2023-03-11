@@ -32,8 +32,14 @@ fun Main() {
 
     when (currentDestination?.route) {
         NavigationScreens.CoinDetailScreen.route -> bottomBarState.value = false
-        NavigationScreens.FavoriteListScreen.route -> titleTextState.value = "Favorites crypto currencies"
-        NavigationScreens.ListScreen.route -> titleTextState.value = "List of crypto currencies"
+        NavigationScreens.FavoriteListScreen.route -> {
+            bottomBarState.value = true
+            titleTextState.value = "Favorites crypto currencies"
+        }
+        NavigationScreens.ListScreen.route -> {
+            titleTextState.value = "List of crypto currencies"
+            bottomBarState.value = true
+        }
         else -> {
             bottomBarState.value = true
         }
