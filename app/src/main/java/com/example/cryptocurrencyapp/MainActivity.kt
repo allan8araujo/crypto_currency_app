@@ -15,7 +15,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         getSecretKey()
 
-        setContent() {
+        setContent {
             MaterialTheme(customColor) {
                 Main()
             }

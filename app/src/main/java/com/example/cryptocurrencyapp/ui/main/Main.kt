@@ -28,7 +28,7 @@ fun Main() {
 
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentDestination = navBackStackEntry?.destination
-    val titleTextState = remember { mutableStateOf("")}
+    val titleTextState = remember { mutableStateOf("") }
 
     when (currentDestination?.route) {
         NavigationScreens.CoinDetailScreen.route -> bottomBarState.value = false

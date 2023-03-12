@@ -1,16 +1,13 @@
 package com.example.cryptocurrencyapp.viewmodel
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.*
 import com.example.abstraction.Assets
 import com.example.abstraction.AssetsItem
 import com.example.apilibrary.repository.Repository
 import com.example.apilibrary.repository.database.AssetsDatabase
 import com.example.apilibrary.repository.states.DataResult
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 class CoinListViewModel(application: Application) : AndroidViewModel(application) {
