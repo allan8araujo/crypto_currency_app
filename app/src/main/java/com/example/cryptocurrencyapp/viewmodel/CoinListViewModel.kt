@@ -43,7 +43,7 @@ class CoinListViewModel(application: Application) : AndroidViewModel(application
         repository.deleteFavoriteAsset(assetItem)
     }
 
-    fun modelFilter(stateCoin: MutableState<CoinListState?>) {
+    fun filterByType(stateCoin: MutableState<CoinListState?>) {
         viewModelScope.launch {
             assetsLiveData.collect { result ->
                 when (result) {

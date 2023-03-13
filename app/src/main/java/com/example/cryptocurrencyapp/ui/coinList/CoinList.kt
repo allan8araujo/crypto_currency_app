@@ -42,7 +42,7 @@ fun CoinList(
     LaunchedEffect(key1 = filterTypeState) {
         Log.i("filterType", "filterType:${filterTypeState.type}")
         scope.launch {
-            coinViewModel.modelFilter(stateCoin)
+            coinViewModel.filterByType(stateCoin)
         }
     }
 
