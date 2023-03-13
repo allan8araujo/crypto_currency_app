@@ -3,6 +3,7 @@ package com.example.cryptocurrencyapp.utils
 import androidx.compose.material.Colors
 import androidx.compose.ui.graphics.Color
 
+const val TAG = "appDebug"
 const val greenColor = 0xFF8D9562
 const val lightBlackColor = 0xFF424242
 const val lightBlack_2Color = 0xFF2B2B2B

@@ -1,13 +1,11 @@
 package com.example.cryptocurrencyapp.ui.coinList
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.Card
-import androidx.compose.material.CircularProgressIndicator
-import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -39,6 +37,15 @@ fun CoinList(
     val stateCoin = remember { mutableStateOf<CoinListState?>(null) }
     val favoriteAssets = coinViewModel.allFavoriteAssets.collectAsState(initial = null)
 
+    val filterTypeState = coinViewModel.filterType.value
+
+    LaunchedEffect(key1 = filterTypeState) {
+        Log.i("filterType", "filterType:${filterTypeState.type}")
+        scope.launch {
+            coinViewModel.modelFilter(stateCoin)
+        }
+    }
+
     LaunchedEffect(key1 = Unit) {
         scope.launch {
             coinViewModel.assetsLiveData.collect { result ->
@@ -53,13 +60,15 @@ fun CoinList(
             }
         }
     }
+
     if (stateCoin.value?.isLoading == true) CircularProgressIndicator(
         modifier = Modifier
             .fillMaxSize()
-            .padding(32.dp)
+            .padding(32.dp), color = Color.White
     )
 
     Column(modifier = Modifier.fillMaxSize()) {
+
         val dateFormat = SimpleDateFormat("dd-MM-yyyy", Locale.US)
         val currentDate = dateFormat.format(Date())
 
@@ -150,5 +159,4 @@ fun CoinList(
         }
     }
 }
-
 
