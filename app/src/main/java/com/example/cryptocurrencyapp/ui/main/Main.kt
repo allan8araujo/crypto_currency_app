@@ -1,5 +1,6 @@
 package com.example.cryptocurrencyapp.ui.main
 
+import android.app.Application
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.*
@@ -9,16 +10,25 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.example.cryptocurrencyapp.commons.FilterCryptoMenu
 import com.example.cryptocurrencyapp.ui.NavigationBarScreens
 import com.example.cryptocurrencyapp.ui.NavigationMain
 import com.example.cryptocurrencyapp.ui.NavigationScreens
+import com.example.cryptocurrencyapp.utils.FilterEnum
+import com.example.cryptocurrencyapp.utils.FilterEnum.Companion.ALL_CURRENCIES
+import com.example.cryptocurrencyapp.utils.FilterEnum.Companion.CRYPTO_CURRENCIES
+import com.example.cryptocurrencyapp.utils.FilterEnum.Companion.TRADITIONAL_CURRENCIES
+import com.example.cryptocurrencyapp.viewmodel.CoinListViewModel
+import com.example.cryptocurrencyapp.viewmodel.factories.ListViewModelFactory
 
 @Composable
 fun Main() {
@@ -28,7 +38,12 @@ fun Main() {
 
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentDestination = navBackStackEntry?.destination
-    val titleTextState = remember { mutableStateOf("")}
+    val titleTextState = remember { mutableStateOf("") }
+
+    val context = LocalContext.current
+    val coinViewModel: CoinListViewModel = viewModel(
+        factory = ListViewModelFactory(context.applicationContext as Application)
+    )
 
     when (currentDestination?.route) {
         NavigationScreens.CoinDetailScreen.route -> bottomBarState.value = false
@@ -54,6 +69,17 @@ fun Main() {
                         .padding(8.dp),
                     text = titleTextState.value,
                     textAlign = TextAlign.Center,
+                )
+            }, actions = {
+                FilterCryptoMenu(
+                    items = listOf(CRYPTO_CURRENCIES, TRADITIONAL_CURRENCIES, ALL_CURRENCIES),
+                    onItemSelected = { selectedItem ->
+                        when (selectedItem){
+                            CRYPTO_CURRENCIES -> coinViewModel.filterType.value = FilterEnum.cryptoCurrencies
+                            TRADITIONAL_CURRENCIES -> coinViewModel.filterType.value = FilterEnum.traditionalCurrencies
+                            ALL_CURRENCIES -> coinViewModel.filterType.value = FilterEnum.allCurrencies
+                        }
+                    }
                 )
             })
         }
@@ -86,6 +112,6 @@ fun Main() {
             }
         }
     }) { paddingValues ->
-        NavigationMain(paddingValues, navController)
+        NavigationMain(paddingValues, navController, coinViewModel)
     }
 }

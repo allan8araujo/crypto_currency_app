@@ -16,4 +16,5 @@ fun Double.toMoneyFormat(): String? {
 }
 
 fun AssetsItem.formatNullText() =
-    if (price_usd != null) price_usd!!.toMoneyFormat().toString() else "Price is currently unavailable."
+    if (price_usd != null) price_usd!!.toMoneyFormat()
+        .toString() else "Price is currently unavailable."

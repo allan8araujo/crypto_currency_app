@@ -7,6 +7,7 @@ class UrlHelper {
     fun loadUrlFromGlide(assetItem: AssetsItem): String? {
         return assetItem.id_icon
     }
+
     fun stringToUrl(idIcon: String): String {
         return Constants.AMAZON_ICON + idIcon.replace("-", "") + ".png"
     }
