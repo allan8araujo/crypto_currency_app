@@ -80,45 +80,38 @@ fun CoinList(
         val dateFormat = SimpleDateFormat("dd-MM-yyyy", Locale.US)
         val currentDate = dateFormat.format(Date())
 
-        Text(
-            modifier = Modifier.fillMaxWidth(), text = currentDate, textAlign = TextAlign.Center
-        )
+        Text(modifier = Modifier.fillMaxWidth(), text = currentDate, textAlign = TextAlign.Center)
 
-
-        LazyColumn(modifier = Modifier.fillMaxSize()) {
+        LazyColumn {
             item {
                 LazyRow {
-
-                    if (notNullList) items(stateCoinList?.isSucess!!.take(5)) { asset ->
-                        val isFavorite =
-                            favoriteAssets?.value?.any { it.name == asset.name } == true
-
-                        Card(modifier = Modifier.padding(8.dp), onClick = {
-
-                            coinDetailSharedViewModel.setIsFavorite(isFavorite)
-
-                            coinDetailSharedViewModel.addCoin(asset)
-                            navController.navigate(NavigationScreens.CoinDetailScreen.route)
-                        }) {
-                            assetItemHorizontal(asset)
+                    if (notNullList) {
+                        val orderedList = stateCoinList?.isSucess!!.sortedBy { assetItem_ ->
+                            assetItem_.price_usd
+                        }
+                        items(orderedList.take(10)) { asset ->
+                            Card(modifier = Modifier.padding(8.dp), onClick = {
+                                coinDetailSharedViewModel.addCoin(asset)
+                                navController.navigate(NavigationScreens.CoinDetailScreen.route)
+                            }) {
+                                AssetItemHorizontal(asset)
+                            }
                         }
                     }
                 }
             }
-            if (notNullList) items(stateCoinList?.isSucess!!) { asset ->
-                val isFavorite =
-                    favoriteAssets?.value?.any { it.name == asset.name } == true
 
-                Card(modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(8.dp), onClick = {
+            if (notNullList) items(stateCoinList?.isSucess!!) { asset ->
+                val isFavorite = favoriteAssets?.value?.any { it.name == asset.name } == true
+
+                Card(modifier = Modifier.padding(8.dp), onClick = {
 
                     coinDetailSharedViewModel.setIsFavorite(isFavorite)
 
                     coinDetailSharedViewModel.addCoin(asset)
                     navController.navigate(NavigationScreens.CoinDetailScreen.route)
                 }) {
-                    assetItem(asset, isFavorite)
+                    AssetItem(asset, isFavorite)
                 }
             }
         }
@@ -128,15 +121,14 @@ fun CoinList(
 @Preview
 @Composable
 private fun assetItemPreview() {
-    assetItem(asset = listMockedAssetsItems[1], isFavorite = false)
+    AssetItem(asset = listMockedAssetsItems[1], isFavorite = false)
 }
 
 @Composable
-private fun assetItem(asset: AssetsItem, isFavorite: Boolean) {
+private fun AssetItem(asset: AssetsItem, isFavorite: Boolean = false) {
     asset.apply {
         Row(
-            modifier = Modifier.padding(8.dp),
-            verticalAlignment = Alignment.CenterVertically
+            modifier = Modifier.padding(8.dp), verticalAlignment = Alignment.CenterVertically
         ) {
             val iconUrl = id_icon?.toAssetsImage()
             if (!iconUrl.isNullOrEmpty()) SubcomposeAsyncImage(
@@ -198,28 +190,15 @@ private fun assetItem(asset: AssetsItem, isFavorite: Boolean) {
     }
 }
 
-@Preview
 @Composable
-private fun assetItemHorizontalPreview() {
-    assetItemHorizontal(asset = listMockedAssetsItems[1])
-}
-
-@Composable
-private fun assetItemHorizontal(asset: AssetsItem) {
+private fun AssetItemHorizontal(asset: AssetsItem) {
     asset.apply {
         Column(
-            modifier = Modifier
-                .height(156.dp)
-                .width(156.dp)
-                .padding(8.dp),
+            modifier = Modifier.padding(8.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-
             val iconUrl = id_icon?.toAssetsImage()
             if (!iconUrl.isNullOrEmpty()) SubcomposeAsyncImage(
-                modifier = Modifier
-                    .weight(1f)
-                    .aspectRatio(1f),
                 model = iconUrl,
                 contentDescription = "essa é a moeda $name",
                 loading = {
@@ -229,28 +208,19 @@ private fun assetItemHorizontal(asset: AssetsItem) {
                 },
             )
             else AsyncImage(
-                modifier = Modifier
-                    .weight(1f)
-                    .aspectRatio(1f),
                 model = R.drawable.ic_coin_base,
                 contentDescription = "essa é a moeda $name",
             )
-            Column(
-                modifier = Modifier
-                    .padding(8.dp)
-                    .weight(1f)
-            ) {
+            Column {
                 Text(text = name)
+                Text(text = asset_id)
             }
 
             val textValue = formatNullText()
 
             Text(
                 text = textValue,
-                modifier = Modifier
-                    .padding(0.dp)
-                    .weight(1f),
-                textAlign = TextAlign.Center
+                textAlign = TextAlign.End
             )
         }
     }
@@ -263,7 +233,6 @@ fun CoinListPreview() {
     val navController = rememberNavController()
 
     CoinList(
-        coinDetailSharedViewModel = coinDetailSharedViewModel,
-        navController = navController
+        coinDetailSharedViewModel = coinDetailSharedViewModel, navController = navController
     )
 }
