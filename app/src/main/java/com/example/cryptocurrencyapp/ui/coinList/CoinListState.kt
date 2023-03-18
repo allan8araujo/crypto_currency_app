@@ -4,6 +4,6 @@ import com.example.abstraction.AssetsItem
 
 data class CoinListState(
     val isLoading: Boolean = false,
-    var isSucess: List<AssetsItem>? = null,
+    var isSucess: List<AssetsItem> = emptyList(),
     val isError: String? = ""
 )
