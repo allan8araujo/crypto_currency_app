@@ -100,7 +100,7 @@ fun CoinList(
                             coinDetailSharedViewModel.addCoin(asset)
                             navController.navigate(NavigationScreens.CoinDetailScreen.route)
                         }) {
-                            assetItemHorizontal(asset, isFavorite)
+                            assetItemHorizontal(asset)
                         }
                     }
                 }
@@ -201,7 +201,7 @@ private fun assetItem(asset: AssetsItem, isFavorite: Boolean) {
 @Preview
 @Composable
 private fun assetItemHorizontalPreview() {
-    assetItemHorizontal(asset = listMockedAssetsItems[1], isFavorite = false)
+    assetItemHorizontal(asset = listMockedAssetsItems[1])
 }
 
 @Composable
