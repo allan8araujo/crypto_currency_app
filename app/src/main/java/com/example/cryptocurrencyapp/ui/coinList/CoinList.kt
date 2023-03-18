@@ -86,10 +86,16 @@ fun CoinList(
             item {
                 LazyRow {
                     if (notNullList) {
-                        val orderedList = stateCoinList?.isSucess!!.sortedBy { assetItem_ ->
-                            assetItem_.price_usd
+
+                        val removeNullPrices =  stateCoinList?.isSucess!!.filter {assetItem_ ->
+                            assetItem_.price_usd != null
                         }
-                        items(orderedList.take(10)) { asset ->
+
+                        val orderedList = removeNullPrices.sortedByDescending { assetItem_ ->
+                            assetItem_.volume_1mth_usd
+                        }
+
+                        items(orderedList.take(20)) { asset ->
                             Card(modifier = Modifier.padding(8.dp), onClick = {
                                 coinDetailSharedViewModel.addCoin(asset)
                                 navController.navigate(NavigationScreens.CoinDetailScreen.route)
@@ -159,7 +165,7 @@ private fun AssetItem(asset: AssetsItem, isFavorite: Boolean = false) {
                 Text(text = asset_id)
             }
 
-            val textValue = formatNullText()
+            val textValue = formatDisplayedText()
 
             Text(
                 text = textValue,
@@ -216,7 +222,7 @@ private fun AssetItemHorizontal(asset: AssetsItem) {
                 Text(text = asset_id)
             }
 
-            val textValue = formatNullText()
+            val textValue = formatDisplayedText()
 
             Text(
                 text = textValue,

@@ -110,7 +110,7 @@ fun CoinDetail(
                 .padding(16.dp)
                 .verticalScroll(rememberScrollState()),
         ) {
-            val textValue = asset?.formatNullText()
+            val textValue = asset?.formatDisplayedText()
 
             Text(
                 text = textValue.toString(),
