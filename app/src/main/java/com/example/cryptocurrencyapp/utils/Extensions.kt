@@ -15,6 +15,6 @@ fun Double.toMoneyFormat(): String? {
     return format.format(this)
 }
 
-fun AssetsItem.formatNullText() =
+fun AssetsItem.formatDisplayedText() =
     if (price_usd != null) price_usd!!.toMoneyFormat()
         .toString() else "price is unavailable."
