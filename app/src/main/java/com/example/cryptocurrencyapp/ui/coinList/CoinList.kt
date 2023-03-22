@@ -44,10 +44,9 @@ fun CoinList(
     val assetsLiveData = coinViewModel?.assetsLiveData
     val stateCoin = remember { mutableStateOf<CoinListState?>(null) }
 
-
     CoinList(
         navController = navController,
-        favoriteAssets = favoriteAssets,
+        favoriteAssets = favoriteAssets?.value,
         filterTypeState = filterTypeState,
         assetsLiveData = assetsLiveData,
         filterByType = coinViewModel?.filterByType(stateCoin),
@@ -65,7 +64,7 @@ fun CoinList(
 @Composable
 fun CoinList(
     navController: NavHostController,
-    favoriteAssets: State<List<AssetsItem>?>?,
+    favoriteAssets: List<AssetsItem>?,
     filterTypeState: FilterEnum?,
     assetsLiveData: Flow<DataResult<Assets>>?,
     filterByType: Unit?,
@@ -138,7 +137,7 @@ fun CoinList(
             }
 
             if (notNullList) items(stateCoinList?.isSucess!!) { asset ->
-                val isFavorite = favoriteAssets?.value?.any { it.name == asset.name } == true
+                val isFavorite = favoriteAssets?.any { it.name == asset.name } == true
 
                 Card(modifier = Modifier.padding(8.dp), onClick = {
 
@@ -265,10 +264,27 @@ private fun AssetItemHorizontal(asset: AssetsItem) {
 @Preview
 @Composable
 fun CoinListPreview() {
-    val coinDetailSharedViewModel = CoinDetailSharedViewModel()
     val navController = rememberNavController()
+    val favoriteAssets = listMockedAssetsItems.toList()
+    val filterTypeState = remember { mutableStateOf<FilterEnum?>(null) }
+    val assetsLiveData = remember { mutableStateOf<Flow<DataResult<Assets>>?>(null) }
+    val filterByType = null // Replace with your own implementation
+    val stateCoin = remember { mutableStateOf<CoinListState?>(null) }
+    val selectedCoin = remember { mutableStateOf<AssetsItem?>(null) }
+    val setIsFavorite = { isFavoriteCoin: Boolean ->
+        // Replace with your own implementation
+    }
 
     CoinList(
-        coinDetailSharedViewModel = coinDetailSharedViewModel, navController = navController
+        navController = navController,
+        favoriteAssets = favoriteAssets,
+        filterTypeState = filterTypeState.value,
+        assetsLiveData = assetsLiveData.value,
+        filterByType = filterByType,
+        stateCoin = stateCoin,
+        addCoin = { newSelectedCoin ->
+            selectedCoin.value = newSelectedCoin
+        },
+        setIsFavorite = setIsFavorite
     )
 }
