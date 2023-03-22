@@ -19,6 +19,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import coil.compose.AsyncImage
 import coil.compose.SubcomposeAsyncImage
+import com.example.abstraction.Assets
 import com.example.abstraction.AssetsItem
 import com.example.abstraction.listMockedAssetsItems
 import com.example.apilibrary.repository.states.DataResult
@@ -27,36 +28,65 @@ import com.example.cryptocurrencyapp.ui.NavigationScreens
 import com.example.cryptocurrencyapp.ui.coinDetail.CoinDetailSharedViewModel
 import com.example.cryptocurrencyapp.utils.*
 import com.example.cryptocurrencyapp.viewmodel.CoinListViewModel
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
 
-@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun CoinList(
     coinViewModel: CoinListViewModel? = null,
     coinDetailSharedViewModel: CoinDetailSharedViewModel,
     navController: NavHostController
 ) {
-    val scope = rememberCoroutineScope()
-    val stateCoin = remember { mutableStateOf<CoinListState?>(null) }
     val favoriteAssets = coinViewModel?.allFavoriteAssets?.collectAsState(initial = null)
-
     val filterTypeState = coinViewModel?.filterType?.value
+    val assetsLiveData = coinViewModel?.assetsLiveData
+    val stateCoin = remember { mutableStateOf<CoinListState?>(null) }
+
+
+    CoinList(
+        navController = navController,
+        favoriteAssets = favoriteAssets,
+        filterTypeState = filterTypeState,
+        assetsLiveData = assetsLiveData,
+        filterByType = coinViewModel?.filterByType(stateCoin),
+        stateCoin = stateCoin,
+        addCoin = { newSelectedCoin ->
+            coinDetailSharedViewModel.addCoin(newSelectedCoin)
+        },
+        setIsFavorite = { isFavoriteCoin ->
+            coinDetailSharedViewModel.setIsFavorite(isFavoriteCoin)
+        }
+    )
+}
+
+@OptIn(ExperimentalMaterialApi::class)
+@Composable
+fun CoinList(
+    navController: NavHostController,
+    favoriteAssets: State<List<AssetsItem>?>?,
+    filterTypeState: FilterEnum?,
+    assetsLiveData: Flow<DataResult<Assets>>?,
+    filterByType: Unit?,
+    stateCoin: MutableState<CoinListState?>,
+    addCoin: (AssetsItem) -> Unit,
+    setIsFavorite: (Boolean) -> Unit,
+) {
+    val scope = rememberCoroutineScope()
 
     val stateCoinList = stateCoin.value
     val notNullList = stateCoinList?.isSucess != null
-
     LaunchedEffect(key1 = filterTypeState) {
         Log.i("filterType", "filterType:${filterTypeState?.type}")
         scope.launch {
-            coinViewModel?.filterByType(stateCoin)
+            filterByType
         }
     }
 
     LaunchedEffect(key1 = Unit) {
         scope.launch {
-            coinViewModel?.assetsLiveData?.collect { result ->
+            assetsLiveData?.collect { result ->
                 when (result) {
                     is DataResult.Loading -> stateCoin.value = (CoinListState(isLoading = true))
                     is DataResult.Success -> stateCoin.value =
@@ -87,7 +117,7 @@ fun CoinList(
                 LazyRow {
                     if (notNullList) {
 
-                        val removeNullPrices =  stateCoinList?.isSucess!!.filter {assetItem_ ->
+                        val removeNullPrices = stateCoinList?.isSucess!!.filter { assetItem_ ->
                             assetItem_.price_usd != null
                         }
 
@@ -97,7 +127,7 @@ fun CoinList(
 
                         items(orderedList.take(20)) { asset ->
                             Card(modifier = Modifier.padding(8.dp), onClick = {
-                                coinDetailSharedViewModel.addCoin(asset)
+                                addCoin(asset)
                                 navController.navigate(NavigationScreens.CoinDetailScreen.route)
                             }) {
                                 AssetItemHorizontal(asset)
@@ -112,9 +142,9 @@ fun CoinList(
 
                 Card(modifier = Modifier.padding(8.dp), onClick = {
 
-                    coinDetailSharedViewModel.setIsFavorite(isFavorite)
+                    setIsFavorite(isFavorite)
 
-                    coinDetailSharedViewModel.addCoin(asset)
+                    addCoin(asset)
                     navController.navigate(NavigationScreens.CoinDetailScreen.route)
                 }) {
                     AssetItem(asset, isFavorite)
