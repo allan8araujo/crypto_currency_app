@@ -268,11 +268,10 @@ fun CoinListPreview() {
     val favoriteAssets = listMockedAssetsItems.toList()
     val filterTypeState = remember { mutableStateOf<FilterEnum?>(null) }
     val assetsLiveData = remember { mutableStateOf<Flow<DataResult<Assets>>?>(null) }
-    val filterByType = null // Replace with your own implementation
+    val filterByType = null
     val stateCoin = remember { mutableStateOf<CoinListState?>(null) }
     val selectedCoin = remember { mutableStateOf<AssetsItem?>(null) }
     val setIsFavorite = { isFavoriteCoin: Boolean ->
-        // Replace with your own implementation
     }
 
     CoinList(
