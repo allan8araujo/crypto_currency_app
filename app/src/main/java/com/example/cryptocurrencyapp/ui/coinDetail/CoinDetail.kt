@@ -18,6 +18,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
+import com.example.abstraction.AssetsItem
 import com.example.cryptocurrencyapp.R
 import com.example.cryptocurrencyapp.commons.composeBackButton
 import com.example.cryptocurrencyapp.commons.textButtonStyle
@@ -39,6 +40,34 @@ fun CoinDetail(
         0.20f to Color(lightBlackColor),
         1f to Color(lightBlackColor)
     )
+
+    CoinDetail(
+        navController = navController,
+        asset = asset,
+        isFavoriteAsset = isFavoriteAsset,
+        deleteAsset = { asset ->
+            coinViewModel.deleteAsset(asset)
+        },
+        insertAsset = { asset ->
+            coinViewModel.insertAsset(asset)
+        },
+        setIsFavorite = { boolean ->
+            coinDetailSharedViewModel.setIsFavorite(boolean)
+        },
+        backgroundCoinColor = backgroundCoinColor
+    )
+}
+
+@Composable
+fun CoinDetail(
+    navController: NavHostController,
+    asset: AssetsItem?,
+    isFavoriteAsset: Boolean,
+    deleteAsset: (AssetsItem) -> Unit,
+    insertAsset: (AssetsItem) -> Unit,
+    setIsFavorite: (Boolean) -> Unit,
+    backgroundCoinColor: Brush
+) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -152,10 +181,10 @@ fun CoinDetail(
             ),
             onClick = {
                 asset?.let { asset_ ->
-                    coinDetailSharedViewModel.setIsFavorite(!isFavoriteAsset)
+                    setIsFavorite(!isFavoriteAsset)
                     if (isFavoriteAsset)
-                        coinViewModel.deleteAsset(asset_) else
-                        coinViewModel.insertAsset(asset_)
+                        deleteAsset(asset_) else
+                        insertAsset(asset_)
                 }
             }
         ) {
