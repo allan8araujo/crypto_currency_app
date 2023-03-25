@@ -13,16 +13,37 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import coil.compose.AsyncImage
 import coil.compose.SubcomposeAsyncImage
+import com.example.abstraction.AssetsItem
+import com.example.abstraction.listMockedAssetsItems
 import com.example.cryptocurrencyapp.R
 import com.example.cryptocurrencyapp.ui.NavigationScreens
 import com.example.cryptocurrencyapp.ui.coinDetail.CoinDetailSharedViewModel
 import com.example.cryptocurrencyapp.utils.toAssetsImage
 import com.example.cryptocurrencyapp.utils.toMoneyFormat
 import com.example.cryptocurrencyapp.viewmodel.CoinListViewModel
+
+@Composable
+fun FavoriteCoinList(
+    navController: NavHostController,
+    coinViewModel: CoinListViewModel,
+    coinDetailSharedViewModel: CoinDetailSharedViewModel
+) {
+    val coinFavoriteList = coinViewModel.allFavoriteAssets.collectAsState(initial = null).value
+
+    FavoriteCoinList(
+        navController = navController,
+        coinFavoriteList = coinFavoriteList,
+        addCoin = { asset ->
+            coinDetailSharedViewModel.addCoin(asset)
+        }
+    )
+}
 
 @OptIn(
     ExperimentalMaterialApi::class, ExperimentalFoundationApi::class,
@@ -31,10 +52,9 @@ import com.example.cryptocurrencyapp.viewmodel.CoinListViewModel
 @Composable
 fun FavoriteCoinList(
     navController: NavHostController,
-    coinViewModel: CoinListViewModel,
-    coinDetailSharedViewModel: CoinDetailSharedViewModel
+    coinFavoriteList: List<AssetsItem>?,
+    addCoin: (AssetsItem) -> Unit,
 ) {
-    val coinFavoriteList = coinViewModel.allFavoriteAssets.collectAsState(initial = null).value
     LazyVerticalStaggeredGrid(
         columns = StaggeredGridCells.Fixed(2),
         modifier = Modifier.fillMaxSize()
@@ -43,7 +63,7 @@ fun FavoriteCoinList(
             Card(modifier = Modifier
                 .fillMaxWidth()
                 .padding(8.dp), onClick = {
-                coinDetailSharedViewModel.addCoin(asset)
+                addCoin(asset)
                 navController.navigate(NavigationScreens.CoinDetailScreen.route)
             }) {
                 asset.apply {
@@ -83,4 +103,17 @@ fun FavoriteCoinList(
             }
         }
     }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun PreviewFavoriteCoinList() {
+    val navController = rememberNavController()
+    val coinFavoriteList = listMockedAssetsItems
+
+    FavoriteCoinList(
+        navController = navController,
+        coinFavoriteList = coinFavoriteList,
+        addCoin = {}
+    )
 }
