@@ -1,3 +1,5 @@
+@file:Suppress("NAME_SHADOWING")
+
 package com.example.cryptocurrencyapp.ui.coinDetail
 
 import androidx.compose.foundation.Image
@@ -15,8 +17,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import coil.compose.AsyncImage
 import com.example.abstraction.AssetsItem
 import com.example.cryptocurrencyapp.R
@@ -34,12 +38,7 @@ fun CoinDetail(
 ) {
     val asset = coinDetailSharedViewModel.selectedCoin
     val isFavoriteAsset = coinDetailSharedViewModel.isFavoriteAsset
-    val backgroundCoinColor = Brush.verticalGradient(
-        0f to Color(greenColor),
-        0.20f to Color(greenColor),
-        0.20f to Color(lightBlackColor),
-        1f to Color(lightBlackColor)
-    )
+    val backgroundCoinColor = getGradientBackground()
 
     CoinDetail(
         navController = navController,
@@ -57,6 +56,14 @@ fun CoinDetail(
         backgroundCoinColor = backgroundCoinColor
     )
 }
+
+@Composable
+private fun getGradientBackground() = Brush.verticalGradient(
+    0f to Color(greenColor),
+    0.20f to Color(greenColor),
+    0.20f to Color(lightBlackColor),
+    1f to Color(lightBlackColor)
+)
 
 @Composable
 fun CoinDetail(
@@ -192,4 +199,36 @@ fun CoinDetail(
             textButtonStyle(buttonTextState)
         }
     }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun CoinDetailPreview() {
+    CoinDetail(
+        navController = rememberNavController(),
+        asset = AssetsItem(
+            asset_id = "1",
+            name = "Bitcoin",
+            price_usd = 48281.39,
+            volume_1hrs_usd = 102480000.0,
+            volume_1day_usd = 10248000000.0,
+            volume_1mth_usd = 119601000000.0,
+            id_icon = "https://s3.us-east-2.amazonaws.com/nomics-api/static/images/currencies/btc.svg",
+            data_symbols_count = 0,
+            type_is_crypto = 0,
+            data_end = null,
+            data_orderbook_end = null,
+            data_orderbook_start = null,
+            data_quote_end = null,
+            data_quote_start = null,
+            data_start = null,
+            data_trade_end = null,
+            data_trade_start = null
+        ),
+        isFavoriteAsset = true,
+        deleteAsset = { asset -> },
+        insertAsset = { asset -> },
+        setIsFavorite = { boolean -> },
+        backgroundCoinColor = getGradientBackground()
+    )
 }
