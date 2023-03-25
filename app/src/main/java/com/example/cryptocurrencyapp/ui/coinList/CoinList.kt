@@ -1,29 +1,23 @@
 package com.example.cryptocurrencyapp.ui.coinList
 
 import android.util.Log
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.*
 import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
-import coil.compose.AsyncImage
-import coil.compose.SubcomposeAsyncImage
 import com.example.abstraction.Assets
 import com.example.abstraction.AssetsItem
 import com.example.abstraction.listMockedAssetsItems
 import com.example.apilibrary.repository.states.DataResult
-import com.example.cryptocurrencyapp.R
 import com.example.cryptocurrencyapp.ui.NavigationScreens
 import com.example.cryptocurrencyapp.ui.coinDetail.CoinDetailSharedViewModel
 import com.example.cryptocurrencyapp.utils.*
@@ -149,114 +143,6 @@ fun CoinList(
                     AssetItem(asset, isFavorite)
                 }
             }
-        }
-    }
-}
-
-@Preview
-@Composable
-private fun assetItemPreview() {
-    AssetItem(asset = listMockedAssetsItems[1], isFavorite = false)
-}
-
-@Composable
-private fun AssetItem(asset: AssetsItem, isFavorite: Boolean = false) {
-    asset.apply {
-        Row(
-            modifier = Modifier.padding(8.dp), verticalAlignment = Alignment.CenterVertically
-        ) {
-            val iconUrl = id_icon?.toAssetsImage()
-            if (!iconUrl.isNullOrEmpty()) SubcomposeAsyncImage(
-                modifier = Modifier
-                    .weight(0.4f)
-                    .aspectRatio(1f),
-                model = iconUrl,
-                contentDescription = "essa é a moeda $name",
-                loading = {
-                    CircularProgressIndicator(
-                        color = Color(greenColor)
-                    )
-                },
-            )
-            else AsyncImage(
-                modifier = Modifier
-                    .weight(0.4f)
-                    .aspectRatio(1f),
-                model = R.drawable.ic_coin_base,
-                contentDescription = "essa é a moeda $name",
-            )
-            Column(
-                modifier = Modifier
-                    .padding(8.dp)
-                    .weight(1f)
-            ) {
-                Text(text = name)
-                Text(text = asset_id)
-            }
-
-            val textValue = formatDisplayedText()
-
-            Text(
-                text = textValue,
-                modifier = Modifier
-                    .padding(8.dp)
-                    .weight(1f),
-                textAlign = TextAlign.End
-            )
-
-            if (isFavorite) {
-                Image(
-                    modifier = Modifier
-                        .weight(0.2f)
-                        .aspectRatio(1f),
-                    painter = painterResource(id = R.drawable.ic_baseline_star_coin_24),
-                    contentDescription = "essa é a moeda $name",
-                )
-            } else {
-                Image(
-                    modifier = Modifier
-                        .weight(0.2f)
-                        .aspectRatio(1f),
-                    painter = painterResource(id = R.drawable.baseline_star_outline_24),
-                    contentDescription = "essa é a moeda $name",
-                )
-            }
-        }
-    }
-}
-
-@Composable
-private fun AssetItemHorizontal(asset: AssetsItem) {
-    asset.apply {
-        Column(
-            modifier = Modifier.padding(8.dp),
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            val iconUrl = id_icon?.toAssetsImage()
-            if (!iconUrl.isNullOrEmpty()) SubcomposeAsyncImage(
-                model = iconUrl,
-                contentDescription = "essa é a moeda $name",
-                loading = {
-                    CircularProgressIndicator(
-                        color = Color(greenColor)
-                    )
-                },
-            )
-            else AsyncImage(
-                model = R.drawable.ic_coin_base,
-                contentDescription = "essa é a moeda $name",
-            )
-            Column {
-                Text(text = name)
-                Text(text = asset_id)
-            }
-
-            val textValue = formatDisplayedText()
-
-            Text(
-                text = textValue,
-                textAlign = TextAlign.End
-            )
         }
     }
 }
