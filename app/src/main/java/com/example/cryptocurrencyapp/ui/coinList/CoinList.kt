@@ -8,8 +8,9 @@ import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
@@ -23,7 +24,6 @@ import com.example.cryptocurrencyapp.utils.*
 import com.example.cryptocurrencyapp.viewmodel.CoinListViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
-import java.text.SimpleDateFormat
 import java.util.*
 
 @Composable
@@ -36,6 +36,8 @@ fun CoinList(
     val filterTypeState = coinViewModel?.filterType?.value
     val assetsLiveData = coinViewModel?.assetsLiveData
     val stateCoin = remember { mutableStateOf<CoinListState?>(null) }
+    val currentWidthSize = (LocalView.current.width / 8f).dp
+    val currentHeightSize = (LocalView.current.height / 8f).dp
 
     CoinList(
         navController = navController,
@@ -49,7 +51,9 @@ fun CoinList(
         },
         setIsFavorite = { isFavoriteCoin ->
             coinDetailSharedViewModel.setIsFavorite(isFavoriteCoin)
-        }
+        },
+        currentWidthSize = currentWidthSize,
+        currentHeightSize = currentHeightSize
     )
 }
 
@@ -64,11 +68,13 @@ fun CoinList(
     stateCoin: MutableState<CoinListState?>,
     addCoin: (AssetsItem) -> Unit,
     setIsFavorite: (Boolean) -> Unit,
+    currentWidthSize: Dp,
+    currentHeightSize: Dp,
 ) {
     val scope = rememberCoroutineScope()
-
     val stateCoinList = stateCoin.value
     val notNullList = stateCoinList?.isSucess != null
+
     LaunchedEffect(key1 = filterTypeState) {
         filterByType
     }
@@ -91,19 +97,14 @@ fun CoinList(
     if (stateCoin.value?.isLoading == true) CircularProgressIndicator(
         modifier = Modifier
             .fillMaxSize()
-            .padding(32.dp), color = Color.White
+            .padding(64.dp), color = Color.White
     )
 
     Column(modifier = Modifier.fillMaxSize()) {
 
-        val dateFormat = SimpleDateFormat("dd-MM-yyyy", Locale.US)
-        val currentDate = dateFormat.format(Date())
-
-        Text(modifier = Modifier.fillMaxWidth(), text = currentDate, textAlign = TextAlign.Center)
-
         LazyColumn {
             item {
-                LazyRow {
+                LazyRow() {
                     if (notNullList) {
 
                         val removeNullPrices = stateCoinList?.isSucess!!.filter { assetItem_ ->
@@ -115,10 +116,14 @@ fun CoinList(
                         }
 
                         items(orderedList.take(20)) { asset ->
-                            Card(modifier = Modifier.padding(8.dp), onClick = {
-                                addCoin(asset)
-                                navController.navigate(NavigationScreens.CoinDetailScreen.route)
-                            }) {
+                            Card(modifier = Modifier
+                                .padding(8.dp)
+                                .width(currentWidthSize)
+                                .height(currentHeightSize),
+                                onClick = {
+                                    addCoin(asset)
+                                    navController.navigate(NavigationScreens.CoinDetailScreen.route)
+                                }) {
                                 AssetItemHorizontal(asset)
                             }
                         }
@@ -169,6 +174,8 @@ fun CoinListPreview() {
         addCoin = { newSelectedCoin ->
             selectedCoin.value = newSelectedCoin
         },
-        setIsFavorite = setIsFavorite
+        setIsFavorite = setIsFavorite,
+        currentWidthSize = 130.dp,
+        currentHeightSize = 130.dp,
     )
 }

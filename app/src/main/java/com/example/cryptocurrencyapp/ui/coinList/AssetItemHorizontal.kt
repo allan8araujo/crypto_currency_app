@@ -1,11 +1,12 @@
 package com.example.cryptocurrencyapp.ui.coinList
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
@@ -29,27 +30,30 @@ private fun assetItemPreview() {
 @Composable
 fun AssetItemHorizontal(asset: AssetsItem) {
     asset.apply {
-        Column(
-            modifier = Modifier.padding(8.dp),
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
+        Column(modifier = Modifier.padding(8.dp).fillMaxHeight()) {
             val iconUrl = id_icon?.toAssetsImage()
-            if (!iconUrl.isNullOrEmpty()) SubcomposeAsyncImage(
-                model = iconUrl,
-                contentDescription = "essa é a moeda $name",
-                loading = {
-                    CircularProgressIndicator(
-                        color = Color(greenColor)
+
+            Row {
+                if (!iconUrl.isNullOrEmpty()) {
+                    SubcomposeAsyncImage(
+                        modifier = Modifier.padding(4.dp),
+                        model = iconUrl,
+                        contentDescription = "essa é a moeda $name",
+                        loading = {
+                            CircularProgressIndicator(
+                                color = Color(greenColor)
+                            )
+                        },
                     )
-                },
-            )
-            else AsyncImage(
-                model = R.drawable.ic_coin_base,
-                contentDescription = "essa é a moeda $name",
-            )
-            Column {
-                Text(text = name)
-                Text(text = asset_id)
+                    assetName()
+                } else {
+                    AsyncImage(
+                        modifier = Modifier.padding(4.dp),
+                        model = R.drawable.ic_coin_base,
+                        contentDescription = "essa é a moeda $name",
+                    )
+                    assetName()
+                }
             }
 
             val textValue = formatDisplayedText()
@@ -59,5 +63,15 @@ fun AssetItemHorizontal(asset: AssetsItem) {
                 textAlign = TextAlign.End
             )
         }
+    }
+}
+
+@Composable
+private fun AssetsItem.assetName() {
+    Column(modifier = Modifier.padding(4.dp)) {
+        if (asset_id.isNotEmpty())
+            Text(text = asset_id, textAlign = TextAlign.Center)
+        else
+            Text(text = name, textAlign = TextAlign.Center)
     }
 }
