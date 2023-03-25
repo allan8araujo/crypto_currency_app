@@ -1,6 +1,5 @@
 package com.example.cryptocurrencyapp.ui.coinList
 
-import android.util.Log
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
@@ -71,10 +70,7 @@ fun CoinList(
     val stateCoinList = stateCoin.value
     val notNullList = stateCoinList?.isSucess != null
     LaunchedEffect(key1 = filterTypeState) {
-        Log.i("filterType", "filterType:${filterTypeState?.type}")
-        scope.launch {
-            filterByType
-        }
+        filterByType
     }
 
     LaunchedEffect(key1 = Unit) {
@@ -147,15 +143,18 @@ fun CoinList(
     }
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
 fun CoinListPreview() {
     val navController = rememberNavController()
+
     val favoriteAssets = listMockedAssetsItems.toList()
+
     val filterTypeState = remember { mutableStateOf<FilterEnum?>(null) }
     val assetsLiveData = remember { mutableStateOf<Flow<DataResult<Assets>>?>(null) }
     val filterByType = null
-    val stateCoin = remember { mutableStateOf<CoinListState?>(null) }
+    val stateCoin =
+        remember { mutableStateOf<CoinListState?>(CoinListState(isSucess = listMockedAssetsItems)) }
     val selectedCoin = remember { mutableStateOf<AssetsItem?>(null) }
     val setIsFavorite = { isFavoriteCoin: Boolean ->
     }
