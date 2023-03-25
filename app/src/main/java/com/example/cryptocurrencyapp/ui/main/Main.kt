@@ -10,16 +10,19 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.cryptocurrencyapp.commons.FilterCryptoMenu
+import com.example.cryptocurrencyapp.commons.ubuntuBold
 import com.example.cryptocurrencyapp.ui.NavigationBarScreens
 import com.example.cryptocurrencyapp.ui.NavigationMain
 import com.example.cryptocurrencyapp.ui.NavigationScreens
@@ -27,6 +30,7 @@ import com.example.cryptocurrencyapp.utils.FilterEnum
 import com.example.cryptocurrencyapp.utils.FilterEnum.Companion.ALL_CURRENCIES
 import com.example.cryptocurrencyapp.utils.FilterEnum.Companion.CRYPTO_CURRENCIES
 import com.example.cryptocurrencyapp.utils.FilterEnum.Companion.TRADITIONAL_CURRENCIES
+import com.example.cryptocurrencyapp.utils.iceWhiteColor
 import com.example.cryptocurrencyapp.viewmodel.CoinListViewModel
 import com.example.cryptocurrencyapp.viewmodel.factories.ListViewModelFactory
 
@@ -45,16 +49,11 @@ fun Main() {
         factory = ListViewModelFactory(context.applicationContext as Application)
     )
 
+    titleTextState.value = "Vellorum"
+
     when (currentDestination?.route) {
         NavigationScreens.CoinDetailScreen.route -> bottomBarState.value = false
-        NavigationScreens.FavoriteListScreen.route -> {
-            bottomBarState.value = true
-            titleTextState.value = "Favorites crypto currencies"
-        }
-        NavigationScreens.ListScreen.route -> {
-            titleTextState.value = "List of crypto currencies"
-            bottomBarState.value = true
-        }
+
         else -> {
             bottomBarState.value = true
         }
@@ -66,18 +65,24 @@ fun Main() {
                 Text(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(8.dp),
+                        .padding(16.dp),
                     text = titleTextState.value,
-                    textAlign = TextAlign.Center,
+                    textAlign = TextAlign.Start,
+                    fontFamily = ubuntuBold,
+                    fontSize = 24.sp,
+                    color = Color(iceWhiteColor)
                 )
             }, actions = {
                 FilterCryptoMenu(
                     items = listOf(CRYPTO_CURRENCIES, TRADITIONAL_CURRENCIES, ALL_CURRENCIES),
                     onItemSelected = { selectedItem ->
-                        when (selectedItem){
-                            CRYPTO_CURRENCIES -> coinViewModel.filterType.value = FilterEnum.cryptoCurrencies
-                            TRADITIONAL_CURRENCIES -> coinViewModel.filterType.value = FilterEnum.traditionalCurrencies
-                            ALL_CURRENCIES -> coinViewModel.filterType.value = FilterEnum.allCurrencies
+                        when (selectedItem) {
+                            CRYPTO_CURRENCIES -> coinViewModel.filterType.value =
+                                FilterEnum.cryptoCurrencies
+                            TRADITIONAL_CURRENCIES -> coinViewModel.filterType.value =
+                                FilterEnum.traditionalCurrencies
+                            ALL_CURRENCIES -> coinViewModel.filterType.value =
+                                FilterEnum.allCurrencies
                         }
                     }
                 )

@@ -5,16 +5,18 @@ import androidx.compose.ui.graphics.Color
 
 const val TAG = "appDebug"
 const val greenColor = 0xFF8D9562
+const val iceWhiteColor = 0xFFDADADA
 const val lightBlackColor = 0xFF424242
 const val lightBlack_2Color = 0xFF2B2B2B
+const val lightBlack_3Color = 0xFF060606
 const val transparentColor = 0x00000000
 
 val customColor = Colors(
-    primary = Color(lightBlackColor),
+    primary = Color(lightBlack_3Color),
     primaryVariant = Color(greenColor),
     secondary = Color(greenColor),
     secondaryVariant = Color(greenColor),
-    background = Color(lightBlackColor),
+    background = Color(lightBlack_3Color),
     surface = Color(lightBlack_2Color),
     error = Color.Red,
     onPrimary = Color.White,

@@ -17,6 +17,7 @@ import coil.compose.SubcomposeAsyncImage
 import com.example.abstraction.AssetsItem
 import com.example.abstraction.listMockedAssetsItems
 import com.example.cryptocurrencyapp.R
+import com.example.cryptocurrencyapp.commons.robotoRegular
 import com.example.cryptocurrencyapp.utils.formatDisplayedText
 import com.example.cryptocurrencyapp.utils.greenColor
 import com.example.cryptocurrencyapp.utils.toAssetsImage
@@ -30,7 +31,9 @@ private fun assetItemPreview() {
 @Composable
 fun AssetItemHorizontal(asset: AssetsItem) {
     asset.apply {
-        Column(modifier = Modifier.padding(8.dp).fillMaxHeight()) {
+        Column(modifier = Modifier
+            .padding(8.dp)
+            .fillMaxHeight()) {
             val iconUrl = id_icon?.toAssetsImage()
 
             Row {
@@ -60,7 +63,8 @@ fun AssetItemHorizontal(asset: AssetsItem) {
 
             Text(
                 text = textValue,
-                textAlign = TextAlign.End
+                textAlign = TextAlign.End,
+                fontFamily = robotoRegular
             )
         }
     }
@@ -70,8 +74,14 @@ fun AssetItemHorizontal(asset: AssetsItem) {
 private fun AssetsItem.assetName() {
     Column(modifier = Modifier.padding(4.dp)) {
         if (asset_id.isNotEmpty())
-            Text(text = asset_id, textAlign = TextAlign.Center)
+            Text(
+                text = asset_id, textAlign = TextAlign.Center,
+                fontFamily = robotoRegular
+            )
         else
-            Text(text = name, textAlign = TextAlign.Center)
+            Text(
+                text = name, textAlign = TextAlign.Center,
+                fontFamily = robotoRegular
+            )
     }
 }

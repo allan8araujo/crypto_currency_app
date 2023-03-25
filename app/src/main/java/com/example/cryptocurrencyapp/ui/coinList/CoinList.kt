@@ -9,15 +9,18 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalView
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.abstraction.Assets
 import com.example.abstraction.AssetsItem
 import com.example.abstraction.listMockedAssetsItems
 import com.example.apilibrary.repository.states.DataResult
+import com.example.cryptocurrencyapp.commons.poppinsRegular
 import com.example.cryptocurrencyapp.ui.NavigationScreens
 import com.example.cryptocurrencyapp.ui.coinDetail.CoinDetailSharedViewModel
 import com.example.cryptocurrencyapp.utils.*
@@ -100,7 +103,23 @@ fun CoinList(
             .padding(64.dp), color = Color.White
     )
 
-    Column(modifier = Modifier.fillMaxSize()) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp)
+    ) {
+        val titleTextState = remember { "Top Coins" }
+
+        Text(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(8.dp),
+            text = titleTextState,
+            textAlign = TextAlign.Start,
+            fontFamily = poppinsRegular,
+            fontSize = 16.sp,
+            color = Color(iceWhiteColor)
+        )
 
         LazyColumn {
             item {
@@ -117,7 +136,7 @@ fun CoinList(
 
                         items(orderedList.take(20)) { asset ->
                             Card(modifier = Modifier
-                                .padding(8.dp)
+                                .padding(end = 16.dp)
                                 .width(currentWidthSize)
                                 .height(currentHeightSize),
                                 onClick = {
@@ -131,10 +150,11 @@ fun CoinList(
                 }
             }
 
+            item { Spacer(modifier = Modifier.padding(8.dp)) }
             if (notNullList) items(stateCoinList?.isSucess!!) { asset ->
                 val isFavorite = favoriteAssets?.any { it.name == asset.name } == true
 
-                Card(modifier = Modifier.padding(8.dp), onClick = {
+                Card(modifier = Modifier.padding(bottom = 16.dp), onClick = {
 
                     setIsFavorite(isFavorite)
 
