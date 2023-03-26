@@ -65,7 +65,7 @@ fun Main() {
                 Text(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(16.dp),
+                        .padding(vertical = 16.dp),
                     text = titleTextState.value,
                     textAlign = TextAlign.Start,
                     fontFamily = ubuntuBold,

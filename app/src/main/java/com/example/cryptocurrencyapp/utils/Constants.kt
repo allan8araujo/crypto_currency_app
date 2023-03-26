@@ -11,6 +11,9 @@ const val lightBlack_2Color = 0xFF2B2B2B
 const val lightBlack_3Color = 0xFF060606
 const val transparentColor = 0x00000000
 
+const val iceWhiteColor_30 = 0x4CDADADA
+const val lightBlackColor_30 =0x4C04020A
+
 val customColor = Colors(
     primary = Color(lightBlack_3Color),
     primaryVariant = Color(greenColor),

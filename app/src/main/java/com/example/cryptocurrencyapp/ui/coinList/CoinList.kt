@@ -1,12 +1,19 @@
 package com.example.cryptocurrencyapp.ui.coinList
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.text.style.TextAlign
@@ -113,11 +120,11 @@ fun CoinList(
         Text(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(8.dp),
+                .padding(bottom = 8.dp),
             text = titleTextState,
             textAlign = TextAlign.Start,
             fontFamily = poppinsRegular,
-            fontSize = 16.sp,
+            fontSize = 18.sp,
             color = Color(iceWhiteColor)
         )
 
@@ -134,12 +141,30 @@ fun CoinList(
                             assetItem_.volume_1mth_usd
                         }
 
+                        val whiteBlackGradientColor = Brush.linearGradient(
+                            colors = listOf(
+                                Color(iceWhiteColor_30),
+                                Color(lightBlackColor_30)
+                            ),
+                            start = Offset.Zero,
+                            end = Offset.Infinite
+                        )
+
                         items(orderedList.take(20)) { asset ->
-                            Card(modifier = Modifier
+                            Box(modifier = Modifier
                                 .padding(end = 16.dp)
                                 .width(currentWidthSize)
-                                .height(currentHeightSize),
-                                onClick = {
+                                .height(currentHeightSize)
+                                .clip(RoundedCornerShape(16))
+                                .border(
+                                    width = 1.dp,
+                                    brush = whiteBlackGradientColor,
+                                    shape = RoundedCornerShape(16)
+                                )
+                                .background(
+                                    brush = whiteBlackGradientColor,
+                                )
+                                .clickable {
                                     addCoin(asset)
                                     navController.navigate(NavigationScreens.CoinDetailScreen.route)
                                 }) {
