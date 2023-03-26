@@ -119,14 +119,14 @@ fun CoinDetail(
                     Image(
                         modifier = Modifier
                             .aspectRatio(1f),
-                        painter = painterResource(id = R.drawable.ic_baseline_star_coin_24),
+                        painter = painterResource(id = R.drawable.ic_heart),
                         contentDescription = "is favorite"
                     )
                 } else {
                     Image(
                         modifier = Modifier
                             .aspectRatio(1f),
-                        painter = painterResource(id = R.drawable.baseline_star_outline_24),
+                        painter = painterResource(id = R.drawable.ic_outlined_heart),
                         contentDescription = "is not favorite"
                     )
                 }

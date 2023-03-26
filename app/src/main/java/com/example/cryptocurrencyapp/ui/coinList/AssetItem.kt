@@ -34,7 +34,9 @@ private fun assetItemPreview() {
 fun AssetItem(asset: AssetsItem, isFavorite: Boolean = false) {
     asset.apply {
         Row(
-            modifier = Modifier.padding(8.dp), verticalAlignment = Alignment.CenterVertically
+            modifier = Modifier
+                .padding(8.dp),
+            verticalAlignment = Alignment.CenterVertically,
         ) {
             val iconUrl = id_icon?.toAssetsImage()
             if (!iconUrl.isNullOrEmpty()) SubcomposeAsyncImage(
@@ -80,7 +82,7 @@ fun AssetItem(asset: AssetsItem, isFavorite: Boolean = false) {
                     modifier = Modifier
                         .weight(0.2f)
                         .aspectRatio(1f),
-                    painter = painterResource(id = R.drawable.ic_baseline_star_coin_24),
+                    painter = painterResource(id = R.drawable.ic_heart),
                     contentDescription = "essa é a moeda $name",
                 )
             } else {
@@ -88,7 +90,7 @@ fun AssetItem(asset: AssetsItem, isFavorite: Boolean = false) {
                     modifier = Modifier
                         .weight(0.2f)
                         .aspectRatio(1f),
-                    painter = painterResource(id = R.drawable.baseline_star_outline_24),
+                    painter = painterResource(id = R.drawable.ic_outlined_heart),
                     contentDescription = "essa é a moeda $name",
                 )
             }

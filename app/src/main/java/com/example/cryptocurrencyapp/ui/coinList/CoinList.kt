@@ -12,7 +12,6 @@ import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalView
@@ -27,7 +26,9 @@ import com.example.abstraction.Assets
 import com.example.abstraction.AssetsItem
 import com.example.abstraction.listMockedAssetsItems
 import com.example.apilibrary.repository.states.DataResult
+import com.example.cryptocurrencyapp.commons.blackWhiteGradientColor
 import com.example.cryptocurrencyapp.commons.poppinsRegular
+import com.example.cryptocurrencyapp.commons.whiteBlackGradientColor
 import com.example.cryptocurrencyapp.ui.NavigationScreens
 import com.example.cryptocurrencyapp.ui.coinDetail.CoinDetailSharedViewModel
 import com.example.cryptocurrencyapp.utils.*
@@ -63,7 +64,9 @@ fun CoinList(
             coinDetailSharedViewModel.setIsFavorite(isFavoriteCoin)
         },
         currentWidthSize = currentWidthSize,
-        currentHeightSize = currentHeightSize
+        currentHeightSize = currentHeightSize,
+        whiteBlackGradientColor = whiteBlackGradientColor,
+        blackWhiteGradientColor = blackWhiteGradientColor
     )
 }
 
@@ -80,6 +83,8 @@ fun CoinList(
     setIsFavorite: (Boolean) -> Unit,
     currentWidthSize: Dp,
     currentHeightSize: Dp,
+    whiteBlackGradientColor: Brush,
+    blackWhiteGradientColor: Brush,
 ) {
     val scope = rememberCoroutineScope()
     val stateCoinList = stateCoin.value
@@ -117,18 +122,20 @@ fun CoinList(
     ) {
         val titleTextState = remember { "Top Coins" }
 
-        Text(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(bottom = 8.dp),
-            text = titleTextState,
-            textAlign = TextAlign.Start,
-            fontFamily = poppinsRegular,
-            fontSize = 18.sp,
-            color = Color(iceWhiteColor)
-        )
-
         LazyColumn {
+            item {
+
+                Text(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(bottom = 8.dp),
+                    text = titleTextState,
+                    textAlign = TextAlign.Start,
+                    fontFamily = poppinsRegular,
+                    fontSize = 18.sp,
+                    color = Color(iceWhiteColor)
+                )
+            }
             item {
                 LazyRow() {
                     if (notNullList) {
@@ -140,15 +147,6 @@ fun CoinList(
                         val orderedList = removeNullPrices.sortedByDescending { assetItem_ ->
                             assetItem_.volume_1mth_usd
                         }
-
-                        val whiteBlackGradientColor = Brush.linearGradient(
-                            colors = listOf(
-                                Color(iceWhiteColor_30),
-                                Color(lightBlackColor_30)
-                            ),
-                            start = Offset.Zero,
-                            end = Offset.Infinite
-                        )
 
                         items(orderedList.take(20)) { asset ->
                             Box(modifier = Modifier
@@ -179,13 +177,16 @@ fun CoinList(
             if (notNullList) items(stateCoinList?.isSucess!!) { asset ->
                 val isFavorite = favoriteAssets?.any { it.name == asset.name } == true
 
-                Card(modifier = Modifier.padding(bottom = 16.dp), onClick = {
+                Box(modifier = Modifier
+                    .padding(bottom = 16.dp)
+                    .clip(RoundedCornerShape(16))
+                    .background(brush = blackWhiteGradientColor)
+                    .clickable {
+                        setIsFavorite(isFavorite)
 
-                    setIsFavorite(isFavorite)
-
-                    addCoin(asset)
-                    navController.navigate(NavigationScreens.CoinDetailScreen.route)
-                }) {
+                        addCoin(asset)
+                        navController.navigate(NavigationScreens.CoinDetailScreen.route)
+                    }) {
                     AssetItem(asset, isFavorite)
                 }
             }
@@ -222,5 +223,7 @@ fun CoinListPreview() {
         setIsFavorite = setIsFavorite,
         currentWidthSize = 130.dp,
         currentHeightSize = 130.dp,
+        whiteBlackGradientColor = whiteBlackGradientColor,
+        blackWhiteGradientColor = blackWhiteGradientColor,
     )
 }
