@@ -75,4 +75,28 @@ class CoinListViewModel(application: Application) : AndroidViewModel(application
             }
         }
     }
+
+    fun filterByName(
+        stateCoin: MutableState<CoinListState?>,
+        filterText: String
+    ) {
+        viewModelScope.launch {
+            assetsLiveData.collect { result ->
+                when (result) {
+                    is DataResult.Success -> {
+                        stateCoin.value = (CoinListState(isSucess = result.data.filter {
+                            it.name.contains(
+                                other = filterText,
+                                ignoreCase = true
+                            ) || it.asset_id.contains(
+                                other = filterText,
+                                ignoreCase = true
+                            )
+                        }))
+                    }
+                    else -> {}
+                }
+            }
+        }
+    }
 }

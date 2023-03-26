@@ -8,13 +8,20 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.*
+import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material.CircularProgressIndicator
+import androidx.compose.material.Icon
+import androidx.compose.material.Text
+import androidx.compose.material.TextField
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalView
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
@@ -26,16 +33,17 @@ import com.example.abstraction.Assets
 import com.example.abstraction.AssetsItem
 import com.example.abstraction.listMockedAssetsItems
 import com.example.apilibrary.repository.states.DataResult
+import com.example.cryptocurrencyapp.R
 import com.example.cryptocurrencyapp.commons.blackWhiteGradientColor
 import com.example.cryptocurrencyapp.commons.poppinsRegular
 import com.example.cryptocurrencyapp.commons.whiteBlackGradientColor
 import com.example.cryptocurrencyapp.ui.NavigationScreens
 import com.example.cryptocurrencyapp.ui.coinDetail.CoinDetailSharedViewModel
-import com.example.cryptocurrencyapp.utils.*
+import com.example.cryptocurrencyapp.utils.FilterEnum
+import com.example.cryptocurrencyapp.utils.iceWhiteColor
 import com.example.cryptocurrencyapp.viewmodel.CoinListViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
-import java.util.*
 
 @Composable
 fun CoinList(
@@ -48,7 +56,8 @@ fun CoinList(
     val assetsLiveData = coinViewModel?.assetsLiveData
     val stateCoin = remember { mutableStateOf<CoinListState?>(null) }
     val currentWidthSize = (LocalView.current.width / 8f).dp
-    val currentHeightSize = (LocalView.current.height / 8f).dp
+    val currentHeightSize = (LocalView.current.height / 10f).dp
+    val filterText = remember { mutableStateOf("") }
 
     CoinList(
         navController = navController,
@@ -56,6 +65,8 @@ fun CoinList(
         filterTypeState = filterTypeState,
         assetsLiveData = assetsLiveData,
         filterByType = coinViewModel?.filterByType(stateCoin),
+        filterByName = coinViewModel?.filterByName(stateCoin, filterText.value),
+        filterText = filterText,
         stateCoin = stateCoin,
         addCoin = { newSelectedCoin ->
             coinDetailSharedViewModel.addCoin(newSelectedCoin)
@@ -70,7 +81,6 @@ fun CoinList(
     )
 }
 
-@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun CoinList(
     navController: NavHostController,
@@ -78,6 +88,8 @@ fun CoinList(
     filterTypeState: FilterEnum?,
     assetsLiveData: Flow<DataResult<Assets>>?,
     filterByType: Unit?,
+    filterByName: Unit?,
+    filterText: MutableState<String>,
     stateCoin: MutableState<CoinListState?>,
     addCoin: (AssetsItem) -> Unit,
     setIsFavorite: (Boolean) -> Unit,
@@ -92,6 +104,10 @@ fun CoinList(
 
     LaunchedEffect(key1 = filterTypeState) {
         filterByType
+    }
+
+    LaunchedEffect(key1 = filterByName) {
+        filterByName
     }
 
     LaunchedEffect(key1 = Unit) {
@@ -173,6 +189,36 @@ fun CoinList(
                 }
             }
 
+            item {
+                TextField(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(top = 8.dp)
+                        .clip(RoundedCornerShape(16))
+                        .border(
+                            width = 1.dp,
+                            brush = whiteBlackGradientColor,
+                            shape = RoundedCornerShape(16)
+                        )
+                        .background(
+                            color = Color(0xFF0F0F0F),
+                        ),
+                    keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done),
+                    leadingIcon = {
+                        Icon(
+                            painterResource(R.drawable.ic_baseline_search_24),
+                            contentDescription = null
+                        )
+                    },
+                    value = filterText.value,
+                    onValueChange = {
+                        filterText.value = it
+                    },
+                    maxLines = 1,
+                    textStyle = TextStyle(textAlign = TextAlign.Start)
+                )
+            }
+
             item { Spacer(modifier = Modifier.padding(8.dp)) }
             if (notNullList) items(stateCoinList?.isSucess!!) { asset ->
                 val isFavorite = favoriteAssets?.any { it.name == asset.name } == true
@@ -203,7 +249,7 @@ fun CoinListPreview() {
 
     val filterTypeState = remember { mutableStateOf<FilterEnum?>(null) }
     val assetsLiveData = remember { mutableStateOf<Flow<DataResult<Assets>>?>(null) }
-    val filterByType = null
+    val filterText = remember { mutableStateOf("") }
     val stateCoin =
         remember { mutableStateOf<CoinListState?>(CoinListState(isSucess = listMockedAssetsItems)) }
     val selectedCoin = remember { mutableStateOf<AssetsItem?>(null) }
@@ -215,7 +261,9 @@ fun CoinListPreview() {
         favoriteAssets = favoriteAssets,
         filterTypeState = filterTypeState.value,
         assetsLiveData = assetsLiveData.value,
-        filterByType = filterByType,
+        filterByType = null,
+        filterByName = null,
+        filterText = filterText,
         stateCoin = stateCoin,
         addCoin = { newSelectedCoin ->
             selectedCoin.value = newSelectedCoin
