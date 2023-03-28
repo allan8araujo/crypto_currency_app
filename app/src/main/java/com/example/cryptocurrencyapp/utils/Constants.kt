@@ -5,6 +5,7 @@ import androidx.compose.ui.graphics.Color
 
 const val TAG = "appDebug"
 const val greenColor = 0xFF8D9562
+const val lightGreenColor = 0xFFC7CEAB
 const val iceWhiteColor = 0xFFDADADA
 
 const val lightBlackColor = 0xFF424242
