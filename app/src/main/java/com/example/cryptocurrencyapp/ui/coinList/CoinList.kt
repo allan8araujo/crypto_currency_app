@@ -189,8 +189,7 @@ fun CoinList(
                 }
             }
 
-            item {
-                if (stateCoin.value?.isLoading != true)
+            item {if (stateCoin.value?.isLoading != true)
                 TextField(
                     modifier = Modifier
                         .fillMaxWidth()
