@@ -51,7 +51,6 @@ fun FavoriteCoinList(
 }
 
 @OptIn(
-    ExperimentalMaterialApi::class, ExperimentalFoundationApi::class,
     ExperimentalFoundationApi::class
 )
 @Composable

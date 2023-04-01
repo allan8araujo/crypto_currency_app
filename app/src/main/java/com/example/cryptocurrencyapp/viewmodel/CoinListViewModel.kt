@@ -7,6 +7,8 @@ import androidx.lifecycle.*
 import com.example.abstraction.Assets
 import com.example.abstraction.AssetsItem
 import com.example.apilibrary.repository.Repository
+import com.example.apilibrary.repository.api.retrofit.CoinApiInstance
+import com.example.apilibrary.repository.api.retrofit.RetrofitService
 import com.example.apilibrary.repository.database.AssetsDatabase
 import com.example.apilibrary.repository.states.DataResult
 import com.example.cryptocurrencyapp.ui.coinList.CoinListState
@@ -26,7 +28,10 @@ class CoinListViewModel(application: Application) : AndroidViewModel(application
 
     init {
         val assetDao = AssetsDatabase.getDatabase(application).assetsDao()
-        repository = Repository(assetDao)
+        val coinApiInstanceService =
+            CoinApiInstance.getCryptoRetrofit().create(RetrofitService::class.java)
+
+        repository = Repository(assetDao, coinApiInstanceService)
         allFavoriteAssets = repository.getAllAssets()
 
         _assetsLiveData = getAllAssets()
