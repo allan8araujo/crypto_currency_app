@@ -5,7 +5,7 @@
         <item name="colorPrimary">@color/black</item>
         <item name="colorPrimaryVariant">@color/app_black_background</item>
         <item name="colorOnPrimary">@color/white</item>
-        <item name="android:windowBackground">@color/green_base</item>
+        <item name="android:windowBackground">@color/black</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/green_base</item>
         <item name="colorSecondaryVariant">@color/app_grey_background</item>
