@@ -26,7 +26,6 @@ import coil.compose.AsyncImage
 import com.example.abstraction.AssetsItem
 import com.example.cryptocurrencyapp.R
 import com.example.cryptocurrencyapp.commons.textButtonStyle
-import com.example.cryptocurrencyapp.ui.NavigationScreens
 import com.example.cryptocurrencyapp.utils.*
 import com.example.cryptocurrencyapp.viewmodel.CoinListViewModel
 
@@ -58,17 +57,7 @@ fun CoinDetail(
 }
 
 @Composable
-private fun getGradientBackground() = Brush.linearGradient(
-    colors = listOf(
-        Color(iceWhiteColor_30),
-        Color(lightBlackColor_30)
-    ),
-    start = Offset.Zero,
-    end = Offset.Infinite
-)
-
-@Composable
-fun CoinDetail(
+private fun CoinDetail(
     navController: NavHostController,
     asset: AssetsItem?,
     isFavoriteAsset: Boolean,
@@ -91,7 +80,7 @@ fun CoinDetail(
                 modifier = Modifier
                     .fillMaxWidth()
             ) {
-                IconButton(onClick = { navController.navigate(NavigationScreens.ListScreen.route) }) {
+                IconButton(onClick = { navController.popBackStack() }) {
                     Icon(
                         modifier = Modifier.weight(1f),
                         imageVector = Icons.Default.ArrowBack,
@@ -211,6 +200,16 @@ fun CoinDetail(
         }
     }
 }
+
+@Composable
+private fun getGradientBackground() = Brush.linearGradient(
+    colors = listOf(
+        Color(lightBlackColor_30),
+        Color(iceWhiteColor_30)
+    ),
+    start = Offset.Zero,
+    end = Offset.Infinite
+)
 
 @Preview(showBackground = true)
 @Composable

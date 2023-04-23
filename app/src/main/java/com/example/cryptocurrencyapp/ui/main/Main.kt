@@ -3,7 +3,12 @@ package com.example.cryptocurrencyapp.ui.main
 import android.app.Application
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.*
+import androidx.compose.material.BottomNavigation
+import androidx.compose.material.BottomNavigationItem
+import androidx.compose.material.Icon
+import androidx.compose.material.Scaffold
+import androidx.compose.material.Text
+import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -59,8 +64,8 @@ fun Main() {
         }
     }
 
-    Scaffold(topBar = {
-        if (bottomBarState.value) {
+    Scaffold(
+        topBar = {
             TopAppBar(title = {
                 Text(
                     modifier = Modifier
@@ -72,51 +77,54 @@ fun Main() {
                     fontSize = 24.sp,
                     color = Color(iceWhiteColor)
                 )
-            }, actions = {
-                FilterCryptoMenu(
-                    items = listOf(CRYPTO_CURRENCIES, TRADITIONAL_CURRENCIES, ALL_CURRENCIES),
-                    onItemSelected = { selectedItem ->
-                        when (selectedItem) {
-                            CRYPTO_CURRENCIES -> coinViewModel.filterType.value =
-                                FilterEnum.cryptoCurrencies
-                            TRADITIONAL_CURRENCIES -> coinViewModel.filterType.value =
-                                FilterEnum.traditionalCurrencies
-                            ALL_CURRENCIES -> coinViewModel.filterType.value =
-                                FilterEnum.allCurrencies
-                        }
-                    }
-                )
-            })
-        }
-    }, bottomBar = {
-        if (bottomBarState.value) {
-            BottomNavigation {
-                val items = listOf(
-                    NavigationBarScreens.ListScreen,
-                    NavigationBarScreens.FavoriteListScreen,
-                )
+            },
+                actions = {
+                    if (bottomBarState.value) FilterCryptoMenu(
+                        items = listOf(CRYPTO_CURRENCIES, TRADITIONAL_CURRENCIES, ALL_CURRENCIES),
+                        onItemSelected = { selectedItem ->
+                            when (selectedItem) {
+                                CRYPTO_CURRENCIES -> coinViewModel.filterType.value =
+                                    FilterEnum.cryptoCurrencies
 
-                items.forEach { screen ->
-                    BottomNavigationItem(icon = {
-                        Icon(
-                            painterResource(screen.Icon), contentDescription = null
-                        )
-                    },
-                        label = { Text(screen.resourceId) },
-                        selected = currentDestination?.hierarchy?.any { it.route == screen.route } == true,
-                        onClick = {
-                            navController.navigate(screen.route) {
-                                popUpTo(navController.graph.findStartDestination().id) {
-                                    saveState = true
-                                }
-                                launchSingleTop = true
-                                restoreState = true
+                                TRADITIONAL_CURRENCIES -> coinViewModel.filterType.value =
+                                    FilterEnum.traditionalCurrencies
+
+                                ALL_CURRENCIES -> coinViewModel.filterType.value =
+                                    FilterEnum.allCurrencies
                             }
-                        })
+                        }
+                    )
+                })
+        },
+        bottomBar = {
+            if (bottomBarState.value) {
+                BottomNavigation {
+                    val items = listOf(
+                        NavigationBarScreens.ListScreen,
+                        NavigationBarScreens.FavoriteListScreen,
+                    )
+
+                    items.forEach { screen ->
+                        BottomNavigationItem(icon = {
+                            Icon(
+                                painterResource(screen.Icon), contentDescription = null
+                            )
+                        },
+                            label = { Text(screen.resourceId) },
+                            selected = currentDestination?.hierarchy?.any { it.route == screen.route } == true,
+                            onClick = {
+                                navController.navigate(screen.route) {
+                                    popUpTo(navController.graph.findStartDestination().id) {
+                                        saveState = true
+                                    }
+                                    launchSingleTop = true
+                                    restoreState = true
+                                }
+                            })
+                    }
                 }
             }
-        }
-    }) { paddingValues ->
+        }) { paddingValues ->
         NavigationMain(paddingValues, navController, coinViewModel)
     }
 }

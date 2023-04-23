@@ -23,7 +23,6 @@ fun NavigationMain(
     val coinDetailSharedViewModel: CoinDetailSharedViewModel = viewModel()
 
     NavHost(
-        modifier = Modifier.padding(paddingValues),
         navController = navController,
         startDestination = NavigationScreens.ListScreen.route
     ) {
