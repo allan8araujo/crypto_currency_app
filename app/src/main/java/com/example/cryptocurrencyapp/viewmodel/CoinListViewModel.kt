@@ -3,7 +3,11 @@ package com.example.cryptocurrencyapp.viewmodel
 import android.app.Application
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
-import androidx.lifecycle.*
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.asFlow
+import androidx.lifecycle.asLiveData
+import androidx.lifecycle.viewModelScope
 import com.example.abstraction.Assets
 import com.example.abstraction.AssetsItem
 import com.example.apilibrary.repository.Repository
@@ -53,28 +57,29 @@ class CoinListViewModel(application: Application) : AndroidViewModel(application
             assetsLiveData.collect { result ->
                 when (result) {
                     is DataResult.Success -> {
-                        stateCoin.value = (CoinListState(isSucess = result.data))
-
-                        when (filterType.value.type) {
+                        stateCoin.value = when (filterType.value.type) {
                             FilterEnum.TRADITIONAL_CURRENCIES -> {
-                                stateCoin.value =
-                                    (CoinListState(isSucess = result.data.filter { assetItem ->
-                                        assetItem.type_is_crypto == 0
-                                    }))
+                                (CoinListState(isSucess = result.data.filter { assetItem ->
+                                    assetItem.type_is_crypto == 0
+                                }))
                             }
 
                             FilterEnum.CRYPTO_CURRENCIES -> {
-                                stateCoin.value =
-                                    (CoinListState(isSucess = result.data.filter { assetItem ->
-                                        assetItem.type_is_crypto == 1
-                                    }))
+                                (CoinListState(isSucess = result.data.filter { assetItem ->
+                                    assetItem.type_is_crypto == 1
+                                }))
                             }
 
                             FilterEnum.ALL_CURRENCIES -> {
-                                stateCoin.value = (CoinListState(isSucess = result.data))
+                                (CoinListState(isSucess = result.data))
+                            }
+
+                            else -> {
+                                null
                             }
                         }
                     }
+
                     else -> {}
                 }
             }
@@ -99,6 +104,7 @@ class CoinListViewModel(application: Application) : AndroidViewModel(application
                             )
                         }))
                     }
+
                     else -> {}
                 }
             }

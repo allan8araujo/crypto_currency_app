@@ -3,7 +3,14 @@ package com.example.cryptocurrencyapp.ui.coinList
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
@@ -13,7 +20,13 @@ import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.material.TextField
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
@@ -64,7 +77,9 @@ fun CoinList(
         favoriteAssets = favoriteAssets?.value,
         filterTypeState = filterTypeState,
         assetsLiveData = assetsLiveData,
-        filterByType = coinViewModel?.filterByType(stateCoin),
+        filterByType = { stateCoin_ ->
+            coinViewModel?.filterByType(stateCoin_)
+        },
         filterByName = coinViewModel?.filterByName(stateCoin, filterText.value),
         filterText = filterText,
         stateCoin = stateCoin,
@@ -87,7 +102,7 @@ fun CoinList(
     favoriteAssets: List<AssetsItem>?,
     filterTypeState: FilterEnum?,
     assetsLiveData: Flow<DataResult<Assets>>?,
-    filterByType: Unit?,
+    filterByType: (MutableState<CoinListState?>) -> Unit,
     filterByName: Unit?,
     filterText: MutableState<String>,
     stateCoin: MutableState<CoinListState?>,
@@ -103,7 +118,7 @@ fun CoinList(
     val notNullList = stateCoinList?.isSucess != null
 
     LaunchedEffect(key1 = filterTypeState) {
-        filterByType
+        filterByType(stateCoin)
     }
 
     LaunchedEffect(key1 = filterByName) {
@@ -117,8 +132,10 @@ fun CoinList(
                     is DataResult.Loading -> stateCoin.value = (CoinListState(isLoading = true))
                     is DataResult.Success -> stateCoin.value =
                         (CoinListState(isSucess = result.data))
+
                     is DataResult.Error -> stateCoin.value =
                         (CoinListState(isError = result.throwable.message))
+
                     else -> {}
                 }
             }
@@ -189,34 +206,35 @@ fun CoinList(
                 }
             }
 
-            item {if (stateCoin.value?.isLoading != true)
-                TextField(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(top = 16.dp)
-                        .clip(RoundedCornerShape(16))
-                        .border(
-                            width = 1.dp,
-                            brush = whiteBlackGradientColor,
-                            shape = RoundedCornerShape(16)
-                        )
-                        .background(
-                            color = Color(0xFF0F0F0F),
-                        ),
-                    keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done),
-                    leadingIcon = {
-                        Icon(
-                            painterResource(R.drawable.ic_baseline_search_24),
-                            contentDescription = null
-                        )
-                    },
-                    value = filterText.value,
-                    onValueChange = {
-                        filterText.value = it
-                    },
-                    maxLines = 1,
-                    textStyle = TextStyle(textAlign = TextAlign.Start)
-                )
+            item {
+                if (stateCoin.value?.isLoading != true)
+                    TextField(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(top = 16.dp)
+                            .clip(RoundedCornerShape(16))
+                            .border(
+                                width = 1.dp,
+                                brush = whiteBlackGradientColor,
+                                shape = RoundedCornerShape(16)
+                            )
+                            .background(
+                                color = Color(0xFF0F0F0F),
+                            ),
+                        keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done),
+                        leadingIcon = {
+                            Icon(
+                                painterResource(R.drawable.ic_baseline_search_24),
+                                contentDescription = null
+                            )
+                        },
+                        value = filterText.value,
+                        onValueChange = {
+                            filterText.value = it
+                        },
+                        maxLines = 1,
+                        textStyle = TextStyle(textAlign = TextAlign.Start)
+                    )
             }
 
             item { Spacer(modifier = Modifier.padding(8.dp)) }
@@ -261,7 +279,9 @@ fun CoinListPreview() {
         favoriteAssets = favoriteAssets,
         filterTypeState = filterTypeState.value,
         assetsLiveData = assetsLiveData.value,
-        filterByType = null,
+        filterByType = { stateCoin ->
+
+        },
         filterByName = null,
         filterText = filterText,
         stateCoin = stateCoin,
