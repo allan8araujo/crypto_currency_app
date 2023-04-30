@@ -1,3 +1,5 @@
+import com.cryptoCurrencyApp.Configuration
+
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
@@ -6,12 +8,12 @@ plugins {
 
 android {
     namespace = "com.example.apilibrary"
-    compileSdk = 33
+    compileSdk = Configuration.compileSdk
 
     defaultConfig {
-        minSdk = 21
-        targetSdk = 33
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        minSdk = Configuration.minSdk
+        targetSdk = Configuration.targetSdk
+        testInstrumentationRunner = Configuration.AndroidJUnitRunner
         consumerProguardFiles("consumer-rules.pro")
     }
 
