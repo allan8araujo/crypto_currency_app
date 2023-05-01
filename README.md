@@ -26,6 +26,7 @@ App is now available to download on [release](https://github.com/allan8araujo/cr
 
 <h2 align="center">
  <img src="https://user-images.githubusercontent.com/77680596/235539992-59d8342e-c20c-4892-89b8-a1ee15bd4f6a.png" width="75%"/>
+ refference :https://androidexample365.com/retrieve-data-from-an-api-using-mvvm-clean-architecture-and-jetpack-compose/
 </h2>
 
 # Jetpack libraries
