@@ -67,7 +67,7 @@
             app:destination="@+id/coinFavorites" />
         <argument
             android:name="asset"
-            app:argType="com.example.abstraction.AssetsItem" />
+            app:argType="com.example.abstraction.AssetsItemDTO" />
     </fragment>
     <fragment
         android:id="@+id/errorScreen"

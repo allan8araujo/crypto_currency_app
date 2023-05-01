@@ -3,9 +3,10 @@ package com.example.abstraction
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import java.io.Serializable
 
 @Entity(tableName = "favorite_assets")
-data class AssetsItem(
+data class AssetsItemDTO(
     @PrimaryKey @ColumnInfo(name = "asset_id") val asset_id: String,
     val data_end: String? = null,
     val data_orderbook_end: String? = null,
@@ -23,4 +24,4 @@ data class AssetsItem(
     val volume_1day_usd: Double,
     val volume_1hrs_usd: Double,
     val volume_1mth_usd: Double,
-)
+) : Serializable

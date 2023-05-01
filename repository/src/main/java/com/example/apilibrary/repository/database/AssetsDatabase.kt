@@ -9,6 +9,7 @@ import com.example.abstraction.AssetsItem
 @Database(entities = [(AssetsItem::class)], version = 1)
 abstract class AssetsDatabase : RoomDatabase() {
     abstract fun assetsDao(): AssetsDao
+
     companion object {
 
         private var INSTANCE: AssetsDatabase? = null

@@ -6,7 +6,7 @@ import com.example.apilibrary.repository.states.DataResult
 import kotlinx.coroutines.flow.Flow
 
 interface IRepository {
-    fun getApiAssets(): Flow<DataResult<Assets>>
-    suspend fun insertFavoriteAsset(asset: AssetsItem)
-    suspend fun deleteFavoriteAsset(asset: AssetsItem)
+    fun getApiAssets(): Flow<DataResult<List<AssetsItem>>>
+    suspend fun insertFavoriteAssetToDatabase(asset: AssetsItem)
+    suspend fun deleteFavoriteAssetFromDatabase(asset: AssetsItem)
 }

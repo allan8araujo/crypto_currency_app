@@ -1,6 +1,5 @@
 package com.example.apilibrary.repository.database
 
-import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.example.abstraction.AssetsItem
 import kotlinx.coroutines.flow.Flow
@@ -11,8 +10,8 @@ interface AssetsDao {
     fun getFavoriteAssets(): Flow<List<AssetsItem>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertFavorite(item: AssetsItem)
+    suspend fun insertFavoriteAssetToDatabase(item: AssetsItem)
 
     @Delete()
-    suspend fun deleteFavorite(item: AssetsItem)
+    suspend fun deleteFavoriteAssetFromDatabase(item: AssetsItem)
 }
