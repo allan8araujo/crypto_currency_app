@@ -22,6 +22,11 @@ App is now available to download on [release](https://github.com/allan8araujo/cr
 
 • [Coil v2.2.2](https://github.com/coil-kt/coil)
 
+# About the architecture
+
+<h2 align="center">
+ <img src="https://user-images.githubusercontent.com/77680596/235539992-59d8342e-c20c-4892-89b8-a1ee15bd4f6a.png" width="75%"/>
+</h2>
 
 # Jetpack libraries
 
