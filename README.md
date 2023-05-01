@@ -9,9 +9,10 @@ By providing real-time data on preferred cryptocurrencies, the user-friendly and
   ## about the app flow
 
 <h2 align="center">
-  <img src="https://user-images.githubusercontent.com/77680596/224366916-d62352eb-ad0d-4f4d-8c9e-ea4e2d817b48.png" width="25%"/>
-  <img src="https://user-images.githubusercontent.com/77680596/224366909-467d3e9f-5c2c-4e30-9832-a9577c9cd966.png" width="25%"/>
-  <img src="https://user-images.githubusercontent.com/77680596/224366915-7eda01bd-c299-481e-a718-6eb96bae38c1.png" width="25%"/>
+
+  <img src="https://user-images.githubusercontent.com/77680596/235399256-f8eb266e-ffa6-4492-9e25-e9b2a6d0cfe6.png" width="25%"/>
+  <img src="https://user-images.githubusercontent.com/77680596/235399259-5253ba33-e5e1-42c1-ad9b-81a0f4bc8630.png" width="25%"/>
+  <img src="https://user-images.githubusercontent.com/77680596/235399261-a07d983a-520e-493c-a788-ae65a520bdc8.png" width="25%"/>
 </h2>
 
 # Download
