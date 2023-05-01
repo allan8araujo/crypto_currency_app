@@ -23,8 +23,8 @@ android {
         getByName("release") {
             isMinifyEnabled = false
             proguardFiles(
-                    getDefaultProguardFile("proguard-android-optimize.txt"),
-                    "proguard-rules.pro"
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
             )
         }
     }
@@ -47,19 +47,19 @@ android {
 }
 
 val groupVersions = mapOf(
-        "lifecycle_version" to "2.6.0",
-        "core_version" to "1.9.0",
-        "appcompat_version" to "1.6.1",
-        "material_version" to "1.8.0",
-        "mediarouter_version" to "1.3.1",
-        "paging_version" to "3.1.1",
-        "coil_version" to "2.2.2",
-        "lottie_version" to "3.4.0",
-        "retrofit_version" to "2.9.0",
-        "gson_version" to "2.8.9",
-        "room_version" to "2.5.0",
-        "compose_ui_version" to "1.3.3",
-        "compose_ui_tooling" to "1.4.0-rc01"
+    "lifecycle_version" to "2.6.0",
+    "core_version" to "1.9.0",
+    "appcompat_version" to "1.6.1",
+    "material_version" to "1.8.0",
+    "mediarouter_version" to "1.3.1",
+    "paging_version" to "3.1.1",
+    "coil_version" to "2.2.2",
+    "lottie_version" to "3.4.0",
+    "retrofit_version" to "2.9.0",
+    "gson_version" to "2.8.9",
+    "room_version" to "2.5.0",
+    "compose_ui_version" to "1.3.3",
+    "compose_ui_tooling" to "1.4.0-rc01"
 )
 
 dependencies {
@@ -102,8 +102,8 @@ dependencies {
     androidTestImplementation("androidx.compose.ui:ui-test-junit4:${groupVersions["compose_ui_version"]}")
     implementation("androidx.compose.compiler:compiler:1.4.3")
     implementation("androidx.navigation:navigation-compose:2.5.3")
-    implementation ("androidx.activity:activity-compose:1.6.1")
-    implementation ("androidx.compose.foundation:foundation:1.3.1")
+    implementation("androidx.activity:activity-compose:1.6.1")
+    implementation("androidx.compose.foundation:foundation:1.3.1")
 
     //modules
     implementation(project(":repository"))

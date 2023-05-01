@@ -3,7 +3,6 @@ package com.example.apilibrary.repository.api
 import com.example.apilibrary.repository.const.Constants
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
-import org.junit.Assert
 import org.junit.Test
 
 internal class AssetsRequestTest {

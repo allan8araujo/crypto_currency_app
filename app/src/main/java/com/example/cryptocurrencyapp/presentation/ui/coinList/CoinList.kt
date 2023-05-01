@@ -44,8 +44,8 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.abstraction.Assets
 import com.example.abstraction.AssetsItem
-import com.example.apilibrary.repository.states.DataResult
 import com.example.abstraction.toAssetsItem
+import com.example.apilibrary.repository.states.DataResult
 import com.example.cryptocurrencyapp.R
 import com.example.cryptocurrencyapp.assets.listMockedAssetsItems
 import com.example.cryptocurrencyapp.commons.ui.blackWhiteGradientColor
@@ -69,7 +69,7 @@ fun CoinList(
     val assetsLiveData = coinViewModel?.assetsLiveData
     val stateCoin = remember { mutableStateOf<CoinListState?>(null) }
     val currentWidthSize = (LocalView.current.width / 8f).dp
-    val currentHeightSize = (LocalView.current.height / 10f).dp
+    val currentHeightSize = (LocalView.current.height / 16f).dp
     val filterText = remember { mutableStateOf("") }
 
     CoinList(

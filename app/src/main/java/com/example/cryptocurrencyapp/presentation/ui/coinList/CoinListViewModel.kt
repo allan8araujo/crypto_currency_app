@@ -8,9 +8,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.asFlow
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
-import com.example.abstraction.Assets
 import com.example.abstraction.AssetsItem
-import com.example.abstraction.AssetsItemDTO
 import com.example.apilibrary.repository.Repository
 import com.example.apilibrary.repository.api.retrofit.CoinApiInstance
 import com.example.apilibrary.repository.api.retrofit.RetrofitService

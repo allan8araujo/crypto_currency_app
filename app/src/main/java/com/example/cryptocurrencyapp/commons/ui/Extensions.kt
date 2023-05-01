@@ -16,8 +16,6 @@ import androidx.navigation.NavHostController
 import com.example.cryptocurrencyapp.R
 import com.example.cryptocurrencyapp.commons.utils.iceWhiteColor_30
 import com.example.cryptocurrencyapp.commons.utils.iceWhiteColor_50
-import com.example.cryptocurrencyapp.commons.utils.lightBlackColor_30
-import com.example.cryptocurrencyapp.commons.utils.lightBlack_4Color
 
 @Composable
 fun composeBackButton(
@@ -53,7 +51,7 @@ val ubuntuBold = FontFamily(Font(R.font.ubuntu_bold))
 val whiteBlackGradientColor = Brush.linearGradient(
     colors = listOf(
         Color(iceWhiteColor_30),
-        Color(lightBlackColor_30)
+        Color(0xFF1A1A1A)
     ),
     start = Offset.Zero,
     end = Offset.Infinite
@@ -61,7 +59,7 @@ val whiteBlackGradientColor = Brush.linearGradient(
 
 val blackWhiteGradientColor = Brush.linearGradient(
     colors = listOf(
-        Color(lightBlack_4Color),
+        Color(0xFF1A1A1A),
         Color(iceWhiteColor_50),
     ),
     start = Offset.Zero,

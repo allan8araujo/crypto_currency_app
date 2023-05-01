@@ -9,8 +9,8 @@ import androidx.navigation.compose.composable
 import com.example.cryptocurrencyapp.presentation.ui.coinDetail.CoinDetail
 import com.example.cryptocurrencyapp.presentation.ui.coinDetail.CoinDetailSharedViewModel
 import com.example.cryptocurrencyapp.presentation.ui.coinList.CoinList
-import com.example.cryptocurrencyapp.presentation.ui.favoriteCoinList.FavoriteCoinList
 import com.example.cryptocurrencyapp.presentation.ui.coinList.CoinListViewModel
+import com.example.cryptocurrencyapp.presentation.ui.favoriteCoinList.FavoriteCoinList
 
 @Composable
 fun RootNavigation(

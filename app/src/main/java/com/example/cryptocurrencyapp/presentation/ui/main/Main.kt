@@ -28,14 +28,14 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.cryptocurrencyapp.commons.ui.FilterCryptoMenu
 import com.example.cryptocurrencyapp.commons.ui.ubuntuBold
-import com.example.cryptocurrencyapp.presentation.ui.NavigationBarScreens
-import com.example.cryptocurrencyapp.presentation.ui.RootNavigation
-import com.example.cryptocurrencyapp.presentation.ui.NavigationScreens
 import com.example.cryptocurrencyapp.commons.utils.FilterEnum
 import com.example.cryptocurrencyapp.commons.utils.FilterEnum.Companion.ALL_CURRENCIES
 import com.example.cryptocurrencyapp.commons.utils.FilterEnum.Companion.CRYPTO_CURRENCIES
 import com.example.cryptocurrencyapp.commons.utils.FilterEnum.Companion.TRADITIONAL_CURRENCIES
 import com.example.cryptocurrencyapp.commons.utils.iceWhiteColor
+import com.example.cryptocurrencyapp.presentation.ui.NavigationBarScreens
+import com.example.cryptocurrencyapp.presentation.ui.NavigationScreens
+import com.example.cryptocurrencyapp.presentation.ui.RootNavigation
 import com.example.cryptocurrencyapp.presentation.ui.coinList.CoinListViewModel
 import com.example.cryptocurrencyapp.presentation.ui.coinList.factories.ListViewModelFactory
 
