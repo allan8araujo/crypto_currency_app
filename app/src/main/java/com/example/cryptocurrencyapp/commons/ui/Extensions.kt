@@ -12,17 +12,13 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavHostController
 import com.example.cryptocurrencyapp.R
 import com.example.cryptocurrencyapp.commons.utils.iceWhiteColor_30
 import com.example.cryptocurrencyapp.commons.utils.iceWhiteColor_50
 
 @Composable
-fun composeBackButton(
-    navController: NavHostController?,
-    route: String
-) {
-    IconButton(onClick = { navController?.navigate(route) }) {
+fun CustomBackButton(onClick: () -> Unit) {
+    IconButton(onClick = onClick) {
         Icon(
             imageVector = Icons.Default.ArrowBack,
             contentDescription = "back button"
@@ -31,9 +27,9 @@ fun composeBackButton(
 }
 
 @Composable
-fun textButtonStyle(buttonTextState: String) {
+fun CustomText(customText: String) {
     Text(
-        text = buttonTextState,
+        text = customText,
         fontSize = 16.sp
     )
 }

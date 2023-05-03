@@ -8,8 +8,6 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -25,7 +23,8 @@ import androidx.navigation.compose.rememberNavController
 import coil.compose.AsyncImage
 import com.example.abstraction.AssetsItem
 import com.example.cryptocurrencyapp.R
-import com.example.cryptocurrencyapp.commons.ui.textButtonStyle
+import com.example.cryptocurrencyapp.commons.ui.CustomBackButton
+import com.example.cryptocurrencyapp.commons.ui.CustomText
 import com.example.cryptocurrencyapp.commons.utils.formatDisplayedText
 import com.example.cryptocurrencyapp.commons.utils.greenColor
 import com.example.cryptocurrencyapp.commons.utils.iceWhiteColor_30
@@ -85,14 +84,7 @@ private fun CoinDetail(
                 modifier = Modifier
                     .fillMaxWidth()
             ) {
-                IconButton(onClick = { navController.popBackStack() }) {
-                    Icon(
-                        modifier = Modifier.weight(1f),
-                        imageVector = Icons.Default.ArrowBack,
-                        contentDescription = "back button"
-                    )
-                }
-
+                CustomBackButton { navController.popBackStack() }
                 Spacer(modifier = Modifier.weight(1f))
                 if (isFavoriteAsset) {
                     Image(
@@ -201,7 +193,7 @@ private fun CoinDetail(
             }
         ) {
             val buttonTextState = if (!isFavoriteAsset) "ADD" else "REMOVE"
-            textButtonStyle(buttonTextState)
+            CustomText(buttonTextState)
         }
     }
 }
