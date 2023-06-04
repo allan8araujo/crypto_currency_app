@@ -1,4 +1,4 @@
-package com.example.cryptocurrencyapp.presentation.ui.coinDetail
+package com.example.cryptocurrencyapp.presentation.ui.coindetail
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf

@@ -4,7 +4,7 @@ import com.example.abstraction.AssetsItem
 import com.example.abstraction.toAssets
 import com.example.apilibrary.repository.api.retrofit.RetrofitService
 import com.example.apilibrary.repository.database.AssetsDao
-import com.example.apilibrary.repository.states.DataResult
+import com.example.apilibrary.repository.util.DataResult
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow

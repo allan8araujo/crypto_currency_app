@@ -36,8 +36,8 @@ import com.example.cryptocurrencyapp.commons.utils.iceWhiteColor
 import com.example.cryptocurrencyapp.presentation.ui.NavigationBarScreens
 import com.example.cryptocurrencyapp.presentation.ui.NavigationScreens
 import com.example.cryptocurrencyapp.presentation.ui.RootNavigation
-import com.example.cryptocurrencyapp.presentation.ui.coinList.CoinListViewModel
-import com.example.cryptocurrencyapp.presentation.ui.coinList.factories.ListViewModelFactory
+import com.example.cryptocurrencyapp.presentation.ui.coinlist.CoinListViewModel
+import com.example.cryptocurrencyapp.presentation.ui.coinlist.factories.ListViewModelFactory
 
 @Composable
 fun RootScaffold() {

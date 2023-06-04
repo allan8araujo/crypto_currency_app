@@ -1,4 +1,4 @@
-package com.example.cryptocurrencyapp.presentation.ui.coinList
+package com.example.cryptocurrencyapp.presentation.ui.coinlist
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -45,7 +45,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.abstraction.Assets
 import com.example.abstraction.AssetsItem
 import com.example.abstraction.toAssetsItem
-import com.example.apilibrary.repository.states.DataResult
+import com.example.apilibrary.repository.util.DataResult
 import com.example.cryptocurrencyapp.R
 import com.example.cryptocurrencyapp.assets.listMockedAssetsItems
 import com.example.cryptocurrencyapp.commons.ui.blackWhiteGradientColor
@@ -54,7 +54,7 @@ import com.example.cryptocurrencyapp.commons.ui.whiteBlackGradientColor
 import com.example.cryptocurrencyapp.commons.utils.FilterEnum
 import com.example.cryptocurrencyapp.commons.utils.iceWhiteColor
 import com.example.cryptocurrencyapp.presentation.ui.NavigationScreens
-import com.example.cryptocurrencyapp.presentation.ui.coinDetail.CoinDetailSharedViewModel
+import com.example.cryptocurrencyapp.presentation.ui.coindetail.CoinDetailSharedViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 

@@ -1,4 +1,4 @@
-package com.example.cryptocurrencyapp.presentation.ui.favoriteCoinList
+package com.example.cryptocurrencyapp.presentation.ui.favoritecoinlist
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
@@ -30,8 +30,8 @@ import com.example.cryptocurrencyapp.commons.ui.whiteBlackGradientColor
 import com.example.cryptocurrencyapp.commons.utils.toAssetsImage
 import com.example.cryptocurrencyapp.commons.utils.toMoneyFormat
 import com.example.cryptocurrencyapp.presentation.ui.NavigationScreens
-import com.example.cryptocurrencyapp.presentation.ui.coinDetail.CoinDetailSharedViewModel
-import com.example.cryptocurrencyapp.presentation.ui.coinList.CoinListViewModel
+import com.example.cryptocurrencyapp.presentation.ui.coindetail.CoinDetailSharedViewModel
+import com.example.cryptocurrencyapp.presentation.ui.coinlist.CoinListViewModel
 
 @Composable
 fun FavoriteCoinList(

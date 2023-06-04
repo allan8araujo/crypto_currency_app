@@ -1,4 +1,4 @@
-package com.example.apilibrary.repository.states
+package com.example.apilibrary.repository.util
 
 import com.example.abstraction.AssetsItemDTO
 

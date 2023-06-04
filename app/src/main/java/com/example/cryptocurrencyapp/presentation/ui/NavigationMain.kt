@@ -6,11 +6,11 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.example.cryptocurrencyapp.presentation.ui.coinDetail.CoinDetail
-import com.example.cryptocurrencyapp.presentation.ui.coinDetail.CoinDetailSharedViewModel
-import com.example.cryptocurrencyapp.presentation.ui.coinList.CoinList
-import com.example.cryptocurrencyapp.presentation.ui.coinList.CoinListViewModel
-import com.example.cryptocurrencyapp.presentation.ui.favoriteCoinList.FavoriteCoinList
+import com.example.cryptocurrencyapp.presentation.ui.coindetail.CoinDetail
+import com.example.cryptocurrencyapp.presentation.ui.coindetail.CoinDetailSharedViewModel
+import com.example.cryptocurrencyapp.presentation.ui.coinlist.CoinList
+import com.example.cryptocurrencyapp.presentation.ui.coinlist.CoinListViewModel
+import com.example.cryptocurrencyapp.presentation.ui.favoritecoinlist.FavoriteCoinList
 
 @Composable
 fun RootNavigation(

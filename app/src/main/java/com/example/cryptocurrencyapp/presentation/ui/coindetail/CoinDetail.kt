@@ -1,6 +1,6 @@
 @file:Suppress("NAME_SHADOWING")
 
-package com.example.cryptocurrencyapp.presentation.ui.coinDetail
+package com.example.cryptocurrencyapp.presentation.ui.coindetail
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -31,7 +31,7 @@ import com.example.cryptocurrencyapp.commons.utils.iceWhiteColor_30
 import com.example.cryptocurrencyapp.commons.utils.lightBlackColor_30
 import com.example.cryptocurrencyapp.commons.utils.toAssetsImage
 import com.example.cryptocurrencyapp.commons.utils.toMoneyFormat
-import com.example.cryptocurrencyapp.presentation.ui.coinList.CoinListViewModel
+import com.example.cryptocurrencyapp.presentation.ui.coinlist.CoinListViewModel
 
 @Composable
 fun CoinDetail(

@@ -1,4 +1,4 @@
-package com.example.cryptocurrencyapp.presentation.ui.coinList
+package com.example.cryptocurrencyapp.presentation.ui.coinlist
 
 import android.app.Application
 import androidx.compose.runtime.MutableState
@@ -13,7 +13,7 @@ import com.example.apilibrary.repository.Repository
 import com.example.apilibrary.repository.api.retrofit.CoinApiInstance
 import com.example.apilibrary.repository.api.retrofit.RetrofitService
 import com.example.apilibrary.repository.database.AssetsDatabase
-import com.example.apilibrary.repository.states.DataResult
+import com.example.apilibrary.repository.util.DataResult
 import com.example.cryptocurrencyapp.commons.utils.FilterEnum
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch

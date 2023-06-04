@@ -1,4 +1,4 @@
-package com.example.cryptocurrencyapp.presentation.ui.coinList
+package com.example.cryptocurrencyapp.presentation.ui.coinlist
 
 import com.example.abstraction.AssetsItem
 
