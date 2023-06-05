@@ -1,4 +1,5 @@
 import com.cryptoCurrencyApp.Configuration
+import com.cryptoCurrencyApp.Versions
 
 plugins {
     id("com.android.library")
@@ -38,40 +39,37 @@ android {
 }
 
 dependencies {
+    implementation("androidx.core:core-ktx:${Versions.CORE_KTX}")
+    implementation("androidx.appcompat:appcompat:${Versions.APPCOMPAT}")
+    implementation("com.google.android.material:material:${Versions.MATERIAL}")
+    testImplementation("junit:junit:${Versions.JUNIT}")
+    androidTestImplementation("androidx.test.ext:junit:${Versions.ANDROIDX_JUNIT}")
+    androidTestImplementation("androidx.test.espresso:espresso-core:${Versions.ESPRESSO_CORE}")
 
-    implementation("androidx.core:core-ktx:1.9.0")
-    implementation("androidx.appcompat:appcompat:1.6.1")
-    implementation("com.google.android.material:material:1.8.0")
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+    // Glide
+    implementation("com.github.bumptech.glide:glide:${Versions.GLIDE}")
 
-    //Glide
-    implementation("com.github.bumptech.glide:glide:4.13.2")
-
-    //Retrofit & Gson
-    implementation("com.squareup.retrofit2:retrofit:2.9.0")
-    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
-    implementation("com.squareup.retrofit2:adapter-rxjava2:2.9.0")
-    implementation("com.google.code.gson:gson:2.9.0")
+    // Retrofit & Gson
+    implementation("com.squareup.retrofit2:retrofit:${Versions.RETROFIT}")
+    implementation("com.squareup.retrofit2:converter-gson:${Versions.GSON}")
+    implementation("com.squareup.retrofit2:adapter-rxjava2:${Versions.RETROFIT}")
+    implementation("com.google.code.gson:gson:${Versions.GSON}")
 
     // Coroutine
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4")
-    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.KOTLINX_COROUTINES_ANDROID}")
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:${Versions.KOTLINX_COROUTINES_TEST}")
 
-    //Http
-    implementation("com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.2")
+    // Http
+    implementation("com.squareup.okhttp3:logging-interceptor:${Versions.OKHTTP_LOGGING_INTERCEPTOR}")
 
-    //mockk
-    testImplementation("io.mockk:mockk:1.13.4")
+    // Mockk
+    testImplementation("io.mockk:mockk:${Versions.MOCKK}")
 
     // Room components
-    val roomVersion = "2.5.0"
-
-    implementation("androidx.room:room-runtime:$roomVersion")
-    kapt("androidx.room:room-compiler:$roomVersion")
-    implementation("androidx.room:room-ktx:$roomVersion")
-    implementation("androidx.compose.runtime:runtime-livedata:1.3.3")
+    implementation("androidx.room:room-runtime:${Versions.ROOM}")
+    kapt("androidx.room:room-compiler:${Versions.ROOM}")
+    implementation("androidx.room:room-ktx:${Versions.ROOM}")
+    implementation("androidx.compose.runtime:runtime-livedata:${Versions.RUNTIME_LIVEDATA}")
 
     implementation(project(":abstraction"))
 }

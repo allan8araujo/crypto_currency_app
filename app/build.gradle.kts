@@ -69,10 +69,10 @@ dependencies {
     implementation("com.google.code.gson:gson:${Versions.GSON}")
 
     //Test
-    testImplementation("junit:junit:4.13.2")
-    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4")
+    testImplementation("junit:junit:${Versions.JUNIT}")
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:${Versions.KOTLINX_COROUTINES_TEST}")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+    androidTestImplementation("androidx.test.espresso:espresso-core:${Versions.ESPRESSO_CORE}")
 
     //Room
     implementation("androidx.room:room-runtime:${Versions.ROOM}")
@@ -85,10 +85,10 @@ dependencies {
     debugImplementation("androidx.compose.ui:ui-tooling:${Versions.COMPOSE_UI_TOOLING}")
     implementation("androidx.compose.ui:ui:${Versions.COMPOSE_UI}")
     androidTestImplementation("androidx.compose.ui:ui-test-junit4:${Versions.COMPOSE_UI}")
-    implementation("androidx.compose.compiler:compiler:1.4.3")
-    implementation("androidx.navigation:navigation-compose:2.5.3")
-    implementation("androidx.activity:activity-compose:1.6.1")
-    implementation("androidx.compose.foundation:foundation:1.3.1")
+    implementation("androidx.compose.compiler:compiler:${Versions.COMPILER}")
+    implementation("androidx.navigation:navigation-compose:${Versions.NAVIGATION_COMPOSE}")
+    implementation("androidx.activity:activity-compose:${Versions.ACTIVITY_COMPOSE}")
+    implementation("androidx.compose.foundation:foundation:${Versions.FOUNDATION}")
 
     //Koin
     implementation("io.insert-koin:koin-android:${Versions.KOIN}")
