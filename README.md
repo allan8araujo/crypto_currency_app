@@ -22,6 +22,8 @@ App is now available to download on [release](https://github.com/allan8araujo/cr
 
 • [Coil v2.2.2](https://github.com/coil-kt/coil)
 
+• [Koin](https://insert-koin.io)
+
 # About the architecture
 
 <h2 align="center">
@@ -43,5 +45,3 @@ App is now available to download on [release](https://github.com/allan8araujo/cr
 • [Navigation Architecture Component](https://developer.android.com/guide/navigation)
 
 • [Lifecycle Architecture component](https://developer.android.com/topic/libraries/architecture/lifecycle)
-
-• [Koin](https://insert-koin.io)
