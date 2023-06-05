@@ -43,3 +43,5 @@ App is now available to download on [release](https://github.com/allan8araujo/cr
 • [Navigation Architecture Component](https://developer.android.com/guide/navigation)
 
 • [Lifecycle Architecture component](https://developer.android.com/topic/libraries/architecture/lifecycle)
+
+• [Koin](https://insert-koin.io)
