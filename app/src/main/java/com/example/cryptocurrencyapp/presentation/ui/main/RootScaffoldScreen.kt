@@ -1,6 +1,5 @@
 package com.example.cryptocurrencyapp.presentation.ui.main
 
-import android.app.Application
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.BottomNavigation
@@ -16,12 +15,10 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.currentBackStackEntryAsState
@@ -37,10 +34,10 @@ import com.example.cryptocurrencyapp.presentation.ui.NavigationBarScreens
 import com.example.cryptocurrencyapp.presentation.ui.NavigationScreens
 import com.example.cryptocurrencyapp.presentation.ui.RootNavigation
 import com.example.cryptocurrencyapp.presentation.ui.coinlist.CoinListViewModel
-import com.example.cryptocurrencyapp.presentation.ui.coinlist.factories.ListViewModelFactory
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
-fun RootScaffold() {
+fun RootScaffold(coinViewModel: CoinListViewModel = koinViewModel()) {
     val navController = rememberNavController()
 
     val bottomBarState = rememberSaveable { mutableStateOf(true) }
@@ -48,11 +45,6 @@ fun RootScaffold() {
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentDestination = navBackStackEntry?.destination
     val titleTextState = remember { mutableStateOf("") }
-
-    val context = LocalContext.current
-    val coinViewModel: CoinListViewModel = viewModel(
-        factory = ListViewModelFactory(context.applicationContext as Application)
-    )
 
     titleTextState.value = "Vellorum"
 

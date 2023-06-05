@@ -9,45 +9,32 @@ import androidx.lifecycle.asFlow
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.abstraction.AssetsItem
-import com.example.apilibrary.repository.Repository
-import com.example.apilibrary.repository.api.retrofit.CoinApiInstance
-import com.example.apilibrary.repository.api.retrofit.RetrofitService
-import com.example.apilibrary.repository.database.AssetsDatabase
+import com.example.apilibrary.repository.RepositoryImpl
 import com.example.apilibrary.repository.util.DataResult
 import com.example.cryptocurrencyapp.commons.utils.FilterEnum
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 
-class CoinListViewModel(application: Application) : AndroidViewModel(application) {
-    private val repository: Repository
+class CoinListViewModel(
+    private val repositoryImpl: RepositoryImpl,
+    application: Application,
+) : AndroidViewModel(application) {
 
-    private val _assetsLiveData: LiveData<DataResult<List<AssetsItem>>>
-    val assetsLiveData: Flow<DataResult<List<AssetsItem>>>
+    private val _assetsLiveData: LiveData<DataResult<List<AssetsItem>>> = getAllAssets()
+    val assetsLiveData: Flow<DataResult<List<AssetsItem>>> = _assetsLiveData.asFlow()
 
-    val allFavoriteAssets: Flow<List<AssetsItem>>
+    val allFavoriteAssets: Flow<List<AssetsItem>> = repositoryImpl.getFavoriteAssetsFromDatabase()
 
     var filterType: MutableState<FilterEnum> = mutableStateOf(FilterEnum.allCurrencies)
 
-    init {
-        val assetDao = AssetsDatabase.getDatabase(application).assetsDao()
-        val coinApiInstanceService =
-            CoinApiInstance.getCryptoRetrofit().create(RetrofitService::class.java)
-
-        repository = Repository(assetDao, coinApiInstanceService)
-        allFavoriteAssets = repository.getFavoriteAssetsFromDatabase()
-
-        _assetsLiveData = getAllAssets()
-        assetsLiveData = _assetsLiveData.asFlow()
-    }
-
-    fun getAllAssets() = repository.getApiAssets().asLiveData()
+    private fun getAllAssets() = repositoryImpl.getApiAssets().asLiveData()
 
     fun insertAsset(assetItem: AssetsItem) = viewModelScope.launch {
-        repository.insertFavoriteAssetToDatabase(assetItem)
+        repositoryImpl.insertFavoriteAssetToDatabase(assetItem)
     }
 
     fun deleteAsset(assetItem: AssetsItem) = viewModelScope.launch {
-        repository.deleteFavoriteAssetFromDatabase(assetItem)
+        repositoryImpl.deleteFavoriteAssetFromDatabase(assetItem)
     }
 
     fun filterByType(stateCoin: MutableState<CoinListState?>) {
